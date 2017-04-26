@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{0413c95a-34e0-45a0-8845-5d6e520805a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager">
+      <UniqueIdentifier>{ea915182-0c8d-4d0c-baf9-e55bc257f044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneFactory">
+      <UniqueIdentifier>{8ee961ca-dbcb-49b0-a7ce-2e5478476603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase">
+      <UniqueIdentifier>{df0de377-f78f-44f9-9d09-7b3117f5ba08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene">
+      <UniqueIdentifier>{f83b7d6b-93ec-4881-a665-1953d748c464}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\TitleScene">
+      <UniqueIdentifier>{1ebab0cf-e3c3-4d9e-822b-844b628bf630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager">
+      <UniqueIdentifier>{ed8080a0-9b6d-414d-8ef3-27fa2d763302}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\GameScene.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleScene.cpp">
+      <Filter>Main\SceneManager\SceneBase\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\SceneBase.cpp">
+      <Filter>Main\SceneManager\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneFactory\SceneFactory.cpp">
+      <Filter>Main\SceneManager\SceneFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneManager.cpp">
+      <Filter>Main\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\Main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectManager.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\GameScene.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\TitleScene.h">
+      <Filter>Main\SceneManager\SceneBase\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\SceneBase.h">
+      <Filter>Main\SceneManager\SceneBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneFactory\SceneFactory.h">
+      <Filter>Main\SceneManager\SceneFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneManager.h">
+      <Filter>Main\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectManager.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\ObjectBase.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

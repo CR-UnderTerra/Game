@@ -1,11 +1,9 @@
 ﻿#ifndef TEXTUREMANAGER_H
 #define TEXTUREMANAGER_H
 #include "..\Singleton.h"
-#include "TextureContainer.h"
-#include "TextureLoader.h"
+#include <vector>
+#include <D3DX11.h>
 
-class TextureLoader;
-class TextureContainer;
 
 namespace Lib
 {
@@ -34,30 +32,29 @@ namespace Lib
 		 */
 		inline ID3D11ShaderResourceView* GetTexture(int _index) const
 		{
-			return SINGLETON_INSTANCE(TextureContainer).GetTexture(_index);
+			return m_pTextureResourceView[_index];
 		}
 
 		/**
 		 * テクスチャの開放
 		 * @param[in] _index 開放するテクスチャのインデックス
 		 */
-		inline void ReleaseTexture(int _index)
-		{
-			SINGLETON_INSTANCE(TextureContainer).ReleaseTexture(_index);
-		}
+		void ReleaseTexture(int _index);
 
 		/**
 		 * 開放処理
 		 */
 		inline void Release()
 		{
-			SINGLETON_INSTANCE(TextureContainer).ClearBuffer();
+			m_pTextureResourceView.clear();
 		}
 
 	private:
 		TextureManager(){};
 		~TextureManager();
 
+		ID3D11Device*								m_pDevice;
+		std::vector<ID3D11ShaderResourceView*>		m_pTextureResourceView;
 	};
 }
 

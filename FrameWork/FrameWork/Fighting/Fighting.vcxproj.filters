@@ -26,6 +26,24 @@
     <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager">
       <UniqueIdentifier>{ed8080a0-9b6d-414d-8ef3-27fa2d763302}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase">
+      <UniqueIdentifier>{c4fbac5d-50b5-45c0-adec-9c4f04238b2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\BackGround">
+      <UniqueIdentifier>{339b3375-1e2a-4c38-93f2-c32c3fe03fa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player">
+      <UniqueIdentifier>{c8861474-6e0a-4205-b5e9-8edc1eea2407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase">
+      <UniqueIdentifier>{4cd282a3-1bcf-4a2f-a251-b39825fa386c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\LeftHand">
+      <UniqueIdentifier>{427b152c-c28c-4c4b-92e8-4784b487fd80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\RightHand">
+      <UniqueIdentifier>{2c5771ba-31e3-424b-8dc8-4246e1335f3a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\GameScene.cpp">
@@ -49,6 +67,21 @@
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectManager.cpp">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager</Filter>
     </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\BackGround\BackGround.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\Player.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\HandBase.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\LeftHand\LeftHand.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\LeftHand</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\RightHand\RightHand.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\RightHand</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\GameScene.h">
@@ -70,7 +103,22 @@
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager</Filter>
     </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\ObjectBase.h">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager</Filter>
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\BackGround\BackGround.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\Player.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\HandBase.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\LeftHand\LeftHand.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\LeftHand</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\RightHand\RightHand.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\RightHand</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

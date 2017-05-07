@@ -73,6 +73,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\HandBase.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\LeftHand\LeftHand.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\BackGround\BackGround.cpp" />
     <ClCompile Include="Main\Main.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\GameScene.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectManager.cpp" />
@@ -80,8 +83,13 @@
     <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Main\SceneManager\SceneFactory\SceneFactory.cpp" />
     <ClCompile Include="Main\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\Player.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\RightHand\RightHand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\HandBase.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\LeftHand\LeftHand.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\BackGround\BackGround.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\GameScene.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\ObjectBase.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectManager.h" />
@@ -89,6 +97,8 @@
     <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\TitleScene.h" />
     <ClInclude Include="Main\SceneManager\SceneFactory\SceneFactory.h" />
     <ClInclude Include="Main\SceneManager\SceneManager.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\Player.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\RightHand\RightHand.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

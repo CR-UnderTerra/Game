@@ -5,7 +5,7 @@
  */
 #ifndef OBJECTMANAGER_H
 #define OBJECTMANAGER_H
-#include <memory>
+#include <vector>
 #include "ObjectBase\ObjectBase.h"
 
 
@@ -33,7 +33,11 @@ public:
 	void Draw();
 
 private:
-	std::unique_ptr<ObjectBase> m_pGameObject;
+	std::vector<ObjectBase*> m_pGameObject;
+
+	int						 m_TextureIndex1;
+	int						 m_TextureIndex2;
+	int						 m_TextureIndex3;
 
 };
 

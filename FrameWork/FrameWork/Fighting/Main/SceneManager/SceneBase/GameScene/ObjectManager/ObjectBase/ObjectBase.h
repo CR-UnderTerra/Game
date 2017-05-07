@@ -1,6 +1,6 @@
 ﻿/**
- * @file   GameObjectManager.h
- * @brief  GameObjectManagerクラスのヘッダファイル
+ * @file   ObjectBase.h
+ * @brief  ObjectBaseクラスのヘッダファイル
  * @author kotani
  */
 #ifndef OBJECTBASE_H

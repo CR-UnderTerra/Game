@@ -18,11 +18,6 @@ SceneBase(SCENE_GAME)
 	{
 		const HWND hWnd = SINGLETON_INSTANCE(Lib::Window).GetWindowHandle();
 
-		// Lib::DX11Manager Init
-		SINGLETON_CREATE(Lib::DX11Manager);
-		SINGLETON_INSTANCE(Lib::DX11Manager).Init(hWnd);
-		// Lib::DX11Manager Init end
-
 		// Lib::DSoundManager Init
 		SINGLETON_CREATE(Lib::DSoundManager);
 		SINGLETON_INSTANCE(Lib::DSoundManager).Init(hWnd);
@@ -78,10 +73,6 @@ GameScene::~GameScene()
 	SINGLETON_DELETE(Lib::DSoundManager);
 	// Lib::DSoundManager Delete end
 
-	// Lib::DX11Manager Delete
-	SINGLETON_INSTANCE(Lib::DX11Manager).Release();
-	SINGLETON_DELETE(Lib::DX11Manager);
-	// Lib::DX11Manager Delete end
 }
 
 

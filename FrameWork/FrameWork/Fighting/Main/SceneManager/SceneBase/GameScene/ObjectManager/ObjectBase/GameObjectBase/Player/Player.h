@@ -5,12 +5,12 @@
  */
 #ifndef PLAYER_H
 #define PLAYER_H
-#include "../ObjectBase/ObjectBase.h"
+#include "../GameObjectBase.h"
 #include <vector>
 
 class HandBase;
 
-class Player : public ObjectBase
+class Player : public GameObjectBase
 {
 public:
 	/**

@@ -56,8 +56,5 @@ void BackGround::Update()
 
 void BackGround::Draw()
 {
-	static D3DXVECTOR2 var = D3DXVECTOR2(1,1);
-	var.x -= 0.001;
-	var.y -= 0.001;
 	m_pVertex->Draw(&m_Pos, m_pAnimUvController->GetUV());
 }

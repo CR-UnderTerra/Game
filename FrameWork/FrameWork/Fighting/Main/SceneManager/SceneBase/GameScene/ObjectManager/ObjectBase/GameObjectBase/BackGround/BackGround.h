@@ -7,9 +7,9 @@
 #define BACKGROUND_H
 #include "Vertex2D/Vertex2D.h"
 #include "Animation/AnimUvController.h"
-#include "../ObjectBase/ObjectBase.h"
+#include "../GameObjectBase.h"
 
-class BackGround : public ObjectBase
+class BackGround : public GameObjectBase
 {
 public:
 	/**

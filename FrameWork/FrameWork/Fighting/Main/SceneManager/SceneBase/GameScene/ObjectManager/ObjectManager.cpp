@@ -5,8 +5,8 @@
  */
 #include "ObjectManager.h"
 #include "Texture/TextureManager.h"
-#include "BackGround/BackGround.h"
-#include "Player/Player.h"
+#include "ObjectBase/GameObjectBase/BackGround/BackGround.h"
+#include "ObjectBase/GameObjectBase/Player/Player.h"
 
 
 ObjectManager::ObjectManager()
@@ -16,7 +16,6 @@ ObjectManager::ObjectManager()
 
 	m_pGameObject.push_back(new BackGround(m_TextureIndex3));
 	m_pGameObject.push_back(new Player(m_TextureIndex1));
-
 }
 
 ObjectManager::~ObjectManager()

@@ -6,7 +6,7 @@
 #ifndef OBJECTMANAGER_H
 #define OBJECTMANAGER_H
 #include <vector>
-#include "ObjectBase\ObjectBase.h"
+#include "ObjectBase/GameObjectBase/GameObjectBase.h"
 
 
 class ObjectManager
@@ -33,11 +33,14 @@ public:
 	void Draw();
 
 private:
-	std::vector<ObjectBase*> m_pGameObject;
+	ObjectManager(const ObjectManager&);
+	void operator=(const ObjectManager&);
 
-	int						 m_TextureIndex1;
-	int						 m_TextureIndex2;
-	int						 m_TextureIndex3;
+	std::vector<GameObjectBase*> m_pGameObject;
+	
+	int							 m_TextureIndex1;
+	int							 m_TextureIndex2;
+	int							 m_TextureIndex3;
 
 };
 

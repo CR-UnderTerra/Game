@@ -5,11 +5,11 @@
  */
 #ifndef HANDBASE_H
 #define HANDBASE_H
-#include "../../ObjectBase/ObjectBase.h"
+#include "../../../GameObjectBase/GameObjectBase.h"
 #include "Vertex2D/Vertex2D.h"
 #include "Animation/AnimUvController.h"
 
-class HandBase : public ObjectBase
+class HandBase : public GameObjectBase
 {
 public:
 	HandBase(D3DXVECTOR2* _pos,LPCTSTR _animName,int _textureIndex);

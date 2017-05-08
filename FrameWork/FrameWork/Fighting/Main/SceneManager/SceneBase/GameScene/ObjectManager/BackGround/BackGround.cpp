@@ -16,7 +16,7 @@ m_TextureIndex(_textureIndex)
 {
 	RECT ClientRect;
 	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
-	m_Pos = D3DXVECTOR2(ClientRect.right / 2, ClientRect.bottom/ 2);
+	m_Pos = D3DXVECTOR2(static_cast<float>(ClientRect.right / 2), static_cast<float>(ClientRect.bottom / 2));
 	m_pAnimUvController = new Lib::AnimUvController();
 	m_pAnimUvController->LoadAnimation("Resource/test_003.anim", "bg01");
 

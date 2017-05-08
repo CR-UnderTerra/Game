@@ -99,9 +99,6 @@
     <ClInclude Include="Main\SceneManager\SceneManager.h">
       <Filter>Main\SceneManager</Filter>
     </ClInclude>
-    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectManager.h">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager</Filter>
-    </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\ObjectBase.h">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase</Filter>
     </ClInclude>
@@ -119,6 +116,9 @@
     </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\RightHand\RightHand.h">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\Player\HandBase\RightHand</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectManager.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

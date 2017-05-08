@@ -67,7 +67,7 @@ void RightHand::Update()
 		}
 		else if (m_Pos.x > ClientRect.right / 2 + 300)
 		{
-			m_Pos.x = ClientRect.right / 2 + 300;
+			m_Pos.x = static_cast<float>(ClientRect.right / 2 + 300.f);
 		}
 	}
 }

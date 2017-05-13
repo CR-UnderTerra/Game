@@ -7,7 +7,10 @@
 #define OBJECTMANAGER_H
 #include <vector>
 #include "ObjectBase/GameObjectBase/GameObjectBase.h"
+#include "ObjectBase/UIBase/UIBase.h"
 
+
+class KnifeManager;
 
 class ObjectManager
 {
@@ -36,11 +39,14 @@ private:
 	ObjectManager(const ObjectManager&);
 	void operator=(const ObjectManager&);
 
-	std::vector<GameObjectBase*> m_pGameObject;
+	GameObjectBase*		 m_pBackGround;
+	KnifeManager*		 m_pKnifeManager;
+	GameObjectBase*		 m_pPlayer;
+	std::vector<UIBase*> m_pUIBase;
 	
-	int							 m_TextureIndex1;
-	int							 m_TextureIndex2;
-	int							 m_TextureIndex3;
+	int					 m_TextureIndex1;
+	int					 m_TextureIndex2;
+	int					 m_TextureIndex3;
 
 };
 

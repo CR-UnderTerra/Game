@@ -53,6 +53,27 @@
     <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase">
       <UniqueIdentifier>{98887cfb-f6c9-4da8-bb45-e530bb49574e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreUI">
+      <UniqueIdentifier>{c6dc6e11-6c3c-4115-aad2-0b7e4bd98acd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI">
+      <UniqueIdentifier>{0754cc71-c635-4141-830a-57f2f01985ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\KnifeBar">
+      <UniqueIdentifier>{e0c946db-74c1-447f-872a-fc7ba6e551e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\CollisionManager">
+      <UniqueIdentifier>{c16f68a4-9305-4eb9-b6c4-2d1111145fa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\CollisionManager\CollisionData">
+      <UniqueIdentifier>{1c2f900a-8d3a-46fe-a8d0-70b6136fb9ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager">
+      <UniqueIdentifier>{f5d67c7b-b6f4-4379-b58f-da140f549d33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\Knife">
+      <UniqueIdentifier>{708a076e-a55c-4d1d-98de-a3b76d2035e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\GameScene.cpp">
@@ -94,8 +115,26 @@
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\Player\Player.cpp">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\UIBase.cpp">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase</Filter>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\DistanceGaugeUI.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreUI\ScoreUI.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\KnifeBar\KnifeBar.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\KnifeBar</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\CollisionManager\CollisionManager.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\CollisionManager\CollisionData\CollisionData.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\CollisionManager\CollisionData</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\KnifeManager.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\Knife\Knife.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\Knife</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +182,27 @@
     </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\UIBase.h">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\DistanceGaugeUI.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreUI\ScoreUI.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\KnifeBar\KnifeBar.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\KnifeBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\CollisionManager\CollisionData\CollisionData.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\CollisionManager\CollisionData</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\KnifeManager.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\Knife\Knife.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\Knife</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\CollisionManager\CollisionManager.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\CollisionManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

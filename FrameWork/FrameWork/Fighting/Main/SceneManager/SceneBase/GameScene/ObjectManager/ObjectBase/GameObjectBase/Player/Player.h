@@ -5,8 +5,9 @@
  */
 #ifndef PLAYER_H
 #define PLAYER_H
-#include "../GameObjectBase.h"
 #include <vector>
+#include "../GameObjectBase.h"
+#include "../../../../CollisionManager/CollisionData/CollisionData.h"
 
 class HandBase;
 
@@ -34,9 +35,18 @@ public:
 	 */
 	void Draw() override;
 
+
 private:
-	std::vector<HandBase*> m_pHandBase;
-	int					   m_Hp;
+	/**
+	 * ナイフの投げる方向処理
+	 */
+	void KnifeThrow();
+
+	std::vector<HandBase*>   m_pHandBase;
+	CollisionData*		     m_pCollisionData;
+	CollisionData::HIT_STATE m_OldHitState;
+	D3DXVECTOR2			     m_Pos;
+	int					     m_Hp;
 
 };
 

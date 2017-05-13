@@ -25,14 +25,24 @@ public:
 	 */
 	virtual void Draw() override = 0;
 
+	/**
+	 * キャッチ出来る状態か?
+	 * @return キャッチ出来るならtrue
+	 */
+	inline bool GetIsCatch()
+	{
+		return m_IsCatch;
+	}
+
 protected:
 	static const D3DXVECTOR2 m_Rect;
 	static const float		 m_Acceleration;
+	static		 bool		 m_IsCatch;
 
 	Lib::AnimUvController*   m_pAnimUvController;
 	Lib::Vertex2D*			 m_pVertex;
-	D3DXVECTOR2				 m_Pos;
 	int						 m_TextureIndex;
+	D3DXVECTOR2				 m_Pos;
 	float					 m_MoveSpeed;
 };
 

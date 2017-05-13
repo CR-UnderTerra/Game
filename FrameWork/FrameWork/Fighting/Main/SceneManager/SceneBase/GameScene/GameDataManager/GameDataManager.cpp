@@ -4,7 +4,7 @@
  * @author kotani
  */
 #include "GameDataManager.h"
-
+#include "../ObjectManager/ObjectBase/UIBase/DistanceGaugeUI/DistanceGaugeUI.h"
 
 GameDataManager::GameDataManager()
 {
@@ -27,3 +27,9 @@ void GameDataManager::Update()
 void GameDataManager::Draw()
 {
 }
+
+void GameDataManager::SetKnifeDistance(float _distance, float _velocity)
+{
+	m_pDistanceGaugeUI->SetKnifeBar(_distance, _velocity);
+}
+

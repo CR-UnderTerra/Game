@@ -11,6 +11,8 @@
 #include "Dx11/DX11Manager.h"
 #include "ObjectManager/ObjectManager.h"
 #include "DxInput/DXInputDevice.h"
+#include "CollisionManager/CollisionManager.h"
+#include "GameDataManager/GameDataManager.h"
 
 GameScene::GameScene() :
 SceneBase(SCENE_GAME)
@@ -46,12 +48,16 @@ SceneBase(SCENE_GAME)
 		SINGLETON_INSTANCE(Lib::TextureManager).Init(pDevice);
 		// Lib::TextureManager Init end
 	}
+	SINGLETON_CREATE(GameDataManager);
+	SINGLETON_CREATE(CollisionManager);
 	m_pObjectManager = new ObjectManager();
 }
 
 GameScene::~GameScene()
 {
 	delete m_pObjectManager;
+	SINGLETON_DELETE(CollisionManager);
+	SINGLETON_DELETE(GameDataManager);
 
 	// Lib::TextureManager Delete
 	SINGLETON_INSTANCE(Lib::TextureManager).Release();
@@ -83,6 +89,7 @@ GameScene::~GameScene()
 SceneBase::SceneID GameScene::Update()
 {
 	m_pObjectManager->Update();
+	SINGLETON_INSTANCE(CollisionManager).Update();
 	SINGLETON_INSTANCE(Lib::KeyDevice).Update();
 	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_R);
 	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_R] == Lib::KEY_PUSH)

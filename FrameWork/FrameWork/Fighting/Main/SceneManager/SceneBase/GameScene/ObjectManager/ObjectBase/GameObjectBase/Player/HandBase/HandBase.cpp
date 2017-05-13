@@ -7,9 +7,12 @@
 #include "Texture/TextureManager.h"
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
+#include "../../../../../CollisionManager/CollisionManager.h"
+#include "../../../../../CollisionManager/CollisionData/CollisionData.h"
 
 const D3DXVECTOR2 HandBase::m_Rect = D3DXVECTOR2(128, 256);
 const float HandBase::m_Acceleration = 3.f;
+bool  HandBase::m_IsCatch = false;
 
 
 HandBase::HandBase(D3DXVECTOR2* _pos, LPCTSTR _animName, int _textureIndex) :

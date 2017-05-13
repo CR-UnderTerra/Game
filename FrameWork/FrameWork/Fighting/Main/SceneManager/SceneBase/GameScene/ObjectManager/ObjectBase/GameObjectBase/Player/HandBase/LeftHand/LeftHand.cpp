@@ -32,6 +32,7 @@ void LeftHand::Update()
 {
 	RECT ClientRect;
 	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
+	m_IsCatch = false;
 
 	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_Z] == Lib::KEY_PUSH ||
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_X] == Lib::KEY_PUSH ||
@@ -42,10 +43,17 @@ void LeftHand::Update()
 	{
 		m_MoveSpeed = 1;
 	}
+
 	else if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_Z] == Lib::KEY_ON ||
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_X] == Lib::KEY_ON ||
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_C] == Lib::KEY_ON)
 	{
+
+		if (m_Pos.x > ClientRect.right / 2 - (m_Rect.x / 2 + 80.f))
+		{
+			m_IsCatch = true;
+		}
+
 		if (m_Pos.x < ClientRect.right / 2 - m_Rect.x / 2)
 		{
 			m_Pos.x += m_MoveSpeed;

@@ -24,11 +24,22 @@ public:
 	 */
 	void Draw();
 
+	/**
+	 * KnifeBarにナイフの速度と距離を設定する
+	 */
+	void SetKnifeDistance(float _distance,float _velocity);
+
+	/**
+	 * DistanceGaugeUIのセット
+	 */
 	inline void SetDistanceGaugeUI(DistanceGaugeUI* _pDistanceGaugeUI)
 	{
 		m_pDistanceGaugeUI = _pDistanceGaugeUI;
 	}
 
+	/**
+	 * ScoreUIのセット
+	 */
 	inline void SetScoreUI(ScoreUI* _pScoreUI)
 	{
 		m_pScoreUI = _pScoreUI;

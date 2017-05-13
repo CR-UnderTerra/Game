@@ -8,9 +8,9 @@ const D3DXVECTOR2 KnifeBar::m_Rect(64, 16);
 KnifeBar::KnifeBar(int m_TextureIndex,D3DXVECTOR2* _GaugeTopPos) :
 m_TextureIndex(m_TextureIndex),
 m_GaugeTopPos(*_GaugeTopPos),
-m_Offset(0, 0)
+m_OffsetPos(0, 0),
+m_IsEnable(false)
 {
-	m_IsVisible = false;
 	m_pAnimUvController = new Lib::AnimUvController();
 	m_pAnimUvController->LoadAnimation("Resource/test_001.anim", "d_mark");
 
@@ -39,18 +39,24 @@ KnifeBar::~KnifeBar()
 
 void KnifeBar::Update()
 {
-	if (!m_IsVisible) return;
+	if (!m_IsEnable) return;
 	m_Distance -= m_Velocity;
-	m_Offset.y += m_AddValue;
+	m_OffsetPos.y += m_AddValue;
 	if (m_Distance <= 0)
 	{
-		m_IsVisible = false;
-		m_Offset.y = 0;
+		m_IsEnable = false;
+		m_OffsetPos.y = 0;
 	}
 }
 
 void KnifeBar::Draw()
 {
-	if (!m_IsVisible) return;
-	m_pVertex->Draw(&D3DXVECTOR2(m_GaugeTopPos.x, m_GaugeTopPos.y + m_Offset.y), m_pAnimUvController->GetUV());
+	if (!m_IsEnable) return;
+	m_pVertex->Draw(&D3DXVECTOR2(m_GaugeTopPos.x, m_GaugeTopPos.y + m_OffsetPos.y), m_pAnimUvController->GetUV());
+}
+
+void KnifeBar::SetIsEnable(bool _enable)
+{
+	m_OffsetPos.y = 0;
+	m_IsEnable = _enable;
 }

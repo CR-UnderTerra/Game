@@ -41,7 +41,14 @@ public:
 	/**
 	 * KnifeBarをセットする
 	 */
-	void SetKnifeBar(float _distance, float _velocity);
+	void SetKnifeBar(float _distance, float _velocity,int _index);
+
+	/**
+	 * ナイフゲージの有効かを設定する
+	 * @param[in] _index 止めるナイフバーのインデックス
+	 * @param[in] _IsEnable 有効ならtrue
+	 */
+	void SetKnifeBarIsEnable(int _index, bool _IsEnable);
 
 private:
 	static const D3DXVECTOR2 m_Rect;

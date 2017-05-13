@@ -68,24 +68,26 @@ public:
 		return m_IsCatch;
 	}
 
-	static const D3DXVECTOR2	   m_Rect;
 private:
-
-	CollisionData*				   m_pCollisionData;
-	Lib::Vertex2D*				   m_pVertex;
-	Lib::AnimUvController*		   m_pUvController;
-	CollisionData::HIT_STATE	   m_OldHitState;
-	D3DXVECTOR2					   m_Pos;
-	bool						   m_IsThrow;		 //!< 投げられたか?(存在しているか？)
-	bool						   m_IsCatch;		 //!< キャッチされたか？
-	TARGET						   m_Target;		 //!< 狙う先
-	float						   m_TargetDistance; //!< ターゲットまでの距離
-	float						   m_ScaleAddValue;  //!< スケールの増加量
-	int							   m_ArriveFrame;    //!< 何フレームで到達するか?
-	float						   m_Velocity;		 //!< 速度
-	float						   m_Angle;			 //!< 角度
-	float						   m_Scale;			 //!< 拡縮率 1が最大
-	int							   m_TextureIndex;	 //!< テクスチャのインデックス
+	static const D3DXVECTOR2	   m_Rect;
+	static int					   m_IndexMax;			
+	int							   m_Index;
+	CollisionData*				   m_pCollisionData;	 //!< 何番のインデックスにセットされているか
+	Lib::Vertex2D*				   m_pVertex;			 
+	Lib::AnimUvController*		   m_pUvController;		 
+	CollisionData::HIT_STATE	   m_OldHitState;		 
+	D3DXVECTOR2					   m_Pos;				 
+	bool						   m_IsThrow;			 //!< 投げられたか?(存在しているか？)
+	bool						   m_IsCatch;			 //!< キャッチされたか？
+	TARGET						   m_Target;			 //!< 狙う先
+	float						   m_TargetDistance;	 //!< ターゲットまでの距離
+	float						   m_ScaleAddValue;		 //!< スケールの増加量
+	int							   m_ArriveFrame;		 //!< 何フレームで到達するか?
+	float						   m_Velocity;			 //!< 速度
+	float						   m_Angle;				 //!< 角度
+	float						   m_Scale;				 //!< 拡縮率 1が最大
+	float						   m_RectCollisionRatio; //!< 当たり判定の割合
+	int							   m_TextureIndex;		 //!< テクスチャのインデックス
 
 };
 

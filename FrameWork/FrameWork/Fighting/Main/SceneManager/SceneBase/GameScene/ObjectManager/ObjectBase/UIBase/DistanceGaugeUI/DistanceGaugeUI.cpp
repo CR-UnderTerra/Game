@@ -70,15 +70,13 @@ void DistanceGaugeUI::Draw()
 	}
 }
 
-void DistanceGaugeUI::SetKnifeBar(float _distance, float _velocity)
+void DistanceGaugeUI::SetKnifeBar(float _distance, float _velocity, int _index)
 {
-	for (int i = 0; i < KnifeManager::m_KnifeMax; i++)
-	{
-		if (!m_pKnifeBar[i]->GetVisible())
-		{
-			m_pKnifeBar[i]->SetKnifeState(_distance, _velocity);
-			m_pKnifeBar[i]->SetVisible(true);
-			return;
-		}
-	}
+	m_pKnifeBar[_index]->SetKnifeState(_distance, _velocity);
+	m_pKnifeBar[_index]->SetIsEnable(true);
+}
+
+void DistanceGaugeUI::SetKnifeBarIsEnable(int _index, bool _IsEnable)
+{
+	m_pKnifeBar[_index]->SetIsEnable(_IsEnable);
 }

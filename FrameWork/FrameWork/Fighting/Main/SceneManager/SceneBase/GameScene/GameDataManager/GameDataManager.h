@@ -27,7 +27,12 @@ public:
 	/**
 	 * KnifeBarにナイフの速度と距離を設定する
 	 */
-	void SetKnifeDistance(float _distance,float _velocity);
+	void SetKnifeDistance(float _distance, float _velocity, int _index);
+
+	/**
+	 * KnifeBarの有効かを設定する
+	 */
+	void SetKnifeBarIsEnable(int _index, bool _isEnable);
 
 	/**
 	 * DistanceGaugeUIのセット

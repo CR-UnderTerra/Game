@@ -39,30 +39,20 @@ public:
 	}
 
 	/**
-	 * 可視状態かの取得
+	 * 有効かの設定
+	 * @param[in] _enable 見えるかのフラグ
 	 */
-	inline bool GetVisible()
-	{
-		return m_IsVisible;
-	}
+	void SetIsEnable(bool _enable);
 
-	/**
-	 * 可視状態の設定
-	 * @param[in] _visible 見えるかのフラグ
-	 */
-	inline void SetVisible(bool _visible)
-	{
-		m_IsVisible = _visible;
-	}
 
 private:
 	static const D3DXVECTOR2 m_Rect;
 	Lib::AnimUvController*   m_pAnimUvController;
 	Lib::Vertex2D*			 m_pVertex;
-	bool					 m_IsVisible;
+	bool					 m_IsEnable;
 	int						 m_TextureIndex;
 	D3DXVECTOR2				 m_GaugeTopPos;
-	D3DXVECTOR2				 m_Offset; //!< 距離ゲージの一番上からどれくらい動くか?.
+	D3DXVECTOR2				 m_OffsetPos; //!< 距離ゲージの一番上からどれくらい動くか?.
 	float					 m_AddValue;
 	float					 m_Distance;
 	float					 m_Velocity;

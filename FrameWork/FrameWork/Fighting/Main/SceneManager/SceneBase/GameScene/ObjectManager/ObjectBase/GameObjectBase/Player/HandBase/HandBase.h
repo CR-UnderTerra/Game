@@ -8,6 +8,8 @@
 #include "../../../GameObjectBase/GameObjectBase.h"
 #include "Vertex2D/Vertex2D.h"
 #include "Animation/AnimUvController.h"
+#include "../../../../../CollisionManager/CollisionManager.h"
+#include "../../../../../CollisionManager/CollisionData/CollisionData.h"
 
 class HandBase : public GameObjectBase
 {
@@ -34,6 +36,11 @@ public:
 		return m_IsCatch;
 	}
 
+	inline CollisionData::HIT_STATE GetHitState()
+	{
+		return m_pCollisionData->GetCollisionState().HitState;
+	}
+
 protected:
 	static const D3DXVECTOR2 m_Rect;
 	static const float		 m_Acceleration;
@@ -44,6 +51,8 @@ protected:
 	int						 m_TextureIndex;
 	D3DXVECTOR2				 m_Pos;
 	float					 m_MoveSpeed;
+	CollisionData*		     m_pCollisionData;
+
 };
 
 

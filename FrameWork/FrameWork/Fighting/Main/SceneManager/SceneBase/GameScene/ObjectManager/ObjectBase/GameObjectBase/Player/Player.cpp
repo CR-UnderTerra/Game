@@ -22,8 +22,8 @@ Player::Player(int _textureIndex)
 	RECT ClientRect;
 	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
 	m_Pos.x = static_cast<float>(ClientRect.right / 2);
-	m_Pos.y = static_cast<float>(ClientRect.bottom + 100);
-	m_pCollisionData->SetCollision(&m_Pos,&D3DXVECTOR2(200,200),CollisionData::PLAYER_TYPE);
+	m_Pos.y = static_cast<float>(ClientRect.bottom);
+	m_pCollisionData->SetCollision(&m_Pos,&D3DXVECTOR2(100,200),CollisionData::PLAYER_TYPE);
 	m_pCollisionData->SetEnable(true);
 	SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pCollisionData);
 
@@ -56,14 +56,7 @@ void Player::Update()
 	RECT ClientRect;
 	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
 
-	if (m_pHandBase[0]->GetIsCatch())
-	{
-		m_pCollisionData->SetCollision(&D3DXVECTOR2(m_Pos.x, m_Pos.y - 300), &D3DXVECTOR2(200, 200), CollisionData::HAND_TYPE);
-	}
-	else
-	{
-		m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2(100, 100), CollisionData::PLAYER_TYPE);
-	}
+	m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2(100, 200), CollisionData::PLAYER_TYPE);
 
 	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_W] == Lib::KEY_PUSH)
 	{
@@ -72,7 +65,7 @@ void Player::Update()
 	}
 
 	KnifeThrow();
-	m_OldHitState = m_pCollisionData->GetCollisionState().HitState;
+	m_OldHitState = m_pHandBase[0]->GetHitState();
 
 	for (unsigned int i = 0; i < m_pHandBase.size(); i++)
 	{

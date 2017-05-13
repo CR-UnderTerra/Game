@@ -77,6 +77,7 @@ private:
 	Lib::AnimUvController*		   m_pUvController;		 
 	CollisionData::HIT_STATE	   m_OldHitState;		 
 	D3DXVECTOR2					   m_Pos;				 
+	D3DXVECTOR2					   m_RectCollisionRatio; //!< 当たり判定の割合
 	bool						   m_IsThrow;			 //!< 投げられたか?(存在しているか？)
 	bool						   m_IsCatch;			 //!< キャッチされたか？
 	TARGET						   m_Target;			 //!< 狙う先
@@ -86,7 +87,6 @@ private:
 	float						   m_Velocity;			 //!< 速度
 	float						   m_Angle;				 //!< 角度
 	float						   m_Scale;				 //!< 拡縮率 1が最大
-	float						   m_RectCollisionRatio; //!< 当たり判定の割合
 	int							   m_TextureIndex;		 //!< テクスチャのインデックス
 
 };

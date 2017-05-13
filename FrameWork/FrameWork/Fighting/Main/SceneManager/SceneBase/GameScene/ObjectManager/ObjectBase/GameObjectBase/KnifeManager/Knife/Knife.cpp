@@ -21,7 +21,7 @@ m_IsThrow(false),
 m_IsCatch(false),
 m_pUvController(_pUvController),
 m_TextureIndex(_textureIndex),
-m_RectCollisionRatio(0.6f)
+m_RectCollisionRatio(D3DXVECTOR2(0.6f,0.3f))
 {
 	m_Index = m_IndexMax;
 	m_IndexMax++;
@@ -73,13 +73,13 @@ void Knife::Update()
 
 	if (m_Target != PLAYER)
 	{
-		m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio,
-			(m_Rect.y * m_Scale) * m_RectCollisionRatio), CollisionData::PLAYER_KNIFE_TYPE);
+		m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
+			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::PLAYER_KNIFE_TYPE);
 	}
 	else
 	{
-		m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio,
-			(m_Rect.y * m_Scale) * m_RectCollisionRatio), CollisionData::ENEMY_KNIFE_TYPE);
+		m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
+			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::ENEMY_KNIFE_TYPE);
 	}
 
 	if (hitState == CollisionData::CATCH_HIT)
@@ -158,16 +158,16 @@ void Knife::Throw(D3DXVECTOR2* _pos, TARGET _target, float _velocity)
 	m_ArriveFrame = static_cast<int>(m_TargetDistance / m_Velocity);
 	if (m_Target != PLAYER)
 	{
-		m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio,
-			(m_Rect.y * m_Scale) * m_RectCollisionRatio), CollisionData::PLAYER_KNIFE_TYPE);
+		m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
+			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::PLAYER_KNIFE_TYPE);
 		m_ScaleAddValue = -((0.5f) / m_ArriveFrame);
 	}
 	else
 	{
 		SINGLETON_INSTANCE(GameDataManager).SetKnifeDistance(m_TargetDistance, m_Velocity, m_Index);
 		m_Scale = 0.3f;
-		m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio,
-			(m_Rect.y * m_Scale) * m_RectCollisionRatio), CollisionData::ENEMY_KNIFE_TYPE);
+		m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
+			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::ENEMY_KNIFE_TYPE);
 		m_ScaleAddValue = (1.f - m_Scale) / m_ArriveFrame;
 	}
 }

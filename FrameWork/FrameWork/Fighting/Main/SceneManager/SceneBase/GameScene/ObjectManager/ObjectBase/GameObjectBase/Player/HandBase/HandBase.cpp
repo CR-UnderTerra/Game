@@ -7,8 +7,6 @@
 #include "Texture/TextureManager.h"
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
-#include "../../../../../CollisionManager/CollisionManager.h"
-#include "../../../../../CollisionManager/CollisionData/CollisionData.h"
 
 const D3DXVECTOR2 HandBase::m_Rect = D3DXVECTOR2(128, 256);
 const float HandBase::m_Acceleration = 3.f;
@@ -29,11 +27,20 @@ m_TextureIndex(_textureIndex)
 	m_pVertex->Init(&m_Rect, m_pAnimUvController->GetUV());
 	m_pVertex->SetTexture(
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
+
+	m_pCollisionData = new CollisionData();
+	m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2(m_Rect.x, m_Rect.y), CollisionData::PLAYER_TYPE);
+	m_pCollisionData->SetEnable(true);
+	SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pCollisionData);
+
 }
 
 
 HandBase::~HandBase()
 {
+	delete m_pCollisionData;
+	m_pCollisionData = NULL;
+
 	if (m_pVertex != NULL)
 	{
 		m_pVertex->Release();

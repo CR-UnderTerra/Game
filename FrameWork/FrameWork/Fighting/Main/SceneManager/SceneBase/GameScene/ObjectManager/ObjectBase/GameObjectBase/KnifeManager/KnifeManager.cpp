@@ -52,6 +52,7 @@ Knife* const KnifeManager::GetCatchKnife()
 			return m_pKnife[i];
 		}
 	}
+	return m_pKnife[m_KnifeMax - 1];
 }
 
 void KnifeManager::Update()

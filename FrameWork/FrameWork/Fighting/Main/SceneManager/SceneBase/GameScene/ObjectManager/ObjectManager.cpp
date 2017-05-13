@@ -9,6 +9,8 @@
 #include "ObjectBase/GameObjectBase/Player/Player.h"
 #include "ObjectBase/GameObjectBase/KnifeManager/KnifeManager.h"
 #include "ObjectBase/UIBase/DistanceGaugeUI/DistanceGaugeUI.h"
+#include "ObjectBase/UIBase/HpGaugeUI/HpGaugeUI.h"
+
 
 ObjectManager::ObjectManager()
 {
@@ -21,6 +23,7 @@ ObjectManager::ObjectManager()
 	m_pPlayer = new Player(m_TextureIndex1);
 
 	m_pUIBase.push_back(new DistanceGaugeUI(m_TextureIndex1));
+	m_pUIBase.push_back(new HpGaugeUI(m_TextureIndex1));
 }
 
 ObjectManager::~ObjectManager()

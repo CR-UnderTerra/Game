@@ -9,6 +9,7 @@
 #include "Vertex2D/Vertex2D.h"
 #include "Animation/AnimUvController.h"
 #include <vector>
+
 class KnifeBar;
 
 /**

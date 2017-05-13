@@ -6,7 +6,8 @@
 #include "GameDataManager.h"
 #include "../ObjectManager/ObjectBase/UIBase/DistanceGaugeUI/DistanceGaugeUI.h"
 
-GameDataManager::GameDataManager()
+GameDataManager::GameDataManager() :
+m_PlayerHp(3)
 {
 }
 

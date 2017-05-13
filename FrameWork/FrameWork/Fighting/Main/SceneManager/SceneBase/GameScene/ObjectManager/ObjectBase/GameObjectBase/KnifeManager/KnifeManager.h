@@ -39,11 +39,10 @@ public:
 	 */
 	void Draw() override;
 
-	inline void SetTextureIndex(int _textureIndex)
-	{
-		m_TextureIndex = _textureIndex;
-	}
-
+	/**
+	 * キャッチされたナイフのポインタを返す
+	 * @return キャッチしたナイフ
+	 */
 	Knife* const GetCatchKnife();
 
 	static const int		m_KnifeMax; //!< ナイフの最大出現数.
@@ -51,7 +50,7 @@ private:
 	/**
 	 * コンストラクタ
 	 */
-	KnifeManager(){};
+	KnifeManager() = default;
 
 	/**
 	 * デストラクタ

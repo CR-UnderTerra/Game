@@ -73,6 +73,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpIcon\HpIcon.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpGaugeUI.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\Knife\Knife.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\KnifeManager.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\CollisionManager\CollisionManager.cpp" />
@@ -95,6 +97,8 @@
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreUI\ScoreUI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpIcon\HpIcon.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpGaugeUI.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\Knife\Knife.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\KnifeManager.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\CollisionManager\CollisionManager.h" />

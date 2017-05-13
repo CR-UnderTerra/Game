@@ -20,6 +20,11 @@ KnifeManager::~KnifeManager()
 	m_pAnimUvController = NULL;
 }
 
+
+//----------------------------------------------------------------------------------------------------
+// Public Functions
+//----------------------------------------------------------------------------------------------------
+
 void KnifeManager::Init(int _textureIndex)
 {
 	m_TextureIndex = _textureIndex;

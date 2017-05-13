@@ -14,7 +14,17 @@
 class HandBase : public GameObjectBase
 {
 public:
+	/**
+	 * コンストラクタ
+	 * @param[in] _pos 手の座標
+	 * @param[in] _animName 使用するアニメーションネーム
+	 * @param[in] _textureIndex 使用するテクスチャインデックス
+	 */
 	HandBase(D3DXVECTOR2* _pos,LPCTSTR _animName,int _textureIndex);
+
+	/**
+	 * デストラクタ
+	 */
 	~HandBase();
 
 	/**
@@ -28,14 +38,9 @@ public:
 	virtual void Draw() override = 0;
 
 	/**
-	 * キャッチ出来る状態か?
-	 * @return キャッチ出来るならtrue
+	 * 手の当たり状態を取得する
+	 * @return 手の当たりの状態
 	 */
-	inline bool GetIsCatch()
-	{
-		return m_IsCatch;
-	}
-
 	inline CollisionData::HIT_STATE GetHitState()
 	{
 		return m_pCollisionData->GetCollisionState().HitState;
@@ -44,7 +49,6 @@ public:
 protected:
 	static const D3DXVECTOR2 m_Rect;
 	static const float		 m_Acceleration;
-	static		 bool		 m_IsCatch;
 
 	Lib::AnimUvController*   m_pAnimUvController;
 	Lib::Vertex2D*			 m_pVertex;

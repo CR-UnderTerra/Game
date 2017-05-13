@@ -74,6 +74,12 @@
     <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\Knife">
       <UniqueIdentifier>{708a076e-a55c-4d1d-98de-a3b76d2035e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI">
+      <UniqueIdentifier>{0c404221-b3f5-40be-98ef-f1895fdd1e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpIcon">
+      <UniqueIdentifier>{2b3744b6-9794-4cdb-aa2e-43db763b5f7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\GameScene.cpp">
@@ -135,6 +141,12 @@
     </ClCompile>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\Knife\Knife.cpp">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\Knife</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpGaugeUI.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpIcon\HpIcon.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpIcon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +215,12 @@
     </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\CollisionManager\CollisionManager.h">
       <Filter>Main\SceneManager\SceneBase\GameScene\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpGaugeUI.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpIcon\HpIcon.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpIcon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -42,6 +42,8 @@ private:
 	 */
 	void KnifeThrow();
 
+	static const D3DXVECTOR2 m_RectCollision;
+
 	std::vector<HandBase*>   m_pHandBase;
 	CollisionData*		     m_pCollisionData;
 	CollisionData::HIT_STATE m_OldHitState;

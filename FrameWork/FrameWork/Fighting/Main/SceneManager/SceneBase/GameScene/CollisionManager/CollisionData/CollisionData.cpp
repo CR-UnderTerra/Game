@@ -54,7 +54,9 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 			return true;
 		}
 		else if (v1.CollisionType == ENEMY_KNIFE_TYPE &&
-			v2.CollisionType == PLAYER_TYPE)
+			v2.CollisionType == PLAYER_TYPE ||
+			v1.CollisionType == PLAYER_TYPE &&
+			v2.CollisionType == ENEMY_KNIFE_TYPE)
 		{
 			m_CollisionState.HitState = KNIFE_HIT;
 			return true;

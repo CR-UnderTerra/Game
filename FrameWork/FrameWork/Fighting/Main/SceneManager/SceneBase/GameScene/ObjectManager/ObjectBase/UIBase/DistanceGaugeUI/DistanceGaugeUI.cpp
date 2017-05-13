@@ -70,6 +70,11 @@ void DistanceGaugeUI::Draw()
 	}
 }
 
+
+//----------------------------------------------------------------------------------------------------
+// Public Functions
+//----------------------------------------------------------------------------------------------------
+
 void DistanceGaugeUI::SetKnifeBar(float _distance, float _velocity, int _index)
 {
 	m_pKnifeBar[_index]->SetKnifeState(_distance, _velocity);

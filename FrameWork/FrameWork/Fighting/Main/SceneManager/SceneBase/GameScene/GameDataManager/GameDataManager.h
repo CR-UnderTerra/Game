@@ -9,6 +9,7 @@
 
 class DistanceGaugeUI;
 class ScoreUI;
+class HpGaugeUI;
 
 class GameDataManager
 {
@@ -50,12 +51,31 @@ public:
 		m_pScoreUI = _pScoreUI;
 	}
 
+	/**
+	 * プレイヤーのHpをセットする
+	 */
+	inline void SetPlayerHp(int _PlayerHp)
+	{
+		m_PlayerHp = _PlayerHp;
+	}
+
+	/**
+	 * プレイヤーのHpを取得する
+	 */
+	inline int GetPlayerHp()
+	{
+		return m_PlayerHp;
+	}
+
+
 private:
 	GameDataManager();
 	~GameDataManager();
 
 	DistanceGaugeUI* m_pDistanceGaugeUI;
 	ScoreUI*		 m_pScoreUI;
+	int				 m_PlayerHp;
+
 };
 
 

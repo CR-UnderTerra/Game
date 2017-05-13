@@ -52,7 +52,6 @@ void RightHand::Update()
 		if (m_Pos.x < ClientRect.right / 2 + (m_Rect.x / 2 + 80.f))
 		{
 			m_pCollisionData->SetEnable(true);
-			m_IsCatch = true;
 		}
 
 		if (m_Pos.x > ClientRect.right / 2 + m_Rect.x / 2)

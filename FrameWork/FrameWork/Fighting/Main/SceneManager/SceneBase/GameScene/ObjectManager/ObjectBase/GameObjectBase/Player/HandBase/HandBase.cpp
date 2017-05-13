@@ -10,7 +10,6 @@
 
 const D3DXVECTOR2 HandBase::m_Rect = D3DXVECTOR2(128, 256);
 const float HandBase::m_Acceleration = 3.f;
-bool  HandBase::m_IsCatch = false;
 
 
 HandBase::HandBase(D3DXVECTOR2* _pos, LPCTSTR _animName, int _textureIndex) :

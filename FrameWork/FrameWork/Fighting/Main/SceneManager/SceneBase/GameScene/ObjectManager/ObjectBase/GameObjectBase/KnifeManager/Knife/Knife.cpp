@@ -4,13 +4,11 @@
  * @author kotani
  */
 #include "Window/Window.h"
-#include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
 #include "Animation/AnimUvController.h"
 #include "Texture/TextureManager.h"
 #include "Knife.h"
 #include "../../../../../CollisionManager/CollisionManager.h"
-#include "../../../../../GameDataManager/GameDataManager.h"
 
 const D3DXVECTOR2 Knife::m_Rect = D3DXVECTOR2(128, 256);
 int	Knife::m_IndexMax = 0;
@@ -56,7 +54,6 @@ Knife::~Knife()
 void Knife::Update()
 {
 	if (!m_IsThrow) return;
-	CollisionData::HIT_STATE hitState = m_pCollisionData->GetCollisionState().HitState;
 	m_IsCatch;
 	if (!m_IsCatch)
 	{
@@ -65,45 +62,8 @@ void Knife::Update()
 		m_Scale += m_ScaleAddValue;
 		m_TargetDistance -= m_Velocity;
 	}
-
-	if (m_TargetDistance <= 0 && m_Target != PLAYER)
-	{
-		m_pCollisionData->SetEnable(false);
-		m_IsThrow = false;
-	}
-	else
-	{
-		m_pCollisionData->SetEnable(true);
-	}
-
-	if (m_Target != PLAYER)
-	{
-		m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
-			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::PLAYER_KNIFE_TYPE);
-	}
-	else
-	{
-		m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
-			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::ENEMY_KNIFE_TYPE);
-	}
-
-	if (hitState == CollisionData::CATCH_HIT)
-	{
-		SINGLETON_INSTANCE(GameDataManager).SetKnifeBarIsEnable(m_Index, false);
-		m_IsCatch = true;
-	}
-	else if (hitState == CollisionData::KNIFE_HIT)
-	{
-		SINGLETON_INSTANCE(GameDataManager).SetKnifeBarIsEnable(m_Index, false);
-		m_pCollisionData->SetEnable(false);
-		m_IsThrow = false;
-	}
-	else if (m_OldHitState == CollisionData::CATCH_HIT &&
-		hitState == CollisionData::NON_HIT)
-	{
-		m_IsCatch = false;
-	}
-	m_OldHitState = hitState;
+	CollisionUpdate();
+	CollisionControl();
 }
 
 void Knife::Draw()
@@ -112,56 +72,26 @@ void Knife::Draw()
 	m_pVertex->Draw(&m_Pos, m_pUvController->GetUV(), 1.f, &D3DXVECTOR2(m_Scale, m_Scale));
 }
 
-void Knife::Throw(D3DXVECTOR2* _pos, TARGET _target, float _velocity)
+void Knife::Throw(D3DXVECTOR2* _pos, GameDataManager::TARGET _target, float _arriveTime)
 {
 	m_pCollisionData->SetEnable(true);
 	m_OldHitState = CollisionData::NON_HIT;
 	m_Pos = *_pos;
 	m_IsThrow = true;
 	m_IsCatch = false;
-	m_Velocity = _velocity;
+	m_Velocity = 0;
+	m_ArriveFrame = static_cast<int>(_arriveTime * 60);
 	m_Target = _target;
 
 	RECT ClientRect;
 	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
 
-	D3DXVECTOR2 playerPos;
-	playerPos.x = static_cast<float>(ClientRect.right / 2);
-	playerPos.y = static_cast<float>(ClientRect.bottom / 2 + 200);
+	D3DXVECTOR2 pos = SINGLETON_INSTANCE(GameDataManager).GetPos(m_Target);
+	m_Angle = atan2(_pos->y - pos.y, _pos->x - pos.x);
+	m_TargetDistance = sqrt(pow(_pos->x - pos.x, 2) + pow(_pos->y - pos.y, 2));
 
-	D3DXVECTOR2 leftEnemyPos;
-	leftEnemyPos.x = static_cast<float>(ClientRect.right / 2 - 150);
-	leftEnemyPos.y = 200.f;
-
-	D3DXVECTOR2 frontEnemyPos;
-	frontEnemyPos.x = static_cast<float>(ClientRect.right / 2);
-	frontEnemyPos.y = 200.f;
-
-	D3DXVECTOR2 rightEnemyPos;
-	rightEnemyPos.x = static_cast<float>(ClientRect.right / 2 + 150);
-	rightEnemyPos.y = 200.f;
-	switch (m_Target)
-	{
-	case LEFT_ENEMY:
-		m_Angle = atan2(_pos->y - leftEnemyPos.y, _pos->x - leftEnemyPos.x);
-		m_TargetDistance = sqrt(pow(_pos->x - leftEnemyPos.x, 2) + pow(_pos->y - leftEnemyPos.y, 2));
-		break;
-	case FRONT_ENEMY:
-		m_Angle = atan2(_pos->y - frontEnemyPos.y, _pos->x - frontEnemyPos.x);
-		m_TargetDistance = sqrt(pow(_pos->x - frontEnemyPos.x, 2) + pow(_pos->y - frontEnemyPos.y, 2));
-		break;
-	case RIGHT_ENEMY:
-		m_Angle = atan2(_pos->y - rightEnemyPos.y, _pos->x - rightEnemyPos.x);
-		m_TargetDistance = sqrt(pow(_pos->x - rightEnemyPos.x, 2) + pow(_pos->y - rightEnemyPos.y, 2));
-		break;
-	case PLAYER:
-		m_Angle = atan2(_pos->y - playerPos.y, _pos->x - playerPos.x);
-		m_TargetDistance = sqrt(pow(_pos->x - playerPos.x, 2) + pow(_pos->y - playerPos.y, 2));
-		break;
-	}
-
-	m_ArriveFrame = static_cast<int>(m_TargetDistance / m_Velocity);
-	if (m_Target != PLAYER)
+	m_Velocity = m_TargetDistance / m_ArriveFrame;
+	if (m_Target != GameDataManager::PLAYER_TARGET)
 	{
 		m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
 			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::PLAYER_KNIFE_TYPE);
@@ -177,7 +107,68 @@ void Knife::Throw(D3DXVECTOR2* _pos, TARGET _target, float _velocity)
 	}
 }
 
-void Knife::Throw(TARGET _target, float _velocity)
+void Knife::Throw(GameDataManager::TARGET _target, float _arriveTime)
 {
-	Throw(&m_Pos, _target, _velocity);
+	Throw(&m_Pos, _target, _arriveTime);
+}
+
+
+//----------------------------------------------------------------------------------------------------
+// Private Functions
+//----------------------------------------------------------------------------------------------------
+
+void Knife::CollisionUpdate()
+{
+	if (m_Target == GameDataManager::PLAYER_TARGET)
+	{
+		if (m_TargetDistance <= 0)
+		{
+			int playerHp = SINGLETON_INSTANCE(GameDataManager).GetPlayerHp();
+			SINGLETON_INSTANCE(GameDataManager).SetPlayerHp(--playerHp);
+			m_pCollisionData->SetEnable(false);
+			m_IsThrow = false;
+		}
+		else
+		{
+			m_pCollisionData->SetEnable(true);
+		}
+		m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
+			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::ENEMY_KNIFE_TYPE);
+	}
+	else
+	{
+		if (m_TargetDistance <= 0)
+		{
+			m_pCollisionData->SetEnable(false);
+			m_IsThrow = false;
+		}
+		else
+		{
+			m_pCollisionData->SetEnable(true);
+		}
+		m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
+			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::PLAYER_KNIFE_TYPE);
+	}
+}
+
+void Knife::CollisionControl()
+{
+	CollisionData::HIT_STATE hitState = m_pCollisionData->GetCollisionState().HitState;
+	if (hitState == CollisionData::KNIFE_HIT)
+	{
+		SINGLETON_INSTANCE(GameDataManager).SetKnifeBarIsEnable(m_Index, false);
+		m_pCollisionData->SetEnable(false);
+		m_IsThrow = false;
+	}
+	else if (hitState == CollisionData::CATCH_HIT)
+	{
+		SINGLETON_INSTANCE(GameDataManager).SetKnifeBarIsEnable(m_Index, false);
+		m_IsCatch = true;
+	}
+	else if (m_OldHitState == CollisionData::CATCH_HIT &&
+		hitState == CollisionData::NON_HIT)
+	{
+		m_IsCatch = false;
+	}
+	m_OldHitState = hitState;
 }

@@ -12,8 +12,8 @@ const D3DXVECTOR2 HandBase::m_Rect = D3DXVECTOR2(128, 256);
 const float HandBase::m_Acceleration = 3.f;
 
 
-HandBase::HandBase(D3DXVECTOR2* _pos, LPCTSTR _animName, int _textureIndex) :
-m_Pos(*_pos),
+HandBase::HandBase(D3DXVECTOR2* _playerTopPos, LPCTSTR _animName, int _textureIndex) :
+m_PlayerTopPos(*_playerTopPos),
 m_TextureIndex(_textureIndex)
 {
 	m_pAnimUvController = new Lib::AnimUvController();

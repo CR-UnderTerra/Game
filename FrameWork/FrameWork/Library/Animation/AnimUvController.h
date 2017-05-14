@@ -99,6 +99,12 @@ namespace Lib
 		}
 
 		/**
+		 * アニメーションのカウントを指定する
+		 * 最大数より大きい場合最大数が設定される
+		 */
+		void SetAnimCount(int _animCount);
+
+		/**
 		 * アニメーション制御
 		 * @param[in] _isReverse 逆再生するか？
 		 * @param[in] _playOperation 再生設定

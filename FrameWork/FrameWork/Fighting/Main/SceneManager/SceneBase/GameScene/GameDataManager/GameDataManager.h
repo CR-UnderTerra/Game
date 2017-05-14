@@ -6,6 +6,7 @@
 #ifndef GAMEDATAMANAGER_H
 #define GAMEDATAMANAGER_H
 #include "Singleton.h"
+#include "Vertex2D/Vertex2D.h"
 
 class DistanceGaugeUI;
 class ScoreUI;
@@ -15,6 +16,15 @@ class GameDataManager
 {
 	friend Lib::Singleton<GameDataManager>;
 public:
+	enum TARGET
+	{
+		PLAYER_TARGET,
+		LEFT_ENEMY_TARGET,
+		FRONT_ENEMY_TARGET,
+		RIGHT_ENEMY_TARGET,
+		TARGET_MAX
+	};
+
 	/**
 	 * 制御関数
 	 */
@@ -67,6 +77,10 @@ public:
 		return m_PlayerHp;
 	}
 
+	inline D3DXVECTOR2 GetPos(TARGET _target)
+	{
+		return m_Pos[_target];
+	}
 
 private:
 	GameDataManager();
@@ -75,6 +89,7 @@ private:
 	DistanceGaugeUI* m_pDistanceGaugeUI;
 	ScoreUI*		 m_pScoreUI;
 	int				 m_PlayerHp;
+	D3DXVECTOR2		 m_Pos[TARGET_MAX];
 
 };
 

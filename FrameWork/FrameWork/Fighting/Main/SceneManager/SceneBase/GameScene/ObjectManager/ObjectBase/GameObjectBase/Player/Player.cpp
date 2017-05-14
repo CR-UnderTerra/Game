@@ -12,11 +12,10 @@
 #include "../../../../CollisionManager/CollisionManager.h"
 #include "../../../../GameDataManager/GameDataManager.h"
 
-const D3DXVECTOR2 Player::m_RectCollision = D3DXVECTOR2(100, 250);
+const D3DXVECTOR2 Player::m_RectCollision = D3DXVECTOR2(100, 230);
 
 
-Player::Player(int _textureIndex) :
-m_Hp(3)
+Player::Player(int _textureIndex)
 {
 	m_pCollisionData = new CollisionData();
 	m_pHandBase.push_back(new RightHand(_textureIndex));
@@ -27,7 +26,7 @@ m_Hp(3)
 	m_Pos.x = static_cast<float>(ClientRect.right / 2);
 	m_Pos.y = static_cast<float>(ClientRect.bottom);
 	m_pCollisionData->SetCollision(&m_Pos, &m_RectCollision, CollisionData::PLAYER_TYPE);
-	m_pCollisionData->SetEnable(true);
+	m_pCollisionData->SetEnable(false);
 	SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pCollisionData);
 }
 
@@ -63,16 +62,10 @@ void Player::Update()
 	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_W] == Lib::KEY_PUSH)
 	{
 		SINGLETON_INSTANCE(KnifeManager).
-			ThrowKnife(&D3DXVECTOR2(static_cast<float>(ClientRect.right / 2), 200), Knife::PLAYER, 4.5f);
+			ThrowKnife(&D3DXVECTOR2(static_cast<float>(ClientRect.right / 2), 200), GameDataManager::PLAYER_TARGET, 1);
 	}
 
 	KnifeThrow();
-
-	if (m_pCollisionData->GetCollisionState().HitState == CollisionData::KNIFE_HIT)
-	{
-		m_Hp--;
-		SINGLETON_INSTANCE(GameDataManager).SetPlayerHp(m_Hp);
-	}
 
 	for (unsigned int i = 0; i < m_pHandBase.size(); i++)
 	{
@@ -105,16 +98,16 @@ void Player::KnifeThrow()
 	if (m_OldHitState == CollisionData::CATCH_HIT &&
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_Z] == Lib::KEY_RELEASE)
 	{
-		SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(Knife::LEFT_ENEMY, 4.5f);
+		SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(GameDataManager::LEFT_ENEMY_TARGET, 1);
 	}
 	else if (m_OldHitState == CollisionData::CATCH_HIT &&
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_X] == Lib::KEY_RELEASE)
 	{
-		SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(Knife::FRONT_ENEMY, 4.5f);
+		SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(GameDataManager::FRONT_ENEMY_TARGET, 1);
 	}
 	else if (m_OldHitState == CollisionData::CATCH_HIT &&
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_C] == Lib::KEY_RELEASE)
 	{
-		SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(Knife::RIGHT_ENEMY, 4.5f);
+		SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(GameDataManager::RIGHT_ENEMY_TARGET, 1);
 	}
 }

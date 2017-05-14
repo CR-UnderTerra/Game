@@ -73,6 +73,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\JudgeGaugeUI\JudgeGaugeUI.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpIcon\HpIcon.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpGaugeUI.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\Knife\Knife.cpp" />
@@ -94,9 +95,10 @@
     <ClCompile Include="Main\SceneManager\SceneManager.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\Player\Player.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\Player\HandBase\RightHand\RightHand.cpp" />
-    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreUI\ScoreUI.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\TimerUI\TimerUI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\JudgeGaugeUI\JudgeGaugeUI.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpIcon\HpIcon.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpGaugeUI.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\KnifeManager\Knife\Knife.h" />
@@ -120,7 +122,7 @@
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\Player\Player.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\Player\HandBase\RightHand\RightHand.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\UIBase.h" />
-    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreUI\ScoreUI.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\TimerUI\TimerUI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

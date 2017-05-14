@@ -10,6 +10,7 @@
 #include "Animation/AnimUvController.h"
 #include "Knife/Knife.h"
 #include "Singleton.h"
+#include "../../../../GameDataManager/GameDataManager.h"
 
 class KnifeManager : public GameObjectBase
 {
@@ -25,9 +26,9 @@ public:
 	 * ナイフを投げる
 	 * @param[in] _pos 何処から飛ばすのかの座標
 	 * @param[in] _target 何処に飛ばすのか?
-	 * @param[in] _velocity 飛ばす速度
+	 * @param[in] _arriveTime 何秒で到達するか
 	 */
-	void ThrowKnife(D3DXVECTOR2* _pos, Knife::TARGET _target, float _velocity);
+	void ThrowKnife(D3DXVECTOR2* _pos, GameDataManager::TARGET _target, float _arriveTime);
 
 	/**
 	 * 制御関数

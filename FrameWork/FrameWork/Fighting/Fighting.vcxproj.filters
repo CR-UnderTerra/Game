@@ -53,9 +53,6 @@
     <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase">
       <UniqueIdentifier>{98887cfb-f6c9-4da8-bb45-e530bb49574e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreUI">
-      <UniqueIdentifier>{c6dc6e11-6c3c-4115-aad2-0b7e4bd98acd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI">
       <UniqueIdentifier>{0754cc71-c635-4141-830a-57f2f01985ea}</UniqueIdentifier>
     </Filter>
@@ -79,6 +76,12 @@
     </Filter>
     <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpIcon">
       <UniqueIdentifier>{2b3744b6-9794-4cdb-aa2e-43db763b5f7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\TimerUI">
+      <UniqueIdentifier>{c6dc6e11-6c3c-4115-aad2-0b7e4bd98acd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\JudgeGaugeUI">
+      <UniqueIdentifier>{43124c1e-c21b-46bb-9128-0811b2fee6a6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -124,9 +127,6 @@
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\DistanceGaugeUI.cpp">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI</Filter>
     </ClCompile>
-    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreUI\ScoreUI.cpp">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreUI</Filter>
-    </ClCompile>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\KnifeBar\KnifeBar.cpp">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\KnifeBar</Filter>
     </ClCompile>
@@ -147,6 +147,12 @@
     </ClCompile>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpIcon\HpIcon.cpp">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\TimerUI\TimerUI.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\TimerUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\JudgeGaugeUI\JudgeGaugeUI.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\JudgeGaugeUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -198,9 +204,6 @@
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\DistanceGaugeUI.h">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI</Filter>
     </ClInclude>
-    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreUI\ScoreUI.h">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreUI</Filter>
-    </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\KnifeBar\KnifeBar.h">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\KnifeBar</Filter>
     </ClInclude>
@@ -221,6 +224,12 @@
     </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpIcon\HpIcon.h">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\HpGaugeUI\HpIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\TimerUI\TimerUI.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\TimerUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\JudgeGaugeUI\JudgeGaugeUI.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\JudgeGaugeUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

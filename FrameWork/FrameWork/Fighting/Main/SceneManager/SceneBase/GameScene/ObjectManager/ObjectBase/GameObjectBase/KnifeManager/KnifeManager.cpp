@@ -36,13 +36,13 @@ void KnifeManager::Init(int _textureIndex)
 	}
 }
 
-void KnifeManager::ThrowKnife(D3DXVECTOR2* _pos, Knife::TARGET _target, float _velocity)
+void KnifeManager::ThrowKnife(D3DXVECTOR2* _pos, GameDataManager::TARGET _target, float _arriveTime)
 {
 	for (int i = 0; i < m_KnifeMax; i++)
 	{
 		if (!m_pKnife[i]->GetIsThrow())
 		{
-			m_pKnife[i]->Throw(_pos, _target, _velocity);
+			m_pKnife[i]->Throw(_pos, _target, _arriveTime);
 			return;
 		}
 	}

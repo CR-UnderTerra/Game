@@ -36,19 +36,18 @@ public:
 	void Draw() override;
 
 
+	static const D3DXVECTOR2 m_RectCollision;
 private:
 	/**
 	 * ナイフの投げる方向処理
 	 */
 	void KnifeThrow();
 
-	static const D3DXVECTOR2 m_RectCollision;
 
 	std::vector<HandBase*>   m_pHandBase;
 	CollisionData*		     m_pCollisionData;
 	CollisionData::HIT_STATE m_OldHitState;
 	D3DXVECTOR2			     m_Pos;
-	int					     m_Hp;
 
 };
 

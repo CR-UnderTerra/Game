@@ -16,11 +16,11 @@ class HandBase : public GameObjectBase
 public:
 	/**
 	 * コンストラクタ
-	 * @param[in] _pos 手の座標
+	 * @param[in] _playerTopPos プレイヤーの上の座標
 	 * @param[in] _animName 使用するアニメーションネーム
 	 * @param[in] _textureIndex 使用するテクスチャインデックス
 	 */
-	HandBase(D3DXVECTOR2* _pos,LPCTSTR _animName,int _textureIndex);
+	HandBase(D3DXVECTOR2* _playerTopPos, LPCTSTR _animName, int _textureIndex);
 
 	/**
 	 * デストラクタ
@@ -53,6 +53,7 @@ protected:
 	Lib::AnimUvController*   m_pAnimUvController;
 	Lib::Vertex2D*			 m_pVertex;
 	int						 m_TextureIndex;
+	D3DXVECTOR2				 m_PlayerTopPos;
 	D3DXVECTOR2				 m_Pos;
 	float					 m_MoveSpeed;
 	CollisionData*		     m_pCollisionData;

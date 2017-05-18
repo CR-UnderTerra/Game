@@ -10,20 +10,21 @@
 #include "ObjectBase/GameObjectBase/KnifeManager/KnifeManager.h"
 #include "ObjectBase/UIBase/DistanceGaugeUI/DistanceGaugeUI.h"
 #include "ObjectBase/UIBase/HpGaugeUI/HpGaugeUI.h"
-
+#include "ObjectBase/UIBase/TimerUI/TimerUI.h"
 
 ObjectManager::ObjectManager()
 {
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png",&m_TextureIndex1);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_003.png", &m_TextureIndex3);
-
-	m_pBackGround = new BackGround(m_TextureIndex3);
 	SINGLETON_CREATE(KnifeManager);
 	SINGLETON_INSTANCE(KnifeManager).Init(m_TextureIndex1);
+
+	m_pBackGround = new BackGround(m_TextureIndex3);
 	m_pPlayer = new Player(m_TextureIndex1);
 
 	m_pUIBase.push_back(new DistanceGaugeUI(m_TextureIndex1));
 	m_pUIBase.push_back(new HpGaugeUI(m_TextureIndex1));
+	m_pUIBase.push_back(new TimerUI());
 }
 
 ObjectManager::~ObjectManager()
@@ -35,9 +36,12 @@ ObjectManager::~ObjectManager()
 	}
 
 	delete m_pPlayer;
-	SINGLETON_DELETE(KnifeManager);
-	delete m_pBackGround;
+	m_pPlayer = NULL;
 
+	delete m_pBackGround;
+	m_pBackGround = NULL;
+
+	SINGLETON_DELETE(KnifeManager);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextureIndex3);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextureIndex1);
 }

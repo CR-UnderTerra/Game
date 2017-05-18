@@ -7,8 +7,8 @@
 #define GAMEDATAMANAGER_H
 #include "Singleton.h"
 #include "Vertex2D/Vertex2D.h"
+#include "../ObjectManager/ObjectBase/UIBase/DistanceGaugeUI/DistanceGaugeUI.h"
 
-class DistanceGaugeUI;
 class ScoreUI;
 class HpGaugeUI;
 
@@ -44,6 +44,12 @@ public:
 	 * KnifeBarの有効かを設定する
 	 */
 	void SetKnifeBarIsEnable(int _index, bool _isEnable);
+
+	/**
+	 * ナイフのキャッチの状態を判断する
+	 * @param[in] 判断ナイフのインデックス
+	 */
+	JudgeGaugeUI::JUDGE KnifeJadge(int _index);
 
 	/**
 	 * DistanceGaugeUIのセット

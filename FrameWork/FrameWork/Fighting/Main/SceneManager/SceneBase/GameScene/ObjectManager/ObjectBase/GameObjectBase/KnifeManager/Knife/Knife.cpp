@@ -8,6 +8,7 @@
 #include "Animation/AnimUvController.h"
 #include "Texture/TextureManager.h"
 #include "Knife.h"
+#include "../../../UIBase/DistanceGaugeUI/JudgeGaugeUI/JudgeGaugeUI.h"
 #include "../../../../../CollisionManager/CollisionManager.h"
 
 const D3DXVECTOR2 Knife::m_Rect = D3DXVECTOR2(128, 256);
@@ -54,16 +55,15 @@ Knife::~Knife()
 void Knife::Update()
 {
 	if (!m_IsThrow) return;
-	m_IsCatch;
 	if (!m_IsCatch)
 	{
 		m_Pos.x += m_Velocity * -cos(m_Angle);
 		m_Pos.y -= m_Velocity * sin(m_Angle);
 		m_Scale += m_ScaleAddValue;
 		m_TargetDistance -= m_Velocity;
+		CollisionControl();
 	}
 	CollisionUpdate();
-	CollisionControl();
 }
 
 void Knife::Draw()
@@ -154,6 +154,7 @@ void Knife::CollisionUpdate()
 void Knife::CollisionControl()
 {
 	CollisionData::HIT_STATE hitState = m_pCollisionData->GetCollisionState().HitState;
+
 	if (hitState == CollisionData::KNIFE_HIT)
 	{
 		SINGLETON_INSTANCE(GameDataManager).SetKnifeBarIsEnable(m_Index, false);
@@ -162,8 +163,12 @@ void Knife::CollisionControl()
 	}
 	else if (hitState == CollisionData::CATCH_HIT)
 	{
-		SINGLETON_INSTANCE(GameDataManager).SetKnifeBarIsEnable(m_Index, false);
-		m_IsCatch = true;
+		m_CatchState = SINGLETON_INSTANCE(GameDataManager).KnifeJadge(m_Index);
+		if (m_CatchState != JudgeGaugeUI::FAILED_JUDGE)
+		{
+			SINGLETON_INSTANCE(GameDataManager).SetKnifeBarIsEnable(m_Index, false);
+			m_IsCatch = true;
+		}
 	}
 	else if (m_OldHitState == CollisionData::CATCH_HIT &&
 		hitState == CollisionData::NON_HIT)

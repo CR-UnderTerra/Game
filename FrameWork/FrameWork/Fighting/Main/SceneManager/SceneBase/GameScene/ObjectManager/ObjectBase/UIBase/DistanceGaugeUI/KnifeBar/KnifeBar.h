@@ -2,6 +2,7 @@
 #define KNIFEBAR_H
 #include "../../UIBase.h"
 #include "Animation/AnimUvController.h"
+#include "../../../UIBase/DistanceGaugeUI/DistanceGaugeUI.h"
 
 class KnifeBar : public UIBase
 {
@@ -43,6 +44,11 @@ public:
 	 * @param[in] _enable 見えるかのフラグ
 	 */
 	void SetIsEnable(bool _enable);
+
+	inline D3DXVECTOR2 GetPos()
+	{
+		return D3DXVECTOR2(m_GaugeTopPos.x, m_GaugeTopPos.y + m_OffsetPos.y);
+	}
 
 
 private:

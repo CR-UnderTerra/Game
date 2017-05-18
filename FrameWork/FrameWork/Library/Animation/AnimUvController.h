@@ -79,6 +79,10 @@ namespace Lib
 		 */
 		inline D3DXVECTOR2* GetUV()
 		{
+			for (int i = 0; i < 4; i++)
+			{
+				m_NowUV[i].x = m_UV[i].x + m_AnimCount * m_ScrollUV.x;
+			}
 			return m_NowUV;
 		}
 

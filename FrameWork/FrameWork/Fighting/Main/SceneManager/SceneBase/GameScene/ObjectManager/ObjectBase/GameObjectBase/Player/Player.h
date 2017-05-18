@@ -8,6 +8,7 @@
 #include <vector>
 #include "../GameObjectBase.h"
 #include "../../../../CollisionManager/CollisionData/CollisionData.h"
+#include "../../../../GameDataManager/GameDataManager.h"
 
 class HandBase;
 
@@ -41,8 +42,9 @@ private:
 	/**
 	 * ナイフの投げる方向処理
 	 */
-	void KnifeThrow();
+	void KnifeCatchControl();
 
+	void KnifeThrowControl(GameDataManager::TARGET _target);
 
 	std::vector<HandBase*>   m_pHandBase;
 	CollisionData*		     m_pCollisionData;

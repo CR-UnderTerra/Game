@@ -8,6 +8,7 @@
 #include "../UIBase.h"
 #include "Vertex2D/Vertex2D.h"
 #include "Animation/AnimUvController.h"
+#include "JudgeGaugeUI/JudgeGaugeUI.h"
 #include <vector>
 
 class KnifeBar;
@@ -51,6 +52,8 @@ public:
 	 */
 	void SetKnifeBarIsEnable(int _index, bool _IsEnable);
 
+	JudgeGaugeUI::JUDGE KnifeJadge(int _index);
+
 private:
 	static const D3DXVECTOR2 m_Rect;
 	D3DXVECTOR2				 m_Pos;
@@ -58,6 +61,7 @@ private:
 	std::vector<KnifeBar*>   m_pKnifeBar;
 	Lib::AnimUvController*   m_pUvController;
 	Lib::Vertex2D*		     m_pVertex;
+	JudgeGaugeUI*			 m_pJudgeGaugeUI;
 
 };
 

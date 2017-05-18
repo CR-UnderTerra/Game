@@ -10,6 +10,7 @@
 #include "Vertex2D/Vertex2D.h"
 #include "../../../../../CollisionManager/CollisionData/CollisionData.h"
 #include "../../../../../GameDataManager/GameDataManager.h"
+#include "../../../UIBase/DistanceGaugeUI/DistanceGaugeUI.h"
 
 class Knife : public GameObjectBase
 {
@@ -61,6 +62,11 @@ public:
 		return m_IsCatch;
 	}
 
+	inline JudgeGaugeUI::JUDGE GetCatchState()
+	{
+		return m_CatchState;
+	}
+
 private:
 	/**
 	 * 当たり判定処理
@@ -77,13 +83,14 @@ private:
 	int							   m_Index;
 	CollisionData*				   m_pCollisionData;	 //!< 何番のインデックスにセットされているか
 	Lib::Vertex2D*				   m_pVertex;			 
-	Lib::AnimUvController*		   m_pUvController;		 
+	Lib::AnimUvController*		   m_pUvController;
+	JudgeGaugeUI::JUDGE			   m_CatchState;
 	CollisionData::HIT_STATE	   m_OldHitState;		 
 	D3DXVECTOR2					   m_Pos;				 
 	D3DXVECTOR2					   m_RectCollisionRatio; //!< 当たり判定の割合
 	bool						   m_IsThrow;			 //!< 投げられたか?(存在しているか？)
 	bool						   m_IsCatch;			 //!< キャッチされたか？
-	GameDataManager::TARGET						   m_Target;			 //!< 狙う先
+	GameDataManager::TARGET		   m_Target;			 //!< 狙う先
 	float						   m_TargetDistance;	 //!< ターゲットまでの距離
 	float						   m_ScaleAddValue;		 //!< スケールの増加量
 	int							   m_ArriveFrame;		 //!< 何フレームで到達するか?

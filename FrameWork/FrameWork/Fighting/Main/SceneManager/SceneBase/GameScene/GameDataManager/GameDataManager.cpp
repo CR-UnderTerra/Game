@@ -54,3 +54,8 @@ void GameDataManager::SetKnifeBarIsEnable(int _index,bool _isEnable)
 {
 	m_pDistanceGaugeUI->SetKnifeBarIsEnable(_index,_isEnable);
 }
+
+JudgeGaugeUI::JUDGE GameDataManager::KnifeJadge(int _index)
+{
+	return m_pDistanceGaugeUI->KnifeJadge(_index);
+}

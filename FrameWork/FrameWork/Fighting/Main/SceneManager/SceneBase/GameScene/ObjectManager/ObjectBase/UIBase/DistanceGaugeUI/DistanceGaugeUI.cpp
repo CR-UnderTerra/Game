@@ -10,6 +10,7 @@
 #include "../../../../GameDataManager/GameDataManager.h"
 #include "../../GameObjectBase/KnifeManager/KnifeManager.h"
 #include "KnifeBar/KnifeBar.h"
+#include "JudgeGaugeUI/JudgeGaugeUI.h"
 
 const D3DXVECTOR2 DistanceGaugeUI::m_Rect = D3DXVECTOR2(64,500);
 
@@ -32,11 +33,15 @@ m_TextureIndex(_textureIndex)
 	{
 		m_pKnifeBar.push_back(new KnifeBar(m_TextureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y - m_Rect.y / 2)));
 	}
+	m_pJudgeGaugeUI = new JudgeGaugeUI(m_TextureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y + m_Rect.y / 2));
 	SINGLETON_INSTANCE(GameDataManager).SetDistanceGaugeUI(this);
 }
 
 DistanceGaugeUI::~DistanceGaugeUI()
 {
+	delete m_pJudgeGaugeUI;
+	m_pJudgeGaugeUI = NULL;
+
 	for (int i = KnifeManager::m_KnifeMax - 1; i >= 0; i--)
 	{
 		delete m_pKnifeBar[i];
@@ -47,11 +52,17 @@ DistanceGaugeUI::~DistanceGaugeUI()
 	{
 		m_pVertex->Release();
 		delete m_pVertex;
+		m_pVertex = NULL;
 	}
 
 	delete m_pUvController;
 	m_pUvController = NULL;
 }
+
+
+//----------------------------------------------------------------------------------------------------
+// Public Functions
+//----------------------------------------------------------------------------------------------------
 
 void DistanceGaugeUI::Update()
 {
@@ -59,6 +70,7 @@ void DistanceGaugeUI::Update()
 	{
 		m_pKnifeBar[i]->Update();
 	}
+	m_pJudgeGaugeUI->Update();
 }
 
 void DistanceGaugeUI::Draw()
@@ -68,13 +80,8 @@ void DistanceGaugeUI::Draw()
 	{
 		m_pKnifeBar[i]->Draw();
 	}
+	m_pJudgeGaugeUI->Draw();
 }
-
-
-//----------------------------------------------------------------------------------------------------
-// Public Functions
-//----------------------------------------------------------------------------------------------------
-
 void DistanceGaugeUI::SetKnifeBar(float _distance, float _velocity, int _index)
 {
 	m_pKnifeBar[_index]->SetKnifeState(_distance, _velocity);
@@ -84,4 +91,10 @@ void DistanceGaugeUI::SetKnifeBar(float _distance, float _velocity, int _index)
 void DistanceGaugeUI::SetKnifeBarIsEnable(int _index, bool _IsEnable)
 {
 	m_pKnifeBar[_index]->SetIsEnable(_IsEnable);
+}
+
+
+JudgeGaugeUI::JUDGE DistanceGaugeUI::KnifeJadge(int _index)
+{
+	return m_pJudgeGaugeUI->Judge(m_pKnifeBar[_index]->GetPos());
 }

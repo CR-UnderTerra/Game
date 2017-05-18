@@ -9,7 +9,7 @@
 #include "Dx11/DX11Manager.h"
 
 const D3DXVECTOR2 HandBase::m_Rect = D3DXVECTOR2(128, 256);
-const float HandBase::m_Acceleration = 3.f;
+const float HandBase::m_Acceleration = 1.f;
 
 
 HandBase::HandBase(D3DXVECTOR2* _playerTopPos, LPCTSTR _animName, int _textureIndex) :

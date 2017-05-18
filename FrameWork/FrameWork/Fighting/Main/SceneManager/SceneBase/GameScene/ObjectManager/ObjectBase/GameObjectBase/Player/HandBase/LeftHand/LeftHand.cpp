@@ -14,7 +14,7 @@ HandBase(&D3DXVECTOR2(0, 0), "h_left", _textureIndex)
 	RECT ClientRect;
 	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
 
-	m_Pos.x = static_cast<float>(ClientRect.right / 2 - 300);
+	m_Pos.x = static_cast<float>(ClientRect.right / 2 - 150 - m_Rect.x / 2);
 	m_Pos.y = static_cast<float>(ClientRect.bottom / 2 + 200);
 	m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2(m_Rect.x, m_Rect.y - 250), CollisionData::HAND_TYPE);
 
@@ -69,17 +69,16 @@ void LeftHand::Update()
 	}
 	else
 	{
-		if (m_Pos.x > ClientRect.right / 2 - 300)
+		if (m_Pos.x > ClientRect.right / 2 - 150 - m_Rect.x / 2)
 		{
-			m_Pos.x -= m_MoveSpeed;
-			m_MoveSpeed += m_Acceleration;
+			m_Pos.x -= 3.f;
 		}
-		else if (m_Pos.x < ClientRect.right / 2 - 300)
+		else if (m_Pos.x < ClientRect.right / 2 - 150 - m_Rect.x / 2)
 		{
-			m_Pos.x = static_cast<float>(ClientRect.right / 2 - 300);
+			m_Pos.x = static_cast<float>(ClientRect.right / 2 - 150 - m_Rect.x / 2);
 		}
 	}
-	m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2(m_Rect.x, m_Rect.y - 150), CollisionData::HAND_TYPE);
+	m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2(m_Rect.x, m_Rect.y - 150 - m_Rect.x / 2), CollisionData::HAND_TYPE);
 }
 
 void LeftHand::Draw()

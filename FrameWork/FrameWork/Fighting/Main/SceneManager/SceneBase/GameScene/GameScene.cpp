@@ -56,6 +56,8 @@ SceneBase(SCENE_GAME)
 GameScene::~GameScene()
 {
 	delete m_pObjectManager;
+	m_pObjectManager = NULL;
+
 	SINGLETON_DELETE(CollisionManager);
 	SINGLETON_DELETE(GameDataManager);
 
@@ -88,11 +90,11 @@ GameScene::~GameScene()
 
 SceneBase::SceneID GameScene::Update()
 {
+	SINGLETON_INSTANCE(GameDataManager).Update();
 	m_pObjectManager->Update();
 	SINGLETON_INSTANCE(CollisionManager).Update();
 	SINGLETON_INSTANCE(Lib::KeyDevice).Update();
-	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_R);
-	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_R] == Lib::KEY_PUSH)
+	if (SINGLETON_INSTANCE(GameDataManager).GetIsGameOver())
 	{
 		m_SceneID = SCENE_TITLE;
 	}

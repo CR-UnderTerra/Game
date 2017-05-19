@@ -19,7 +19,7 @@ HandBase(&D3DXVECTOR2(0, 0), "h_right", _textureIndex)
 
 	m_Pos.x = static_cast<float>(ClientRect.right / 2 + 150 + m_Rect.x / 2);
 	m_Pos.y = static_cast<float>(ClientRect.bottom / 2 + 200);
-	m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2(m_Rect.x, m_Rect.y - 250), CollisionData::HAND_TYPE);
+	m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2(m_Rect.x, m_Rect.y), CollisionData::HAND_TYPE);
 }
 
 RightHand::~RightHand()
@@ -79,7 +79,7 @@ void RightHand::Update()
 			m_Pos.x = static_cast<float>(ClientRect.right / 2 + 150.f + m_Rect.x / 2);
 		}
 	}
-	m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2(m_Rect.x, m_Rect.y - 150 + m_Rect.x / 2), CollisionData::HAND_TYPE);
+	m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2(m_Rect.x, m_Rect.y), CollisionData::HAND_TYPE);
 
 }
 

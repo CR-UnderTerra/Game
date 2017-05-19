@@ -20,10 +20,10 @@ m_Minute(0)
 	InitVertex(&m_Pos, &D3DXVECTOR2(16, 64), "Number", &m_ColonVertex);
 	m_ColonVertex.pUvController->SetAnimCount(6);
 
-	InitVertex(&D3DXVECTOR2(m_Pos.x - (30.f - 8.f), m_Pos.y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[0]);
-	InitVertex(&D3DXVECTOR2(m_Pos.x - (60.f - 8.f), m_Pos.y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[1]);
-	InitVertex(&D3DXVECTOR2(m_Pos.x + (30.f - 8.f), m_Pos.y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[2]);
-	InitVertex(&D3DXVECTOR2(m_Pos.x + (60.f - 8.f), m_Pos.y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[3]);
+	InitVertex(&D3DXVECTOR2(m_Pos.x - (60.f - m_ColonVertex.Rect.x / 2 ), m_Pos.y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[0]);
+	InitVertex(&D3DXVECTOR2(m_Pos.x - (30.f - m_ColonVertex.Rect.x / 2 ), m_Pos.y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[1]);
+	InitVertex(&D3DXVECTOR2(m_Pos.x + (30.f - m_ColonVertex.Rect.x / 2 ), m_Pos.y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[2]);
+	InitVertex(&D3DXVECTOR2(m_Pos.x + (60.f - m_ColonVertex.Rect.x / 2 ), m_Pos.y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[3]);
 }
 
 TimerUI::~TimerUI()

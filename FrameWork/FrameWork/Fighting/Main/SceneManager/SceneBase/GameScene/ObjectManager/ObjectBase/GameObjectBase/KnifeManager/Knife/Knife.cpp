@@ -42,9 +42,11 @@ Knife::~Knife()
 {
 	m_pVertex->Release();
 	delete m_pVertex;
+	m_pVertex = NULL;
 
 	delete m_pCollisionData;
 	m_pCollisionData = NULL;
+	m_IndexMax = 0;
 }
 
 

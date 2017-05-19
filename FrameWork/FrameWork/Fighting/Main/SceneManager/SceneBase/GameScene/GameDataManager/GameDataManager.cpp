@@ -9,7 +9,8 @@
 
 
 GameDataManager::GameDataManager() :
-m_PlayerHp(3)
+m_PlayerHp(3),
+m_IsGameOver(false)
 {
 	RECT ClientRect;
 	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
@@ -28,21 +29,16 @@ m_PlayerHp(3)
 }
 
 
-GameDataManager::~GameDataManager()
-{
-}
-
-
 //----------------------------------------------------------------------------------------------------
 // Public Functions
 //----------------------------------------------------------------------------------------------------
 
 void GameDataManager::Update()
 {
-}
-
-void GameDataManager::Draw()
-{
+	if (m_PlayerHp == 0)
+	{
+		m_IsGameOver = true;
+	}
 }
 
 void GameDataManager::SetKnifeDistance(float _distance, float _velocity,int _index)

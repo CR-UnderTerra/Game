@@ -31,11 +31,6 @@ public:
 	void Update();
 
 	/**
-	 * 描画関数
-	 */
-	void Draw();
-
-	/**
 	 * KnifeBarにナイフの速度と距離を設定する
 	 */
 	void SetKnifeDistance(float _distance, float _velocity, int _index);
@@ -83,19 +78,31 @@ public:
 		return m_PlayerHp;
 	}
 
+	/**
+	 * ターゲットの座標を取得する
+	 */
 	inline D3DXVECTOR2 GetPos(TARGET _target)
 	{
 		return m_Pos[_target];
 	}
 
+	/**
+	 * ゲームオーバーかのフラグを取得する
+	 */
+	inline bool GetIsGameOver()
+	{
+		return m_IsGameOver;
+	}
+
 private:
 	GameDataManager();
-	~GameDataManager();
+	~GameDataManager() = default;
 
 	DistanceGaugeUI* m_pDistanceGaugeUI;
 	ScoreUI*		 m_pScoreUI;
 	int				 m_PlayerHp;
 	D3DXVECTOR2		 m_Pos[TARGET_MAX];
+	bool			 m_IsGameOver;
 
 };
 

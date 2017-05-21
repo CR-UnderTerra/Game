@@ -83,6 +83,9 @@
     <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\JudgeGaugeUI">
       <UniqueIdentifier>{43124c1e-c21b-46bb-9128-0811b2fee6a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main\XInput">
+      <UniqueIdentifier>{ac980adf-65da-496a-8789-2d63b236eea1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\GameScene.cpp">
@@ -153,6 +156,9 @@
     </ClCompile>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\JudgeGaugeUI\JudgeGaugeUI.cpp">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\JudgeGaugeUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\XInput\XInput.cpp">
+      <Filter>Main\XInput</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +236,9 @@
     </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\JudgeGaugeUI\JudgeGaugeUI.h">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\JudgeGaugeUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\XInput\XInput.h">
+      <Filter>Main\XInput</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

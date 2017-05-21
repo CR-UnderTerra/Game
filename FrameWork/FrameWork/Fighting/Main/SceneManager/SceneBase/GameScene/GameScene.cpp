@@ -13,6 +13,7 @@
 #include "DxInput/DXInputDevice.h"
 #include "CollisionManager/CollisionManager.h"
 #include "GameDataManager/GameDataManager.h"
+#include "../../../XInput/XInput.h"
 
 GameScene::GameScene() :
 SceneBase(SCENE_GAME)
@@ -38,6 +39,8 @@ SceneBase(SCENE_GAME)
 		SINGLETON_CREATE(Lib::KeyDevice);
 		SINGLETON_INSTANCE(Lib::KeyDevice).Init(
 			SINGLETON_INSTANCE(Lib::DXInputDevice).GetInputDevice(), hWnd);
+
+		SINGLETON_CREATE(Lib::XInput);
 	}
 
 	{
@@ -65,6 +68,8 @@ GameScene::~GameScene()
 	SINGLETON_INSTANCE(Lib::TextureManager).Release();
 	SINGLETON_DELETE(Lib::TextureManager);
 	// Lib::TextureManager Delete end
+
+	SINGLETON_DELETE(Lib::XInput);
 
 	// Lib::InputDevice関係
 	SINGLETON_INSTANCE(Lib::KeyDevice).Release();
@@ -94,6 +99,7 @@ SceneBase::SceneID GameScene::Update()
 	m_pObjectManager->Update();
 	SINGLETON_INSTANCE(CollisionManager).Update();
 	SINGLETON_INSTANCE(Lib::KeyDevice).Update();
+	SINGLETON_INSTANCE(Lib::XInput).Update(Lib::GAMEPAD1);
 	if (SINGLETON_INSTANCE(GameDataManager).GetIsGameOver())
 	{
 		m_SceneID = SCENE_TITLE;

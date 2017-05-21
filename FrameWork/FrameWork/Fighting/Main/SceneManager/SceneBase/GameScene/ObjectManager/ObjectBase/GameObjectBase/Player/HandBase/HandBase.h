@@ -10,6 +10,7 @@
 #include "Animation/AnimUvController.h"
 #include "../../../../../CollisionManager/CollisionManager.h"
 #include "../../../../../CollisionManager/CollisionData/CollisionData.h"
+#include "../../../../../GameDataManager/GameDataManager.h"
 
 class HandBase : public GameObjectBase
 {
@@ -46,15 +47,23 @@ public:
 		return m_pCollisionData->GetCollisionState().HitState;
 	}
 
+	inline GameDataManager::TARGET GetTarget()
+	{
+		return m_Target;
+	}
+
 protected:
-	static const D3DXVECTOR2 m_Rect;
-	static const float		 m_Acceleration;
+	static const D3DXVECTOR2	   m_Rect;
+	static const float			   m_Acceleration;
+	static GameDataManager::TARGET m_Target;
 
 	Lib::AnimUvController*   m_pAnimUvController;
 	Lib::Vertex2D*			 m_pVertex;
 	int						 m_TextureIndex;
 	D3DXVECTOR2				 m_PlayerTopPos;
 	D3DXVECTOR2				 m_Pos;
+	D3DXVECTOR2				 m_StartPos;
+	D3DXVECTOR2				 m_EndPos;
 	float					 m_MoveSpeed;
 	CollisionData*		     m_pCollisionData;
 

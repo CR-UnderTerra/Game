@@ -85,7 +85,6 @@ private:
 	Lib::Vertex2D*				   m_pVertex;			 
 	Lib::AnimUvController*		   m_pUvController;
 	JudgeGaugeUI::JUDGE			   m_CatchState;
-	CollisionData::HIT_STATE	   m_OldHitState;		 
 	D3DXVECTOR2					   m_Pos;				 
 	D3DXVECTOR2					   m_RectCollisionRatio; //!< 当たり判定の割合
 	bool						   m_IsThrow;			 //!< 投げられたか?(存在しているか？)

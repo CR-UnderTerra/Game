@@ -44,11 +44,18 @@ private:
 	 */
 	void KnifeCatchControl();
 
-	void KnifeThrowControl(GameDataManager::TARGET _target);
+	/**
+	 * キー情報チェック
+	 */
+	void KeyCheck();
+
+	/**
+	 * ゲームパッドボタンチェック
+	 */
+	void GamePadCheck();
 
 	std::vector<HandBase*>   m_pHandBase;
 	CollisionData*		     m_pCollisionData;
-	CollisionData::HIT_STATE m_OldHitState;
 	D3DXVECTOR2			     m_Pos;
 
 };

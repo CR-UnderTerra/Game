@@ -10,6 +10,7 @@
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "../KnifeManager/KnifeManager.h"
 #include "../../../../CollisionManager/CollisionManager.h"
+#include "../../../../../../../XInput/XInput.h"
 
 const D3DXVECTOR2 Player::m_RectCollision = D3DXVECTOR2(100, 230);
 
@@ -48,15 +49,13 @@ Player::~Player()
 
 void Player::Update()
 {
-	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_Z);
-	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_X);
-	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_C);
-	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_W);
+	KeyCheck();
+	GamePadCheck();
+
 	m_pCollisionData->SetCollision(&m_Pos, &m_RectCollision, CollisionData::PLAYER_TYPE);
 
 	RECT ClientRect;
 	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
-
 
 	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_W] == Lib::KEY_PUSH)
 	{
@@ -64,14 +63,11 @@ void Player::Update()
 			ThrowKnife(&D3DXVECTOR2(static_cast<float>(ClientRect.right / 2), 200), GameDataManager::PLAYER_TARGET, 1);
 	}
 
-	KnifeCatchControl();
-
 	for (unsigned int i = 0; i < m_pHandBase.size(); i++)
 	{
 		m_pHandBase[i]->Update();
 	}
-
-	m_OldHitState = m_pHandBase[0]->GetHitState();
+	KnifeCatchControl();
 }
 
 void Player::Draw()
@@ -89,41 +85,57 @@ void Player::Draw()
 
 void Player::KnifeCatchControl()
 {
-	RECT ClientRect;
-	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
+	/* 指定された方向に投げる */
+	auto ThrowControl = [this](GameDataManager::TARGET _target)
+	{
+		switch (SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->GetCatchState())
+		{
+		case JudgeGaugeUI::FANTASTIC_JUDGE:
+			SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(_target, 1 * 0.5f);
+			break;
+		case JudgeGaugeUI::AMAZING_JUDGE:
+			SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(_target, 1 * 0.8f);
+			break;
+		case JudgeGaugeUI::GOOD_JUDGE:
+			SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(_target, 1.f);
+			break;
+		}
+	};
 
-	CollisionData::HIT_STATE hitState = m_pCollisionData->GetCollisionState().HitState;
-
-	if (m_OldHitState == CollisionData::CATCH_HIT &&
+	if (m_pHandBase[0]->GetHitState() == CollisionData::CATCH_HIT &&
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_Z] == Lib::KEY_RELEASE)
 	{
-		KnifeThrowControl(GameDataManager::LEFT_ENEMY_TARGET);
+		int var = 0;
 	}
-	else if (m_OldHitState == CollisionData::CATCH_HIT &&
+
+	if (m_pHandBase[0]->GetHitState() == CollisionData::CATCH_HIT &&
+		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_Z] == Lib::KEY_RELEASE)
+	{
+		ThrowControl(GameDataManager::LEFT_ENEMY_TARGET);
+	}
+	else if (m_pHandBase[0]->GetHitState() == CollisionData::CATCH_HIT &&
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_X] == Lib::KEY_RELEASE)
 	{
-		KnifeThrowControl(GameDataManager::FRONT_ENEMY_TARGET);
+		ThrowControl(GameDataManager::FRONT_ENEMY_TARGET);
 	}
-	else if (m_OldHitState == CollisionData::CATCH_HIT &&
+	else if (m_pHandBase[0]->GetHitState() == CollisionData::CATCH_HIT &&
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_C] == Lib::KEY_RELEASE)
 	{
-		KnifeThrowControl(GameDataManager::RIGHT_ENEMY_TARGET);
+		ThrowControl(GameDataManager::RIGHT_ENEMY_TARGET);
 	}
 }
 
-void Player::KnifeThrowControl(GameDataManager::TARGET _target)
+void Player::KeyCheck()
 {
-	switch (SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->GetCatchState())
-	{
-	case JudgeGaugeUI::FANTASTIC_JUDGE:
-		SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(_target, 1 * 0.5f);
-		break;
-	case JudgeGaugeUI::AMAZING_JUDGE:
-		SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(_target, 1 * 0.8);
-		break;
-	case JudgeGaugeUI::GOOD_JUDGE:
-		SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(_target, 1);
-		break;
-	}
+	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_Z);
+	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_X);
+	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_C);
+	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_W);
 }
 
+void Player::GamePadCheck()
+{
+	SINGLETON_INSTANCE(Lib::XInput).CheckButton(Lib::GAMEPAD1, Lib::GAMEPAD_X, XINPUT_GAMEPAD_A);
+	SINGLETON_INSTANCE(Lib::XInput).CheckButton(Lib::GAMEPAD1, Lib::GAMEPAD_Y, XINPUT_GAMEPAD_Y);
+	SINGLETON_INSTANCE(Lib::XInput).CheckButton(Lib::GAMEPAD1, Lib::GAMEPAD_B, XINPUT_GAMEPAD_B);
+}

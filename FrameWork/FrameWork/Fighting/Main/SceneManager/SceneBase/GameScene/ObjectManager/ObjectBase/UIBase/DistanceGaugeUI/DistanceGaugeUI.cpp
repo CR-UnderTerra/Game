@@ -12,7 +12,7 @@
 #include "KnifeBar/KnifeBar.h"
 #include "JudgeGaugeUI/JudgeGaugeUI.h"
 
-const D3DXVECTOR2 DistanceGaugeUI::m_Rect = D3DXVECTOR2(64,500);
+const D3DXVECTOR2 DistanceGaugeUI::m_Rect = D3DXVECTOR2(96,750);
 
 
 DistanceGaugeUI::DistanceGaugeUI(int _textureIndex) :
@@ -20,7 +20,7 @@ m_TextureIndex(_textureIndex)
 {
 	m_pUvController = new Lib::AnimUvController();
 	m_pUvController->LoadAnimation("Resource/test_001.anim", "d_meter");
-	m_Pos = D3DXVECTOR2(1180,400);
+	m_Pos = D3DXVECTOR2(1770,600);
 	m_pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),

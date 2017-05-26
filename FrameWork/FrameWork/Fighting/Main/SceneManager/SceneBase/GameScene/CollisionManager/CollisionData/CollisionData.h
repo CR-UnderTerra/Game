@@ -28,10 +28,11 @@ public:
 
 	struct CollisionState
 	{
-		D3DXVECTOR2	   Pos;
+		D3DXVECTOR3	   Pos;
 		D3DXVECTOR2    CollisionRect;
 		COLLISION_TYPE CollisionType;
 		HIT_STATE      HitState;
+		bool		   IsCatchEnable;
 		bool		   IsEnable;
 	};
 	/**
@@ -53,9 +54,9 @@ public:
 	/**
 	 * 当たり判定の設定
 	 */
-	inline void SetCollision(const D3DXVECTOR2* _pos, const D3DXVECTOR2* _collisionRect, COLLISION_TYPE _collisionType)
+	inline void SetCollision(const D3DXVECTOR3* _pos, const D3DXVECTOR2* _collisionRect, COLLISION_TYPE _collisionType)
 	{
-		m_CollisionState.Pos = *_pos;
+		m_CollisionState.Pos = D3DXVECTOR3(_pos->x, _pos->y, _pos->y);
 		m_CollisionState.CollisionRect = *_collisionRect;
 		m_CollisionState.CollisionType = _collisionType;
 	}
@@ -74,6 +75,11 @@ public:
 	inline void SetEnable(bool _enable)
 	{
 		m_CollisionState.IsEnable = _enable;
+	}
+
+	inline void SetCatchEnable(bool _enable)
+	{
+		m_CollisionState.IsCatchEnable = _enable;
 	}
 
 	inline int GetIndex()

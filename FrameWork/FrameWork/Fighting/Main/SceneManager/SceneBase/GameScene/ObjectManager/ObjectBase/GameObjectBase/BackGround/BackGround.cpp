@@ -8,7 +8,7 @@
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
 
-const D3DXVECTOR2 BackGround::m_Rect = D3DXVECTOR2(900, 720);
+const D3DXVECTOR2 BackGround::m_Rect = D3DXVECTOR2(1350, 1080);
 
 
 BackGround::BackGround(int _textureIndex) :

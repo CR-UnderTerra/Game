@@ -3,8 +3,8 @@
 #include "SceneManager/SceneManager.h"
 #include "Dx11/DX11Manager.h"
 
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 720
+#define WINDOW_WIDTH 1980
+#define WINDOW_HEIGHT 1080
 
 LRESULT CALLBACK WindowProc(HWND _hwnd, UINT _message, WPARAM _wParam, LPARAM _lParam);
 

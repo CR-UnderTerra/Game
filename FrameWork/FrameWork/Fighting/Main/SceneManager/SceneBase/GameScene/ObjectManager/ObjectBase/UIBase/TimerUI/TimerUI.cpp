@@ -14,16 +14,15 @@ m_Count(0),
 m_Second(0),
 m_Minute(0)
 {
-	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/Number.png",&m_TextureIndex);
-	m_Pos = D3DXVECTOR2(1170, 80);
-	InitVertex(&m_Pos, &D3DXVECTOR2(106, 64), "Number", &m_FrameVertex);
-	InitVertex(&m_Pos, &D3DXVECTOR2(16, 64), "Number", &m_ColonVertex);
-	m_ColonVertex.pUvController->SetAnimCount(6);
+	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png",&m_TextureIndex);
+	m_Pos = D3DXVECTOR2(1770, 80);
+	InitVertex(&m_Pos, &D3DXVECTOR2(225, 100), "t_frame", &m_FrameVertex);
+	InitVertex(&m_Pos, &D3DXVECTOR2(24, 64), "t_colon", &m_ColonVertex);
 
-	InitVertex(&D3DXVECTOR2(m_Pos.x - (60.f - m_ColonVertex.Rect.x / 2 ), m_Pos.y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[0]);
-	InitVertex(&D3DXVECTOR2(m_Pos.x - (30.f - m_ColonVertex.Rect.x / 2 ), m_Pos.y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[1]);
-	InitVertex(&D3DXVECTOR2(m_Pos.x + (30.f - m_ColonVertex.Rect.x / 2 ), m_Pos.y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[2]);
-	InitVertex(&D3DXVECTOR2(m_Pos.x + (60.f - m_ColonVertex.Rect.x / 2 ), m_Pos.y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[3]);
+	InitVertex(&D3DXVECTOR2(m_Pos.x - (90.f - m_ColonVertex.Rect.x / 2 ), m_Pos.y), &D3DXVECTOR2(45, 96), "Number", &m_NumVertex[0]);
+	InitVertex(&D3DXVECTOR2(m_Pos.x - (45.f - m_ColonVertex.Rect.x / 2 ), m_Pos.y), &D3DXVECTOR2(45, 96), "Number", &m_NumVertex[1]);
+	InitVertex(&D3DXVECTOR2(m_Pos.x + (45.f - m_ColonVertex.Rect.x / 2 ), m_Pos.y), &D3DXVECTOR2(45, 96), "Number", &m_NumVertex[2]);
+	InitVertex(&D3DXVECTOR2(m_Pos.x + (90.f - m_ColonVertex.Rect.x / 2 ), m_Pos.y), &D3DXVECTOR2(45, 96), "Number", &m_NumVertex[3]);
 }
 
 TimerUI::~TimerUI()
@@ -84,7 +83,7 @@ void TimerUI::InitVertex(D3DXVECTOR2* _pos, D3DXVECTOR2* _rect, LPCTSTR _animNam
 	_vertex->Pos = *_pos;
 	_vertex->Rect = *_rect;
 	_vertex->pUvController = new Lib::AnimUvController();
-	_vertex->pUvController->LoadAnimation("Resource/Number.anim", _animName);
+	_vertex->pUvController->LoadAnimation("Resource/test_001.anim", _animName);
 	_vertex->pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),

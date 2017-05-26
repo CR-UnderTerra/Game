@@ -18,11 +18,11 @@ HandBase(&D3DXVECTOR2(0, 0), "h_right", _textureIndex)
 	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
 
 	m_Pos.x = static_cast<float>(ClientRect.right / 2 + 150 + m_Rect.x / 2);
-	m_Pos.y = static_cast<float>(ClientRect.bottom / 2 + 200);
+	m_Pos.y = static_cast<float>(ClientRect.bottom / 2 + 300);
 	m_StartPos = m_Pos;
 	m_EndPos.x = static_cast<float>(ClientRect.right / 2 + m_Rect.x / 2);
 	m_EndPos.y = m_StartPos.y;
-	m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2(m_Rect.x, m_Rect.y), CollisionData::HAND_TYPE);
+	m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos), &D3DXVECTOR2(m_Rect.x, m_Rect.y), CollisionData::HAND_TYPE);
 }
 
 RightHand::~RightHand()
@@ -36,15 +36,12 @@ RightHand::~RightHand()
 
 void RightHand::Update()
 {
-	RECT ClientRect;
-	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
-
 	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_Z] == Lib::KEY_ON ||
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_X] == Lib::KEY_ON ||
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_C] == Lib::KEY_ON ||
 		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_X, Lib::GAMEPAD1) == Lib::PAD_ON ||
 		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_Y, Lib::GAMEPAD1) == Lib::PAD_ON ||
-		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_B, Lib::GAMEPAD1) == Lib::PAD_ON)
+		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_B, Lib::GAMEPAD1) == Lib::PAD_ON )
 	{
 
 		if (m_Pos.x > m_EndPos.x)
@@ -54,10 +51,19 @@ void RightHand::Update()
 				m_Pos.x -= m_MoveSpeed;
 				m_MoveSpeed += m_Acceleration;
 			}
-		}
-		else if (m_Pos.x < (m_EndPos.x - 80.f))
-		{
-			m_pCollisionData->SetEnable(true);
+
+			if (m_Pos.x < (m_EndPos.x + 10.f))
+			{
+				m_pCollisionData->SetEnable(false);
+			}
+			else if (m_Pos.x < (m_EndPos.x + 50.f))
+			{
+				m_pCollisionData->SetEnable(true);
+			}
+			else
+			{
+				m_pCollisionData->SetEnable(false);
+			}
 		}
 		else
 		{
@@ -68,6 +74,7 @@ void RightHand::Update()
 	else
 	{
 		m_MoveSpeed = 1;
+		m_pCollisionData->SetEnable(false);
 		if (m_Pos.x < m_StartPos.x)
 		{
 			m_Pos.x += 3.f;
@@ -77,7 +84,7 @@ void RightHand::Update()
 			m_Pos.x = m_StartPos.x;
 		}
 	}
-	m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2(m_Rect.x, m_Rect.y), CollisionData::HAND_TYPE);
+	m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos), &D3DXVECTOR2(m_Rect.x, m_Rect.y), CollisionData::HAND_TYPE);
 }
 
 void RightHand::Draw()

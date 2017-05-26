@@ -14,17 +14,17 @@ m_TextureIndex(_textureIndex),
 m_DistanceGaugeButtomPos(*_distanceGaugeButtomPos)
 {
 	D3DXVECTOR2 pos = m_DistanceGaugeButtomPos;
-	D3DXVECTOR2 rect = D3DXVECTOR2(30, 24);
+	D3DXVECTOR2 rect = D3DXVECTOR2(45, 36);
 
-	InitJudgeVertex(&m_FantasticJudgeVertex, &D3DXVECTOR2(pos.x - 50.f, pos.y - rect.y / 2), &rect, "h_left");
+	InitJudgeVertex(&m_FantasticJudgeVertex, &D3DXVECTOR2(pos.x - 75.f, pos.y - rect.y / 2), &rect, "d_line_2");
 
-	rect = D3DXVECTOR2(30, 30);
-	InitJudgeVertex(&m_AmazingJudgeVertex, &D3DXVECTOR2(pos.x - 50.f,
-		m_FantasticJudgeVertex.Pos.y - m_FantasticJudgeVertex.Rect.y / 2 - rect.y / 2), &rect, "h_right");
+	rect = D3DXVECTOR2(45, 45);
+	InitJudgeVertex(&m_AmazingJudgeVertex, &D3DXVECTOR2(pos.x - 75.f,
+		m_FantasticJudgeVertex.Pos.y - m_FantasticJudgeVertex.Rect.y / 2 - rect.y / 2), &rect, "d_line_1");
 
-	rect = D3DXVECTOR2(30, 64);;
-	InitJudgeVertex(&m_GoodJudgeVertex, &D3DXVECTOR2(pos.x - 50.f,
-		m_AmazingJudgeVertex.Pos.y - m_AmazingJudgeVertex.Rect.y / 2 - rect.y / 2), &rect, "d_meter");
+	rect = D3DXVECTOR2(45, 96);;
+	InitJudgeVertex(&m_GoodJudgeVertex, &D3DXVECTOR2(pos.x - 75.f,
+		m_AmazingJudgeVertex.Pos.y - m_AmazingJudgeVertex.Rect.y / 2 - rect.y / 2), &rect, "d_line_2");
 }
 
 JudgeGaugeUI::~JudgeGaugeUI()

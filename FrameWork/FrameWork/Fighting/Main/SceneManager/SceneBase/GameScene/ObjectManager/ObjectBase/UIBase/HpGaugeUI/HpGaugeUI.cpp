@@ -10,7 +10,7 @@
 #include "HpIcon/HpIcon.h"
 #include "../../../../GameDataManager/GameDataManager.h"
 
-const D3DXVECTOR2 HpGaugeUI::m_Rect = D3DXVECTOR2(150,64);
+const D3DXVECTOR2 HpGaugeUI::m_Rect = D3DXVECTOR2(225,96);
 
 
 HpGaugeUI::HpGaugeUI(int _textureIndex) :
@@ -18,7 +18,7 @@ m_TextureIndex(_textureIndex)
 {
 	m_pUvController = new Lib::AnimUvController();
 	m_pUvController->LoadAnimation("Resource/test_001.anim", "h_frame");
-	m_Pos = D3DXVECTOR2(90, 50);
+	m_Pos = D3DXVECTOR2(135, 75);
 	m_pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
@@ -29,7 +29,7 @@ m_TextureIndex(_textureIndex)
 
 	for (unsigned int i = 0; i < m_pHpIcon.size(); i++)
 	{
-		m_pHpIcon[i] = new HpIcon(m_TextureIndex, &D3DXVECTOR2(static_cast<FLOAT>((m_Pos.x - 50) + 50 * i), m_Pos.y));
+		m_pHpIcon[i] = new HpIcon(m_TextureIndex, &D3DXVECTOR2(static_cast<FLOAT>((m_Pos.x - 75) + 75 * i), m_Pos.y));
 	}
 }
 

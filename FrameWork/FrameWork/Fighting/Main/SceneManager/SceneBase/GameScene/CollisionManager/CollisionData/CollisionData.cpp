@@ -46,12 +46,22 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 			return true;
 		}
 		else if (v1.CollisionType == ENEMY_KNIFE_TYPE &&
-			v2.CollisionType == HAND_TYPE || 
-			v1.CollisionType == HAND_TYPE &&
+			v2.CollisionType == HAND_TYPE )
+		{
+			if (v1.IsCatchEnable)
+			{
+				m_CollisionState.HitState = CATCH_HIT;
+				return true;
+			}
+		}
+		else if (v1.CollisionType == HAND_TYPE &&
 			v2.CollisionType == ENEMY_KNIFE_TYPE)
 		{
-			m_CollisionState.HitState = CATCH_HIT;
-			return true;
+			if (v2.IsCatchEnable)
+			{
+				m_CollisionState.HitState = CATCH_HIT;
+				return true;
+			}
 		}
 		else if (v1.CollisionType == ENEMY_KNIFE_TYPE &&
 			v2.CollisionType == PLAYER_TYPE ||

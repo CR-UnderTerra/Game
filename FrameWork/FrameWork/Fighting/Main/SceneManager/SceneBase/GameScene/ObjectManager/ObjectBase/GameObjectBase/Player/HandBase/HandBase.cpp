@@ -8,9 +8,8 @@
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
 
-const D3DXVECTOR2 HandBase::m_Rect = D3DXVECTOR2(128, 256);
+const D3DXVECTOR2 HandBase::m_Rect = D3DXVECTOR2(192, 384);
 const float HandBase::m_Acceleration = 1.f;
-GameDataManager::TARGET HandBase::m_Target = GameDataManager::LEFT_ENEMY_TARGET;
 
 
 HandBase::HandBase(D3DXVECTOR2* _playerTopPos, LPCTSTR _animName, int _textureIndex) :
@@ -29,7 +28,7 @@ m_TextureIndex(_textureIndex)
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 
 	m_pCollisionData = new CollisionData();
-	m_pCollisionData->SetCollision(&m_Pos, &D3DXVECTOR2(m_Rect.x, m_Rect.y), CollisionData::PLAYER_TYPE);
+	m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos), &D3DXVECTOR2(m_Rect.x, m_Rect.y), CollisionData::PLAYER_TYPE);
 	m_pCollisionData->SetEnable(true);
 	SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pCollisionData);
 

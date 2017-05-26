@@ -3,7 +3,7 @@
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
 
-const D3DXVECTOR2 KnifeBar::m_Rect(64, 16);
+const D3DXVECTOR2 KnifeBar::m_Rect(96, 24);
 
 KnifeBar::KnifeBar(int m_TextureIndex,D3DXVECTOR2* _GaugeTopPos) :
 m_TextureIndex(m_TextureIndex),

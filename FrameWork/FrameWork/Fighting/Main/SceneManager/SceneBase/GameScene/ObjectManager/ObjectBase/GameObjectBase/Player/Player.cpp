@@ -25,7 +25,7 @@ Player::Player(int _textureIndex)
 	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
 	m_Pos.x = static_cast<float>(ClientRect.right / 2);
 	m_Pos.y = static_cast<float>(ClientRect.bottom);
-	m_pCollisionData->SetCollision(&m_Pos, &m_RectCollision, CollisionData::PLAYER_TYPE);
+	m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos), &m_RectCollision, CollisionData::PLAYER_TYPE);
 	m_pCollisionData->SetEnable(false);
 	SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pCollisionData);
 }
@@ -52,7 +52,7 @@ void Player::Update()
 	KeyCheck();
 	GamePadCheck();
 
-	m_pCollisionData->SetCollision(&m_Pos, &m_RectCollision, CollisionData::PLAYER_TYPE);
+	m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos), &m_RectCollision, CollisionData::PLAYER_TYPE);
 
 	RECT ClientRect;
 	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
@@ -60,7 +60,7 @@ void Player::Update()
 	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_W] == Lib::KEY_PUSH)
 	{
 		SINGLETON_INSTANCE(KnifeManager).
-			ThrowKnife(&D3DXVECTOR2(static_cast<float>(ClientRect.right / 2), 200), GameDataManager::PLAYER_TARGET, 1);
+			ThrowKnife(&D3DXVECTOR2(static_cast<float>(ClientRect.right / 2), 540), GameDataManager::PLAYER_TARGET, 1);
 	}
 
 	for (unsigned int i = 0; i < m_pHandBase.size(); i++)
@@ -88,25 +88,19 @@ void Player::KnifeCatchControl()
 	/* 指定された方向に投げる */
 	auto ThrowControl = [this](GameDataManager::TARGET _target)
 	{
-		switch (SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->GetCatchState())
+		switch (SINGLETON_INSTANCE(KnifeManager).GetCatchKnifeState())
 		{
 		case JudgeGaugeUI::FANTASTIC_JUDGE:
-			SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(_target, 1 * 0.5f);
+			SINGLETON_INSTANCE(KnifeManager).CatchThrowKnife(_target, 1 * 0.5f);
 			break;
 		case JudgeGaugeUI::AMAZING_JUDGE:
-			SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(_target, 1 * 0.8f);
+			SINGLETON_INSTANCE(KnifeManager).CatchThrowKnife(_target, 1 * 0.8f);
 			break;
 		case JudgeGaugeUI::GOOD_JUDGE:
-			SINGLETON_INSTANCE(KnifeManager).GetCatchKnife()->Throw(_target, 1.f);
+			SINGLETON_INSTANCE(KnifeManager).CatchThrowKnife(_target, 1.f);
 			break;
 		}
 	};
-
-	if (m_pHandBase[0]->GetHitState() == CollisionData::CATCH_HIT &&
-		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_Z] == Lib::KEY_RELEASE)
-	{
-		int var = 0;
-	}
 
 	if (m_pHandBase[0]->GetHitState() == CollisionData::CATCH_HIT &&
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_Z] == Lib::KEY_RELEASE)

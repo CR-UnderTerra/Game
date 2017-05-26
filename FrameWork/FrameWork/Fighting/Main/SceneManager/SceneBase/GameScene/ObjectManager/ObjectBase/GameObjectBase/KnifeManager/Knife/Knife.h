@@ -15,12 +15,19 @@
 class Knife : public GameObjectBase
 {
 public:
+	enum KNIFE_ANIM_TYPE
+	{
+		LEFT,
+		RIGHT,
+		FRONT,
+		ANIM_MAX
+	};
+
 	/**
 	 * コンストラクタ
 	 * @param[in] _textureIndex 使用するテクスチャのインデックス
-	 * @param[in] _pUvController 使用するUvのコントローラ
 	 */
-	Knife(int _textureIndex, Lib::AnimUvController* _pUvController);
+	Knife(int _textureIndex);
 
 	/**
 	 * デストラクタ
@@ -28,19 +35,21 @@ public:
 	~Knife();
 
 	/**
-	 * ナイフを投げる
+	 * ナイフを投げる (敵用)
 	 * @param[in] _pos 何処から飛ばすのかの座標
 	 * @param[in] _target 何処に飛ばすのか?
 	 * @param[in] _arriveTime 何秒で到達するか
+	 * @param[in] _pThrowUv 使用するuvController
 	 */
-	void Throw(D3DXVECTOR2* _pos, GameDataManager::TARGET _target, float _arriveTime);
+	void Throw(D3DXVECTOR2* _pos, GameDataManager::TARGET _target, float _arriveTime, Lib::AnimUvController* _pThrowUv);
 
 	/**
-	 * ナイフを投げる
+	 * ナイフを投げる (プレイヤー用)
 	 * @param[in] _target 何処に飛ばすのか?
 	 * @param[in] _arriveTime 何秒で到達するか
+	 * @param[in] _pThrowUv 使用するuvController
 	 */
-	void Throw(GameDataManager::TARGET _target, float _arriveTime);
+	void Throw(GameDataManager::TARGET _target, float _arriveTime, Lib::AnimUvController* _pThrowUv);
 
 	/**
 	 * 制御関数
@@ -83,7 +92,6 @@ private:
 	int							   m_Index;
 	CollisionData*				   m_pCollisionData;	 //!< 何番のインデックスにセットされているか
 	Lib::Vertex2D*				   m_pVertex;			 
-	Lib::AnimUvController*		   m_pUvController;
 	JudgeGaugeUI::JUDGE			   m_CatchState;
 	D3DXVECTOR2					   m_Pos;				 
 	D3DXVECTOR2					   m_RectCollisionRatio; //!< 当たり判定の割合
@@ -97,6 +105,7 @@ private:
 	float						   m_Angle;				 //!< 角度
 	float						   m_Scale;				 //!< 拡縮率 1が最大
 	int							   m_TextureIndex;		 //!< テクスチャのインデックス
+	Lib::AnimUvController*		   m_pThrowUv;
 
 };
 

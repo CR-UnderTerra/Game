@@ -47,15 +47,9 @@ public:
 		return m_pCollisionData->GetCollisionState().HitState;
 	}
 
-	inline GameDataManager::TARGET GetTarget()
-	{
-		return m_Target;
-	}
-
 protected:
-	static const D3DXVECTOR2	   m_Rect;
-	static const float			   m_Acceleration;
-	static GameDataManager::TARGET m_Target;
+	static const D3DXVECTOR2 m_Rect;
+	static const float		 m_Acceleration;
 
 	Lib::AnimUvController*   m_pAnimUvController;
 	Lib::Vertex2D*			 m_pVertex;

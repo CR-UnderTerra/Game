@@ -86,6 +86,12 @@
     <Filter Include="Main\XInput">
       <UniqueIdentifier>{ac980adf-65da-496a-8789-2d63b236eea1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager">
+      <UniqueIdentifier>{25bf18f5-9bfa-4264-99f1-c0b19bc24044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\Enemy">
+      <UniqueIdentifier>{d6b450f2-32fe-4da6-81c6-e148adddf2ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\GameScene.cpp">
@@ -160,6 +166,8 @@
     <ClCompile Include="Main\XInput\XInput.cpp">
       <Filter>Main\XInput</Filter>
     </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\EnemyManager.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\Enemy\Enemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\GameScene.h">
@@ -240,5 +248,7 @@
     <ClInclude Include="Main\XInput\XInput.h">
       <Filter>Main\XInput</Filter>
     </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\EnemyManager.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\Enemy\Enemy.h" />
   </ItemGroup>
 </Project>

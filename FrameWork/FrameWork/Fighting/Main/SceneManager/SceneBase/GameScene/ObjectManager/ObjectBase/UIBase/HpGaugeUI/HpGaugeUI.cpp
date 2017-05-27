@@ -18,7 +18,7 @@ m_TextureIndex(_textureIndex)
 {
 	m_pUvController = new Lib::AnimUvController();
 	m_pUvController->LoadAnimation("Resource/test_001.anim", "h_frame");
-	m_Pos = D3DXVECTOR2(135, 75);
+	m_Pos = D3DXVECTOR2(155, 75);
 	m_pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),

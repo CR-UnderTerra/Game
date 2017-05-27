@@ -102,7 +102,7 @@ void Knife::Throw(D3DXVECTOR2* _pos, GameDataManager::TARGET _target, float _arr
 	{
 		m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos.x, m_Pos.y, m_TargetDistance), &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
 			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::PLAYER_KNIFE_TYPE);
-		m_ScaleAddValue = -((0.5f) / m_ArriveFrame);
+		m_ScaleAddValue = -((m_Scale) / m_ArriveFrame);
 	}
 	else
 	{

@@ -15,7 +15,10 @@ m_Second(0),
 m_Minute(0)
 {
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png",&m_TextureIndex);
-	m_Pos = D3DXVECTOR2(1770, 80);
+	RECT ClientRect;
+	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
+
+	m_Pos = D3DXVECTOR2(static_cast<float>(ClientRect.right - 150), 80);
 	InitVertex(&m_Pos, &D3DXVECTOR2(225, 100), "t_frame", &m_FrameVertex);
 	InitVertex(&m_Pos, &D3DXVECTOR2(24, 64), "t_colon", &m_ColonVertex);
 

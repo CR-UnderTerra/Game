@@ -20,7 +20,9 @@ m_TextureIndex(_textureIndex)
 {
 	m_pUvController = new Lib::AnimUvController();
 	m_pUvController->LoadAnimation("Resource/test_001.anim", "d_meter");
-	m_Pos = D3DXVECTOR2(1770,600);
+	RECT ClientRect;
+	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
+	m_Pos = D3DXVECTOR2(static_cast<float>(ClientRect.right - 130), 600);
 	m_pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),

@@ -60,7 +60,8 @@ void Player::Update()
 	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_W] == Lib::KEY_PUSH)
 	{
 		SINGLETON_INSTANCE(KnifeManager).
-			ThrowKnife(&D3DXVECTOR2(static_cast<float>(ClientRect.right / 2), 540), GameDataManager::PLAYER_TARGET, 1);
+			ThrowKnife(&SINGLETON_INSTANCE(GameDataManager).
+			GetPos(GameDataManager::FRONT_ENEMY_TARGET), GameDataManager::PLAYER_TARGET, 1);
 	}
 
 	for (unsigned int i = 0; i < m_pHandBase.size(); i++)

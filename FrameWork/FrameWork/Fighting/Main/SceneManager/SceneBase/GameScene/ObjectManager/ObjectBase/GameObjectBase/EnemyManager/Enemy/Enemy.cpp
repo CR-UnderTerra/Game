@@ -26,8 +26,8 @@ m_LeftCollisionSwitch(false),
 m_ClearInterval(0.0f),
 m_FlashingCount(0.0f),
 m_PosCenter{ (960), (576) }, /*128*/			//敵の出現位置(仮)
-m_PosRight{ (1260), (576) },			//敵の出現位置(仮)
-m_PosLeft{ (660), (576) }			//敵の出現位置(仮)
+m_PosRight{ (1160), (576) },			//敵の出現位置(仮)
+m_PosLeft{ (760), (576) }			//敵の出現位置(仮)
 {
 	/*for (int i = 0; i < ENEMYCOLUMN; i++)
 	{

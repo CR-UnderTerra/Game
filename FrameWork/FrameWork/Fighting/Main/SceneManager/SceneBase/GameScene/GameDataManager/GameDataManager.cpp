@@ -18,14 +18,14 @@ m_IsGameOver(false)
 	m_Pos[PLAYER_TARGET].x = static_cast<float>(ClientRect.right / 2);
 	m_Pos[PLAYER_TARGET].y = static_cast<float>(ClientRect.bottom / 2 + 300);
 
-	m_Pos[LEFT_ENEMY_TARGET].x = static_cast<float>(ClientRect.right / 2 - 150);
-	m_Pos[LEFT_ENEMY_TARGET].y = 500.f;
+	m_Pos[LEFT_ENEMY_TARGET].x = 760.f;
+	m_Pos[LEFT_ENEMY_TARGET].y = 576.f;
 	
-	m_Pos[FRONT_ENEMY_TARGET].x = static_cast<float>(ClientRect.right / 2);
-	m_Pos[FRONT_ENEMY_TARGET].y = 500.f;
+	m_Pos[FRONT_ENEMY_TARGET].x = 960.f;
+	m_Pos[FRONT_ENEMY_TARGET].y = 576.f;
 	
-	m_Pos[RIGHT_ENEMY_TARGET].x = static_cast<float>(ClientRect.right / 2 + 150);
-	m_Pos[RIGHT_ENEMY_TARGET].y = 500.f;
+	m_Pos[RIGHT_ENEMY_TARGET].x = 1160.f;
+	m_Pos[RIGHT_ENEMY_TARGET].y = 576.f;
 }
 
 

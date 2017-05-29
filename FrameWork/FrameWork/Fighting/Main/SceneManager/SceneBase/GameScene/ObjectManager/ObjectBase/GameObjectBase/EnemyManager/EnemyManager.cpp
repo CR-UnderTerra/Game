@@ -33,8 +33,8 @@ EnemyManager::~EnemyManager()
 void EnemyManager::Init(int _textureIndex)
 {
 	m_PosCenter = { (960), (576) };
-	m_PosRight = { (1260), (576) };
-	m_PosLeft = { (660), (576) };
+	m_PosRight = { (1160), (576) };
+	m_PosLeft = { (760), (576) };
 
 	m_pUvController = new Lib::AnimUvController();
 	m_pUvController->LoadAnimation("Resource/test_001.anim", "e_crowd");

@@ -56,12 +56,21 @@ private:
 	~EnemyManager();
 
 
-	int					    m_TextureIndex;
-	std::vector<Enemy*>		m_pEnemy;
-	Lib::AnimUvController*  m_pAnimUvController;
+	int							   m_TextureIndex;
+	std::vector<Enemy*>			   m_pEnemy;
+	Lib::Vertex2D*				   m_pVertex;
+	Lib::AnimUvController*		   m_pUvController;
+	Lib::AnimUvController*		   m_pAnimUvController;
+								   
+	int 						   m_EnemyLoad[ENEMYCOLUMN][ENEMYROW];
+	int							   m_SetEnemyLoad[ENEMYCOLUMN][ENEMYROW];
 
-	int 					m_EnemyLoad[ENEMYCOLUMN][ENEMYROW];
-	int						m_SetEnemyLoad[ENEMYCOLUMN][ENEMYROW];
+	static const D3DXVECTOR2 m_Rect;
+
+	D3DXVECTOR2					   m_PosCenter;
+	D3DXVECTOR2					   m_PosRight;
+	D3DXVECTOR2					   m_PosLeft;
+
 };
 
 #endif // !ENEMYMANAGER_H

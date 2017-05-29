@@ -12,11 +12,22 @@ const D3DXVECTOR2 Enemy::m_Rect = D3DXVECTOR2(128, 256);
 Enemy::Enemy(int _textureIndex, Lib::AnimUvController* _pUvController) :
 m_pUvController(_pUvController),
 m_TextureIndex(_textureIndex),
-m_Hits(false),
-m_IsDeath(false),
-m_PosCenter{ (640), (128) },			//敵の出現位置(仮)
-m_PosRight{ (840), (128) },			//敵の出現位置(仮)
-m_PosLeft{ (440), (128) }			//敵の出現位置(仮)
+m_EnemyColumn(ENEMYCOLUMN),
+m_EnemyRow(ENEMYROW),
+m_CenterEnemyCount(12),
+m_RightEnemyCount(12),
+m_LeftEnemyCount(12),
+m_CenterEnemyHits(false),
+m_RightEnemyHits(false),
+m_LeftEnemyHits(false),
+m_CenterCollisionSwitch(false),
+m_RightCollisionSwitch(false),
+m_LeftCollisionSwitch(false),
+m_ClearInterval(0.0f),
+m_FlashingCount(0.0f),
+m_PosCenter{ (960), (576) }, /*128*/			//敵の出現位置(仮)
+m_PosRight{ (1260), (576) },			//敵の出現位置(仮)
+m_PosLeft{ (660), (576) }			//敵の出現位置(仮)
 {
 	/*for (int i = 0; i < ENEMYCOLUMN; i++)
 	{
@@ -28,12 +39,12 @@ m_PosLeft{ (440), (128) }			//敵の出現位置(仮)
 
 	EnemyLoad("Resource/EnemyPos.csv");
 
-	if (m_EnemyLoad[0][1] == 1)
+	if (m_EnemyLoad[m_LeftEnemyCount][0] == 1)
 	{
-		m_pCollisionData = new CollisionData();
-		m_pCollisionData->SetEnable(false);
-		m_pCollisionData->SetCollision(&D3DXVECTOR3(m_PosCenter), &m_Rect, CollisionData::ENEMY_TYPE);
-		SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pCollisionData);
+		m_pLeftEnemyCollisionData = new CollisionData();
+		m_pLeftEnemyCollisionData->SetEnable(false);
+		m_pLeftEnemyCollisionData->SetCollision(&D3DXVECTOR3(m_PosLeft), &m_Rect, CollisionData::ENEMY_TYPE);
+		SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pLeftEnemyCollisionData);
 
 		m_pVertex = new Lib::Vertex2D(
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
@@ -43,12 +54,12 @@ m_PosLeft{ (440), (128) }			//敵の出現位置(仮)
 		m_pVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 	}
-	else if (m_EnemyLoad[0][0] == 1)
+	else if (m_EnemyLoad[m_CenterEnemyCount][1] == 1)
 	{
-		m_pCollisionData = new CollisionData();
-		m_pCollisionData->SetEnable(false);
-		m_pCollisionData->SetCollision(&D3DXVECTOR3(m_PosLeft), &m_Rect, CollisionData::ENEMY_TYPE);
-		SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pCollisionData);
+		m_pCenterEnemyCollisionData = new CollisionData();
+		m_pCenterEnemyCollisionData->SetEnable(false);
+		m_pCenterEnemyCollisionData->SetCollision(&D3DXVECTOR3(m_PosCenter), &m_Rect, CollisionData::ENEMY_TYPE);
+		SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pCenterEnemyCollisionData);
 
 		m_pVertex = new Lib::Vertex2D(
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
@@ -58,12 +69,12 @@ m_PosLeft{ (440), (128) }			//敵の出現位置(仮)
 		m_pVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 	}
-	else if (m_EnemyLoad[0][2] == 1)
+	else if (m_EnemyLoad[m_RightEnemyCount][2] == 1)
 	{
-		m_pCollisionData = new CollisionData();
-		m_pCollisionData->SetEnable(false);
-		m_pCollisionData->SetCollision(&D3DXVECTOR3(m_PosRight), &m_Rect, CollisionData::ENEMY_TYPE);
-		SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pCollisionData);
+		m_pRightEnemyCollisionData = new CollisionData();
+		m_pRightEnemyCollisionData->SetEnable(false);
+		m_pRightEnemyCollisionData->SetCollision(&D3DXVECTOR3(m_PosRight), &m_Rect, CollisionData::ENEMY_TYPE);
+		SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pRightEnemyCollisionData);
 
 		m_pVertex = new Lib::Vertex2D(
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
@@ -78,8 +89,14 @@ m_PosLeft{ (440), (128) }			//敵の出現位置(仮)
 
 Enemy::~Enemy()
 {
-	delete m_pCollisionData;
-	m_pCollisionData = NULL;
+	delete m_pCenterEnemyCollisionData;
+	m_pCenterEnemyCollisionData = NULL;
+
+	delete m_pLeftEnemyCollisionData;
+	m_pLeftEnemyCollisionData = NULL;
+
+	delete m_pRightEnemyCollisionData;
+	m_pRightEnemyCollisionData = NULL;
 
 	if (m_pVertex != NULL)
 	{
@@ -94,8 +111,49 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-	CollisionUpdate();
-	CollisionControl();
+	//CollisionUpdate();
+	//CollisionControl();
+
+	if (m_CenterEnemyHits == true && m_LeftEnemyHits == true && m_RightEnemyHits == true && m_ClearInterval == CLEARINTERVAL)
+	{
+		m_CenterEnemyCount -= 1;
+		m_LeftEnemyCount -= 1;
+		m_RightEnemyCount -= 1;
+
+		m_CenterEnemyHits = false;
+		m_LeftEnemyHits = false;
+		m_RightEnemyHits = false;
+	
+	}
+
+	Hit();
+
+	if ( m_CenterEnemyHits == true || m_LeftEnemyHits == true || m_RightEnemyHits == true)
+	{
+
+		m_ClearInterval += 1;
+
+		//点滅処理
+		m_FlashingCount++;
+		if (m_FlashingCount > FLASHTIME)
+		{
+			if (m_HitFlashing == false)
+			{
+				m_HitFlashing = true;
+			}
+			else if (m_HitFlashing == true)
+			{
+				m_HitFlashing = false;
+			}
+			m_FlashingCount = 0;
+		}		
+	}
+
+	/*if (m_ClearInterval == CLEARINTERVAL)
+	{
+		m_ClearInterval = 0;
+	}*/
+
 }
 
 void Enemy::Draw()
@@ -113,20 +171,104 @@ void Enemy::Draw()
 	m_pUvController->LoadAnimation("Resource/test_001/test_001.anim", "e_wait");
 	}*/
 
-	if (m_EnemyLoad[0][1] == 1)
+	if (m_CenterEnemyHits == true)
+	{
+		if (m_FlashingCount != 0)
+		{
+			if (m_HitFlashing)
+			{
+				if (m_EnemyLoad[m_CenterEnemyCount][1] == 1)
+				{
+					m_pVertex->Draw(&m_PosCenter, m_pUvController->GetUV());
+				}
+			}
+			else if (m_HitFlashing == false)
+			{
+				if (m_EnemyLoad[m_CenterEnemyCount][1] == 1)
+				{
+					m_pVertex->Draw(&m_PosCenter, m_pUvController->GetUV(), 0);
+				}
+			}
+		}
+	}
+	else
+	{
+		if (m_EnemyLoad[m_CenterEnemyCount][1] == 1)
+		{
+			m_pVertex->Draw(&m_PosCenter, m_pUvController->GetUV());
+		}
+	}
+
+	if (m_LeftEnemyHits == true)
+	{
+		if (m_FlashingCount != 0)
+		{
+			if (m_HitFlashing)
+			{
+				if (m_EnemyLoad[m_LeftEnemyCount][0] == 1)
+				{
+					m_pVertex->Draw(&m_PosLeft, m_pUvController->GetUV());
+				}
+			}
+			else if (m_HitFlashing == false)
+			{
+				if (m_EnemyLoad[m_LeftEnemyCount][0] == 1)
+				{
+					m_pVertex->Draw(&m_PosLeft, m_pUvController->GetUV(), 0);
+				}
+			}
+		}
+	}
+	else
+	{
+		if (m_EnemyLoad[m_LeftEnemyCount][0] == 1)
+		{
+			m_pVertex->Draw(&m_PosLeft, m_pUvController->GetUV());
+		}
+	}
+
+	if (m_RightEnemyHits == true)
+	{
+		if (m_FlashingCount != 0)
+		{
+			if (m_HitFlashing)
+			{
+				if (m_EnemyLoad[m_RightEnemyCount][2] == 1)
+				{
+					m_pVertex->Draw(&m_PosRight, m_pUvController->GetUV());
+				}
+			}
+			else if (m_HitFlashing == false)
+			{
+				if (m_EnemyLoad[m_RightEnemyCount][2] == 1)
+				{
+					m_pVertex->Draw(&m_PosRight, m_pUvController->GetUV(), 0);
+				}
+			}
+		}
+	}
+	else
+	{
+		if (m_EnemyLoad[m_RightEnemyCount][2] == 1)
+		{
+			m_pVertex->Draw(&m_PosRight, m_pUvController->GetUV());
+		}
+	}
+	
+	/*if (m_EnemyLoad[m_CenterEnemyCount][1] == 1)
 	{
 		m_pVertex->Draw(&m_PosCenter, m_pUvController->GetUV());
 	}
 
-	if (m_EnemyLoad[0][0] == 1)
+	if (m_EnemyLoad[m_LeftEnemyCount][0] == 1)
 	{
 		m_pVertex->Draw(&m_PosLeft, m_pUvController->GetUV());
 	}
 
-	if (m_EnemyLoad[0][2] == 1)
+	if (m_EnemyLoad[m_RightEnemyCount][2] == 1)
 	{
 		m_pVertex->Draw(&m_PosRight, m_pUvController->GetUV());
-	}
+	}*/
 }
 
 void Enemy::EnemyLoad(const char* _enemycsv)
@@ -138,18 +280,51 @@ void Enemy::EnemyLoad(const char* _enemycsv)
 	{
 		for (int j = 0; j < ENEMYROW; j++)
 		{
-			fscanf_s(fp, "%d,", &m_EnemyLoad[i][j], _countof(m_EnemyLoad));
+			fscanf_s(fp, "%d,", &m_EnemyLoad[i][j], _countof(m_EnemyLoad));						
 		}
 	}
 }
 
 void Enemy::Hit()
 {
-	m_pCollisionData->SetEnable(true);
+	//m_pCenterEnemyCollisionData->SetEnable(true);
 
 	m_Target = GameDataManager::FRONT_ENEMY_TARGET;
 
 	D3DXVECTOR2 pos = SINGLETON_INSTANCE(GameDataManager).GetPos(m_Target);
+
+	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_1);
+	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_2);
+	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_3);
+
+	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_1] == Lib::KEY_ON /*&& m_EnemyLoad[m_LeftEnemyCount][1] == 1*/)
+	{
+		m_LeftEnemyHits = true;
+	}
+	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_2] == Lib::KEY_ON /*&& m_EnemyLoad[m_CenterEnemyCount][1] == 1*/)
+	{
+		m_CenterEnemyHits = true;
+	}
+	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_3] == Lib::KEY_ON /*&& m_EnemyLoad[m_RightEnemyCount][1] == 1*/)
+	{
+		m_RightEnemyHits = true;
+	}
+
+	if (m_CenterEnemyHits == true && m_ClearInterval == CLEARINTERVAL)
+	{
+		m_ClearInterval = 0;
+		m_EnemyLoad[m_CenterEnemyCount][1] = 0;
+	}
+	if (m_LeftEnemyHits == true && m_ClearInterval == CLEARINTERVAL)
+	{
+		m_ClearInterval = 0;
+		m_EnemyLoad[m_LeftEnemyCount][0] = 0;
+	}
+	if (m_RightEnemyHits == true && m_ClearInterval == CLEARINTERVAL)
+	{
+		m_ClearInterval = 0;
+		m_EnemyLoad[m_RightEnemyCount][2] = 0;
+	}
 
 }
 
@@ -159,10 +334,9 @@ void Enemy::CollisionUpdate()
 
 void Enemy::CollisionControl()
 {
-	CollisionData::HIT_STATE hitState = m_pCollisionData->GetCollisionState().HitState;
+	CollisionData::HIT_STATE hitState = m_pCenterEnemyCollisionData->GetCollisionState().HitState;
 	if (hitState == CollisionData::KNIFE_HIT)
 	{
-		m_pCollisionData->SetEnable(false);
-		m_IsDeath = true;
+		m_pCenterEnemyCollisionData->SetEnable(false);
 	}
 }

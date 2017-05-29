@@ -8,7 +8,9 @@
 //#include "../EnemyManager.h"
 
 #define ENEMYROW		3		//敵出現パターン横列
-#define ENEMYCOLUMN		1/*13*/		//敵出現パターン縦列
+#define ENEMYCOLUMN		13		//敵出現パターン縦列
+#define FLASHTIME		6
+#define CLEARINTERVAL	50
 
 class Enemy : public GameObjectBase
 {
@@ -52,10 +54,30 @@ private:
 	static const D3DXVECTOR2	   m_Rect;
 	static int					   m_IndexMax;
 	int							   m_TextureIndex;		 //!< テクスチャのインデックス
+	int							   m_EnemyColumn;
+	int							   m_EnemyRow;
+	int							   m_CenterEnemyCount;
+	int							   m_RightEnemyCount;
+	int							   m_LeftEnemyCount;
+
+	float						   m_ClearInterval;
+	float						   m_FlashingCount;
+
+	bool						   m_CenterEnemyHits;
+	bool						   m_RightEnemyHits;
+	bool						   m_LeftEnemyHits;
+
+	bool						   m_HitFlashing;
 	bool						   m_Hits;
-	bool						   m_IsDeath;
+
+	bool						   m_CenterCollisionSwitch;
+	bool						   m_RightCollisionSwitch;
+	bool						   m_LeftCollisionSwitch;
+
 	GameDataManager::TARGET		   m_Target;
-	CollisionData*				   m_pCollisionData;	 //!< 何番のインデックスにセットされているか
+	CollisionData*				   m_pCenterEnemyCollisionData;	 //!< 何番のインデックスにセットされているか
+	CollisionData*				   m_pRightEnemyCollisionData;	 //!< 何番のインデックスにセットされているか
+	CollisionData*				   m_pLeftEnemyCollisionData;	 //!< 何番のインデックスにセットされているか
 	Lib::Vertex2D*				   m_pVertex;
 	Lib::AnimUvController*		   m_pUvController;
 	D3DXVECTOR2					   m_PosCenter;

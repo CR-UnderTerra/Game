@@ -72,9 +72,9 @@ void ObjectManager::Update()
 void ObjectManager::Draw()
 {
 	m_pBackGround->Draw();
+	SINGLETON_INSTANCE(EnemyManager).Draw();
 	SINGLETON_INSTANCE(KnifeManager).Draw();
 	m_pPlayer->Draw();
-	SINGLETON_INSTANCE(EnemyManager).Draw();
 	for (unsigned int i = 0; i < m_pUIBase.size(); i++)
 	{
 		m_pUIBase[i]->Draw();

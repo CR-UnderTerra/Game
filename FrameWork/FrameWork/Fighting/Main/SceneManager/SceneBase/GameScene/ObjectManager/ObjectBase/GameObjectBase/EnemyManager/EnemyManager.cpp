@@ -32,9 +32,9 @@ EnemyManager::~EnemyManager()
 
 void EnemyManager::Init(int _textureIndex)
 {
+	m_PosLeft = { (760), (576) };
 	m_PosCenter = { (960), (576) };
 	m_PosRight = { (1160), (576) };
-	m_PosLeft = { (760), (576) };
 
 	m_pUvController = new Lib::AnimUvController();
 	m_pUvController->LoadAnimation("Resource/test_001.anim", "e_crowd");
@@ -92,9 +92,9 @@ void EnemyManager::Update()
 
 void EnemyManager::Draw()
 {
-	m_pVertex->Draw(&m_PosCenter, m_pUvController->GetUV(), 1, &D3DXVECTOR2(0.9f, 0.9f));
-	m_pVertex->Draw(&m_PosLeft, m_pUvController->GetUV(), 1, &D3DXVECTOR2(0.9f, 0.9f));
-	m_pVertex->Draw(&m_PosRight, m_pUvController->GetUV(), 1, &D3DXVECTOR2(0.9f, 0.9f));
+	m_pVertex->Draw(&m_PosCenter, m_pUvController->GetUV(), 1, &D3DXVECTOR2(0.9, 0.9));
+	m_pVertex->Draw(&m_PosLeft, m_pUvController->GetUV(), 1, &D3DXVECTOR2(0.9, 0.9));
+	m_pVertex->Draw(&m_PosRight, m_pUvController->GetUV(), 1, &D3DXVECTOR2(0.9, 0.9));
 
 	for (int i = 0; i < m_EnemyMax; i++)
 	{

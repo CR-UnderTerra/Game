@@ -11,10 +11,25 @@
 #define ENEMYCOLUMN		13		//敵出現パターン縦列
 #define FLASHTIME		6
 #define CLEARINTERVAL	50
+#define ATTACKINTERVAL	100
 
 class Enemy : public GameObjectBase
 {
 public:
+	enum ENEMYACTION
+	{
+		WAIT,
+		THROW,
+		ACTION_MAX
+	};
+
+	enum ATTACKENEMY
+	{
+		LEFT_ENEMY,
+		CENTER_ENEMY,
+		RIGHT_ENEMY,
+	};
+
 	/**
 	* コンストラクタ
 	*/
@@ -40,6 +55,12 @@ public:
 
 	void Hit();
 
+	void EnemyPosInit(D3DXVECTOR2 _pos);
+
+	void EnemyCrush(D3DXVECTOR2 _pos, float _alpha);
+
+	void Attack();
+
 private:
 	/**
 	* 当たり判定処理
@@ -56,34 +77,34 @@ private:
 	int							   m_TextureIndex;		 //!< テクスチャのインデックス
 	int							   m_EnemyColumn;
 	int							   m_EnemyRow;
+	int							   m_LeftEnemyCount;
 	int							   m_CenterEnemyCount;
 	int							   m_RightEnemyCount;
-	int							   m_LeftEnemyCount;
 
 	float						   m_ClearInterval;
 	float						   m_FlashingCount;
 
+	bool						   m_LeftEnemyHits;
 	bool						   m_CenterEnemyHits;
 	bool						   m_RightEnemyHits;
-	bool						   m_LeftEnemyHits;
 
 	bool						   m_HitFlashing;
 	bool						   m_Hits;
 
-	bool						   m_CenterCollisionSwitch;
-	bool						   m_RightCollisionSwitch;
-	bool						   m_LeftCollisionSwitch;
-
 	GameDataManager::TARGET		   m_Target;
-	CollisionData*				   m_pCenterEnemyCollisionData;	 //!< 何番のインデックスにセットされているか
-	CollisionData*				   m_pRightEnemyCollisionData;	 //!< 何番のインデックスにセットされているか
-	CollisionData*				   m_pLeftEnemyCollisionData;	 //!< 何番のインデックスにセットされているか
+	CollisionData*				   m_pCollisionData;
 	Lib::Vertex2D*				   m_pVertex;
+	Lib::Vertex2D*				   m_pVertexCrush;
 	Lib::AnimUvController*		   m_pUvController;
+	Lib::AnimUvController*		   m_pUvControllerCrush;
+	D3DXVECTOR2					   m_PosLeft;
 	D3DXVECTOR2					   m_PosCenter;
 	D3DXVECTOR2					   m_PosRight;
-	D3DXVECTOR2					   m_PosLeft;
 	int							   m_EnemyLoad[ENEMYCOLUMN][ENEMYROW];
+
+	ENEMYACTION					   m_Action;
+	ATTACKENEMY					   m_AttackEnemy;
+	float						   m_AttackInterval;
 
 };
 

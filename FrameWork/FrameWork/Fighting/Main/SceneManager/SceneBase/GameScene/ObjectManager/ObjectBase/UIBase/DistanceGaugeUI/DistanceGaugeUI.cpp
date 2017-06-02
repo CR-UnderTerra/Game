@@ -12,14 +12,15 @@
 #include "KnifeBar/KnifeBar.h"
 #include "JudgeGaugeUI/JudgeGaugeUI.h"
 
-const D3DXVECTOR2 DistanceGaugeUI::m_Rect = D3DXVECTOR2(96,750);
+const D3DXVECTOR2 DistanceGaugeUI::m_Rect = D3DXVECTOR2(64,750);
 
 
 DistanceGaugeUI::DistanceGaugeUI(int _textureIndex) :
 m_TextureIndex(_textureIndex)
 {
+	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_006.png", &m_DistanceGaugeTextureIndex);
 	m_pUvController = new Lib::AnimUvController();
-	m_pUvController->LoadAnimation("Resource/test_001.anim", "d_meter");
+	m_pUvController->LoadAnimation("Resource/test_006.anim", "d_meter");
 	RECT ClientRect;
 	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
 	m_Pos = D3DXVECTOR2(static_cast<float>(ClientRect.right - 130), 600);
@@ -29,7 +30,7 @@ m_TextureIndex(_textureIndex)
 		SINGLETON_INSTANCE(Lib::Window).GetWindowHandle());
 	m_pVertex->Init(&m_Rect, m_pUvController->GetUV());
 	m_pVertex->SetTexture(
-		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
+		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_DistanceGaugeTextureIndex));
 
 	for (int i = 0; i < KnifeManager::m_KnifeMax; i++)
 	{
@@ -59,6 +60,8 @@ DistanceGaugeUI::~DistanceGaugeUI()
 
 	delete m_pUvController;
 	m_pUvController = NULL;
+
+	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_DistanceGaugeTextureIndex);
 }
 
 

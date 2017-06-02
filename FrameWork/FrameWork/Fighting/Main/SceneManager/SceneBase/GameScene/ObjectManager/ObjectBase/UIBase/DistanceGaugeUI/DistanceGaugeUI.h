@@ -58,6 +58,7 @@ private:
 	static const D3DXVECTOR2 m_Rect;
 	D3DXVECTOR2				 m_Pos;
 	int					     m_TextureIndex;
+	int						 m_DistanceGaugeTextureIndex;
 	std::vector<KnifeBar*>   m_pKnifeBar;
 	Lib::AnimUvController*   m_pUvController;
 	Lib::Vertex2D*		     m_pVertex;

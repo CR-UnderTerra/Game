@@ -105,6 +105,7 @@ void Player::KnifeCatchControl()
 	};
 
 	if (m_pHandBase[0]->GetHitState() == CollisionData::CATCH_HIT &&
+		m_pHandBase[1]->GetHitState() == CollisionData::CATCH_HIT &&
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_Z] == Lib::KEY_RELEASE ||
 		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_X, Lib::GAMEPAD1) == Lib::PAD_RELEASE)
 	{

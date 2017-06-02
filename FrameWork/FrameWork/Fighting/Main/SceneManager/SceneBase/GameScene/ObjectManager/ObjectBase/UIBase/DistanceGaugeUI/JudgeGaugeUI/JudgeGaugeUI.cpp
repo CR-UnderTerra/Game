@@ -13,18 +13,19 @@ JudgeGaugeUI::JudgeGaugeUI(int _textureIndex, D3DXVECTOR2* _distanceGaugeButtomP
 m_TextureIndex(_textureIndex),
 m_DistanceGaugeButtomPos(*_distanceGaugeButtomPos)
 {
+	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_006.png",&m_TextureIndex);
 	D3DXVECTOR2 pos = m_DistanceGaugeButtomPos;
-	D3DXVECTOR2 rect = D3DXVECTOR2(45, 36);
+	D3DXVECTOR2 rect = D3DXVECTOR2(45, 18);
 
-	InitJudgeVertex(&m_FantasticJudgeVertex, &D3DXVECTOR2(pos.x - 75.f, pos.y - rect.y / 2), &rect, "d_line_2");
+	InitJudgeVertex(&m_FantasticJudgeVertex, &D3DXVECTOR2(pos.x - 75.f, pos.y - rect.y / 2), &rect, "d_line3");
 
-	rect = D3DXVECTOR2(45, 45);
+	rect = D3DXVECTOR2(45, 42);
 	InitJudgeVertex(&m_AmazingJudgeVertex, &D3DXVECTOR2(pos.x - 75.f,
-		m_FantasticJudgeVertex.Pos.y - m_FantasticJudgeVertex.Rect.y / 2 - rect.y / 2), &rect, "d_line_1");
+		m_FantasticJudgeVertex.Pos.y - m_FantasticJudgeVertex.Rect.y / 2 - rect.y / 2), &rect, "d_line2");
 
-	rect = D3DXVECTOR2(45, 96);;
+	rect = D3DXVECTOR2(45, 60);;
 	InitJudgeVertex(&m_GoodJudgeVertex, &D3DXVECTOR2(pos.x - 75.f,
-		m_AmazingJudgeVertex.Pos.y - m_AmazingJudgeVertex.Rect.y / 2 - rect.y / 2), &rect, "d_line_2");
+		m_AmazingJudgeVertex.Pos.y - m_AmazingJudgeVertex.Rect.y / 2 - rect.y / 2), &rect, "d_line1");
 }
 
 JudgeGaugeUI::~JudgeGaugeUI()
@@ -32,6 +33,7 @@ JudgeGaugeUI::~JudgeGaugeUI()
 	ReleaseJudgeVertex(&m_FantasticJudgeVertex);
 	ReleaseJudgeVertex(&m_AmazingJudgeVertex);
 	ReleaseJudgeVertex(&m_GoodJudgeVertex);
+	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextureIndex);
 }
 
 
@@ -75,7 +77,7 @@ JudgeGaugeUI::JUDGE JudgeGaugeUI::Judge(D3DXVECTOR2 _KnifeBarPos)
 void JudgeGaugeUI::InitJudgeVertex(JudgeGaugeUI::JudgeVertex* _pJudgeVertex, D3DXVECTOR2* _pos, D3DXVECTOR2* _rect, LPCTSTR _animName)
 {
 	_pJudgeVertex->pUvController = new Lib::AnimUvController();
-	_pJudgeVertex->pUvController->LoadAnimation("Resource/test_001.anim", _animName);
+	_pJudgeVertex->pUvController->LoadAnimation("Resource/test_006.anim", _animName);
 	_pJudgeVertex->pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),

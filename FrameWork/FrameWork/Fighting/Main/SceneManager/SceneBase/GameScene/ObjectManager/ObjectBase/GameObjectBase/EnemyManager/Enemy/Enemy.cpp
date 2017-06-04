@@ -376,7 +376,7 @@ void Enemy::Attack()
 			if (m_Action == THROW)
 			{
 				SINGLETON_INSTANCE(KnifeManager).
-					ThrowKnife(&D3DXVECTOR2(*m_PosLeft, 576), GameDataManager::PLAYER_TARGET, 1);
+					ThrowKnife(&D3DXVECTOR2(*m_PosLeft, 576), GameDataManager::LEFT_ENEMY_TARGET, GameDataManager::PLAYER_TARGET, 1);
 				m_Action = WAIT;
 			}
 			break;
@@ -384,7 +384,7 @@ void Enemy::Attack()
 			if (m_Action == THROW)
 			{
 				SINGLETON_INSTANCE(KnifeManager).
-					ThrowKnife(&D3DXVECTOR2(*m_PosCenter, 576), GameDataManager::PLAYER_TARGET, 1);
+					ThrowKnife(&D3DXVECTOR2(*m_PosCenter, 576), GameDataManager::FRONT_ENEMY_TARGET, GameDataManager::PLAYER_TARGET, 1);
 				m_Action = WAIT;
 			}
 			break;
@@ -392,7 +392,7 @@ void Enemy::Attack()
 			if (m_Action == THROW)
 			{
 				SINGLETON_INSTANCE(KnifeManager).
-					ThrowKnife(&D3DXVECTOR2(*m_PosRight, 576), GameDataManager::PLAYER_TARGET, 1);
+					ThrowKnife(&D3DXVECTOR2(*m_PosRight, 576), GameDataManager::RIGHT_ENEMY_TARGET, GameDataManager::PLAYER_TARGET, 1);
 				m_Action = WAIT;
 			}
 			break;

@@ -55,8 +55,8 @@ void KnifeManager::Init(int _textureIndex)
 	InitPlayerAnim("L_sword02", Knife::LEFT);
 
 	InitEnemyAnim("F_sword01", Knife::FRONT);
-	InitEnemyAnim("R_sword01", Knife::RIGHT);
-	InitEnemyAnim("L_sword01", Knife::LEFT);
+	InitEnemyAnim("L_sword01", Knife::RIGHT);
+	InitEnemyAnim("R_sword01", Knife::LEFT);
 
 	for (int i = 0; i < m_KnifeMax; i++)
 	{
@@ -64,14 +64,25 @@ void KnifeManager::Init(int _textureIndex)
 	}
 }
 
-void KnifeManager::ThrowKnife(D3DXVECTOR2* _pos, GameDataManager::TARGET _target, float _arriveTime)
+void KnifeManager::ThrowKnife(D3DXVECTOR2* _pos, GameDataManager::TARGET _myTarget, GameDataManager::TARGET _target, float _arriveTime)
 {
-	auto UvSelect = [this](GameDataManager::TARGET _knifeTarget)
+	auto UvSelect = [this](GameDataManager::TARGET _myTarget, GameDataManager::TARGET _knifeTarget)
 	{
 		switch (_knifeTarget)
 		{
 		case GameDataManager::PLAYER_TARGET:
-			return m_pEnemyKnifeUv[Knife::FRONT];
+			if (_myTarget == GameDataManager::LEFT_ENEMY_TARGET)
+			{
+				return m_pEnemyKnifeUv[Knife::RIGHT];
+			}
+			else if (_myTarget == GameDataManager::FRONT_ENEMY_TARGET)
+			{
+				return m_pEnemyKnifeUv[Knife::FRONT];
+			}
+			else
+			{
+				return m_pEnemyKnifeUv[Knife::LEFT];
+			}
 			break;
 		case GameDataManager::LEFT_ENEMY_TARGET:
 			return m_pPlayerKnifeUv[Knife::LEFT];
@@ -92,7 +103,7 @@ void KnifeManager::ThrowKnife(D3DXVECTOR2* _pos, GameDataManager::TARGET _target
 	{
 		if (!m_pKnife[i]->GetIsThrow())
 		{
-			m_pKnife[i]->Throw(_pos, _target, _arriveTime, UvSelect(_target));
+			m_pKnife[i]->Throw(_pos, _target, _arriveTime, UvSelect(_myTarget, _target));
 			return;
 		}
 	}

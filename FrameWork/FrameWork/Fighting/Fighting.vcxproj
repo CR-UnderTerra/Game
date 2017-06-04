@@ -84,7 +84,7 @@
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\CollisionManager\CollisionData\CollisionData.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\KnifeBar\KnifeBar.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\DistanceGaugeUI.cpp" />
-    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\GameDataManager\GameDataManager.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\GameDataManager\GameDataManager.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\Player\HandBase\HandBase.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\Player\HandBase\LeftHand\LeftHand.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\BackGround\BackGround.cpp" />
@@ -115,7 +115,7 @@
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\CollisionManager\CollisionData\CollisionData.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\KnifeBar\KnifeBar.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\DistanceGaugeUI.h" />
-    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\GameDataManager\GameDataManager.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\GameDataManager\GameDataManager.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\GameObjectBase.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\Player\HandBase\HandBase.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\Player\HandBase\LeftHand\LeftHand.h" />

@@ -4,7 +4,7 @@
 #include "Animation/AnimUvController.h"
 #include "Vertex2D/Vertex2D.h"
 #include "../../../../../CollisionManager/CollisionData/CollisionData.h"
-#include "../../../../../GameDataManager/GameDataManager.h"
+#include "../../../../../../GameDataManager/GameDataManager.h"
 //#include "../EnemyManager.h"
 
 #define ENEMYROW		3		//敵出現パターン横列

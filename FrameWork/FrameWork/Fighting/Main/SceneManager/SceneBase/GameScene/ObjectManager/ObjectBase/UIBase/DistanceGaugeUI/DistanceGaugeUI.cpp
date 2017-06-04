@@ -7,7 +7,7 @@
 #include "Texture/TextureManager.h"
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
-#include "../../../../GameDataManager/GameDataManager.h"
+#include "../../../../../GameDataManager/GameDataManager.h"
 #include "../../GameObjectBase/KnifeManager/KnifeManager.h"
 #include "KnifeBar/KnifeBar.h"
 #include "JudgeGaugeUI/JudgeGaugeUI.h"

@@ -12,7 +12,7 @@
 #include "ObjectManager/ObjectManager.h"
 #include "DxInput/DXInputDevice.h"
 #include "CollisionManager/CollisionManager.h"
-#include "GameDataManager/GameDataManager.h"
+#include "../GameDataManager/GameDataManager.h"
 #include "../../../XInput/XInput.h"
 
 GameScene::GameScene() :

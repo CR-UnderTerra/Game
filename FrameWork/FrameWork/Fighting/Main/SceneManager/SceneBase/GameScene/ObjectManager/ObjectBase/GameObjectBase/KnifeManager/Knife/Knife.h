@@ -9,7 +9,7 @@
 #include "Animation/AnimUvController.h"
 #include "Vertex2D/Vertex2D.h"
 #include "../../../../../CollisionManager/CollisionData/CollisionData.h"
-#include "../../../../../GameDataManager/GameDataManager.h"
+#include "../../../../../../GameDataManager/GameDataManager.h"
 #include "../../../UIBase/DistanceGaugeUI/DistanceGaugeUI.h"
 
 class Knife : public GameObjectBase

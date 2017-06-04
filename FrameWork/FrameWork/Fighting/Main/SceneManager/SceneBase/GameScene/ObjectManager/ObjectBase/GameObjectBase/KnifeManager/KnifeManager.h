@@ -10,7 +10,7 @@
 #include "Animation/AnimUvController.h"
 #include "Knife/Knife.h"
 #include "Singleton.h"
-#include "../../../../GameDataManager/GameDataManager.h"
+#include "../../../../../GameDataManager/GameDataManager.h"
 #include "../../UIBase/DistanceGaugeUI/JudgeGaugeUI/JudgeGaugeUI.h"
 
 class KnifeManager : public GameObjectBase

@@ -29,9 +29,6 @@
     <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase">
       <UniqueIdentifier>{c4fbac5d-50b5-45c0-adec-9c4f04238b2f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Main\SceneManager\SceneBase\GameScene\GameDataManager">
-      <UniqueIdentifier>{7b11333c-8c19-474e-a155-042c8b03fede}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase">
       <UniqueIdentifier>{131fa76e-e8b5-4833-890e-918a5c0fb1a1}</UniqueIdentifier>
     </Filter>
@@ -101,6 +98,9 @@
     <Filter Include="Main\SceneManager\SceneBase\TitleScene\StartButton">
       <UniqueIdentifier>{c9d4b524-2bab-4af7-8b10-73676fcc7335}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main\SceneManager\GameDataManager">
+      <UniqueIdentifier>{7b11333c-8c19-474e-a155-042c8b03fede}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\GameScene.cpp">
@@ -123,9 +123,6 @@
     </ClCompile>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectManager.cpp">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\GameDataManager\GameDataManager.cpp">
-      <Filter>Main\SceneManager\SceneBase\GameScene\GameDataManager</Filter>
     </ClCompile>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\BackGround\BackGround.cpp">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\BackGround</Filter>
@@ -190,6 +187,9 @@
     <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\StartButton\StartButton.cpp">
       <Filter>Main\SceneManager\SceneBase\TitleScene\StartButton</Filter>
     </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameDataManager\GameDataManager.cpp">
+      <Filter>Main\SceneManager\GameDataManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\GameScene.h">
@@ -212,9 +212,6 @@
     </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectManager.h">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\GameDataManager\GameDataManager.h">
-      <Filter>Main\SceneManager\SceneBase\GameScene\GameDataManager</Filter>
     </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\BackGround\BackGround.h">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\BackGround</Filter>
@@ -284,6 +281,9 @@
     </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\StartButton\StartButton.h">
       <Filter>Main\SceneManager\SceneBase\TitleScene\StartButton</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameDataManager\GameDataManager.h">
+      <Filter>Main\SceneManager\GameDataManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

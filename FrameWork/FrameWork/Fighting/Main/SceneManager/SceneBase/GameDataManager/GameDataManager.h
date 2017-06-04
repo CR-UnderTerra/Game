@@ -7,7 +7,7 @@
 #define GAMEDATAMANAGER_H
 #include "Singleton.h"
 #include "Vertex2D/Vertex2D.h"
-#include "../ObjectManager/ObjectBase/UIBase/DistanceGaugeUI/DistanceGaugeUI.h"
+#include "../GameScene/ObjectManager/ObjectBase/UIBase/DistanceGaugeUI/DistanceGaugeUI.h"
 
 class ScoreUI;
 class HpGaugeUI;
@@ -23,6 +23,12 @@ public:
 		FRONT_ENEMY_TARGET,
 		RIGHT_ENEMY_TARGET,
 		TARGET_MAX
+	};
+
+	struct RESULT
+	{
+		int GoodCount,AmazingCount,FantastiocCount;
+		int Time;
 	};
 
 	/**
@@ -45,6 +51,26 @@ public:
 	 * @param[in] 判断ナイフのインデックス
 	 */
 	JudgeGaugeUI::JUDGE KnifeJadge(int _index);
+
+	inline void AddGoodCount()
+	{
+		m_Result.GoodCount++;
+	}
+
+	inline void AddAmazingCount()
+	{
+		m_Result.AmazingCount++;
+	}
+
+	inline void AddFantastiocCount()
+	{
+		m_Result.FantastiocCount++;
+	}
+
+	inline RESULT GetResult()
+	{
+		return m_Result;
+	}
 
 	/**
 	 * DistanceGaugeUIのセット
@@ -102,6 +128,7 @@ private:
 	ScoreUI*		 m_pScoreUI;
 	int				 m_PlayerHp;
 	D3DXVECTOR2		 m_Pos[TARGET_MAX];
+	RESULT			 m_Result;
 	bool			 m_IsGameOver;
 
 };

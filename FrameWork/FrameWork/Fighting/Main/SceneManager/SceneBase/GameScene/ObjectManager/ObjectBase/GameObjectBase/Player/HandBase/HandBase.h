@@ -10,7 +10,7 @@
 #include "Animation/AnimUvController.h"
 #include "../../../../../CollisionManager/CollisionManager.h"
 #include "../../../../../CollisionManager/CollisionData/CollisionData.h"
-#include "../../../../../GameDataManager/GameDataManager.h"
+#include "../../../../../../GameDataManager/GameDataManager.h"
 
 class HandBase : public GameObjectBase
 {

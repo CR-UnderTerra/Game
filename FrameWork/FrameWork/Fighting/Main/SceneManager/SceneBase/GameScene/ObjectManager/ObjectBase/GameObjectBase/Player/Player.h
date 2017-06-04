@@ -8,7 +8,7 @@
 #include <vector>
 #include "../GameObjectBase.h"
 #include "../../../../CollisionManager/CollisionData/CollisionData.h"
-#include "../../../../GameDataManager/GameDataManager.h"
+#include "../../../../../GameDataManager/GameDataManager.h"
 
 class HandBase;
 

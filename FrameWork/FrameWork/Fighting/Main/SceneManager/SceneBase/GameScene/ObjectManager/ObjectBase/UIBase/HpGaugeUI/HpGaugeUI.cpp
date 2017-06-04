@@ -8,7 +8,7 @@
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
 #include "HpIcon/HpIcon.h"
-#include "../../../../GameDataManager/GameDataManager.h"
+#include "../../../../../GameDataManager/GameDataManager.h"
 
 const D3DXVECTOR2 HpGaugeUI::m_Rect = D3DXVECTOR2(225,96);
 

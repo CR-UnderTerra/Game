@@ -4,7 +4,7 @@
  * @author kotani
  */
 #include "GameDataManager.h"
-#include "../ObjectManager/ObjectBase/UIBase/DistanceGaugeUI/DistanceGaugeUI.h"
+#include "../GameScene/ObjectManager/ObjectBase/UIBase/DistanceGaugeUI/DistanceGaugeUI.h"
 #include "Window/Window.h"
 
 
@@ -26,6 +26,10 @@ m_IsGameOver(false)
 	
 	m_Pos[RIGHT_ENEMY_TARGET].x = 1160.f;
 	m_Pos[RIGHT_ENEMY_TARGET].y = 576.f;
+
+	m_Result.AmazingCount = 0;
+	m_Result.FantastiocCount= 0;
+	m_Result.GoodCount = 0;
 }
 
 

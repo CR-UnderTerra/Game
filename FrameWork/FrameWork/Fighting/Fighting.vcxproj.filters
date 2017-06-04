@@ -92,6 +92,15 @@
     <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\Enemy">
       <UniqueIdentifier>{d6b450f2-32fe-4da6-81c6-e148adddf2ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\TitleScene\TitleBackGround">
+      <UniqueIdentifier>{05bee37a-9d5c-4281-8a38-cd1d91d2584f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\TitleScene\TitleText">
+      <UniqueIdentifier>{cce764d1-5350-48b9-bfaf-141ef2851eef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\TitleScene\StartButton">
+      <UniqueIdentifier>{c9d4b524-2bab-4af7-8b10-73676fcc7335}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\GameScene.cpp">
@@ -171,6 +180,15 @@
     </ClCompile>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\Enemy\Enemy.cpp">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleBackGround\TitleBackGround.cpp">
+      <Filter>Main\SceneManager\SceneBase\TitleScene\TitleBackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleText\TitleText.cpp">
+      <Filter>Main\SceneManager\SceneBase\TitleScene\TitleText</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\StartButton\StartButton.cpp">
+      <Filter>Main\SceneManager\SceneBase\TitleScene\StartButton</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,6 +275,15 @@
     </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\Enemy\Enemy.h">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\TitleBackGround\TitleBackGround.h">
+      <Filter>Main\SceneManager\SceneBase\TitleScene\TitleBackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\TitleText\TitleText.h">
+      <Filter>Main\SceneManager\SceneBase\TitleScene\TitleText</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\StartButton\StartButton.h">
+      <Filter>Main\SceneManager\SceneBase\TitleScene\StartButton</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

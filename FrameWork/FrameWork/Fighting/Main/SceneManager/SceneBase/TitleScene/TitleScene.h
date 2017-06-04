@@ -7,6 +7,9 @@
 #define TITLESCENE_H
 #include "..\SceneBase.h"
 
+class TitleBackGround;
+class TitleText;
+class StartButton;
 
 /**
  * タイトルシーンを管理するクラス
@@ -39,7 +42,35 @@ private:
 	TitleScene(const TitleScene&);
 	void operator=(const TitleScene&);
 
-	int m_SoundIndex;
+	/**
+	 * ライブラリの初期化
+	 */
+	void InitLibrary();
+	
+	/**
+	 * ライブラリの解放
+	 */
+	void ReleaseLibrary();
+
+	/**
+	 * キーボードの状態更新
+	 */
+	void KeyUpdate();
+
+	/**
+	 * 設定したキーが押されたか
+	 * @return 押されたらtrue
+ 	 */
+	bool KeyCheck();
+
+	TitleBackGround* m_pTitleBackGround;
+	TitleText*		 m_pTitleText;
+	StartButton*	 m_pStartButton;
+
+	int				 m_SoundIndex;
+	int				 m_BlackOutTextureIndex;
+	int				 m_BackGroundTextureIndex;
+	int				 m_TextTextureIndex;
 
 };
 

@@ -99,6 +99,9 @@
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\Player\HandBase\RightHand\RightHand.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\TimerUI\TimerUI.cpp" />
     <ClCompile Include="Main\XInput\XInput.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleBackGround\TitleBackGround.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\StartButton\StartButton.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleText\TitleText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\EnemyManager.h" />
@@ -129,6 +132,9 @@
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\UIBase.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\TimerUI\TimerUI.h" />
     <ClInclude Include="Main\XInput\XInput.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\TitleBackGround\TitleBackGround.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\StartButton\StartButton.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\TitleText\TitleText.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -26,10 +26,11 @@ public:
 	/**
 	 * ナイフを投げる
 	 * @param[in] _pos 何処から飛ばすのかの座標
+	 * @param[in] _myTarget 自分のターゲットタイプ
 	 * @param[in] _target 何処に飛ばすのか?
 	 * @param[in] _arriveTime 何秒で到達するか
 	 */
-	void ThrowKnife(D3DXVECTOR2* _pos, GameDataManager::TARGET _target, float _arriveTime);
+	void ThrowKnife(D3DXVECTOR2* _pos, GameDataManager::TARGET _myTarget, GameDataManager::TARGET _target, float _arriveTime);
 
 	/**
 	 * 掴まれたナイフを投げる

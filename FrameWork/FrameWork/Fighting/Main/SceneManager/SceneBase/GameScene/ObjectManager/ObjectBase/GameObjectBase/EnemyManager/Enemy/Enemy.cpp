@@ -149,21 +149,24 @@ void Enemy::Update()
 
 	if (m_CenterEnemyHits == true && m_LeftEnemyHits == true && m_RightEnemyHits == true && m_HitInterval == HITINTERVAL)
 	{
-		m_CenterEnemyCount -= 1;
 		m_LeftEnemyCount -= 1;
+		m_CenterEnemyCount -= 1;
 		m_RightEnemyCount -= 1;
 
 		if (m_EnemyLoad[m_LeftEnemyCount][0] == 1)
 		{
 			m_LeftEnemyHits = false;
+			m_pLeftEnemyCollisionData->SetEnable(true);
 		}
 		else if (m_EnemyLoad[m_CenterEnemyCount][1] == 1)
 		{
 			m_CenterEnemyHits = false;
+			m_pCenterEnemyCollisionData->SetEnable(true);
 		}
 		else if (m_EnemyLoad[m_RightEnemyCount][2] == 1)
 		{
 			m_RightEnemyHits = false;
+			m_pRightEnemyCollisionData->SetEnable(true);
 		}
 		
 	}

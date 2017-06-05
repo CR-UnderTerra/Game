@@ -4,7 +4,7 @@
 #include "Dx11/DX11Manager.h"
 #include "Enemy/Enemy.h"
 
-const int EnemyManager::m_EnemyMax = 1/*8*/;
+const int EnemyManager::m_EnemyMax = 1/*18*/;
 const D3DXVECTOR2 EnemyManager::m_Rect = D3DXVECTOR2(256, 256);
 
 EnemyManager::~EnemyManager()

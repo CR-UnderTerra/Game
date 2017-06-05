@@ -5,12 +5,11 @@
 #include "Vertex2D/Vertex2D.h"
 #include "../../../../../CollisionManager/CollisionData/CollisionData.h"
 #include "../../../../../GameDataManager/GameDataManager.h"
-//#include "../EnemyManager.h"
 
 #define ENEMYROW		3		//敵出現パターン横列
 #define ENEMYCOLUMN		13		//敵出現パターン縦列
 #define FLASHTIME		6
-#define CLEARINTERVAL	50
+#define HITINTERVAL	50
 #define ATTACKINTERVAL	100
 
 class Enemy : public GameObjectBase
@@ -55,9 +54,9 @@ public:
 
 	void Hit();
 
-	void EnemyPosInit(CollisionData* _pcollisiondata, D3DXVECTOR2 _pos);
+	void EnemyPosInit(CollisionData* _pcollisiondata, D3DXVECTOR2 _pos, Lib::Vertex2D* _vertex, CollisionData::HIT_STATE _hitstate);
 
-	void EnemyCrush(D3DXVECTOR2 _pos, float _alpha);
+	void EnemyExplosion(D3DXVECTOR2 _pos, float _alpha);
 
 	void Attack();
 
@@ -81,7 +80,7 @@ private:
 	int							   m_CenterEnemyCount;
 	int							   m_RightEnemyCount;
 
-	float						   m_ClearInterval;
+	float						   m_HitInterval;
 	float						   m_FlashingCount;
 
 	bool						   m_LeftEnemyHits;
@@ -95,10 +94,12 @@ private:
 	CollisionData*				   m_pLeftEnemyCollisionData;
 	CollisionData*				   m_pCenterEnemyCollisionData;
 	CollisionData*				   m_pRightEnemyCollisionData;
-	Lib::Vertex2D*				   m_pVertex;
-	Lib::Vertex2D*				   m_pVertexCrush;
+	Lib::Vertex2D*				   m_pLeftEnemyVertex;
+	Lib::Vertex2D*				   m_pCenterEnemyVertex;
+	Lib::Vertex2D*				   m_pRightEnemyVertex;
+	Lib::Vertex2D*				   m_pEnemyExplosionVertex;
 	Lib::AnimUvController*		   m_pUvController;
-	Lib::AnimUvController*		   m_pUvControllerCrush;
+	Lib::AnimUvController*		   m_pEnemyExplosionUvController;
 	D3DXVECTOR2					   m_PosLeft;
 	D3DXVECTOR2					   m_PosCenter;
 	D3DXVECTOR2					   m_PosRight;
@@ -108,6 +109,9 @@ private:
 	ATTACKENEMY					   m_AttackEnemy;
 	float						   m_AttackInterval;
 
+	CollisionData::HIT_STATE	   m_LeftEnemyHitState;
+	CollisionData::HIT_STATE	   m_CenterEnemyHitState;
+	CollisionData::HIT_STATE	   m_RightEnemyHitState;
 };
 
 #endif // !ENEMY_H

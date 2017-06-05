@@ -57,31 +57,6 @@ void EnemyManager::Init(int _textureIndex)
 	}
 }
 
-//void EnemyManager::EnemyLoad(const char* _enemycsv)
-//{
-//	FILE*  fp;
-//	fopen_s(&fp, _enemycsv, "r");
-//
-//	for (int i = 0; i < ENEMYCOLUMN; i++)
-//	{
-//		for (int j = 0; j < ENEMYROW; j++)
-//		{
-//			fscanf_s(fp, "%d,", &m_EnemyLoad[i][j], _countof(m_EnemyLoad));
-//			switch (m_EnemyLoad[i][j])
-//			{
-//			case 1:
-//			{
-//				for (int i = 0; i < m_EnemyMax; i++)
-//				{
-//					m_pEnemy.push_back(new Enemy(m_TextureIndex, m_pAnimUvController));
-//				}
-//			}
-//			break;
-//			}
-//		}
-//	}
-//}
-
 void EnemyManager::Update()
 {
 	for (int i = 0; i < m_EnemyMax; i++)

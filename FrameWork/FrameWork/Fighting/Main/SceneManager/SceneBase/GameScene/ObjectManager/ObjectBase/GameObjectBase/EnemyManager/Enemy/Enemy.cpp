@@ -31,6 +31,7 @@ m_PosRight{ (1160), (576) }			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 	EnemyLoad("Resource/EnemyPos.csv");
 
 	m_pEnemyExplosionUvController = new Lib::AnimUvController();
+	m_pEnemyExplosionUvController->LoadAnimation("Resource/test_001.anim", "e_bom_a");
 
 	m_pEnemyExplosionVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
@@ -437,7 +438,6 @@ void Enemy::CollisionControl()
 
 void Enemy::EnemyExplosion(D3DXVECTOR2 _pos, float _alpha)
 {
-	m_pEnemyExplosionUvController->LoadAnimation("Resource/test_001.anim", "e_bom_a");
 	m_pEnemyExplosionVertex->Draw(&_pos, m_pEnemyExplosionUvController->GetUV(), _alpha);
 }
 

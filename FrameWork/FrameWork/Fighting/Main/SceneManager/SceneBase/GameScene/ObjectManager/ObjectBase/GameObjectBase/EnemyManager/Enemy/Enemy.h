@@ -55,7 +55,7 @@ public:
 
 	void Hit();
 
-	void EnemyPosInit(D3DXVECTOR2 _pos);
+	void EnemyPosInit(CollisionData* _pcollisiondata, D3DXVECTOR2 _pos);
 
 	void EnemyCrush(D3DXVECTOR2 _pos, float _alpha);
 
@@ -92,7 +92,9 @@ private:
 	bool						   m_Hits;
 
 	GameDataManager::TARGET		   m_Target;
-	CollisionData*				   m_pCollisionData;
+	CollisionData*				   m_pLeftEnemyCollisionData;
+	CollisionData*				   m_pCenterEnemyCollisionData;
+	CollisionData*				   m_pRightEnemyCollisionData;
 	Lib::Vertex2D*				   m_pVertex;
 	Lib::Vertex2D*				   m_pVertexCrush;
 	Lib::AnimUvController*		   m_pUvController;

@@ -42,23 +42,29 @@ m_PosRight{ (1160), (576) }			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 
 	if (m_EnemyLoad[m_LeftEnemyCount][0] == 1)
 	{
-		EnemyPosInit(m_PosLeft);
+		EnemyPosInit(m_pLeftEnemyCollisionData, m_PosLeft);
 	}
 	else if (m_EnemyLoad[m_CenterEnemyCount][1] == 1)
 	{
-		EnemyPosInit(m_PosCenter);
+		EnemyPosInit(m_pCenterEnemyCollisionData, m_PosCenter);
 	}
 	else if (m_EnemyLoad[m_RightEnemyCount][2] == 1)
 	{
-		EnemyPosInit(m_PosRight);
+		EnemyPosInit(m_pRightEnemyCollisionData, m_PosRight);
 	}
 	
 }
 
 Enemy::~Enemy()
 {
-	delete m_pCollisionData;
-	m_pCollisionData = NULL;
+	delete m_pLeftEnemyCollisionData;
+	m_pLeftEnemyCollisionData = NULL;
+
+	delete m_pCenterEnemyCollisionData;
+	m_pCenterEnemyCollisionData = NULL;
+
+	delete m_pRightEnemyCollisionData;
+	m_pRightEnemyCollisionData = NULL;
 
 	delete m_pUvControllerCrush;
 	m_pUvControllerCrush = NULL;
@@ -326,19 +332,33 @@ void Enemy::CollisionUpdate()
 
 void Enemy::CollisionControl()
 {
-	CollisionData::HIT_STATE hitState = m_pCollisionData->GetCollisionState().HitState;
-	if (hitState == CollisionData::KNIFE_HIT)
+	CollisionData::HIT_STATE leftenemyhitState = m_pLeftEnemyCollisionData->GetCollisionState().HitState;
+	CollisionData::HIT_STATE centerenemyhitState = m_pCenterEnemyCollisionData->GetCollisionState().HitState;
+	CollisionData::HIT_STATE rightenemyhitState = m_pRightEnemyCollisionData->GetCollisionState().HitState;
+	
+	if (leftenemyhitState == CollisionData::KNIFE_HIT)
 	{
-		m_pCollisionData->SetEnable(false);
+		m_pLeftEnemyCollisionData->SetEnable(false);
+		m_LeftEnemyHits = true;
+	}
+	else if (centerenemyhitState == CollisionData::KNIFE_HIT)
+	{
+		m_pCenterEnemyCollisionData->SetEnable(false);
+		m_CenterEnemyHits = true;
+	}
+	else if (rightenemyhitState == CollisionData::KNIFE_HIT)
+	{
+		m_pRightEnemyCollisionData->SetEnable(false);
+		m_RightEnemyHits = true;
 	}
 }
 
-void Enemy::EnemyPosInit(D3DXVECTOR2 _pos)
+void Enemy::EnemyPosInit(CollisionData* _pcollisiondata, D3DXVECTOR2 _pos)
 {
-	m_pCollisionData = new CollisionData();
-	m_pCollisionData->SetEnable(false);
-	m_pCollisionData->SetCollision(&D3DXVECTOR3(_pos), &m_Rect, CollisionData::ENEMY_TYPE);
-	SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pCollisionData);
+	_pcollisiondata = new CollisionData();
+	_pcollisiondata->SetEnable(false);
+	_pcollisiondata->SetCollision(&D3DXVECTOR3(_pos), &m_Rect, CollisionData::ENEMY_TYPE);
+	SINGLETON_INSTANCE(CollisionManager).AddCollision(_pcollisiondata);
 
 	m_pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),

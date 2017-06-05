@@ -101,6 +101,9 @@
     <Filter Include="Main\SceneManager\GameDataManager">
       <UniqueIdentifier>{7b11333c-8c19-474e-a155-042c8b03fede}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\ResultScene">
+      <UniqueIdentifier>{d8eb5d7c-40b5-4d1b-b541-7a5797d9b96d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\GameScene.cpp">
@@ -189,6 +192,9 @@
     </ClCompile>
     <ClCompile Include="Main\SceneManager\SceneBase\GameDataManager\GameDataManager.cpp">
       <Filter>Main\SceneManager\GameDataManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\ResultScene.cpp">
+      <Filter>Main\SceneManager\SceneBase\ResultScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -284,6 +290,9 @@
     </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\GameDataManager\GameDataManager.h">
       <Filter>Main\SceneManager\GameDataManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\ResultScene.h">
+      <Filter>Main\SceneManager\SceneBase\ResultScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

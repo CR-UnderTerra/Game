@@ -48,7 +48,6 @@ SceneBase::SceneID TitleScene::Update()
 {
 	KeyUpdate();
 
-	SceneID NextSceneID = m_SceneID;
 	if (m_pTitleBackGround->Update())
 	{
 		if (m_pTitleText->Update())
@@ -57,12 +56,12 @@ SceneBase::SceneID TitleScene::Update()
 			{
 				if (KeyCheck())
 				{
-					NextSceneID = SCENE_GAME;
+					m_SceneID = SCENE_GAME;
 				}
 			}
 		}
 	}
-	return NextSceneID;
+	return m_SceneID;
 }
 
 void TitleScene::Draw()

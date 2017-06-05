@@ -31,6 +31,8 @@ public:
 		int Time;
 	};
 
+	void Init();
+
 	/**
 	 * 制御関数
 	 */

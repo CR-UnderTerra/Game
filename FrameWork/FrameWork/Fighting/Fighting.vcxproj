@@ -102,6 +102,7 @@
     <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleBackGround\TitleBackGround.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\StartButton\StartButton.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleText\TitleText.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\ResultScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\EnemyManager.h" />
@@ -135,6 +136,7 @@
     <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\TitleBackGround\TitleBackGround.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\StartButton\StartButton.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\TitleText\TitleText.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\ResultScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

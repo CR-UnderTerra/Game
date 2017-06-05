@@ -6,6 +6,7 @@
 #include "SceneFactory.h"
 #include "..\SceneBase\GameScene\GameScene.h"
 #include "..\SceneBase\TitleScene\TitleScene.h"
+#include "..\SceneBase\ResultScene\ResultScene.h"
 #include <Windows.h>
 
 
@@ -42,6 +43,7 @@ SceneBase* SceneFactory::CreateScene(SceneBase::SceneID _sceneID)
 		pScene = new GameScene();
 		break;
 	case SceneBase::SCENE_RESULT:
+		pScene = new ResultScene();
 		break;
 	case SceneBase::SCENE_ENDING:
 		break;

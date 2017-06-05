@@ -7,6 +7,7 @@
 #include "SceneBase\SceneBase.h"
 #include "SceneFactory\SceneFactory.h"
 #include "DebugTool/DebugTimer.h"
+#include "SceneBase/GameDataManager/GameDataManager.h"
 
 
 SceneManager::SceneManager(HWND _hwnd) :
@@ -16,10 +17,12 @@ m_NextSceneID(SceneBase::SCENE_TITLE),
 m_hWnd(_hwnd),
 m_IsGameEnd(false)
 {
+	SINGLETON_CREATE(GameDataManager);
 }
 
 SceneManager::~SceneManager()
 {
+	SINGLETON_DELETE(GameDataManager);
 	delete m_pScene;
 }
 

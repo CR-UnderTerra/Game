@@ -37,7 +37,7 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 		v1.CollisionType == ENEMY_KNIFE_TYPE &&
 		v2.CollisionType == PLAYER_KNIFE_TYPE)
 	{
-		if (sqrt(pow(v2.Pos.x - v1.Pos.x, 2) + pow(v2.Pos.y - v1.Pos.y, 2)) < 8.f)
+		if (sqrt(pow(v2.Pos.x - v1.Pos.x, 2) + pow(v2.Pos.y - v1.Pos.y, 2)) < 12.f)
 		{
 			m_CollisionState.HitState = KNIFE_HIT;
 			return true;	
@@ -54,7 +54,7 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 		v1.CollisionType == ENEMY_TYPE &&
 		v2.CollisionType == PLAYER_KNIFE_TYPE)
 	{
-		if (sqrt(pow(v2.Pos.x - v1.Pos.x, 2) + pow(v2.Pos.y - v1.Pos.y, 2)) < 8.f)
+		if (sqrt(pow(v2.Pos.x - v1.Pos.x, 2) + pow(v2.Pos.y - v1.Pos.y, 2)) < 12.f)
 		{
 			m_CollisionState.HitState = KNIFE_HIT;
 			return true;

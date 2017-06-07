@@ -4,7 +4,7 @@
 #include "Dx11/DX11Manager.h"
 #include "Enemy/Enemy.h"
 
-const int EnemyManager::m_EnemyMax = 1/*8*/;
+const int EnemyManager::m_EnemyMax = 1/*18*/;
 const D3DXVECTOR2 EnemyManager::m_Rect = D3DXVECTOR2(256, 256);
 
 EnemyManager::~EnemyManager()
@@ -56,31 +56,6 @@ void EnemyManager::Init(int _textureIndex)
 		m_pEnemy.push_back(new Enemy(_textureIndex, m_pAnimUvController));
 	}
 }
-
-//void EnemyManager::EnemyLoad(const char* _enemycsv)
-//{
-//	FILE*  fp;
-//	fopen_s(&fp, _enemycsv, "r");
-//
-//	for (int i = 0; i < ENEMYCOLUMN; i++)
-//	{
-//		for (int j = 0; j < ENEMYROW; j++)
-//		{
-//			fscanf_s(fp, "%d,", &m_EnemyLoad[i][j], _countof(m_EnemyLoad));
-//			switch (m_EnemyLoad[i][j])
-//			{
-//			case 1:
-//			{
-//				for (int i = 0; i < m_EnemyMax; i++)
-//				{
-//					m_pEnemy.push_back(new Enemy(m_TextureIndex, m_pAnimUvController));
-//				}
-//			}
-//			break;
-//			}
-//		}
-//	}
-//}
 
 void EnemyManager::Update()
 {

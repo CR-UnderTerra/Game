@@ -90,8 +90,6 @@ void TitleScene::InitLibrary()
 		SINGLETON_INSTANCE(Lib::DSoundManager).Init(hWnd);
 		// Lib::DSoundManager Init end
 
-		SINGLETON_CREATE(Lib::DXInputDevice);
-
 		// InputDevice関係
 		SINGLETON_CREATE(Lib::DXInputDevice);
 		SINGLETON_INSTANCE(Lib::DXInputDevice).Init(hWnd);

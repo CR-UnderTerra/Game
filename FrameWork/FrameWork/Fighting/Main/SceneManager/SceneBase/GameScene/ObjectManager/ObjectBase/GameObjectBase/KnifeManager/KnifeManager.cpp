@@ -50,13 +50,13 @@ void KnifeManager::Init(int _textureIndex)
 		m_pEnemyKnifeUv[_animType]->LoadAnimation("Resource/test_001.anim", _animName);
 	};
 
-	InitPlayerAnim("F_sword02", Knife::FRONT);
-	InitPlayerAnim("R_sword02", Knife::RIGHT);
-	InitPlayerAnim("L_sword02", Knife::LEFT);
+	InitPlayerAnim("F_mail02", Knife::FRONT);
+	InitPlayerAnim("R_mail02", Knife::RIGHT);
+	InitPlayerAnim("L_mail02", Knife::LEFT);
 
-	InitEnemyAnim("F_sword01", Knife::FRONT);
-	InitEnemyAnim("L_sword01", Knife::RIGHT);
-	InitEnemyAnim("R_sword01", Knife::LEFT);
+	InitEnemyAnim("F_mail01", Knife::FRONT);
+	InitEnemyAnim("L_mail01", Knife::RIGHT);
+	InitEnemyAnim("R_mail01", Knife::LEFT);
 
 	for (int i = 0; i < m_KnifeMax; i++)
 	{

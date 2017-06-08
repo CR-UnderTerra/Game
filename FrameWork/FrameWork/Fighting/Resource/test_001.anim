@@ -20,7 +20,7 @@ h_right
 	256,
 }
 
-F_sword01
+F_mail01
 {
 	256,
 	0,
@@ -28,7 +28,7 @@ F_sword01
 	256,
 }
 
-L_sword01
+L_mail01
 {
 	384,
 	0,
@@ -36,7 +36,7 @@ L_sword01
 	256,
 }
 
-R_sword01
+R_mail01
 {
 	512,
 	0,
@@ -44,7 +44,7 @@ R_sword01
 	256,
 }
 
-F_sword02
+F_mail02
 {
 	640,
 	0,
@@ -52,7 +52,7 @@ F_sword02
 	256,
 }
 
-L_sword02
+L_mail02
 {
 	768,
 	0,
@@ -60,7 +60,7 @@ L_sword02
 	256,
 }
 
-R_sword02
+R_mail02
 {
 	896,
 	0,

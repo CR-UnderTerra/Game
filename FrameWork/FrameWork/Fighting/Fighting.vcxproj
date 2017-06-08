@@ -75,9 +75,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\FantasticText\FantasticText.cpp" />
-    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\AmazingText\AmazingText.cpp" />
-    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\GoodText\GoodText.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\FantasticText\FantasticText.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\AmazingText\AmazingText.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\GoodText\GoodText.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\EnemyManager.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\Enemy\Enemy.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\JudgeGaugeUI\JudgeGaugeUI.cpp" />
@@ -109,11 +109,12 @@
     <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleText\TitleText.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\ResultScene.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreDisplay.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\ScoreBase.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\FantasticText\FantasticText.h" />
-    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\AmazingText\AmazingText.h" />
-    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\GoodText\GoodText.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\FantasticText\FantasticText.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\AmazingText\AmazingText.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\GoodText\GoodText.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\EnemyManager.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\EnemyManager\Enemy\Enemy.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\DistanceGaugeUI\JudgeGaugeUI\JudgeGaugeUI.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\TitleText\TitleText.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\ResultScene.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreDisplay.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\ScoreBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,10 +6,8 @@
 #ifndef SCOREDISPLAY_H
 #define SCOREDISPLAY_H
 #include "../UIBase.h"
-
-class GoodText;
-class AmazingText;
-class FantasticText;
+#include <array>
+class ScoreBase;
 
 class ScoreDisplay : public UIBase
 {
@@ -36,9 +34,7 @@ public:
 
 private:
 	D3DXVECTOR2	   m_Pos;
-	GoodText*	   m_pGoodText;
-	AmazingText*   m_pAmazingText;
-	FantasticText* m_pFantasticText;
+	std::array<ScoreBase*, 3> m_pScoreBase;
 
 };
 

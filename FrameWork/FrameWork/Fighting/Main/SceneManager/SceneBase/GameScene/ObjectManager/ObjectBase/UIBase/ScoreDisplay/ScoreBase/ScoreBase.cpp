@@ -1,47 +1,37 @@
-﻿/**
- * @file   AmazingText.cpp
- * @brief  AmazingTextクラスの実装
- * @author kotani
- */
-#include "AmazingText.h"
+﻿#include "ScoreBase.h"
 #include "Dx11/DX11Manager.h"
 #include "Texture/TextureManager.h"
 #include "Window/Window.h"
-#include "../../../../../../GameDataManager/GameDataManager.h"
 
 
-AmazingText::AmazingText(int _textureIndex, D3DXVECTOR2* _pos) :
+ScoreBase::ScoreBase(D3DXVECTOR2* _pos,LPCTSTR _animName, int _textureIndex) :
 m_TextureIndex(_textureIndex)
 {
-	InitVertex(_pos, &D3DXVECTOR2(200, 64), "e_ama", &m_Vertex);
+	InitVertex(_pos, &D3DXVECTOR2(150, 64), _animName, &m_Vertex);
+	InitVertex(&D3DXVECTOR2(_pos->x + 98, _pos->y), &D3DXVECTOR2(30, 64), "u_feed", &m_NumSymbolVertex);
 	InitVertex(&D3DXVECTOR2(_pos->x + 130, _pos->y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[0]);
 	InitVertex(&D3DXVECTOR2(_pos->x + 160, _pos->y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[1]);
 }
 
-AmazingText::~AmazingText()
+ScoreBase::~ScoreBase()
 {
 	ReleaseVertex(&m_NumVertex[1]);
 	ReleaseVertex(&m_NumVertex[0]);
+	ReleaseVertex(&m_NumSymbolVertex);
 	ReleaseVertex(&m_Vertex);
 }
 
-
-//----------------------------------------------------------------------------------------------------
-// Public Functions
-//----------------------------------------------------------------------------------------------------
-
-void AmazingText::Update()
+void ScoreBase::Draw()
 {
-	int amazingCount = SINGLETON_INSTANCE(GameDataManager).GetResult().AmazingCount;
-	m_NumVertex[0].pUvController->SetAnimCount((amazingCount / 10) % 10);
-	m_NumVertex[1].pUvController->SetAnimCount(amazingCount % 10);
-}
+	auto VertexDraw = [this](Vertex _vertex)
+	{
+		_vertex.pVertex->Draw(&_vertex.Pos, _vertex.pUvController->GetUV());
+	};
 
-void AmazingText::Draw()
-{
-	m_Vertex.pVertex->Draw(&m_Vertex.Pos, m_Vertex.pUvController->GetUV());
-	m_NumVertex[0].pVertex->Draw(&m_NumVertex[0].Pos, m_NumVertex[0].pUvController->GetUV());
-	m_NumVertex[1].pVertex->Draw(&m_NumVertex[1].Pos, m_NumVertex[1].pUvController->GetUV());
+	VertexDraw(m_Vertex);
+	VertexDraw(m_NumSymbolVertex);
+	VertexDraw(m_NumVertex[0]);
+	VertexDraw(m_NumVertex[1]);
 }
 
 
@@ -49,7 +39,7 @@ void AmazingText::Draw()
 // Private Functions
 //----------------------------------------------------------------------------------------------------
 
-void AmazingText::InitVertex(D3DXVECTOR2* _pos, D3DXVECTOR2* _rect, LPCTSTR _animName, Vertex* _vertex)
+void ScoreBase::InitVertex(D3DXVECTOR2* _pos, D3DXVECTOR2* _rect, LPCTSTR _animName, Vertex* _vertex)
 {
 	_vertex->Pos = *_pos;
 	_vertex->Rect = *_rect;
@@ -64,7 +54,7 @@ void AmazingText::InitVertex(D3DXVECTOR2* _pos, D3DXVECTOR2* _rect, LPCTSTR _ani
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 }
 
-void AmazingText::ReleaseVertex(Vertex* _vertex)
+void ScoreBase::ReleaseVertex(Vertex* _vertex)
 {
 	if (_vertex->pVertex != NULL)
 	{

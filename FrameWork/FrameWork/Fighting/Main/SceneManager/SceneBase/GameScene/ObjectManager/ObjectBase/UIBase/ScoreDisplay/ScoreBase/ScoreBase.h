@@ -1,37 +1,21 @@
-﻿/**
- * @file   FantasticText.h
- * @brief  FantasticTextクラスのヘッダファイル
- * @author kotani
- */
-#ifndef FANTASTIC_H
-#define FANTASTIC_H
+﻿#ifndef SCOREBASE_H
+#define SCOREBASE_H
 #include "Vertex2D/Vertex2D.h"
 #include "Animation/AnimUvController.h"
 
-class FantasticText
+/**
+ * Score表示の基底クラス
+ */
+class ScoreBase
 {
 public:
-	/**
-	 * コンストラクタ
-	 */
-	FantasticText(int _textureIndex, D3DXVECTOR2* _pos);
+	ScoreBase(D3DXVECTOR2* _pos,LPCTSTR _animName,int _textureIndex);
+	virtual ~ScoreBase();
 
-	/**
-	 * デストラクタ
-	 */
-	~FantasticText();
-
-	/**
-	 * 制御処理
-	 */
-	void Update();
-
-	/**
-	 * 描画処理
-	 */
+	virtual void Update() = 0;
 	void Draw();
 
-private:
+protected:
 	struct Vertex
 	{
 		D3DXVECTOR2			   Pos;
@@ -55,9 +39,10 @@ private:
 	 */
 	void ReleaseVertex(Vertex* _vertex);
 
-	int		m_TextureIndex;
-	Vertex	m_Vertex;
-	Vertex  m_NumVertex[2]; //!< 何回かを表示する数字
+	int	   m_TextureIndex;
+	Vertex m_Vertex;
+	Vertex m_NumSymbolVertex;
+	Vertex m_NumVertex[2]; //!< 何回かを表示する数字
 
 };
 

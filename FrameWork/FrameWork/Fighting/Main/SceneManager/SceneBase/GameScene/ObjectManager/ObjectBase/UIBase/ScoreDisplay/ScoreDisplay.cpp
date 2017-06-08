@@ -4,29 +4,26 @@
  * @author kotani
  */
 #include "ScoreDisplay.h"
-#include "GoodText/GoodText.h"
-#include "AmazingText/AmazingText.h"
-#include "FantasticText/FantasticText.h"
+#include "ScoreBase/GoodText/GoodText.h"
+#include "ScoreBase/AmazingText/AmazingText.h"
+#include "ScoreBase/FantasticText/FantasticText.h"
 
 
 ScoreDisplay::ScoreDisplay(int _textureIndex)
 {
 	m_Pos = D3DXVECTOR2(100,600);
-	m_pGoodText = new GoodText(_textureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y - 84.f));
-	m_pAmazingText = new AmazingText(_textureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y));
-	m_pFantasticText = new FantasticText(_textureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y + 84.f));
+	m_pScoreBase[0] = new GoodText(_textureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y - 104.f));
+	m_pScoreBase[1] = new AmazingText(_textureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y));
+	m_pScoreBase[2] = new FantasticText(_textureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y + 104.f));
 }
 
 ScoreDisplay::~ScoreDisplay()
 {
-	delete m_pFantasticText;
-	m_pFantasticText = NULL;
-
-	delete m_pAmazingText;
-	m_pAmazingText = NULL;
-
-	delete m_pGoodText;
-	m_pGoodText = NULL;
+	for (int i = m_pScoreBase.size() - 1; i >= 0; i--)
+	{
+		delete m_pScoreBase[i];
+		m_pScoreBase[i] = NULL;
+	}
 }
 
 
@@ -36,14 +33,16 @@ ScoreDisplay::~ScoreDisplay()
 
 void ScoreDisplay::Update()
 {
-	m_pGoodText->Update();
-	m_pFantasticText->Update();
-	m_pAmazingText->Update();
+	for (unsigned int i = 0; i < m_pScoreBase.size(); i++)
+	{
+		m_pScoreBase[i]->Update();
+	}
 }
 
 void ScoreDisplay::Draw()
 {
-	m_pGoodText->Draw();
-	m_pFantasticText->Draw();
-	m_pAmazingText->Draw();
+	for (unsigned int i = 0; i < m_pScoreBase.size(); i++)
+	{
+		m_pScoreBase[i]->Draw();
+	}
 }

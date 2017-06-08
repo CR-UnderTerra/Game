@@ -104,6 +104,18 @@
     <Filter Include="Main\SceneManager\SceneBase\ResultScene">
       <UniqueIdentifier>{d8eb5d7c-40b5-4d1b-b541-7a5797d9b96d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI">
+      <UniqueIdentifier>{14cc7c3f-3c26-4ba1-8d77-ea1f69d46c36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\GoodText">
+      <UniqueIdentifier>{365d076f-8883-4f73-9c05-b254a74cfd63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\AmazingText">
+      <UniqueIdentifier>{10a0a492-4132-4603-be9e-d653c392a8f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\FantasticText">
+      <UniqueIdentifier>{581afdc0-72e0-4de9-8e21-f92daefdafdb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\GameScene.cpp">
@@ -195,6 +207,18 @@
     </ClCompile>
     <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\ResultScene.cpp">
       <Filter>Main\SceneManager\SceneBase\ResultScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreDisplay.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\GoodText\GoodText.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\GoodText</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\AmazingText\AmazingText.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\AmazingText</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\FantasticText\FantasticText.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\FantasticText</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +317,18 @@
     </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\ResultScene.h">
       <Filter>Main\SceneManager\SceneBase\ResultScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreDisplay.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\GoodText\GoodText.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\GoodText</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\AmazingText\AmazingText.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\AmazingText</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\FantasticText\FantasticText.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\FantasticText</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

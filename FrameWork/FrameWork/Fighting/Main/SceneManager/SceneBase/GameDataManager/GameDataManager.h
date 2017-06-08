@@ -27,7 +27,7 @@ public:
 
 	struct RESULT
 	{
-		int GoodCount,AmazingCount,FantastiocCount;
+		int GoodCount,AmazingCount,FantasticCount;
 		int Time;
 	};
 
@@ -66,7 +66,7 @@ public:
 
 	inline void AddFantastiocCount()
 	{
-		m_Result.FantastiocCount++;
+		m_Result.FantasticCount++;
 	}
 
 	inline RESULT GetResult()

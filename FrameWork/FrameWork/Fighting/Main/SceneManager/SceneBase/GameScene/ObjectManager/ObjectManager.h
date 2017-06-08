@@ -49,7 +49,6 @@ private:
 	int					 m_TextureIndex1;
 	int					 m_TextureIndex2;
 	int					 m_TextureIndex3;
-	int					 m_TextureIndex4;
 
 };
 

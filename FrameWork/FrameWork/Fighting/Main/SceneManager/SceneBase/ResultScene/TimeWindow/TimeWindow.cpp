@@ -17,8 +17,7 @@ TimeWindow::TimeWindow() :
 m_Alpha(0)
 {
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png", &m_TextureIndex);
-	RECT ClientRect;
-	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
+	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 
 	m_Pos = D3DXVECTOR2(550, 600);
 	InitVertex(&m_Pos, &D3DXVECTOR2(24, 64), "t_colon", &m_ColonVertex);
@@ -94,7 +93,7 @@ void TimeWindow::InitVertex(D3DXVECTOR2* _pos, D3DXVECTOR2* _rect, LPCTSTR _anim
 	_vertex->pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-		SINGLETON_INSTANCE(Lib::Window).GetWindowHandle());
+		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
 	_vertex->pVertex->Init(&_vertex->Rect, _vertex->pUvController->GetUV());
 	_vertex->pVertex->SetTexture(
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));

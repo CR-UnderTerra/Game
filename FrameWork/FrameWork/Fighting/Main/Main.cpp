@@ -18,7 +18,8 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmdSh
 	const HWND hWnd = SINGLETON_INSTANCE(Lib::Window).GetWindowHandle();
 
 	SINGLETON_CREATE(Lib::DX11Manager);
-	SINGLETON_INSTANCE(Lib::DX11Manager).Init(hWnd);
+	SINGLETON_INSTANCE(Lib::DX11Manager).Init(hWnd,
+		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
 
 	SceneManager* sceneManager = new SceneManager(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle());
 

@@ -18,8 +18,7 @@ TitleBackGround::TitleBackGround(int _textureIndex) :
 m_TextureIndex(_textureIndex),
 m_Alpha(0.f)
 {
-	RECT ClientRect;
-	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
+	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 	m_Pos = D3DXVECTOR2(static_cast<float>(ClientRect.right / 2), static_cast<float>(ClientRect.bottom / 2));
 	m_pUvController = new Lib::AnimUvController();
 	m_pUvController->LoadAnimation("Resource/TitleBackGround.anim", "bg_tit");
@@ -27,7 +26,7 @@ m_Alpha(0.f)
 	m_pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-		SINGLETON_INSTANCE(Lib::Window).GetWindowHandle());
+		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
 	m_pVertex->Init(&m_Rect, m_pUvController->GetUV());
 	m_pVertex->SetTexture(
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));

@@ -21,8 +21,7 @@ Player::Player(int _textureIndex)
 	m_pHandBase.push_back(new RightHand(_textureIndex));
 	m_pHandBase.push_back(new LeftHand(_textureIndex));
 
-	RECT ClientRect;
-	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
+	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 	m_Pos.x = static_cast<float>(ClientRect.right / 2);
 	m_Pos.y = static_cast<float>(ClientRect.bottom);
 	m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos), &m_RectCollision, CollisionData::PLAYER_TYPE);
@@ -54,8 +53,7 @@ void Player::Update()
 
 	m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos), &m_RectCollision, CollisionData::PLAYER_TYPE);
 
-	RECT ClientRect;
-	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
+	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 
 	for (unsigned int i = 0; i < m_pHandBase.size(); i++)
 	{

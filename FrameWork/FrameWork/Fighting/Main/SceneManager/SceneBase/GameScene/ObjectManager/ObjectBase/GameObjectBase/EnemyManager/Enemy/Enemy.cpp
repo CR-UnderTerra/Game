@@ -41,7 +41,7 @@ m_PosRight{ (1160), (576) }			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 	m_pEnemyExplosionVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-		SINGLETON_INSTANCE(Lib::Window).GetWindowHandle());
+		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
 	m_pEnemyExplosionVertex->Init(&m_Rect, m_pEnemyExplosionUvController->GetUV());
 	m_pEnemyExplosionVertex->SetTexture(
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
@@ -58,7 +58,7 @@ m_PosRight{ (1160), (576) }			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 		m_pLeftEnemyVertex = new Lib::Vertex2D(
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-			SINGLETON_INSTANCE(Lib::Window).GetWindowHandle());
+			SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
 		m_pLeftEnemyVertex->Init(&m_Rect, m_pLeftEnemyUvController->GetUV());
 		m_pLeftEnemyVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
@@ -79,7 +79,7 @@ m_PosRight{ (1160), (576) }			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 		m_pCenterEnemyVertex = new Lib::Vertex2D(
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-			SINGLETON_INSTANCE(Lib::Window).GetWindowHandle());
+			SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
 		m_pCenterEnemyVertex->Init(&m_Rect, m_pCenterEnemyUvController->GetUV());
 		m_pCenterEnemyVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
@@ -100,7 +100,7 @@ m_PosRight{ (1160), (576) }			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 		m_pRightEnemyVertex = new Lib::Vertex2D(
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-			SINGLETON_INSTANCE(Lib::Window).GetWindowHandle());
+			SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
 		m_pRightEnemyVertex->Init(&m_Rect, m_pRightEnemyUvController->GetUV());
 		m_pRightEnemyVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
@@ -331,7 +331,7 @@ void Enemy::EnemyPosInit(CollisionData* _pcollisiondata, D3DXVECTOR2 _pos, Lib::
 	_vertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-		SINGLETON_INSTANCE(Lib::Window).GetWindowHandle());
+		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
 	_vertex->Init(&m_Rect, m_pUvController->GetUV());
 	_vertex->SetTexture(
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));

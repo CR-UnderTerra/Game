@@ -31,7 +31,7 @@ m_RectCollisionRatio(D3DXVECTOR2(0.3f,0.3f))
 	m_pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-		SINGLETON_INSTANCE(Lib::Window).GetWindowHandle());
+		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
 	D3DXVECTOR2 uv[4];
 	for (int i = 0; i < 4; i++)
 	{
@@ -90,8 +90,7 @@ void Knife::Throw(D3DXVECTOR2* _pos, GameDataManager::TARGET _target, float _arr
 	m_ArriveFrame = static_cast<int>(_arriveTime * 60);
 	m_Target = _target;
 	m_CatchState = JudgeGaugeUI::FAILED_JUDGE;
-	RECT ClientRect;
-	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
+	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 
 	D3DXVECTOR2 pos = SINGLETON_INSTANCE(GameDataManager).GetPos(m_Target);
 	m_Angle = atan2(_pos->y - pos.y, _pos->x - pos.x);

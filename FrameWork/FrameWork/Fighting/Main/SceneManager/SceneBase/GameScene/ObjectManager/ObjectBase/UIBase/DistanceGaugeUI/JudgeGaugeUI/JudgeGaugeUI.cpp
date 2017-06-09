@@ -23,7 +23,7 @@ m_DistanceGaugeButtomPos(*_distanceGaugeButtomPos)
 	InitJudgeVertex(&m_AmazingJudgeVertex, &D3DXVECTOR2(pos.x - 75.f,
 		m_FantasticJudgeVertex.Pos.y - m_FantasticJudgeVertex.Rect.y / 2 - rect.y / 2), &rect, "d_line2");
 
-	rect = D3DXVECTOR2(45, 60);;
+	rect = D3DXVECTOR2(45, 60);
 	InitJudgeVertex(&m_GoodJudgeVertex, &D3DXVECTOR2(pos.x - 75.f,
 		m_AmazingJudgeVertex.Pos.y - m_AmazingJudgeVertex.Rect.y / 2 - rect.y / 2), &rect, "d_line1");
 }
@@ -81,7 +81,7 @@ void JudgeGaugeUI::InitJudgeVertex(JudgeGaugeUI::JudgeVertex* _pJudgeVertex, D3D
 	_pJudgeVertex->pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-		SINGLETON_INSTANCE(Lib::Window).GetWindowHandle());
+		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
 	_pJudgeVertex->pVertex->Init(_rect, _pJudgeVertex->pUvController->GetUV());
 	_pJudgeVertex->pVertex->SetTexture(
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));

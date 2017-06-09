@@ -14,8 +14,7 @@
 RightHand::RightHand(int _textureIndex) :
 HandBase(&D3DXVECTOR2(0, 0), "h_right", _textureIndex)
 {
-	RECT ClientRect;
-	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
+	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 
 	m_Pos.x = static_cast<float>(ClientRect.right / 2 + 150 + m_Rect.x / 2);
 	m_Pos.y = static_cast<float>(ClientRect.bottom / 2 + 300);

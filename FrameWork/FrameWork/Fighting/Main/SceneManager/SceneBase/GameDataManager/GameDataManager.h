@@ -141,6 +141,18 @@ public:
 		m_IsGameOver = _IsGameOver;
 	}
 
+	inline RESULT_STATE GetResultState()
+	{
+		if (m_PlayerHp != 0)
+		{
+			return CLEAR;
+		}
+		else
+		{
+			return FAILED;
+		}
+	}
+
 private:
 	GameDataManager();
 	~GameDataManager() = default;

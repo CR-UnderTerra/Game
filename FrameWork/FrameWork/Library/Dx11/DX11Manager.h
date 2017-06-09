@@ -6,6 +6,7 @@
 #ifndef DX11MANAGER_H
 #define DX11MANAGER_H
 #include <D3D11.h>
+#include <D3DX10.h>
 #include <Windows.h>
 #include "..\Singleton.h"
 
@@ -28,7 +29,7 @@ namespace Lib
 		 * @param[in] _hWnd DX11Managerが対応するウィンドウのハンドル
 		 * @return 初期化に成功したらtrue
 		 */
-		bool Init(HWND _hWnd);
+		bool Init(HWND _hWnd, RECT _windowSize);
 
 		/**
 		 * DX11Managerクラスの解放関数

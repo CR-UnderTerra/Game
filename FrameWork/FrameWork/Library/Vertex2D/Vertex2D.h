@@ -20,9 +20,9 @@ namespace Lib
 		 * Vertex2Dクラスのコンストラクタ
 		 * @param[in] _pDevice バッファ作成などのために利用するDirectX11のデバイス
 		 * @param[in] _pDeviceContext 描画などに利用するDirectX11のデバイスコンテキスト
-		 * @param[in] _hWnd 2dの矩形を描画するウィンドウのハンドル
+		 * @param[in] _windowSize 2dの矩形を描画するウィンドウのハンドル
 		 */
-		Vertex2D(ID3D11Device* _pDevice, ID3D11DeviceContext* _pDeviceContext, HWND _hWnd);
+		Vertex2D(ID3D11Device* _pDevice, ID3D11DeviceContext* _pDeviceContext,RECT _windowSize);
 
 		/**
 		 * Vertex2Dクラスのデストラクタ
@@ -203,7 +203,6 @@ namespace Lib
 
 		ID3D11Device* const			m_pDevice;
 		ID3D11DeviceContext* const	m_pDeviceContext;
-		HWND						m_hWnd;
 		ID3D11VertexShader*			m_pVertexShader;
 		ID3DBlob*					m_pVertexCompiledShader;
 		ID3D11InputLayout*			m_pVertexLayout;

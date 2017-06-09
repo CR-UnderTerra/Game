@@ -12,8 +12,7 @@ GameDataManager::GameDataManager() :
 m_PlayerHp(3),
 m_IsGameOver(false)
 {
-	RECT ClientRect;
-	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
+	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 
 	m_Pos[PLAYER_TARGET].x = static_cast<float>(ClientRect.right / 2);
 	m_Pos[PLAYER_TARGET].y = static_cast<float>(ClientRect.bottom / 2 + 300);

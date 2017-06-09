@@ -27,6 +27,11 @@ namespace Lib
 			return m_hInstance;
 		}
 
+		inline RECT GetWindowSize()
+		{
+			return m_WindowSize;
+		}
+
 		/**
 		 * ウィンドウの生成
 		 * @param[in] _hInstance インスタンスハンドル
@@ -55,7 +60,7 @@ namespace Lib
 			m_hInstance(NULL),
 			m_hWnd(NULL){};
 		~Window(){};
-
+		RECT	m_WindowSize;
 		HINSTANCE m_hInstance;
 		HWND m_hWnd;
 

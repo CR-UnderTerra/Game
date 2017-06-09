@@ -29,6 +29,11 @@ public:
 	~HandBase();
 
 	/**
+	 * 座標の初期化
+	 */
+	void InitPos();
+
+	/**
 	 * 制御関数
 	 */
 	virtual void Update() override = 0;

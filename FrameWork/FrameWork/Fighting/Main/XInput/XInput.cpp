@@ -63,40 +63,56 @@ void Lib::XInput::CheckButton(XINPUTPAD _pad, XINPUT_ID _buttonId, WORD _xinputB
 	}
 }
 
-Lib::PADSTATE Lib::XInput::GetButtonState(XINPUT_ID _buttonId, XINPUTPAD _pad)
+void Lib::XInput::CheckAnalogPad(XINPUTPAD _pad, XINPUT_ID _buttonId)
 {
-	return m_PadState[_pad][_buttonId];
-}
-
-bool Lib::XInput::GetAnalogState(ANALOGPAD _analogId, XINPUTPAD _pad)
-{
-	switch (_analogId)
+	auto Check = [&](bool _IsOn)
 	{
-	case ANALOG_LEFT:
-		if (m_PadControlState[_pad].State.Gamepad.sThumbLX < -CONDEADZONE)
+		if (_IsOn)
 		{
-			return true;
+			if (m_PadOldState[_pad][_buttonId] == PAD_ON)
+			{
+				m_PadState[_pad][_buttonId] = PAD_ON;
+			}
+			else
+			{
+				m_PadState[_pad][_buttonId] = PAD_PUSH;
+			}
+			m_PadOldState[_pad][_buttonId] = PAD_ON;
 		}
+		else
+		{
+			//前も入力されてたら
+			if (m_PadOldState[_pad][_buttonId] == PAD_ON)
+			{
+				m_PadState[_pad][_buttonId] = PAD_RELEASE;
+			}
+			else
+			{
+				m_PadState[_pad][_buttonId] = PAD_OFF;
+			}
+			m_PadOldState[_pad][_buttonId] = PAD_OFF;
+		}
+	};
+
+	switch (_buttonId)
+	{
+	case GAMEPAD_ANALOG_LEFT:
+		Check(m_PadControlState[_pad].State.Gamepad.sThumbLX < -CONDEADZONE);
 		break;
-	case ANALOG_RIGHT:
-		if (m_PadControlState[_pad].State.Gamepad.sThumbLX > CONDEADZONE)
-		{
-			return true;
-		}
+	case GAMEPAD_ANALOG_RIGHT:
+		Check(m_PadControlState[_pad].State.Gamepad.sThumbLX > CONDEADZONE);
 		break;
-	case ANALOG_UP:
-		if (m_PadControlState[_pad].State.Gamepad.sThumbLY > CONDEADZONE)
-		{
-			return true;
-		}
+	case GAMEPAD_ANALOG_UP:
+		Check(m_PadControlState[_pad].State.Gamepad.sThumbLY > CONDEADZONE);
 		break;
-	case ANALOG_DOWN:
-		if (m_PadControlState[_pad].State.Gamepad.sThumbLY < -CONDEADZONE)
-		{
-			return true;
-		}
+	case GAMEPAD_ANALOG_DOWN:
+		Check(m_PadControlState[_pad].State.Gamepad.sThumbLY < -CONDEADZONE);
 		break;
 	}
 
-	return false;
+}
+
+Lib::PADSTATE Lib::XInput::GetButtonState(XINPUT_ID _buttonId, XINPUTPAD _pad)
+{
+	return m_PadState[_pad][_buttonId];
 }

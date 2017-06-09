@@ -104,20 +104,53 @@
     <Filter Include="Main\SceneManager\SceneBase\ResultScene">
       <UniqueIdentifier>{d8eb5d7c-40b5-4d1b-b541-7a5797d9b96d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI">
+    <Filter Include="Main\SceneManager\SceneBase\ResultScene\ClearText">
+      <UniqueIdentifier>{9c4273b0-7f1a-424b-87e1-051abd7c03ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\ResultScene\ReturnTitleText">
+      <UniqueIdentifier>{35d21f4e-0721-4560-82bc-dd6dba53de4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\ResultScene\ContinueText">
+      <UniqueIdentifier>{ebf53598-c4be-4cfe-bca2-b3698d54cdce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI">
       <UniqueIdentifier>{14cc7c3f-3c26-4ba1-8d77-ea1f69d46c36}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\GoodText">
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI\GoodText">
       <UniqueIdentifier>{365d076f-8883-4f73-9c05-b254a74cfd63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\AmazingText">
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI\AmazingText">
       <UniqueIdentifier>{10a0a492-4132-4603-be9e-d653c392a8f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\FantasticText">
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI\FantasticText">
       <UniqueIdentifier>{581afdc0-72e0-4de9-8e21-f92daefdafdb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\ScoreBase">
+    <Filter Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI\ScoreBase">
       <UniqueIdentifier>{507c8879-b228-4615-b0da-70907ccb3ea3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\ResultScene\BackGround">
+      <UniqueIdentifier>{ab252378-64de-41fa-8664-190e10620c4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\ResultScene\TimeWindow">
+      <UniqueIdentifier>{f8b1f093-0b55-429e-a054-6320c9e4c7a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow">
+      <UniqueIdentifier>{7c78028f-a155-47a6-8f4e-0706115a843a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase">
+      <UniqueIdentifier>{2514da17-6b3b-4086-aec1-a502c52d14cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\GoodCountDisplay">
+      <UniqueIdentifier>{b2d193cc-b591-4ee3-88c9-71b1cdf2a54b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\ResultScene\ScoreWindow">
+      <UniqueIdentifier>{b0037990-90ca-4dba-b0d9-5e5f59cbeddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\FantasticCountDisplay">
+      <UniqueIdentifier>{6e177da3-06c5-4d8a-8d8f-38b0e11dc57d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\AmazingCountDisplay">
+      <UniqueIdentifier>{1d7f323d-de94-46f7-986c-2ba80f23cbdd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -211,20 +244,53 @@
     <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\ResultScene.cpp">
       <Filter>Main\SceneManager\SceneBase\ResultScene</Filter>
     </ClCompile>
-    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreDisplay.cpp">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI</Filter>
+    <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\ClearText\ClearText.cpp">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\ClearText</Filter>
     </ClCompile>
-    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\ScoreBase.cpp">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\ScoreBase</Filter>
+    <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\ReturnTitleText\ReturnTitleText.cpp">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\ReturnTitleText</Filter>
     </ClCompile>
-    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\AmazingText\AmazingText.cpp">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\AmazingText</Filter>
+    <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\ContinueText\ContinueText.cpp">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\ContinueText</Filter>
     </ClCompile>
-    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\FantasticText\FantasticText.cpp">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\FantasticText</Filter>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindow\ScoreBase\AmazingText\AmazingText.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI\AmazingText</Filter>
     </ClCompile>
-    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\GoodText\GoodText.cpp">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\GoodText</Filter>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindow\ScoreBase\FantasticText\FantasticText.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI\FantasticText</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindow\ScoreBase\GoodText\GoodText.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI\GoodText</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindow\ScoreBase\ScoreBase.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI\ScoreBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindow\ScoreWindow.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\BackGround\ResultBackGround.cpp">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\TimeWindow\TimeWindow.cpp">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\TimeWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\AmazingCountDisplay\AmazingCountDisplay.cpp">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\AmazingCountDisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\FantasticCountDisplay\FantasticCountDisplay.cpp">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\FantasticCountDisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\GoodCountDisplay\GoodCountDisplay.cpp">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\GoodCountDisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\CountDisplayBase.cpp">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\JudgeCountWindow.cpp">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\ScoreWindow\ResultScoreWindow.cpp">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\ScoreWindow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -324,20 +390,53 @@
     <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\ResultScene.h">
       <Filter>Main\SceneManager\SceneBase\ResultScene</Filter>
     </ClInclude>
-    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreDisplay.h">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI</Filter>
+    <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\ClearText\ClearText.h">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\ClearText</Filter>
     </ClInclude>
-    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\ScoreBase.h">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\ScoreBase</Filter>
+    <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\ReturnTitleText\ReturnTitleText.h">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\ReturnTitleText</Filter>
     </ClInclude>
-    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\AmazingText\AmazingText.h">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\AmazingText</Filter>
+    <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\ContinueText\ContinueText.h">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\ContinueText</Filter>
     </ClInclude>
-    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\FantasticText\FantasticText.h">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\FantasticText</Filter>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindow\ScoreBase\AmazingText\AmazingText.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI\AmazingText</Filter>
     </ClInclude>
-    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplay\ScoreBase\GoodText\GoodText.h">
-      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreDisplayUI\GoodText</Filter>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindow\ScoreBase\FantasticText\FantasticText.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI\FantasticText</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindow\ScoreBase\GoodText\GoodText.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI\GoodText</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindow\ScoreBase\ScoreBase.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI\ScoreBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindow\ScoreWindow.h">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindowUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\BackGround\ResultBackGround.h">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\TimeWindow\TimeWindow.h">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\TimeWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\AmazingCountDisplay\AmazingCountDisplay.h">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\AmazingCountDisplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\FantasticCountDisplay\FantasticCountDisplay.h">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\FantasticCountDisplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\GoodCountDisplay\GoodCountDisplay.h">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\GoodCountDisplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\CountDisplayBase.h">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\JudgeCountWindow.h">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\ScoreWindow\ResultScoreWindow.h">
+      <Filter>Main\SceneManager\SceneBase\ResultScene\ScoreWindow</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

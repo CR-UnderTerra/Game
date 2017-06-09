@@ -17,7 +17,7 @@ public:
 	LeftHand(int _textureIndex);
 
 	~LeftHand();
-	
+
 	/**
 	 * 制御関数
 	 */

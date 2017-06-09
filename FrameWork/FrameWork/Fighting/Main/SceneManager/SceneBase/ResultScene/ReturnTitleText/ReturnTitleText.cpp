@@ -1,31 +1,29 @@
 ﻿/**
- * @file   StartButton.cpp
- * @brief  StartButtonクラスの実装
+ * @file   ReturnTitleText.cpp
+ * @brief  ReturnTitleTextクラスの実装
  * @author kotani
  */
-#include "StartButton.h"
+#include "ReturnTitleText.h"
 #include "Texture/TextureManager.h"
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
 #include "DxInput/KeyBoard/KeyDevice.h"
-#include "../TitleScene.h"
+#include "../ResultScene.h"
 
-const D3DXVECTOR2 StartButton::m_Rect = D3DXVECTOR2(768, 192);
-const float StartButton::m_DisplayTime = 2.f;
+const D3DXVECTOR2 ReturnTitleText::m_Rect = D3DXVECTOR2(768, 192);
+const float ReturnTitleText::m_DisplayTime = 1.5f;
 
 
-StartButton::StartButton(int _textureIndex) :
+ReturnTitleText::ReturnTitleText(int _textureIndex) :
 m_TextureIndex(_textureIndex),
-m_Alpha(0),
-m_IsAddAlpha(true),
-m_IsButtonEnable(false)
+m_IsSelect(false)
 {
 	RECT ClientRect;
 	GetClientRect(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle(), &ClientRect);
 	m_Pos = D3DXVECTOR2(static_cast<float>(ClientRect.right / 2), static_cast<float>(ClientRect.bottom / 2));
-	m_Pos.y = 638.f;
+	m_Pos.y = static_cast<float>(ClientRect.bottom) - 160.f;
 	m_pUvController = new Lib::AnimUvController();
-	m_pUvController->LoadAnimation("Resource/Text.anim", "l_button");
+	m_pUvController->LoadAnimation("Resource/Text.anim", "l_return");
 
 	m_pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
@@ -34,12 +32,11 @@ m_IsButtonEnable(false)
 	m_pVertex->Init(&m_Rect, m_pUvController->GetUV());
 	m_pVertex->SetTexture(
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
-
 	m_AddAlphaValue = 1.f / (m_DisplayTime * 60);
 }
 
 
-StartButton::~StartButton()
+ReturnTitleText::~ReturnTitleText()
 {
 	if (m_pVertex != NULL)
 	{
@@ -57,7 +54,7 @@ StartButton::~StartButton()
 // Public Functions
 //----------------------------------------------------------------------------------------------------
 
-bool StartButton::Update()
+bool ReturnTitleText::Update()
 {
 	if (m_IsAddAlpha)
 	{
@@ -65,7 +62,15 @@ bool StartButton::Update()
 	}
 	else
 	{
-		m_Alpha -= m_AddAlphaValue;
+		if (m_IsSelect)
+		{
+			m_Alpha -= m_AddAlphaValue;
+		}
+		else
+		{
+			m_Alpha = 1.f;
+		}
+
 	}
 
 	if (m_Alpha >= 1.f)
@@ -74,20 +79,20 @@ bool StartButton::Update()
 		m_IsButtonEnable = true;
 		m_IsAddAlpha = false;
 	}
-	else if (m_Alpha <= 0.2f)
+	else if (m_Alpha <= 0.3f)
 	{
-		m_Alpha = 0.2f;
+		m_Alpha = 0.3f;
 		m_IsAddAlpha = true;
 	}
 
-	if (TitleScene::KeyCheck())
+	if (ResultScene::KeyCheck())
 	{
 		m_Alpha = 1.f;
 	}
 	return m_IsButtonEnable;
 }
 
-void StartButton::Draw()
+void ReturnTitleText::Draw()
 {
-	m_pVertex->Draw(&m_Pos, m_pUvController->GetUV(),m_Alpha);
+	m_pVertex->Draw(&m_Pos, m_pUvController->GetUV(), m_Alpha);
 }

@@ -20,8 +20,8 @@ TitleScene::TitleScene() :
 SceneBase(SCENE_TITLE)
 {
 	InitLibrary();
-	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/BlackOut.png",&m_BlackOutTextureIndex);
-	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/TitleText.png", &m_TextTextureIndex);
+	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/BlackOut.png", &m_BlackOutTextureIndex);
+	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/Text.png", &m_TextTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/TitleBackGround.png", &m_BackGroundTextureIndex);
 
 	m_pTitleBackGround = new TitleBackGround(m_BackGroundTextureIndex);
@@ -48,18 +48,15 @@ SceneBase::SceneID TitleScene::Update()
 {
 	KeyUpdate();
 
-	if (m_pTitleBackGround->Update())
+	// alpha値が1になると次の絵を描画するので
+	// alpha値が1になるとtrueになって次の処理をするようにする
+	if (!m_pTitleBackGround->Update()) return m_SceneID;
+	if (!m_pTitleText->Update()) return m_SceneID;
+	if (!m_pStartButton->Update()) return m_SceneID;
+
+	if (KeyCheck())
 	{
-		if (m_pTitleText->Update())
-		{
-			if (m_pStartButton->Update())
-			{
-				if (KeyCheck())
-				{
-					m_SceneID = SCENE_GAME;
-				}
-			}
-		}
+		m_SceneID = SCENE_GAME;
 	}
 	return m_SceneID;
 }
@@ -72,7 +69,25 @@ void TitleScene::Draw()
 	m_pStartButton->Draw();
 	m_pTitleText->Draw();
 	SINGLETON_INSTANCE(Lib::DX11Manager).EndScene();
+}
 
+bool TitleScene::KeyCheck()
+{
+	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_Z] == Lib::KEY_RELEASE ||
+		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_X] == Lib::KEY_RELEASE ||
+		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_C] == Lib::KEY_RELEASE ||
+		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_SPACE] == Lib::KEY_RELEASE ||
+		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_RETURN] == Lib::KEY_RELEASE ||
+		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_X,Lib::GAMEPAD1) == Lib::PAD_RELEASE ||
+		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_Y, Lib::GAMEPAD1) == Lib::PAD_RELEASE ||
+		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_B, Lib::GAMEPAD1) == Lib::PAD_RELEASE)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 
@@ -143,25 +158,14 @@ void TitleScene::ReleaseLibrary()
 void TitleScene::KeyUpdate()
 {
 	SINGLETON_INSTANCE(Lib::KeyDevice).Update();
+	SINGLETON_INSTANCE(Lib::XInput).Update(Lib::GAMEPAD1);
+	SINGLETON_INSTANCE(Lib::XInput).CheckButton(Lib::GAMEPAD1,Lib::GAMEPAD_X,XINPUT_GAMEPAD_X);
+	SINGLETON_INSTANCE(Lib::XInput).CheckButton(Lib::GAMEPAD1, Lib::GAMEPAD_Y, XINPUT_GAMEPAD_Y);
+	SINGLETON_INSTANCE(Lib::XInput).CheckButton(Lib::GAMEPAD1, Lib::GAMEPAD_B, XINPUT_GAMEPAD_B);
+
 	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_Z);
 	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_X);
 	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_C);
 	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_SPACE);
 	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_RETURN);
-}
-
-bool TitleScene::KeyCheck()
-{
-	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_Z] == Lib::KEY_RELEASE ||
-		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_X] == Lib::KEY_RELEASE ||
-		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_C] == Lib::KEY_RELEASE ||
-		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_SPACE] == Lib::KEY_RELEASE ||
-		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_RETURN] == Lib::KEY_RELEASE)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
 }

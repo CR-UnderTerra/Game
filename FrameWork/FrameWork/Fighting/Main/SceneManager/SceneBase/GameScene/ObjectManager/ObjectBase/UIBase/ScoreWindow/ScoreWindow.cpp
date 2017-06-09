@@ -1,23 +1,23 @@
 ﻿/**
- * @file   ScoreDisplay.cpp
- * @brief  ScoreDisplayクラスの実装
+ * @file   ScoreWindow.cpp
+ * @brief  ScoreWindowクラスの実装
  * @author kotani
  */
-#include "ScoreDisplay.h"
+#include "ScoreWindow.h"
 #include "ScoreBase/GoodText/GoodText.h"
 #include "ScoreBase/AmazingText/AmazingText.h"
 #include "ScoreBase/FantasticText/FantasticText.h"
 
 
-ScoreDisplay::ScoreDisplay(int _textureIndex)
+ScoreWindow::ScoreWindow(int _textureIndex)
 {
-	m_Pos = D3DXVECTOR2(100,600);
-	m_pScoreBase[0] = new GoodText(_textureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y - 104.f));
+	m_Pos = D3DXVECTOR2(120,500);
+	m_pScoreBase[0] = new GoodText(_textureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y + 124.f));
 	m_pScoreBase[1] = new AmazingText(_textureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y));
-	m_pScoreBase[2] = new FantasticText(_textureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y + 104.f));
+	m_pScoreBase[2] = new FantasticText(_textureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y - 124.f));
 }
 
-ScoreDisplay::~ScoreDisplay()
+ScoreWindow::~ScoreWindow()
 {
 	for (int i = m_pScoreBase.size() - 1; i >= 0; i--)
 	{
@@ -31,7 +31,7 @@ ScoreDisplay::~ScoreDisplay()
 // Public Functions
 //----------------------------------------------------------------------------------------------------
 
-void ScoreDisplay::Update()
+void ScoreWindow::Update()
 {
 	for (unsigned int i = 0; i < m_pScoreBase.size(); i++)
 	{
@@ -39,7 +39,7 @@ void ScoreDisplay::Update()
 	}
 }
 
-void ScoreDisplay::Draw()
+void ScoreWindow::Draw()
 {
 	for (unsigned int i = 0; i < m_pScoreBase.size(); i++)
 	{

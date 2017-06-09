@@ -25,11 +25,19 @@ public:
 		TARGET_MAX
 	};
 
-	struct RESULT
+	enum RESULT_STATE
+	{
+		CLEAR,
+		FAILED
+	};
+	
+	struct RESULT_SCORE
 	{
 		int GoodCount,AmazingCount,FantasticCount;
-		int Time;
+		int Minute,Second;
 	};
+
+
 
 	void Init();
 
@@ -69,7 +77,7 @@ public:
 		m_Result.FantasticCount++;
 	}
 
-	inline RESULT GetResult()
+	inline RESULT_SCORE GetResult()
 	{
 		return m_Result;
 	}
@@ -114,6 +122,12 @@ public:
 		return m_Pos[_target];
 	}
 
+	inline void SetClearTime(int _minute,int _second)
+	{
+		m_Result.Second = _second;
+		m_Result.Minute = _minute;
+	}
+
 	/**
 	 * ゲームオーバーかのフラグを取得する
 	 */
@@ -122,15 +136,20 @@ public:
 		return m_IsGameOver;
 	}
 
+	inline bool SetIsGameOver(bool _IsGameOver)
+	{
+		m_IsGameOver = _IsGameOver;
+	}
+
 private:
 	GameDataManager();
 	~GameDataManager() = default;
-
 	DistanceGaugeUI* m_pDistanceGaugeUI;
 	ScoreUI*		 m_pScoreUI;
 	int				 m_PlayerHp;
 	D3DXVECTOR2		 m_Pos[TARGET_MAX];
-	RESULT			 m_Result;
+	RESULT_SCORE     m_Result;
+	RESULT_STATE	 m_ResultState;
 	bool			 m_IsGameOver;
 
 };

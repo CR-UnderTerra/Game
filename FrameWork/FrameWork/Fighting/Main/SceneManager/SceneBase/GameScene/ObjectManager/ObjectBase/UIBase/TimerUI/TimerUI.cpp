@@ -7,6 +7,7 @@
 #include "Texture/TextureManager.h"
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
+#include "../../../../../GameDataManager/GameDataManager.h"
 
 
 TimerUI::TimerUI() :
@@ -63,6 +64,7 @@ void TimerUI::Update()
 	m_NumVertex[1].pUvController->SetAnimCount(m_Minute % 10);
 	m_NumVertex[2].pUvController->SetAnimCount((m_Second / 10) % 10);
 	m_NumVertex[3].pUvController->SetAnimCount(m_Second % 10);
+	SINGLETON_INSTANCE(GameDataManager).SetClearTime(m_Minute, m_Second);
 }
 
 void TimerUI::Draw()

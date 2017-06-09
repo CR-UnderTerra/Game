@@ -7,9 +7,12 @@
 #include "Texture/TextureManager.h"
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
+#include "DxInput/KeyBoard/KeyDevice.h"
+#include "../TitleScene.h"
 
 const D3DXVECTOR2 TitleBackGround::m_Rect = D3DXVECTOR2(1920, 1080);
 const float TitleBackGround::m_DisplayTime = 2.f;
+
 
 TitleBackGround::TitleBackGround(int _textureIndex) :
 m_TextureIndex(_textureIndex),
@@ -58,6 +61,11 @@ bool TitleBackGround::Update()
 	{
 		m_Alpha = 1.f;
 		return true;
+	}
+
+	if (TitleScene::KeyCheck())
+	{
+		m_Alpha = 1.f;
 	}
 	return false;
 }

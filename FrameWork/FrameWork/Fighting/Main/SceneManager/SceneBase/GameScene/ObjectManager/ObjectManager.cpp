@@ -12,7 +12,7 @@
 #include "ObjectBase/UIBase/HpGaugeUI/HpGaugeUI.h"
 #include "ObjectBase/UIBase/TimerUI/TimerUI.h"
 #include "ObjectBase/GameObjectBase/EnemyManager/EnemyManager.h"
-#include "ObjectBase/UIBase/ScoreDisplay/ScoreDisplay.h"
+#include "ObjectBase/UIBase/ScoreWindow/ScoreWindow.h"
 
 
 ObjectManager::ObjectManager()
@@ -29,7 +29,7 @@ ObjectManager::ObjectManager()
 
 	m_pUIBase.push_back(new DistanceGaugeUI(m_TextureIndex1));
 	m_pUIBase.push_back(new HpGaugeUI(m_TextureIndex1));
-	m_pUIBase.push_back(new ScoreDisplay(m_TextureIndex1));
+	m_pUIBase.push_back(new ScoreWindow(m_TextureIndex1));
 	m_pUIBase.push_back(new TimerUI());
 }
 

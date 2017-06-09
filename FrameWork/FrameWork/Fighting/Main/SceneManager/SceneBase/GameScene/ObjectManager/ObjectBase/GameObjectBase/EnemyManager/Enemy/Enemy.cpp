@@ -178,17 +178,16 @@ void Enemy::Update()
 			m_LeftEnemyHits = false;
 			m_pLeftEnemyCollisionData->SetEnable(true);
 		}
-		else if (m_EnemyLoad[m_CenterEnemyCount][1] > 0)
+		if (m_EnemyLoad[m_CenterEnemyCount][1] > 0)
 		{
 			m_CenterEnemyHits = false;
 			m_pCenterEnemyCollisionData->SetEnable(true);
 		}
-		else if (m_EnemyLoad[m_RightEnemyCount][2] > 0)
+		if (m_EnemyLoad[m_RightEnemyCount][2] > 0)
 		{
 			m_RightEnemyHits = false;
 			m_pRightEnemyCollisionData->SetEnable(true);
 		}
-		
 	}
 
 	Hit();

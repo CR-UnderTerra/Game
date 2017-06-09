@@ -21,10 +21,10 @@ namespace Lib
 
 	enum XINPUT_ID
 	{
-		GAMEPAD_DANALOG_UP,
-		GAMEPAD_DANALOG_DOWN,
-		GAMEPAD_DANALOG_LEFT,
-		GAMEPAD_DANALOG_RIGHT,
+		GAMEPAD_ANALOG_UP,
+		GAMEPAD_ANALOG_DOWN,
+		GAMEPAD_ANALOG_LEFT,
+		GAMEPAD_ANALOG_RIGHT,
 		GAMEPAD_START,
 		GAMEPAD_BACK,
 		GAMEANALOG_LEFT_THUMB,
@@ -55,15 +55,6 @@ namespace Lib
 		PAD_OFF
 	};
 
-	enum ANALOGPAD
-	{
-		ANALOG_LEFT,
-		ANALOG_RIGHT,
-		ANALOG_UP,
-		ANALOG_DOWN,
-		ANALOG_MAX
-	};
-
 	class XInput
 	{
 		friend Lib::Singleton<XInput>;
@@ -82,20 +73,14 @@ namespace Lib
 		*/
 		void CheckButton(XINPUTPAD _pad, XINPUT_ID _buttonId, WORD _xinputButton);
 
+		void CheckAnalogPad(XINPUTPAD _pad, XINPUT_ID _buttonId);
+
 		/**
 		* GamePadのボタンの状態を取得する
 		* @param[in] id チェックするボタン
 		* @param[in] pad チェックするGamePad
 		*/
 		PADSTATE GetButtonState(XINPUT_ID _buttonId, XINPUTPAD _pad);
-
-		/**
-		* スティックの状態を取得する関数
-		* @param[in] id チェックするスティック
-		* @param[in] pad チェックするGamePad
-		* @return スティックの状態
-		*/
-		bool GetAnalogState(ANALOGPAD _analogId, XINPUTPAD _pad);
 
 	private:
 		/**
@@ -111,7 +96,6 @@ namespace Lib
 		CONTROLER_STATE m_PadControlState[GAMEANALOG_MAX];
 		PADSTATE m_PadOldState[GAMEANALOG_MAX][XINPUT_IDMAX];
 		PADSTATE m_PadState[GAMEANALOG_MAX][XINPUT_IDMAX];
-
 	};
 }
 

@@ -50,3 +50,13 @@ HandBase::~HandBase()
 	delete m_pAnimUvController;
 	m_pAnimUvController = NULL;
 }
+
+
+//----------------------------------------------------------------------------------------------------
+// Public Functions
+//----------------------------------------------------------------------------------------------------
+
+void HandBase::InitPos()
+{
+	m_Pos = m_StartPos;
+}

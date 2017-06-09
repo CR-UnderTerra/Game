@@ -1,6 +1,6 @@
 ﻿/**
- * @file   ScoreDisplay.h
- * @brief  ScoreDisplayクラスのヘッダファイル
+ * @file   ScoreWindow.h
+ * @brief  ScoreWindowクラスのヘッダファイル
  * @author kotani
  */
 #ifndef SCOREDISPLAY_H
@@ -9,18 +9,18 @@
 #include <array>
 class ScoreBase;
 
-class ScoreDisplay : public UIBase
+class ScoreWindow : public UIBase
 {
 public:
 	/**
 	 * コンストラクタ
 	 */
-	ScoreDisplay(int _textureIndex);
+	ScoreWindow(int _textureIndex);
 
 	/**
 	 * デストラクタ
 	 */
-	~ScoreDisplay();
+	~ScoreWindow();
 
 	/**
 	 * 制御関数

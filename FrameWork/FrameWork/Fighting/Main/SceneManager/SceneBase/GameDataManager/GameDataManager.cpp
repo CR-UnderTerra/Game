@@ -30,6 +30,8 @@ m_IsGameOver(false)
 	m_Result.AmazingCount = 0;
 	m_Result.FantasticCount = 0;
 	m_Result.GoodCount = 0;
+	m_Result.Second = 0;
+	m_Result.Minute = 0;
 }
 
 
@@ -43,6 +45,8 @@ void GameDataManager::Init()
 	m_Result.AmazingCount = 0;
 	m_Result.FantasticCount = 0;
 	m_Result.GoodCount = 0;
+	m_Result.Second = 0;
+	m_Result.Minute= 0;
 	m_IsGameOver = false;
 }
 
@@ -50,6 +54,7 @@ void GameDataManager::Update()
 {
 	if (m_PlayerHp == 0)
 	{
+		m_ResultState = FAILED;
 		m_IsGameOver = true;
 	}
 }

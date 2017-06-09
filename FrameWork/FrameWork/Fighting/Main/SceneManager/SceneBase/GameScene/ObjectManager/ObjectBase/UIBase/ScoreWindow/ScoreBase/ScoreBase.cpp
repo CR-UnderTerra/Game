@@ -7,10 +7,10 @@
 ScoreBase::ScoreBase(D3DXVECTOR2* _pos,LPCTSTR _animName, int _textureIndex) :
 m_TextureIndex(_textureIndex)
 {
-	InitVertex(_pos, &D3DXVECTOR2(150, 64), _animName, &m_Vertex);
-	InitVertex(&D3DXVECTOR2(_pos->x + 98, _pos->y), &D3DXVECTOR2(30, 64), "u_feed", &m_NumSymbolVertex);
-	InitVertex(&D3DXVECTOR2(_pos->x + 130, _pos->y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[0]);
-	InitVertex(&D3DXVECTOR2(_pos->x + 160, _pos->y), &D3DXVECTOR2(30, 64), "Number", &m_NumVertex[1]);
+	InitVertex(_pos, &D3DXVECTOR2(200, 32), _animName, &m_Vertex);
+	InitVertex(&D3DXVECTOR2(_pos->x + 78.f, _pos->y + 37.f), &D3DXVECTOR2(30 * 0.7f, 64 * 0.7f), "u_feed", &m_NumSymbolVertex);
+	InitVertex(&D3DXVECTOR2(_pos->x + 110.f, _pos->y + 37.f), &D3DXVECTOR2(30 * 0.7f, 64 * 0.7f), "Number", &m_NumVertex[0]);
+	InitVertex(&D3DXVECTOR2(_pos->x + 140.f, _pos->y + 37.f), &D3DXVECTOR2(30 * 0.7f, 64 * 0.7f), "Number", &m_NumVertex[1]);
 }
 
 ScoreBase::~ScoreBase()

@@ -105,16 +105,22 @@ void Player::KnifeCatchControl()
 		if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_Z] == Lib::KEY_RELEASE ||
 			SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_X, Lib::GAMEPAD1) == Lib::PAD_RELEASE)
 		{
+			m_pHandBase[0]->InitPos();
+			m_pHandBase[1]->InitPos();
 			ThrowControl(GameDataManager::LEFT_ENEMY_TARGET);
 		}
 		else if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_X] == Lib::KEY_RELEASE ||
 			SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_Y, Lib::GAMEPAD1) == Lib::PAD_RELEASE)
 		{
+			m_pHandBase[0]->InitPos();
+			m_pHandBase[1]->InitPos();
 			ThrowControl(GameDataManager::FRONT_ENEMY_TARGET);
 		}
 		else if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_C] == Lib::KEY_RELEASE || 
 			SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_B, Lib::GAMEPAD1) == Lib::PAD_RELEASE)
 		{
+			m_pHandBase[0]->InitPos();
+			m_pHandBase[1]->InitPos();
 			ThrowControl(GameDataManager::RIGHT_ENEMY_TARGET);
 		}
 	}

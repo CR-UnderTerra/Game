@@ -38,6 +38,12 @@ public:
 	 */
 	void Draw() override;
 
+	/**
+	 * 設定したキーが押されたか
+	 * @return 押されたらtrue
+	 */
+	static bool KeyCheck();
+
 private:
 	TitleScene(const TitleScene&);
 	void operator=(const TitleScene&);
@@ -56,12 +62,6 @@ private:
 	 * キーボードの状態更新
 	 */
 	void KeyUpdate();
-
-	/**
-	 * 設定したキーが押されたか
-	 * @return 押されたらtrue
- 	 */
-	bool KeyCheck();
 
 	TitleBackGround* m_pTitleBackGround;
 	TitleText*		 m_pTitleText;

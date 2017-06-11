@@ -10,7 +10,7 @@
 #include "Sound/DSoundManager.h"
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "DxInput/DXInputDevice.h"
-#include "../../../XInput/XInput.h"
+#include "XInput/XInput.h"
 #include "BackGround/ResultBackGround.h"
 #include "ClearText/ClearText.h"
 #include "ContinueText/ContinueText.h"
@@ -22,7 +22,6 @@
 ResultScene::ResultScene() :
 SceneBase(SCENE_RESULT)
 {
-	InitLibrary();
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/Text.png", &m_TextTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/TitleBackGround.png", &m_BackGroundTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png", &m_TextureIndex);
@@ -61,7 +60,7 @@ ResultScene::~ResultScene()
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_BackGroundTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextTextureIndex);
-	ReleaseLibrary();
+	SINGLETON_INSTANCE(Lib::TextureManager).Release();
 }
 
 

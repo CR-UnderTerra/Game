@@ -9,7 +9,7 @@
 #include "Dx11/DX11Manager.h"
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "Window/Window.h"
-#include "../../../../../../../../../XInput/XInput.h"
+#include "XInput/XInput.h"
 
 RightHand::RightHand(int _textureIndex) :
 HandBase(&D3DXVECTOR2(0, 0), "h_right", _textureIndex)

@@ -21,7 +21,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
-    <CLRSupport>true</CLRSupport>
+    <CLRSupport>false</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -29,7 +29,7 @@
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <CLRSupport>true</CLRSupport>
+    <CLRSupport>false</CLRSupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -54,6 +54,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)DebugLib;$(DXSDK_DIR)\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Library.lib;winmm.lib;d3d11.lib;d3dx11.lib;d3dx10.lib;dxguid.lib;dinput8.lib;dsound.lib;strmiids.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <NoEntryPoint>false</NoEntryPoint>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -109,7 +110,6 @@
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\Player\Player.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\Player\HandBase\RightHand\RightHand.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\TimerUI\TimerUI.cpp" />
-    <ClCompile Include="Main\XInput\XInput.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleBackGround\TitleBackGround.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\StartButton\StartButton.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleText\TitleText.cpp" />
@@ -159,7 +159,6 @@
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\Player\HandBase\RightHand\RightHand.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\UIBase.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\TimerUI\TimerUI.h" />
-    <ClInclude Include="Main\XInput\XInput.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\TitleBackGround\TitleBackGround.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\StartButton\StartButton.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\TitleText\TitleText.h" />

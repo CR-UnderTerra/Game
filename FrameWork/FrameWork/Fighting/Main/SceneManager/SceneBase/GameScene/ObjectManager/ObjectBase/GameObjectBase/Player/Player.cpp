@@ -10,7 +10,7 @@
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "../KnifeManager/KnifeManager.h"
 #include "../../../../CollisionManager/CollisionManager.h"
-#include "../../../../../../../XInput/XInput.h"
+#include "XInput/XInput.h"
 
 const D3DXVECTOR2 Player::m_RectCollision = D3DXVECTOR2(100, 230);
 

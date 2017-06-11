@@ -6,7 +6,7 @@
 #include "LeftHand.h"
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "Window/Window.h"
-#include "../../../../../../../../../XInput/XInput.h"
+#include "XInput/XInput.h"
 
 
 LeftHand::LeftHand(int _textureIndex) :

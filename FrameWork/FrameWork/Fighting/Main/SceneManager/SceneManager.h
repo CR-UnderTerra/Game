@@ -16,9 +16,8 @@ class SceneManager
 public:
 	/**
 	 * コンストラクタ
-	 * @param[in] _hwnd ゲームを動作させるウィンドウのハンドル
 	 */
-	SceneManager(HWND _hwnd);
+	SceneManager();
 	
 	/**
 	 * デストラクタ

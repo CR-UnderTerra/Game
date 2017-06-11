@@ -10,7 +10,7 @@
 #include "Sound/DSoundManager.h"
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "DxInput/DXInputDevice.h"
-#include "../../../XInput/XInput.h"
+#include "XInput/XInput.h"
 #include "TitleBackGround/TitleBackGround.h"
 #include "StartButton/StartButton.h"
 #include "TitleText/TitleText.h"
@@ -19,7 +19,6 @@
 TitleScene::TitleScene() :
 SceneBase(SCENE_TITLE)
 {
-	InitLibrary();
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/BlackOut.png", &m_BlackOutTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/Text.png", &m_TextTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/TitleBackGround.png", &m_BackGroundTextureIndex);
@@ -37,7 +36,7 @@ TitleScene::~TitleScene()
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_BackGroundTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_BlackOutTextureIndex);
-	ReleaseLibrary();
+	SINGLETON_INSTANCE(Lib::TextureManager).Release();
 }
 
 //----------------------------------------------------------------------------------------------------

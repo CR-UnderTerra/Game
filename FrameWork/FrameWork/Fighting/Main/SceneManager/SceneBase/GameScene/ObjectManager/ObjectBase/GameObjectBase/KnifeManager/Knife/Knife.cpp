@@ -64,8 +64,9 @@ void Knife::Update()
 	if (!m_IsThrow) return;
 	if (!m_IsCatch)
 	{
-		m_Pos.x += m_Velocity * -cos(m_Angle);
-		m_Pos.y -= m_Velocity * sin(m_Angle);
+		float test = D3DXToDegree(m_Angle);
+		m_Pos.x += m_Velocity * cos(m_Angle);
+		m_Pos.y += m_Velocity * sin(m_Angle);
 		m_Scale += m_ScaleAddValue;
 		m_TargetDistance -= m_Velocity;
 	}
@@ -93,7 +94,7 @@ void Knife::Throw(D3DXVECTOR2* _pos, GameDataManager::TARGET _target, float _arr
 	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 
 	D3DXVECTOR2 pos = SINGLETON_INSTANCE(GameDataManager).GetPos(m_Target);
-	m_Angle = atan2(_pos->y - pos.y, _pos->x - pos.x);
+	m_Angle = atan2(pos.y - _pos->y, pos.x - _pos->x);
 	m_TargetDistance = sqrt(pow(_pos->x - pos.x, 2) + pow(_pos->y - pos.y, 2));
 
 	m_Velocity = m_TargetDistance / m_ArriveFrame;

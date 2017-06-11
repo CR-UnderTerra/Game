@@ -8,15 +8,16 @@
 #include "SceneFactory\SceneFactory.h"
 #include "DebugTool/DebugTimer.h"
 #include "SceneBase/GameDataManager/GameDataManager.h"
+#include "Window/Window.h"
 
 
-SceneManager::SceneManager(HWND _hwnd) :
+SceneManager::SceneManager() :
 m_pScene(NULL),
 m_State(SCENE_CREATE),
 m_NextSceneID(SceneBase::SCENE_TITLE),
-m_hWnd(_hwnd),
 m_IsGameEnd(false)
 {
+	m_hWnd = SINGLETON_INSTANCE(Lib::Window).GetWindowHandle();
 	SINGLETON_CREATE(GameDataManager);
 }
 

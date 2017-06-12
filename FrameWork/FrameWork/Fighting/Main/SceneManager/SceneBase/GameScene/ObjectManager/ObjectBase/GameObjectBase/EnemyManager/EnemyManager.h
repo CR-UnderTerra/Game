@@ -37,13 +37,6 @@ public:
 
 	static const int		m_EnemyMax; //!< 敵の最大出現数.
 
-	//void SetEnemyLoad(int _column, int _row);
-
-	int GetEnemyLoad(int _column, int _row)
-	{
-		return m_EnemyLoad[_column][_row];
-	}
-
 private:
 	/**
 	* コンストラクタ
@@ -71,6 +64,9 @@ private:
 	D3DXVECTOR2					   m_PosRight;
 	D3DXVECTOR2					   m_PosLeft;
 
+	float						   m_LeftEnemyCrowdAlfa;
+	float						   m_CenterEnemyCrowdAlfa;
+	float						   m_RightEnemyCrowdAlfa;
 };
 
 #endif // !ENEMYMANAGER_H

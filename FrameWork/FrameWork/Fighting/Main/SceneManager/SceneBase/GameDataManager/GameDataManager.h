@@ -153,6 +153,33 @@ public:
 		}
 	}
 
+	void SetLeftEnemyCrowdAlfa(float _alfa)
+	{
+		m_LeftEnemyCrowdAlfa = _alfa;
+	}
+	float GetLeftEnemyCrowdAlfa()
+	{
+		return m_LeftEnemyCrowdAlfa;
+	}
+
+	void SetCenterEnemyCrowdAlfa(float _alfa)
+	{
+		m_CenterEnemyCrowdAlfa = _alfa;
+	}
+	float GetCenterEnemyCrowdAlfa()
+	{
+		return m_CenterEnemyCrowdAlfa;
+	}
+	
+	void SetRightEnemyCrowdAlfa(float _alfa)	
+	{
+		m_RightEnemyCrowdAlfa = _alfa;
+	}
+	float GetRightEnemyCrowdAlfa()
+	{
+		return m_RightEnemyCrowdAlfa;
+	}
+
 private:
 	GameDataManager();
 	~GameDataManager() = default;
@@ -163,6 +190,10 @@ private:
 	RESULT_SCORE     m_Result;
 	RESULT_STATE	 m_ResultState;
 	bool			 m_IsGameOver;
+
+	float			 m_LeftEnemyCrowdAlfa;
+	float			 m_CenterEnemyCrowdAlfa;
+	float			 m_RightEnemyCrowdAlfa;
 
 };
 

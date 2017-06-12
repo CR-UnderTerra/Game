@@ -166,9 +166,6 @@
     <ClCompile Include="Main\SceneManager\SceneManager.cpp">
       <Filter>Main\SceneManager</Filter>
     </ClCompile>
-    <ClCompile Include="Main\Main.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectManager.cpp">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager</Filter>
     </ClCompile>
@@ -285,6 +282,9 @@
     </ClCompile>
     <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\ScoreWindow\ResultScoreWindow.cpp">
       <Filter>Main\SceneManager\SceneBase\ResultScene\ScoreWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\Main.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

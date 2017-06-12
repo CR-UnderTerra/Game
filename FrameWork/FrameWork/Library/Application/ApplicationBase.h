@@ -28,7 +28,7 @@ namespace Lib
 		/**
 		 * ライブラリの初期化
 		 */
-		void InitLib();
+		void InitLib(HWND _hWnd);
 
 		/**
 		 * ライブラリの解放

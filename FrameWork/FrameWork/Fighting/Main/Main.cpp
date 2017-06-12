@@ -14,6 +14,7 @@ public:
 	void Init()
 	{
 		SINGLETON_INSTANCE(Lib::Window).DispWindow(WINDOW_WIDTH, WINDOW_HEIGHT, TEXT("私の愛を受け取って"));
+		InitLib(SINGLETON_INSTANCE(Lib::Window).GetWindowHandle());
 		m_pSceneManager = new SceneManager();
 	};
 
@@ -21,6 +22,7 @@ public:
 	{
 		delete m_pSceneManager;
 		m_pSceneManager = NULL;
+		ReleaseLib();
 	};
 
 	bool MainLoop()

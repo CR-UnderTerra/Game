@@ -7,6 +7,7 @@
 #include "../../../../../CollisionManager/CollisionManager.h"
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "../../KnifeManager/KnifeManager.h"
+//#include "../EnemyManager.h"
 
 const D3DXVECTOR2 Enemy::m_Rect = D3DXVECTOR2(128, 256);
 
@@ -29,11 +30,21 @@ m_AttackInterval(0.f),
 m_AttackTime(0.f),
 m_Action(WAIT),
 m_AttackEnemy(NOT_ENEMY_ATTACK),
+m_LeftEnemyAnimName("e_wait"),
+m_CenterEnemyAnimName("e_wait"),
+m_RightEnemyAnimName("e_wait"),
+m_LeftEnemyCrowdAlfa(1.f),
+m_CenterEnemyCrowdAlfa(1.f),
+m_RightEnemyCrowdAlfa(1.f),
 m_PosLeft{ (760), (576) },			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 m_PosCenter{ (960), (576) },		//“G‚ÌoŒ»ˆÊ’u(‰¼)
 m_PosRight{ (1160), (576) }			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 {
 	EnemyLoad("Resource/EnemyPos.csv");
+
+	SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
+	SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
+	SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
 
 	m_pEnemyExplosionUvController = new Lib::AnimUvController();
 	m_pEnemyExplosionUvController->LoadAnimation("Resource/test_001.anim", "e_bom_a");
@@ -62,6 +73,9 @@ m_PosRight{ (1160), (576) }			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 		m_pLeftEnemyVertex->Init(&m_Rect, m_pLeftEnemyUvController->GetUV());
 		m_pLeftEnemyVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
+
+		m_pLeftEnemyUvController->LoadAnimation("Resource/test_001.anim", m_LeftEnemyAnimName);
+
 		m_LeftEnemyHitState = m_pLeftEnemyCollisionData->GetCollisionState().HitState;
 
 		//EnemyPosInit(m_pLeftEnemyCollisionData, m_PosLeft, m_pLeftEnemyVertex, m_LeftEnemyHitState);
@@ -83,6 +97,8 @@ m_PosRight{ (1160), (576) }			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 		m_pCenterEnemyVertex->Init(&m_Rect, m_pCenterEnemyUvController->GetUV());
 		m_pCenterEnemyVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
+		m_pCenterEnemyUvController->LoadAnimation("Resource/test_001.anim", m_CenterEnemyAnimName);
+
 		m_CenterEnemyHitState = m_pCenterEnemyCollisionData->GetCollisionState().HitState;
 		
 		//EnemyPosInit(m_pCenterEnemyCollisionData, m_PosCenter, m_pCenterEnemyVertex, m_CenterEnemyHitState);
@@ -104,6 +120,8 @@ m_PosRight{ (1160), (576) }			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 		m_pRightEnemyVertex->Init(&m_Rect, m_pRightEnemyUvController->GetUV());
 		m_pRightEnemyVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
+		m_pRightEnemyUvController->LoadAnimation("Resource/test_001.anim", m_RightEnemyAnimName);
+
 		m_RightEnemyHitState = m_pRightEnemyCollisionData->GetCollisionState().HitState;
 	
 		//EnemyPosInit(m_pRightEnemyCollisionData, m_PosRight, m_pRightEnemyVertex, m_RightEnemyHitState);
@@ -158,7 +176,9 @@ void Enemy::Update()
 {
 	CollisionControl();
 
-	if (m_CenterEnemyHits == true && m_LeftEnemyHits == true && m_RightEnemyHits == true && m_HitInterval == HITINTERVAL)
+	if ((m_EnemyLoad[m_LeftEnemyCount][0] == 0) && 
+		(m_EnemyLoad[m_CenterEnemyCount][1] == 0) && 
+		(m_EnemyLoad[m_RightEnemyCount][2] == 0) )
 	{
 		if (m_LeftEnemyCount > 0)
 		{
@@ -175,18 +195,29 @@ void Enemy::Update()
 		
 		if (m_EnemyLoad[m_LeftEnemyCount][0] > 0)
 		{
-			m_LeftEnemyHits = false;
+			//m_LeftEnemyHits = false;
 			m_pLeftEnemyCollisionData->SetEnable(true);
+
+			m_LeftEnemyCrowdAlfa = 1.f;
+			SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
 		}
-		else if (m_EnemyLoad[m_CenterEnemyCount][1] > 0)
+		
+		if (m_EnemyLoad[m_CenterEnemyCount][1] > 0)
 		{
-			m_CenterEnemyHits = false;
+			//m_CenterEnemyHits = false;
 			m_pCenterEnemyCollisionData->SetEnable(true);
+
+			m_CenterEnemyCrowdAlfa = 1.f;
+			SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
 		}
-		else if (m_EnemyLoad[m_RightEnemyCount][2] > 0)
+		
+		if (m_EnemyLoad[m_RightEnemyCount][2] > 0)
 		{
-			m_RightEnemyHits = false;
+			//m_RightEnemyHits = false;
 			m_pRightEnemyCollisionData->SetEnable(true);
+
+			m_RightEnemyCrowdAlfa = 1.f;
+			SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
 		}
 		
 	}
@@ -204,67 +235,75 @@ void Enemy::Update()
 
 void Enemy::Draw()
 {
-	if (m_LeftEnemyHits == true)
-	{
-		EnemyExplosion(m_PosLeft, 1);
-	}
-	else
+	if (m_LeftEnemyHits == false)
 	{
 		if (m_EnemyLoad[m_LeftEnemyCount][0] > 0)
 		{
 			m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pLeftEnemyUvController->GetUV());
-			if (m_AttackEnemy == LEFT_ENEMY_ATTACK && m_Action == THROW)
+			if (m_AttackEnemy == NOT_ENEMY_ATTACK)
 			{
-				m_pLeftEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
+				//m_pLeftEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
+				m_LeftEnemyAnimName = "e_wait";
 			}
-			else if (m_AttackEnemy == NOT_ENEMY_ATTACK && m_Action == WAIT)
+			else if (m_AttackEnemy == LEFT_ENEMY_ATTACK)
 			{
-				m_pLeftEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
+				//m_pLeftEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
+				m_LeftEnemyAnimName = "e_attack";
 			}
-			EnemyExplosion(m_PosCenter, 0.f);
+			EnemyExplosion(m_PosLeft, 0.f);
 		}
 	}
-
-	if (m_CenterEnemyHits == true)
+	else if(m_LeftEnemyHits == true)
 	{
-		EnemyExplosion(m_PosCenter, 1.f);
+		EnemyExplosion(m_PosLeft, 1.f);		
 	}
-	else
+	
+	if (m_CenterEnemyHits == false)
 	{
 		if (m_EnemyLoad[m_CenterEnemyCount][1] > 0)
 		{
 			m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pCenterEnemyUvController->GetUV());
-			if (m_AttackEnemy == CENTER_ENEMY_ATTACK)
+			if (m_AttackEnemy == NOT_ENEMY_ATTACK && m_Action == WAIT)
 			{
-				m_pCenterEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
+				//m_pCenterEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
+				m_CenterEnemyAnimName = "e_wait";
 			}
-			else if (m_AttackEnemy == NOT_ENEMY_ATTACK && m_Action == WAIT)
+			else if (m_AttackEnemy == CENTER_ENEMY_ATTACK)
 			{
-				m_pCenterEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
+				//m_pCenterEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
+				m_CenterEnemyAnimName = "e_attack";
 			}
+			
 			EnemyExplosion(m_PosCenter, 0.f);
 		}
 	}
-
-	if (m_RightEnemyHits == true)
+	else if(m_CenterEnemyHits == true)
 	{
-		EnemyExplosion(m_PosRight, 1.f);
+		EnemyExplosion(m_PosCenter, 1.f);
 	}
-	else
+	
+	if (m_RightEnemyHits == false)
 	{
 		if (m_EnemyLoad[m_RightEnemyCount][2] > 0)
 		{
 			m_pRightEnemyVertex->Draw(&m_PosRight, m_pRightEnemyUvController->GetUV());
-			if (m_AttackEnemy == RIGHT_ENEMY_ATTACK)
+			if (m_AttackEnemy == NOT_ENEMY_ATTACK && m_Action == WAIT)
 			{
-				m_pRightEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
+				//m_pRightEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
+				m_RightEnemyAnimName = "e_wait";
 			}
-			else if (m_AttackEnemy == NOT_ENEMY_ATTACK && m_Action == WAIT)
+			else if (m_AttackEnemy == RIGHT_ENEMY_ATTACK)
 			{
-				m_pRightEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
+				//m_pRightEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
+				m_RightEnemyAnimName = "e_attack";
 			}
+			
 			EnemyExplosion(m_PosRight, 0.f);
 		}
+	}
+	else if(m_RightEnemyHits == true)
+	{
+		EnemyExplosion(m_PosRight, 1.f);
 	}
 }
 
@@ -301,23 +340,35 @@ void Enemy::Hit()
 		m_RightEnemyHits = true;
 	}
 
-	if (m_CenterEnemyHits == true && m_HitInterval == HITINTERVAL)
-	{
-		m_HitInterval = 0;
-		m_EnemyLoad[m_CenterEnemyCount][1] = 0;
-		EnemyExplosion(m_PosCenter, 0.f);
-	}
 	if (m_LeftEnemyHits == true && m_HitInterval == HITINTERVAL)
 	{
 		m_HitInterval = 0;
+		m_LeftEnemyHits = false;
 		m_EnemyLoad[m_LeftEnemyCount][0] = 0;
 		EnemyExplosion(m_PosLeft, 0.f);
+
+		m_LeftEnemyCrowdAlfa = 0.f;
+		SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
+	}
+	if (m_CenterEnemyHits == true && m_HitInterval == HITINTERVAL)
+	{
+		m_HitInterval = 0;
+		m_CenterEnemyHits = false;
+		m_EnemyLoad[m_CenterEnemyCount][1] = 0;
+		EnemyExplosion(m_PosCenter, 0.f);
+
+		m_CenterEnemyCrowdAlfa = 0.f;
+		SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
 	}
 	if (m_RightEnemyHits == true && m_HitInterval == HITINTERVAL)
 	{
 		m_HitInterval = 0;
+		m_RightEnemyHits = false;
 		m_EnemyLoad[m_RightEnemyCount][2] = 0;
 		EnemyExplosion(m_PosRight, 0.f);
+
+		m_RightEnemyCrowdAlfa = 0.f;
+		SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
 	}
 
 }
@@ -439,6 +490,19 @@ void Enemy::Attack()
 			break;
 		}
 			m_AttackInterval = 0;
-			m_AttackEnemy = NOT_ENEMY_ATTACK;
+			//m_AttackEnemy = NOT_ENEMY_ATTACK;
+	}
+}
+
+void Enemy::AttackControl(int _column, int _row)
+{
+	if (m_EnemyLoad[_column][_row] = 1)
+	{
+	}
+	else if (m_EnemyLoad[_column][_row] = 2)
+	{
+	}
+	else if (m_EnemyLoad[_column][_row] = 3)
+	{
 	}
 }

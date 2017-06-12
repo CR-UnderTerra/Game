@@ -36,6 +36,10 @@ void EnemyManager::Init(int _textureIndex)
 	m_PosCenter = { (960), (576) };
 	m_PosRight = { (1160), (576) };
 
+	m_LeftEnemyCrowdAlfa = 1.f;
+	m_CenterEnemyCrowdAlfa = 1.f;
+	m_LeftEnemyCrowdAlfa = 1.f;
+
 	m_pUvController = new Lib::AnimUvController();
 	m_pUvController->LoadAnimation("Resource/test_001.anim", "e_crowd");
 
@@ -49,7 +53,7 @@ void EnemyManager::Init(int _textureIndex)
 
 	m_TextureIndex = _textureIndex;
 	m_pAnimUvController = new Lib::AnimUvController();
-	m_pAnimUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
+	//m_pAnimUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
 	//EnemyLoad("Resource/EnemyPos.csv");
 	for (int i = 0; i < m_EnemyMax; i++)
 	{
@@ -67,9 +71,12 @@ void EnemyManager::Update()
 
 void EnemyManager::Draw()
 {
-	m_pVertex->Draw(&m_PosCenter, m_pUvController->GetUV(), 1, &D3DXVECTOR2(0.9, 0.9));
-	m_pVertex->Draw(&m_PosLeft, m_pUvController->GetUV(), 1, &D3DXVECTOR2(0.9, 0.9));
-	m_pVertex->Draw(&m_PosRight, m_pUvController->GetUV(), 1, &D3DXVECTOR2(0.9, 0.9));
+	m_pVertex->Draw(&m_PosLeft, m_pUvController->GetUV(), m_LeftEnemyCrowdAlfa, &D3DXVECTOR2(0.9, 0.9));
+	m_pVertex->Draw(&m_PosCenter, m_pUvController->GetUV(), m_CenterEnemyCrowdAlfa, &D3DXVECTOR2(0.9, 0.9));
+	m_pVertex->Draw(&m_PosRight, m_pUvController->GetUV(), m_RightEnemyCrowdAlfa, &D3DXVECTOR2(0.9, 0.9));
+	m_LeftEnemyCrowdAlfa = SINGLETON_INSTANCE(GameDataManager).GetLeftEnemyCrowdAlfa();
+	m_CenterEnemyCrowdAlfa = SINGLETON_INSTANCE(GameDataManager).GetCenterEnemyCrowdAlfa();
+	m_RightEnemyCrowdAlfa = SINGLETON_INSTANCE(GameDataManager).GetRightEnemyCrowdAlfa();
 
 	for (int i = 0; i < m_EnemyMax; i++)
 	{

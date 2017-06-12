@@ -8,7 +8,6 @@
 
 #define ENEMYROW		3		//敵出現パターン横列
 #define ENEMYCOLUMN		13		//敵出現パターン縦列
-#define FLASHTIME		6
 #define HITINTERVAL		50.f
 #define ATTACKINTERVAL	100.f
 #define ATTACKTIME		30.f
@@ -75,6 +74,8 @@ public:
 
 	void Attack();
 
+	void AttackControl(int column_, int _row);
+
 private:
 	/**
 	* 当たり判定処理
@@ -124,6 +125,14 @@ private:
 	CollisionData::HIT_STATE	   m_LeftEnemyHitState;
 	CollisionData::HIT_STATE	   m_CenterEnemyHitState;
 	CollisionData::HIT_STATE	   m_RightEnemyHitState;
+
+	LPCTSTR						   m_LeftEnemyAnimName;
+	LPCTSTR						   m_CenterEnemyAnimName;
+	LPCTSTR						   m_RightEnemyAnimName;
+
+	float						   m_LeftEnemyCrowdAlfa;
+	float						   m_CenterEnemyCrowdAlfa;
+	float						   m_RightEnemyCrowdAlfa;
 };
 
 #endif // !ENEMY_H

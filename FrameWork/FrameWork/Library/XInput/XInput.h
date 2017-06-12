@@ -57,7 +57,7 @@ namespace Lib
 
 	class XInput
 	{
-		friend Singleton<XInput>;
+		friend Lib::Singleton<XInput>;
 	public:
 		/**
 		* GamePadの状態チェック関数

@@ -20,11 +20,6 @@ namespace Lib
 	{
 		friend Singleton<Window>;
 	public:
-		inline void Init(HINSTANCE _hInstance)
-		{
-			m_hInstance = _hInstance;
-		}
-
 		inline HWND GetWindowHandle() const
 		{
 			return m_hWnd;
@@ -64,7 +59,10 @@ namespace Lib
 	private:
 		Window() :
 			m_hInstance(NULL),
-			m_hWnd(NULL){};
+			m_hWnd(NULL)
+		{
+			m_hInstance = GetModuleHandle(NULL);
+		};
 		~Window(){};
 		RECT	m_WindowSize;
 		HINSTANCE m_hInstance;

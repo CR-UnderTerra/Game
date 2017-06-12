@@ -5,14 +5,15 @@
 #define WINDOW_WIDTH 1920
 #define WINDOW_HEIGHT 1080
 
-class Main : Lib::ApplicationBase
+class App : Lib::ApplicationBase
 {
 public:
-	Main() = default;
-	~Main() = default;
+	App() = default;
+	~App() = default;
 
 	void Init()
 	{
+		SINGLETON_INSTANCE(Lib::Window).DispWindow(WINDOW_WIDTH, WINDOW_HEIGHT, TEXT("私の愛を受け取って"));
 		m_pSceneManager = new SceneManager();
 	};
 
@@ -36,9 +37,4 @@ private:
 
 };
 
-
-ENTRY_POINT
-{
-	Main main;
-	Lib::Boot(WINDOW_WIDTH, WINDOW_HEIGHT,TEXT("私の愛を受け取って"));
-}
+App app;

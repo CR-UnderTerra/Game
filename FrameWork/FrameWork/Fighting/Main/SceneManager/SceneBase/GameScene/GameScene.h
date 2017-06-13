@@ -7,6 +7,8 @@
 #define GAMESCENE_H
 #include <memory>
 #include "..\SceneBase.h"
+#include "Vertex2D/Vertex2D.h"
+#include "Animation/AnimUvController.h"
 
 class ObjectManager;
 
@@ -42,6 +44,13 @@ private:
 	void operator=(const GameScene&);
 
 	ObjectManager* m_pObjectManager;
+
+	/* ゲーム開始カウント用 */
+	D3DXVECTOR2			   m_Pos;
+	D3DXVECTOR2			   m_Rect;
+	Lib::AnimUvController* m_pUvController;
+	Lib::Vertex2D*		   m_pVertex;
+	int					   m_TextureIndex;
 };
 
 

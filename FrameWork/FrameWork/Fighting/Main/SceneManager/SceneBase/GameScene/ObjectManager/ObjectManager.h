@@ -8,6 +8,7 @@
 #include <vector>
 #include "ObjectBase/GameObjectBase/GameObjectBase.h"
 #include "ObjectBase/UIBase/UIBase.h"
+#include "Vertex2D/Vertex2D.h"
 
 
 class KnifeManager;

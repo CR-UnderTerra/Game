@@ -15,6 +15,10 @@
 const D3DXVECTOR2 Knife::m_Rect = D3DXVECTOR2(192, 384);
 int	Knife::m_IndexMax = 0;
 
+namespace
+{
+	D3DXVECTOR2 g_oldPos = D3DXVECTOR2(0,0);
+}
 
 Knife::Knife(int _textureIndex) :
 m_IsThrow(false),
@@ -63,12 +67,16 @@ Knife::~Knife()
 void Knife::Update()
 {
 	if (!m_IsThrow) return;
-	if (!m_IsCatch)
+	g_oldPos = m_Pos;
+	
+	if (m_pCollisionData->GetCollisionState().HitState == CollisionData::NON_HIT 
+	&& !m_IsCatch)
 	{
 		m_Pos += Lib::Math::GetAngleMovePos(m_Velocity,m_Angle);
 		m_Scale += m_ScaleAddValue;
 		m_TargetDistance -= m_Velocity;
 	}
+
 	CollisionUpdate();
 	CollisionControl();
 }
@@ -198,13 +206,9 @@ void Knife::CollisionControl()
 		m_IsCatch = false;
 	}
 	else if (hitState == CollisionData::CATCH_HIT &&
-		m_Target == GameDataManager::PLAYER_TARGET &&
-		!m_IsCatch)
+		m_Target == GameDataManager::PLAYER_TARGET)
 	{
-		if (SINGLETON_INSTANCE(GameDataManager).KnifeJadge(m_Index) != JudgeGaugeUI::FAILED_JUDGE)
-		{
-			SINGLETON_INSTANCE(GameDataManager).SetKnifeBarIsEnable(m_Index, false);
-			m_IsCatch = true;
-		}
+		SINGLETON_INSTANCE(GameDataManager).SetKnifeBarIsEnable(m_Index, false);
+		m_IsCatch = true;
 	}
 }

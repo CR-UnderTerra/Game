@@ -16,10 +16,31 @@
 #include "../GameDataManager/GameDataManager.h"
 #include "XInput/XInput.h"
 
+namespace
+{
+	int FrameCount = 240;
+}
 
 GameScene::GameScene() :
 SceneBase(SCENE_GAME)
 {
+	RECT windowRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
+	m_Pos.x = static_cast<float>(windowRect.right) / 2;
+	m_Pos.y = static_cast<float>(windowRect.bottom) / 2;
+	m_Rect = D3DXVECTOR2(45 * 2, 96 * 2);
+
+	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png",&m_TextureIndex);
+	m_pUvController = new Lib::AnimUvController();
+	m_pUvController->LoadAnimation("Resource/test_001.anim", "Number");
+	m_pVertex = new Lib::Vertex2D(
+		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
+		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
+		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
+	m_pVertex->Init(&m_Rect, m_pUvController->GetUV());
+	m_pVertex->SetTexture(
+		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
+
+
 	SINGLETON_CREATE(CollisionManager);
 	m_pObjectManager = new ObjectManager();
 	SINGLETON_INSTANCE(GameDataManager).Init();
@@ -29,6 +50,11 @@ GameScene::~GameScene()
 {
 	delete m_pObjectManager;
 	m_pObjectManager = NULL;
+
+	m_pVertex->Release();
+	delete m_pVertex;
+	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextureIndex);
+	delete m_pUvController;
 
 	SINGLETON_DELETE(CollisionManager);
 	SINGLETON_INSTANCE(Lib::TextureManager).Release();
@@ -41,15 +67,24 @@ GameScene::~GameScene()
 
 SceneBase::SceneID GameScene::Update()
 {
-	SINGLETON_INSTANCE(GameDataManager).Update();
-	m_pObjectManager->Update();
-	SINGLETON_INSTANCE(CollisionManager).Update();
-	SINGLETON_INSTANCE(Lib::KeyDevice).Update();
-	SINGLETON_INSTANCE(Lib::XInput).Update(Lib::GAMEPAD1);
-	if (SINGLETON_INSTANCE(GameDataManager).GetIsGameOver())
+	FrameCount--;
+	if (FrameCount > 60)
 	{
-		m_SceneID = SCENE_RESULT;
+		m_pUvController->SetAnimCount(FrameCount / 60);
 	}
+	else
+	{
+		SINGLETON_INSTANCE(GameDataManager).Update();
+		m_pObjectManager->Update();
+		SINGLETON_INSTANCE(CollisionManager).Update();
+		SINGLETON_INSTANCE(Lib::KeyDevice).Update();
+		SINGLETON_INSTANCE(Lib::XInput).Update(Lib::GAMEPAD1);
+		if (SINGLETON_INSTANCE(GameDataManager).GetIsGameOver())
+		{
+			m_SceneID = SCENE_RESULT;
+		}
+	}
+
 	return m_SceneID;
 }
 
@@ -58,5 +93,9 @@ void GameScene::Draw()
 	SINGLETON_INSTANCE(Lib::DX11Manager).SetDepthStencilTest(false);
 	SINGLETON_INSTANCE(Lib::DX11Manager).BeginScene();
 	m_pObjectManager->Draw();
+	if (FrameCount > 60)
+	{
+		m_pVertex->Draw(&m_Pos,m_pUvController->GetUV());
+	}
 	SINGLETON_INSTANCE(Lib::DX11Manager).EndScene();
 }

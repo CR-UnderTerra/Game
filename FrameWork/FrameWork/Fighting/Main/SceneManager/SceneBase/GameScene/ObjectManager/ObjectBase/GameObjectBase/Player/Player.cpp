@@ -80,44 +80,54 @@ void Player::KnifeCatchControl()
 	/* 指定された方向に投げる */
 	auto ThrowControl = [this](GameDataManager::TARGET _target)
 	{
+		bool returnVal = false;
 		switch (SINGLETON_INSTANCE(KnifeManager).GetCatchKnifeState())
 		{
 		case JudgeGaugeUI::FANTASTIC_JUDGE:
 			SINGLETON_INSTANCE(KnifeManager).CatchThrowKnife(_target, 1 * 0.5f);
+			returnVal = true;
 			break;
 		case JudgeGaugeUI::AMAZING_JUDGE:
 			SINGLETON_INSTANCE(KnifeManager).CatchThrowKnife(_target, 1 * 0.8f);
+			returnVal = true;
 			break;
 		case JudgeGaugeUI::GOOD_JUDGE:
 			SINGLETON_INSTANCE(KnifeManager).CatchThrowKnife(_target, 1.f);
+			returnVal = true;
 			break;
 		}
+		return returnVal;
 	};
 
-	if (m_pHandBase[0]->GetHitState() == CollisionData::CATCH_HIT ||
-		m_pHandBase[1]->GetHitState() == CollisionData::CATCH_HIT)
+	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_Z] == Lib::KEY_RELEASE ||
+		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_X, Lib::GAMEPAD1) == Lib::PAD_RELEASE)
 	{
-		if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_Z] == Lib::KEY_RELEASE ||
-			SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_X, Lib::GAMEPAD1) == Lib::PAD_RELEASE)
+		if (ThrowControl(GameDataManager::LEFT_ENEMY_TARGET))
 		{
 			m_pHandBase[0]->InitPos();
 			m_pHandBase[1]->InitPos();
-			ThrowControl(GameDataManager::LEFT_ENEMY_TARGET);
 		}
-		else if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_X] == Lib::KEY_RELEASE ||
-			SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_Y, Lib::GAMEPAD1) == Lib::PAD_RELEASE)
+		
+	}
+	else if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_X] == Lib::KEY_RELEASE ||
+		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_Y, Lib::GAMEPAD1) == Lib::PAD_RELEASE)
+	{
+		if (ThrowControl(GameDataManager::FRONT_ENEMY_TARGET))
 		{
 			m_pHandBase[0]->InitPos();
 			m_pHandBase[1]->InitPos();
-			ThrowControl(GameDataManager::FRONT_ENEMY_TARGET);
 		}
-		else if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_C] == Lib::KEY_RELEASE || 
-			SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_B, Lib::GAMEPAD1) == Lib::PAD_RELEASE)
+		//ThrowControl(GameDataManager::FRONT_ENEMY_TARGET);
+	}
+	else if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_C] == Lib::KEY_RELEASE || 
+		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_B, Lib::GAMEPAD1) == Lib::PAD_RELEASE)
+	{
+		if (ThrowControl(GameDataManager::RIGHT_ENEMY_TARGET))
 		{
 			m_pHandBase[0]->InitPos();
 			m_pHandBase[1]->InitPos();
-			ThrowControl(GameDataManager::RIGHT_ENEMY_TARGET);
 		}
+		//ThrowControl(GameDataManager::RIGHT_ENEMY_TARGET);
 	}
 }
 

@@ -107,10 +107,14 @@ private:
 	Lib::Vertex2D*				   m_pCenterEnemyVertex;
 	Lib::Vertex2D*				   m_pRightEnemyVertex;
 	Lib::Vertex2D*				   m_pEnemyExplosionVertex;
-	Lib::AnimUvController*		   m_pUvController;
-	Lib::AnimUvController*		   m_pLeftEnemyUvController;
-	Lib::AnimUvController*		   m_pCenterEnemyUvController;
-	Lib::AnimUvController*		   m_pRightEnemyUvController;
+	Lib::AnimUvController*		   m_pWaitUvController;
+	Lib::AnimUvController*		   m_pAttackUvController;
+	Lib::AnimUvController*		   m_pLeftEnemyWaitUvController;
+	Lib::AnimUvController*		   m_pLeftEnemyAttackUvController;
+	Lib::AnimUvController*		   m_pCenterEnemyWaitUvController;
+	Lib::AnimUvController*		   m_pCenterEnemyAttackUvController;
+	Lib::AnimUvController*		   m_pRightEnemyWaitUvController;
+	Lib::AnimUvController*		   m_pRightEnemyAttackUvController;
 	Lib::AnimUvController*		   m_pEnemyExplosionUvController;
 	D3DXVECTOR2					   m_PosLeft;
 	D3DXVECTOR2					   m_PosCenter;
@@ -125,10 +129,6 @@ private:
 	CollisionData::HIT_STATE	   m_LeftEnemyHitState;
 	CollisionData::HIT_STATE	   m_CenterEnemyHitState;
 	CollisionData::HIT_STATE	   m_RightEnemyHitState;
-
-	LPCTSTR						   m_LeftEnemyAnimName;
-	LPCTSTR						   m_CenterEnemyAnimName;
-	LPCTSTR						   m_RightEnemyAnimName;
 
 	float						   m_LeftEnemyCrowdAlfa;
 	float						   m_CenterEnemyCrowdAlfa;

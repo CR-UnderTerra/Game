@@ -83,15 +83,12 @@ void Player::KnifeCatchControl()
 		switch (SINGLETON_INSTANCE(KnifeManager).GetCatchKnifeState())
 		{
 		case JudgeGaugeUI::FANTASTIC_JUDGE:
-			SINGLETON_INSTANCE(GameDataManager).AddFantastiocCount();
 			SINGLETON_INSTANCE(KnifeManager).CatchThrowKnife(_target, 1 * 0.5f);
 			break;
 		case JudgeGaugeUI::AMAZING_JUDGE:
-			SINGLETON_INSTANCE(GameDataManager).AddAmazingCount();
 			SINGLETON_INSTANCE(KnifeManager).CatchThrowKnife(_target, 1 * 0.8f);
 			break;
 		case JudgeGaugeUI::GOOD_JUDGE:
-			SINGLETON_INSTANCE(GameDataManager).AddGoodCount();
 			SINGLETON_INSTANCE(KnifeManager).CatchThrowKnife(_target, 1.f);
 			break;
 		}

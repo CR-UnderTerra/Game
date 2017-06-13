@@ -4,6 +4,7 @@
 * @author kotani
 */
 #include "CollisionData.h"
+#include "Math/Math.h"
 
 int CollisionData::m_IndexMax = 0;
 
@@ -26,7 +27,7 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 	CollisionState v1 = m_CollisionState;
 	CollisionState v2 = *_collisionState;
 
-	if (!v2.IsEnable)
+	if (!v2.IsEnable || !v1.IsEnable)
 	{
 		m_CollisionState.HitState = NON_HIT;
 		return false;
@@ -37,7 +38,8 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 		v1.CollisionType == ENEMY_KNIFE_TYPE &&
 		v2.CollisionType == PLAYER_KNIFE_TYPE)
 	{
-		if (sqrt(pow(v2.Pos.x - v1.Pos.x, 2) + pow(v2.Pos.y - v1.Pos.y, 2)) < 12.f)
+		Lib::Math::GetDistance(v1.Pos, v2.Pos);
+		if (Lib::Math::GetDistance(v1.Pos, v2.Pos) < 20.f)
 		{
 			m_CollisionState.HitState = KNIFE_HIT;
 			return true;	
@@ -54,7 +56,7 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 		v1.CollisionType == ENEMY_TYPE &&
 		v2.CollisionType == PLAYER_KNIFE_TYPE)
 	{
-		if (sqrt(pow(v2.Pos.x - v1.Pos.x, 2) + pow(v2.Pos.y - v1.Pos.y, 2)) < 12.f)
+		if (Lib::Math::GetDistance(v1.Pos, v2.Pos) < 20.f)
 		{
 			m_CollisionState.HitState = KNIFE_HIT;
 			return true;

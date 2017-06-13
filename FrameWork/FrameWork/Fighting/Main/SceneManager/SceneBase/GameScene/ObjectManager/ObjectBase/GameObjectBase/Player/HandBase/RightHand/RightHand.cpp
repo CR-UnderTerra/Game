@@ -51,11 +51,13 @@ void RightHand::Update()
 				m_MoveSpeed += m_Acceleration;
 			}
 
-			if (m_Pos.x < (m_EndPos.x + 10.f))
+			if (m_Pos.x <= m_EndPos.x)
 			{
 				m_pCollisionData->SetEnable(false);
+				m_Pos.x = m_EndPos.x;
 			}
-			else if (m_Pos.x < (m_EndPos.x + 50.f))
+
+			if (m_Pos.x < (m_EndPos.x + 70.f))
 			{
 				m_pCollisionData->SetEnable(true);
 			}

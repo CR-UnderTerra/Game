@@ -26,8 +26,7 @@ void CollisionManager::Update()
 			if (i != j)
 			{
 				CollisionData::CollisionState collisionState = m_pCollisionData[j]->GetCollisionState();
-				if (m_pCollisionData[i]->HitCheck(&collisionState) &&
-					m_pCollisionData[i]->GetCollisionState().IsEnable)
+				if (m_pCollisionData[i]->HitCheck(&collisionState))
 				{
 					break;
 				}

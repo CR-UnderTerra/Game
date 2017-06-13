@@ -7,9 +7,6 @@
 #include "Singleton.h"
 #include "../../../../../GameDataManager/GameDataManager.h"
 
-#define ENEMYROW		3		//敵出現パターン横列
-#define ENEMYCOLUMN		1//6/*13*/		//敵出現パターン縦列
-
 class EnemyManager : public ObjectBase
 {
 	friend Lib::Singleton<EnemyManager>;

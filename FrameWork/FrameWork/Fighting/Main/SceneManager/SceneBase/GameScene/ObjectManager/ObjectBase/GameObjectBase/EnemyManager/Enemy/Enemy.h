@@ -7,7 +7,7 @@
 #include "../../../../../../GameDataManager/GameDataManager.h"
 
 #define ENEMYROW		3		//敵出現パターン横列
-#define ENEMYCOLUMN		13		//敵出現パターン縦列
+#define ENEMYCOLUMN		14		//敵出現パターン縦列
 #define HITINTERVAL		50.f
 #define ATTACKINTERVAL	100.f
 #define ATTACKTIME		30.f
@@ -85,8 +85,6 @@ private:
 	static const D3DXVECTOR2	   m_Rect;
 	static int					   m_IndexMax;
 	int							   m_TextureIndex;		 //!< テクスチャのインデックス
-	int							   m_EnemyColumn;
-	int							   m_EnemyRow;
 	int							   m_LeftEnemyCount;
 	int							   m_CenterEnemyCount;
 	int							   m_RightEnemyCount;
@@ -109,12 +107,6 @@ private:
 	Lib::Vertex2D*				   m_pEnemyExplosionVertex;
 	Lib::AnimUvController*		   m_pWaitUvController;
 	Lib::AnimUvController*		   m_pAttackUvController;
-	Lib::AnimUvController*		   m_pLeftEnemyWaitUvController;
-	Lib::AnimUvController*		   m_pLeftEnemyAttackUvController;
-	Lib::AnimUvController*		   m_pCenterEnemyWaitUvController;
-	Lib::AnimUvController*		   m_pCenterEnemyAttackUvController;
-	Lib::AnimUvController*		   m_pRightEnemyWaitUvController;
-	Lib::AnimUvController*		   m_pRightEnemyAttackUvController;
 	Lib::AnimUvController*		   m_pEnemyExplosionUvController;
 	D3DXVECTOR2					   m_PosLeft;
 	D3DXVECTOR2					   m_PosCenter;

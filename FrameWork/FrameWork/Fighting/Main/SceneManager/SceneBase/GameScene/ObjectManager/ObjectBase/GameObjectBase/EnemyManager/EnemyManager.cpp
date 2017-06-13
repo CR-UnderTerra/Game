@@ -52,7 +52,7 @@ void EnemyManager::Init(int _textureIndex)
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 
 	m_TextureIndex = _textureIndex;
-	m_pAnimUvController = new Lib::AnimUvController();
+	//m_pAnimUvController = new Lib::AnimUvController();
 	//m_pAnimUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
 	//EnemyLoad("Resource/EnemyPos.csv");
 	for (int i = 0; i < m_EnemyMax; i++)

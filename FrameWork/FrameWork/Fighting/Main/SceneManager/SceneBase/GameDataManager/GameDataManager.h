@@ -136,7 +136,7 @@ public:
 		return m_IsGameOver;
 	}
 
-	inline bool SetIsGameOver(bool _IsGameOver)
+	inline void SetIsGameOver(bool _IsGameOver)
 	{
 		m_IsGameOver = _IsGameOver;
 	}

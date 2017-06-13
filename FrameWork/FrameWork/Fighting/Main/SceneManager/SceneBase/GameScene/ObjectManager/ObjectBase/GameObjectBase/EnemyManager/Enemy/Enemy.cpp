@@ -13,18 +13,10 @@ const D3DXVECTOR2 Enemy::m_Rect = D3DXVECTOR2(128, 256);
 Enemy::Enemy(int _textureIndex, Lib::AnimUvController* _pUvController) :
 m_pWaitUvController(_pUvController),
 m_pAttackUvController(_pUvController),
-m_pLeftEnemyWaitUvController(_pUvController),
-m_pLeftEnemyAttackUvController(_pUvController),
-m_pCenterEnemyAttackUvController(_pUvController),
-m_pCenterEnemyWaitUvController(_pUvController),
-m_pRightEnemyWaitUvController(_pUvController),
-m_pRightEnemyAttackUvController(_pUvController),
 m_TextureIndex(_textureIndex),
-m_EnemyColumn(ENEMYCOLUMN),
-m_EnemyRow(ENEMYROW),
-m_LeftEnemyCount(12),
-m_CenterEnemyCount(12),
-m_RightEnemyCount(12),
+m_LeftEnemyCount(13),
+m_CenterEnemyCount(13),
+m_RightEnemyCount(13),
 m_LeftEnemyHits(false),
 m_CenterEnemyHits(false),
 m_RightEnemyHits(false),
@@ -57,6 +49,11 @@ m_PosRight{ (1160), (576) }			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 	m_pEnemyExplosionVertex->SetTexture(
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 
+	m_pAttackUvController = new Lib::AnimUvController();
+	m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
+	m_pWaitUvController = new Lib::AnimUvController();
+	m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
+
 	if (m_EnemyLoad[m_LeftEnemyCount][0] > 0)
 	{
 		//m_pLeftEnemyUvController = _pUvController;
@@ -70,15 +67,12 @@ m_PosRight{ (1160), (576) }			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
 			SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
-		//m_pLeftEnemyVertex->Init(&m_Rect, m_pLeftEnemyWaitUvController->GetUV());
 		m_pLeftEnemyVertex->Init(&m_Rect, m_pWaitUvController->GetUV());
 		m_pLeftEnemyVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 
-		//m_pLeftEnemyWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
-		//m_pLeftEnemyAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
-		m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
-		m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
+		//m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
+		//m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
 
 		m_LeftEnemyHitState = m_pLeftEnemyCollisionData->GetCollisionState().HitState;
 
@@ -103,10 +97,8 @@ m_PosRight{ (1160), (576) }			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 		m_pCenterEnemyVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 
-		//m_pCenterEnemyWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
-		//m_pCenterEnemyAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
-		m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
-		m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
+		//m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
+		//m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
 
 		m_CenterEnemyHitState = m_pCenterEnemyCollisionData->GetCollisionState().HitState;
 		
@@ -131,10 +123,8 @@ m_PosRight{ (1160), (576) }			//“G‚ÌoŒ»ˆÊ’u(‰¼)
 		m_pRightEnemyVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 
-		//m_pRightEnemyWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
-		//m_pRightEnemyAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
-		m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
-		m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
+		//m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
+		//m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
 
 		m_RightEnemyHitState = m_pRightEnemyCollisionData->GetCollisionState().HitState;
 	
@@ -157,6 +147,12 @@ Enemy::~Enemy()
 	delete m_pEnemyExplosionUvController;
 	m_pEnemyExplosionUvController = NULL;
 
+	delete m_pAttackUvController;
+	m_pAttackUvController = NULL;
+	
+	delete m_pWaitUvController;
+	m_pWaitUvController = NULL;
+	
 	if (m_pLeftEnemyVertex != NULL)
 	{
 		m_pLeftEnemyVertex->Release();
@@ -206,7 +202,7 @@ void Enemy::Update()
 		{
 			m_RightEnemyCount -= 1;
 		}
-		
+
 		if (m_EnemyLoad[m_LeftEnemyCount][0] > 0)
 		{
 			//m_LeftEnemyHits = false;
@@ -244,6 +240,11 @@ void Enemy::Update()
 		m_HitInterval += 1.0f;
 	}
 
+	if (m_LeftEnemyCount == 0 && m_CenterEnemyCount == 0 && m_RightEnemyCount == 0)
+	{
+		SINGLETON_INSTANCE(GameDataManager).SetIsGameOver(true);
+	}
+
 }
 
 void Enemy::Draw()
@@ -252,17 +253,12 @@ void Enemy::Draw()
 	{
 		if (m_EnemyLoad[m_LeftEnemyCount][0] > 0)
 		{
-			//m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pLeftEnemyWaitUvController->GetUV());
-			if (m_AttackEnemy == NOT_ENEMY_ATTACK || m_Action == WAIT)
+			if (/*m_AttackEnemy == NOT_ENEMY_ATTACK || m_Action == WAIT*/m_AttackEnemy != LEFT_ENEMY_ATTACK)
 			{
-				//m_pLeftEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
-				//m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pLeftEnemyWaitUvController->GetUV());
 				m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pWaitUvController->GetUV());
 			}
 			if (m_AttackEnemy == LEFT_ENEMY_ATTACK)
 			{
-				//m_pLeftEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
-				//m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pLeftEnemyAttackUvController->GetUV());
 				m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pAttackUvController->GetUV());
 			}
 			EnemyExplosion(m_PosLeft, 0.f);
@@ -277,17 +273,12 @@ void Enemy::Draw()
 	{
 		if (m_EnemyLoad[m_CenterEnemyCount][1] > 0)
 		{
-			//m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pCenterEnemyWaitUvController->GetUV());
-			if (m_AttackEnemy == NOT_ENEMY_ATTACK || m_Action == WAIT)
+			if (/*m_AttackEnemy == NOT_ENEMY_ATTACK || m_Action == WAIT*/m_AttackEnemy != CENTER_ENEMY_ATTACK)
 			{
-				//m_pCenterEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
-				//m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pCenterEnemyWaitUvController->GetUV());
 				m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pWaitUvController->GetUV());
 			}
 			if (m_AttackEnemy == CENTER_ENEMY_ATTACK)
 			{
-				//m_pCenterEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
-				//m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pCenterEnemyAttackUvController->GetUV());
 				m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pAttackUvController->GetUV());
 			}
 			
@@ -303,17 +294,12 @@ void Enemy::Draw()
 	{
 		if (m_EnemyLoad[m_RightEnemyCount][2] > 0)
 		{
-			//m_pRightEnemyVertex->Draw(&m_PosRight, m_pRightEnemyWaitUvController->GetUV());
-			if (m_AttackEnemy == NOT_ENEMY_ATTACK || m_Action == WAIT)
+			if (/*m_AttackEnemy == NOT_ENEMY_ATTACK || m_Action == WAIT*/m_AttackEnemy != RIGHT_ENEMY_ATTACK)
 			{
-				//m_pRightEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
-				//m_pRightEnemyVertex->Draw(&m_PosRight, m_pRightEnemyWaitUvController->GetUV());
 				m_pRightEnemyVertex->Draw(&m_PosRight, m_pWaitUvController->GetUV());
 			}
 			if (m_AttackEnemy == RIGHT_ENEMY_ATTACK)
 			{
-				//m_pRightEnemyUvController->LoadAnimation("Resource/test_001.anim", "e_attack");
-				//m_pRightEnemyVertex->Draw(&m_PosRight, m_pRightEnemyAttackUvController->GetUV());
 				m_pRightEnemyVertex->Draw(&m_PosRight, m_pAttackUvController->GetUV());
 			}
 			

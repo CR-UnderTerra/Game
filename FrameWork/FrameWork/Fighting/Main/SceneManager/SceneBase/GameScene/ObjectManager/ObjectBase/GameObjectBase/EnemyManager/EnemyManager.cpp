@@ -36,9 +36,9 @@ void EnemyManager::Init(int _textureIndex)
 	m_PosCenter = { (960), (576) };
 	m_PosRight = { (1160), (576) };
 
-	m_LeftEnemyCrowdAlfa = 1.f;
-	m_CenterEnemyCrowdAlfa = 1.f;
-	m_LeftEnemyCrowdAlfa = 1.f;
+	m_LeftEnemyCrowdAlfa = SINGLETON_INSTANCE(GameDataManager).GetLeftEnemyCrowdAlfa();
+	m_CenterEnemyCrowdAlfa = SINGLETON_INSTANCE(GameDataManager).GetCenterEnemyCrowdAlfa();
+	m_LeftEnemyCrowdAlfa = SINGLETON_INSTANCE(GameDataManager).GetRightEnemyCrowdAlfa();
 
 	m_pUvController = new Lib::AnimUvController();
 	m_pUvController->LoadAnimation("Resource/test_001.anim", "e_crowd");
@@ -53,8 +53,6 @@ void EnemyManager::Init(int _textureIndex)
 
 	m_TextureIndex = _textureIndex;
 	//m_pAnimUvController = new Lib::AnimUvController();
-	//m_pAnimUvController->LoadAnimation("Resource/test_001.anim", "e_wait");
-	//EnemyLoad("Resource/EnemyPos.csv");
 	for (int i = 0; i < m_EnemyMax; i++)
 	{
 		m_pEnemy.push_back(new Enemy(_textureIndex, m_pAnimUvController));

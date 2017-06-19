@@ -31,6 +31,14 @@ public:
 		ENEMY_ATTACK_MAX
 	};
 
+	enum ATTACK_TURN
+	{
+		FIRST_ATTACK,
+		SECOND_ATTACK,
+		THIRD_ATTACK,
+		ATTACK_MAX,
+	};
+
 	/*struct ENEMYSTATE
 	{
 		D3DXVECTOR2				 Position;
@@ -74,7 +82,9 @@ public:
 
 	void Attack();
 
-	void AttackControl(int column_, int _row);
+	ATTACK_TURN AttackTurn(int column_, int _row);
+
+	float ThrowSpeed(int _column, int _row);
 
 private:
 	/**
@@ -115,6 +125,9 @@ private:
 
 	ENEMY_ACTION				   m_Action;
 	ATTACK_ENEMY				   m_AttackEnemy;
+	bool						   m_FirstAttack;
+	bool						   m_SecondAttack;
+	bool						   m_ThirdAttack;
 	float						   m_AttackInterval;
 	float						   m_AttackTime;
 
@@ -125,6 +138,8 @@ private:
 	float						   m_LeftEnemyCrowdAlfa;
 	float						   m_CenterEnemyCrowdAlfa;
 	float						   m_RightEnemyCrowdAlfa;
+
+	float						   m_ThrowSpeed;
 };
 
 #endif // !ENEMY_H

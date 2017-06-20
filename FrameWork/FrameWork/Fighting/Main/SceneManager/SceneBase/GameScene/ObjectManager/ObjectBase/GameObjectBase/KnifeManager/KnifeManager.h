@@ -33,11 +33,11 @@ public:
 	void ThrowKnife(D3DXVECTOR2* _pos, GameDataManager::TARGET _myTarget, GameDataManager::TARGET _target, float _arriveTime);
 
 	/**
-	 * 掴まれたナイフを投げる
+	 * 掴まれたナイフを止める
 	 * @param[in] _target 何処に飛ばすのか?
 	 * @param[in] _arriveTime 何秒で到達するか
 	 */
-	void CatchThrowKnife(GameDataManager::TARGET _target, float _arriveTime);
+	void CatchKnifeControl(GameDataManager::TARGET _target, float _arriveTime);
 
 	/**
 	 * 制御関数

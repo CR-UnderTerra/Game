@@ -10,7 +10,7 @@
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "../ResultScene.h"
 
-const D3DXVECTOR2 ContinueText::m_Rect = D3DXVECTOR2(768, 192);
+const D3DXVECTOR2 ContinueText::m_Rect = D3DXVECTOR2(768 * 0.7, 192*0.7);
 const float ContinueText::m_DisplayTime = 2.f;
 
 

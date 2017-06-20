@@ -109,7 +109,7 @@ void Knife::Throw(D3DXVECTOR2* _pos, GameDataManager::TARGET _target, float _arr
 	if (m_Target != GameDataManager::PLAYER_TARGET)
 	{
 		m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos.x, m_Pos.y, m_TargetDistance), &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
-			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::PLAYER_KNIFE_TYPE);
+			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::AMAZING_PLAYER_KNIFE_TYPE);
 		m_ScaleAddValue = -((m_Scale) / m_ArriveFrame);
 	}
 	else
@@ -162,8 +162,27 @@ void Knife::CollisionUpdate()
 		{
 			m_pCollisionData->SetEnable(true);
 		}
+		if (m_Target != GameDataManager::PLAYER_TARGET)
+		{
+			switch (m_CatchState)
+			{
+			case JudgeGaugeUI::GOOD_JUDGE:
+				m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos.x, m_Pos.y, m_TargetDistance), &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
+					(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::GOOD_PLAYER_KNIFE_TYPE);
+				break;
+			case JudgeGaugeUI::AMAZING_JUDGE:
+				m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos.x, m_Pos.y, m_TargetDistance), &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
+					(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::AMAZING_PLAYER_KNIFE_TYPE);
+				break;
+			case JudgeGaugeUI::FANTASTIC_JUDGE:
+				m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos.x, m_Pos.y, m_TargetDistance), &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
+					(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::FANTASTIC_PLAYER_KNIFE_TYPE);
+				break;
+			}
+		}
+
 		m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos.x, m_Pos.y, m_TargetDistance), &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
-			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::PLAYER_KNIFE_TYPE);
+			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::AMAZING_PLAYER_KNIFE_TYPE);
 	}
 }
 

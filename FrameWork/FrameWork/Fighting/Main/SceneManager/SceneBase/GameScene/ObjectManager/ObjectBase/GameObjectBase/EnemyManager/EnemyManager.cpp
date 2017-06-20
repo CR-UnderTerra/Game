@@ -52,7 +52,6 @@ void EnemyManager::Init(int _textureIndex)
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 
 	m_TextureIndex = _textureIndex;
-	//m_pAnimUvController = new Lib::AnimUvController();
 	for (int i = 0; i < m_EnemyMax; i++)
 	{
 		m_pEnemy.push_back(new Enemy(_textureIndex, m_pAnimUvController));

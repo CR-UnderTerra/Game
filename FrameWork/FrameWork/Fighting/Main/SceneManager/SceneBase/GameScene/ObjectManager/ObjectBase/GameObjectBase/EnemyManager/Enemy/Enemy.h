@@ -17,8 +17,8 @@ class Enemy : public GameObjectBase
 public:
 	enum ENEMY_ACTION
 	{
-		WAIT,
-		THROW,
+		ACT_WAIT,
+		ACT_THROW,
 		ACTION_MAX
 	};
 
@@ -71,14 +71,14 @@ public:
 	*/
 	void Draw() override;
 
-	//Test
+	//EnemyÇÃîzíuópCSVÇÃì«Ç›çûÇ›ä÷êî
 	void EnemyLoad(const char*);
 
 	void Hit();
 
 	void EnemyPosInit(CollisionData* _pcollisiondata, D3DXVECTOR2 _pos, Lib::Vertex2D* _vertex, CollisionData::HIT_STATE _hitstate);
 
-	void EnemyExplosion(D3DXVECTOR2 _pos, float _alpha);
+	void EnemyExplosionDraw(D3DXVECTOR2 _pos, float _alpha);
 
 	void Attack();
 

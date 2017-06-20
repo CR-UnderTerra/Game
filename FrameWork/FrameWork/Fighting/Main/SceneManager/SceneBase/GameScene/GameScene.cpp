@@ -28,7 +28,7 @@ SceneBase(SCENE_GAME)
 	m_Pos.x = static_cast<float>(windowRect.right) / 2;
 	m_Pos.y = static_cast<float>(windowRect.bottom) / 2;
 	m_Rect = D3DXVECTOR2(45 * 2, 96 * 2);
-
+	FrameCount = 240;
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png",&m_TextureIndex);
 	m_pUvController = new Lib::AnimUvController();
 	m_pUvController->LoadAnimation("Resource/test_001.anim", "Number");

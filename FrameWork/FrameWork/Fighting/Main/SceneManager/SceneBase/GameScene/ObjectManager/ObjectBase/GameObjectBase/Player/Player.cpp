@@ -84,15 +84,15 @@ void Player::KnifeCatchControl()
 		switch (SINGLETON_INSTANCE(KnifeManager).GetCatchKnifeState())
 		{
 		case JudgeGaugeUI::FANTASTIC_JUDGE:
-			SINGLETON_INSTANCE(KnifeManager).CatchThrowKnife(_target, 1 * 0.5f);
+			SINGLETON_INSTANCE(KnifeManager).CatchKnifeControl(_target, 1 * 0.5f);
 			returnVal = true;
 			break;
 		case JudgeGaugeUI::AMAZING_JUDGE:
-			SINGLETON_INSTANCE(KnifeManager).CatchThrowKnife(_target, 1 * 0.8f);
+			SINGLETON_INSTANCE(KnifeManager).CatchKnifeControl(_target, 1 * 0.8f);
 			returnVal = true;
 			break;
 		case JudgeGaugeUI::GOOD_JUDGE:
-			SINGLETON_INSTANCE(KnifeManager).CatchThrowKnife(_target, 1.f);
+			SINGLETON_INSTANCE(KnifeManager).CatchKnifeControl(_target, 1.f);
 			returnVal = true;
 			break;
 		}
@@ -117,7 +117,6 @@ void Player::KnifeCatchControl()
 			m_pHandBase[0]->InitPos();
 			m_pHandBase[1]->InitPos();
 		}
-		//ThrowControl(GameDataManager::FRONT_ENEMY_TARGET);
 	}
 	else if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_C] == Lib::KEY_RELEASE || 
 		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_B, Lib::GAMEPAD1) == Lib::PAD_RELEASE)
@@ -127,7 +126,7 @@ void Player::KnifeCatchControl()
 			m_pHandBase[0]->InitPos();
 			m_pHandBase[1]->InitPos();
 		}
-		//ThrowControl(GameDataManager::RIGHT_ENEMY_TARGET);
+		//(GameDataManager::RIGHT_ENEMY_TARGET);
 	}
 }
 

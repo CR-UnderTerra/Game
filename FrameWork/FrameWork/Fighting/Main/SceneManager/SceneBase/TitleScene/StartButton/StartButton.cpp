@@ -22,7 +22,7 @@ m_IsButtonEnable(false)
 {
 	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 	m_Pos = D3DXVECTOR2(static_cast<float>(ClientRect.right / 2), static_cast<float>(ClientRect.bottom / 2));
-	m_Pos.y = 638.f;
+	m_Pos.y = 738.f;
 	m_pUvController = new Lib::AnimUvController();
 	m_pUvController->LoadAnimation("Resource/Text.anim", "l_button");
 

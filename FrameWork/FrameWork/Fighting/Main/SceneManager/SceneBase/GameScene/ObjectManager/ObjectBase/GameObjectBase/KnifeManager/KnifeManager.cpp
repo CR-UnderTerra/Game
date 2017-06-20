@@ -109,7 +109,7 @@ void KnifeManager::ThrowKnife(D3DXVECTOR2* _pos, GameDataManager::TARGET _myTarg
 	}
 }
 
-void KnifeManager::CatchThrowKnife(GameDataManager::TARGET _target, float _arriveTime)
+void KnifeManager::CatchKnifeControl(GameDataManager::TARGET _target, float _arriveTime)
 {
 	auto UvSelect = [this](GameDataManager::TARGET _knifeTarget)
 	{

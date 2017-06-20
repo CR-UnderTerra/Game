@@ -27,18 +27,30 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 	CollisionState v1 = m_CollisionState;
 	CollisionState v2 = *_collisionState;
 
+	auto CollisionCheck = [&](COLLISION_TYPE _v1, COLLISION_TYPE _v2)
+	{
+		if (v1.CollisionType == _v1 &&
+			v2.CollisionType == _v2 ||
+			v1.CollisionType == _v2 &&
+			v2.CollisionType == _v2)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	};
+
 	if (!v2.IsEnable || !v1.IsEnable)
 	{
 		m_CollisionState.HitState = NON_HIT;
 		return false;
 	}
 
-	if (v1.CollisionType == PLAYER_KNIFE_TYPE &&
-		v2.CollisionType == ENEMY_KNIFE_TYPE ||
-		v1.CollisionType == ENEMY_KNIFE_TYPE &&
-		v2.CollisionType == PLAYER_KNIFE_TYPE)
+	
+	if (CollisionCheck(AMAZING_PLAYER_KNIFE_TYPE, ENEMY_KNIFE_TYPE))
 	{
-		Lib::Math::GetDistance(v1.Pos, v2.Pos);
 		if (Lib::Math::GetDistance(v1.Pos, v2.Pos) < 20.f)
 		{
 			m_CollisionState.HitState = KNIFE_HIT;
@@ -51,10 +63,10 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 		}
 	}
 
-	if (v1.CollisionType == PLAYER_KNIFE_TYPE &&
-		v2.CollisionType == ENEMY_TYPE ||
-		v1.CollisionType == ENEMY_TYPE &&
-		v2.CollisionType == PLAYER_KNIFE_TYPE)
+	if (v1.CollisionType == GOOD_PLAYER_KNIFE_TYPE ||
+		v1.CollisionType == AMAZING_PLAYER_KNIFE_TYPE ||
+		v1.CollisionType == FANTASTIC_HIT &&
+		v2.CollisionType == ENEMY_TYPE)
 	{
 		if (Lib::Math::GetDistance(v1.Pos, v2.Pos) < 20.f)
 		{
@@ -67,6 +79,41 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 			return false;
 		}
 	}
+
+	if (v1.CollisionType == ENEMY_TYPE)
+	{
+		if (v2.CollisionType == GOOD_PLAYER_KNIFE_TYPE)
+		{
+			if (Lib::Math::GetDistance(v1.Pos, v2.Pos) < 20.f)
+			{
+				m_CollisionState.HitState = GOOD_HIT;
+				return true;
+			}
+		}
+		else if (v2.CollisionType == AMAZING_PLAYER_KNIFE_TYPE)
+		{
+			if (Lib::Math::GetDistance(v1.Pos, v2.Pos) < 20.f)
+			{
+				m_CollisionState.HitState = AMAZING_HIT;
+				return true;
+			}
+		}
+		else if (v2.CollisionType == FANTASTIC_HIT)
+		{
+			if (Lib::Math::GetDistance(v1.Pos, v2.Pos) < 20.f)
+			{
+				m_CollisionState.HitState = FANTASTIC_HIT;
+				return true;
+			}
+		}
+		else
+		{
+			m_CollisionState.HitState = NON_HIT;
+			return false;
+		}
+	}
+
+
 
 	if ((v1.Pos.x - v1.CollisionRect.x / 2) <= (v2.Pos.x + v2.CollisionRect.x / 2) &&
 		(v1.Pos.x + v1.CollisionRect.x / 2) >= (v2.Pos.x - v2.CollisionRect.x / 2) &&

@@ -14,7 +14,7 @@ HandBase(&D3DXVECTOR2(0, 0), "h_left", _textureIndex)
 {
 	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 
-	m_Pos.x = static_cast<float>(ClientRect.right / 2 - 150 - m_Rect.x / 2);
+	m_Pos.x = static_cast<float>(ClientRect.right / 2 - 50 - m_Rect.x / 2);
 	m_Pos.y = static_cast<float>(ClientRect.bottom / 2 + 300);
 	m_StartPos = m_Pos;
 	m_EndPos.x = static_cast<float>(ClientRect.right / 2 - m_Rect.x / 2);
@@ -38,7 +38,7 @@ void LeftHand::Update()
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_C] == Lib::KEY_ON ||
 		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_X, Lib::GAMEPAD1) == Lib::PAD_ON ||
 		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_Y, Lib::GAMEPAD1) == Lib::PAD_ON ||
-		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_B, Lib::GAMEPAD1) == Lib::PAD_ON)
+		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_B, Lib::GAMEPAD1) == Lib::PAD_ON )
 	{
 		if (m_Pos.x < m_EndPos.x)
 		{
@@ -53,7 +53,7 @@ void LeftHand::Update()
 				m_Pos.x = m_EndPos.x;
 			}
 
-			if (m_Pos.x > (m_EndPos.x - 70.f))
+			if (m_Pos.x > (m_EndPos.x - 10.f))
 			{
 				m_pCollisionData->SetEnable(true);
 			}

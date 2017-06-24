@@ -11,6 +11,8 @@
 #include "../../../UIBase/DistanceGaugeUI/JudgeGaugeUI/JudgeGaugeUI.h"
 #include "../../../../../CollisionManager/CollisionManager.h"
 #include "Math/Math.h"
+#include "Helper/Helper.h"
+#include "Sound/DSoundManager.h"
 
 const D3DXVECTOR2 Knife::m_Rect = D3DXVECTOR2(192, 384);
 int	Knife::m_IndexMax = 0;
@@ -46,16 +48,16 @@ m_RectCollisionRatio(D3DXVECTOR2(0.3f,0.3f))
 	m_pVertex->Init(&m_Rect, uv);
 	m_pVertex->SetTexture(
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
+
+	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/playerDamage.wav", &m_DamageSoundIndex);
 }
 
 Knife::~Knife()
 {
+	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_DamageSoundIndex);
 	m_pVertex->Release();
-	delete m_pVertex;
-	m_pVertex = NULL;
-
-	delete m_pCollisionData;
-	m_pCollisionData = NULL;
+	Lib::SafeDelete<Lib::Vertex2D>(m_pVertex);
+	Lib::SafeDelete<CollisionData>(m_pCollisionData);
 	m_IndexMax = 0;
 }
 
@@ -140,6 +142,7 @@ void Knife::CollisionUpdate()
 		{
 			int playerHp = SINGLETON_INSTANCE(GameDataManager).GetPlayerHp();
 			SINGLETON_INSTANCE(GameDataManager).SetPlayerHp(--playerHp);
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_DamageSoundIndex,Lib::DSoundManager::SOUND_PLAY);
 			SINGLETON_INSTANCE(GameDataManager).SetKnifeBarIsEnable(m_Index, false);
 			m_pCollisionData->SetEnable(false);
 			m_IsThrow = false;
@@ -180,9 +183,6 @@ void Knife::CollisionUpdate()
 				break;
 			}
 		}
-
-		m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos.x, m_Pos.y, m_TargetDistance), &D3DXVECTOR2((m_Rect.x * m_Scale) * m_RectCollisionRatio.x,
-			(m_Rect.y * m_Scale) * m_RectCollisionRatio.y), CollisionData::AMAZING_PLAYER_KNIFE_TYPE);
 	}
 }
 

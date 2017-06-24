@@ -49,16 +49,6 @@ private:
 	void operator=(const TitleScene&);
 
 	/**
-	 * ライブラリの初期化
-	 */
-	void InitLibrary();
-	
-	/**
-	 * ライブラリの解放
-	 */
-	void ReleaseLibrary();
-
-	/**
 	 * キーボードの状態更新
 	 */
 	void KeyUpdate();
@@ -68,9 +58,11 @@ private:
 	StartButton*	 m_pStartButton;
 
 	int				 m_SoundIndex;
+	static int		 m_ButtonSoundIndex;
 	int				 m_BlackOutTextureIndex;
 	int				 m_BackGroundTextureIndex;
 	int				 m_TextTextureIndex;
+	bool			 m_IsNextSceneControl;
 
 };
 

@@ -17,13 +17,38 @@
 #include "ReturnTitleText/ReturnTitleText.h"
 #include "TimeWindow/TimeWindow.h"
 #include "JudgeCountWindow/JudgeCountWindow.h"
+#include "Sound/DSoundManager.h"
+#include "Helper/Helper.h"
+#include <stdlib.h>
+#include <time.h>
 
 
 ResultScene::ResultScene() :
 SceneBase(SCENE_RESULT)
 {
+	srand(unsigned int(time(NULL)));
+	if (SINGLETON_INSTANCE(GameDataManager).GetResultState())
+	{
+		SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/bgm/gameoverBGM.wav", &m_BgmSoundIndex);
+		switch (rand() % 3)
+		{
+		case 0:
+			SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/bg_g_over_01.png", &m_BackGroundTextureIndex);
+			break;
+		case 1:
+			SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/bg_g_over_02.png", &m_BackGroundTextureIndex);
+			break;
+		case 2:
+			SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/bg_g_over_03.png", &m_BackGroundTextureIndex);
+			break;
+		}
+	}
+	else
+	{
+		SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/bgm/gameclearBGM.wav", &m_BgmSoundIndex);
+		SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/TitleBackGround.png", &m_BackGroundTextureIndex);
+	}
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/Text.png", &m_TextTextureIndex);
-	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/TitleBackGround.png", &m_BackGroundTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png", &m_TextureIndex);
 	m_pBackGround = new Result::BackGround(m_BackGroundTextureIndex);
 	m_pClearText = new ClearText(m_TextTextureIndex);
@@ -36,31 +61,26 @@ SceneBase(SCENE_RESULT)
 
 ResultScene::~ResultScene()
 {
-	delete m_pScoreWindow;
-	m_pScoreWindow = NULL;
+	Lib::SafeDelete<Result::ScoreWindow>(m_pScoreWindow);
 
-	delete m_pTimeWindow;
-	m_pTimeWindow = NULL;
+	Lib::SafeDelete<TimeWindow>(m_pTimeWindow);
 
-	delete m_pJudgeCountWindow;
-	m_pJudgeCountWindow = NULL;
+	Lib::SafeDelete<JudgeCountWindow>(m_pJudgeCountWindow);
 
-	delete m_pContinueText;
-	m_pContinueText = NULL;
+	Lib::SafeDelete<ContinueText>(m_pContinueText);
 
-	delete m_pReturnTitleText;
-	m_pReturnTitleText = NULL;
+	Lib::SafeDelete<ReturnTitleText>(m_pReturnTitleText);
 
-	delete m_pClearText;
-	m_pClearText = NULL;
+	Lib::SafeDelete<ClearText>(m_pClearText);
 
-	delete m_pBackGround;
-	m_pBackGround = NULL;
+	Lib::SafeDelete<Result::BackGround>(m_pBackGround);
 
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_BackGroundTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Release();
+	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_BgmSoundIndex);
+	SINGLETON_INSTANCE(Lib::DSoundManager).ClearBuffer();
 }
 
 
@@ -71,14 +91,25 @@ ResultScene::~ResultScene()
 SceneBase::SceneID ResultScene::Update()
 {
 	KeyUpdate();
-
-	if (!m_pBackGround->Update()) return m_SceneID;
-	if (!m_pClearText->Update()) return m_SceneID;
-	if (!m_pTimeWindow->Update()) return m_SceneID;
-	if (!m_pJudgeCountWindow->Update()) return m_SceneID;
-	if (!m_pScoreWindow->Update()) return m_SceneID;
-	m_pContinueText->Update();
-	m_pReturnTitleText->Update();
+	if (SINGLETON_INSTANCE(GameDataManager).GetResultState() == GameDataManager::CLEAR)
+	{
+		if (!m_pBackGround->Update()) return m_SceneID;
+		SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_BgmSoundIndex, Lib::DSoundManager::SOUND_LOOP);
+		if (!m_pClearText->Update()) return m_SceneID;
+		if (!m_pTimeWindow->Update()) return m_SceneID;
+		if (!m_pJudgeCountWindow->Update()) return m_SceneID;
+		if (!m_pScoreWindow->Update()) return m_SceneID;
+		m_pContinueText->Update();
+		m_pReturnTitleText->Update();
+	}
+	else
+	{
+		if (!m_pBackGround->Update()) return m_SceneID;
+		SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_BgmSoundIndex, Lib::DSoundManager::SOUND_LOOP);
+		if (!m_pClearText->Update()) return m_SceneID;
+		m_pContinueText->Update();
+		m_pReturnTitleText->Update();
+	}
 	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_UPARROW] == Lib::KEY_PUSH ||
 		SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_DOWNARROW] == Lib::KEY_PUSH ||
 		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_ANALOG_UP, Lib::GAMEPAD1) == Lib::PAD_PUSH ||
@@ -114,13 +145,23 @@ void ResultScene::Draw()
 {
 	SINGLETON_INSTANCE(Lib::DX11Manager).SetDepthStencilTest(false);
 	SINGLETON_INSTANCE(Lib::DX11Manager).BeginScene();
-	m_pBackGround->Draw();
-	m_pClearText->Draw();
-	m_pTimeWindow->Draw();
-	m_pJudgeCountWindow->Draw();
-	m_pScoreWindow->Draw();
-	m_pContinueText->Draw();
-	m_pReturnTitleText->Draw();
+	if (SINGLETON_INSTANCE(GameDataManager).GetResultState() == GameDataManager::CLEAR)
+	{
+		m_pBackGround->Draw();
+		m_pClearText->Draw();
+		m_pTimeWindow->Draw();
+		m_pJudgeCountWindow->Draw();
+		m_pScoreWindow->Draw();
+		m_pContinueText->Draw();
+		m_pReturnTitleText->Draw();
+	}
+	else
+	{
+		m_pBackGround->Draw();
+		m_pClearText->Draw();
+		m_pContinueText->Draw();
+		m_pReturnTitleText->Draw();
+	}
 	SINGLETON_INSTANCE(Lib::DX11Manager).EndScene();
 }
 
@@ -147,66 +188,6 @@ bool ResultScene::KeyCheck()
 //----------------------------------------------------------------------------------------------------
 // Private Functions
 //----------------------------------------------------------------------------------------------------
-
-void ResultScene::InitLibrary()
-{
-	{
-		const HWND hWnd = SINGLETON_INSTANCE(Lib::Window).GetWindowHandle();
-
-		// Lib::DSoundManager Init
-		SINGLETON_CREATE(Lib::DSoundManager);
-		SINGLETON_INSTANCE(Lib::DSoundManager).Init(hWnd);
-		// Lib::DSoundManager Init end
-
-		// InputDevice関係
-		SINGLETON_CREATE(Lib::DXInputDevice);
-		SINGLETON_INSTANCE(Lib::DXInputDevice).Init(hWnd);
-
-		SINGLETON_CREATE(Lib::MouseDevice);
-		SINGLETON_INSTANCE(Lib::MouseDevice).Init(
-			SINGLETON_INSTANCE(Lib::DXInputDevice).GetInputDevice(), hWnd);
-
-		SINGLETON_CREATE(Lib::KeyDevice);
-		SINGLETON_INSTANCE(Lib::KeyDevice).Init(
-			SINGLETON_INSTANCE(Lib::DXInputDevice).GetInputDevice(), hWnd);
-
-		SINGLETON_CREATE(Lib::XInput);
-	}
-
-	{
-		ID3D11Device* const pDevice = SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice();
-
-		// Lib::TextureManager Init
-		SINGLETON_CREATE(Lib::TextureManager);
-		SINGLETON_INSTANCE(Lib::TextureManager).Init(pDevice);
-		// Lib::TextureManager Init end
-	}
-}
-
-void ResultScene::ReleaseLibrary()
-{
-	// Lib::TextureManager Delete
-	SINGLETON_INSTANCE(Lib::TextureManager).Release();
-	SINGLETON_DELETE(Lib::TextureManager);
-	// Lib::TextureManager Delete end
-
-	SINGLETON_DELETE(Lib::XInput);
-
-	// Lib::InputDevice関係
-	SINGLETON_INSTANCE(Lib::KeyDevice).Release();
-	SINGLETON_DELETE(Lib::KeyDevice);
-
-	SINGLETON_INSTANCE(Lib::MouseDevice).Release();
-	SINGLETON_DELETE(Lib::MouseDevice);
-
-	SINGLETON_INSTANCE(Lib::DXInputDevice).Release();
-	SINGLETON_DELETE(Lib::DXInputDevice);
-
-	// Lib::DSoundManager Delete
-	SINGLETON_INSTANCE(Lib::DSoundManager).Release();
-	SINGLETON_DELETE(Lib::DSoundManager);
-	// Lib::DSoundManager Delete end
-}
 
 void ResultScene::KeyUpdate()
 {

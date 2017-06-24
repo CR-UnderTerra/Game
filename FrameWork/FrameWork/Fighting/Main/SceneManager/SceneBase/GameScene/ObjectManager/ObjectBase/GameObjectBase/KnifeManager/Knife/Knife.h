@@ -105,6 +105,7 @@ private:
 	float						   m_Angle;				 //!< 角度
 	float						   m_Scale;				 //!< 拡縮率 1が最大
 	int							   m_TextureIndex;		 //!< テクスチャのインデックス
+	int							   m_DamageSoundIndex;
 	Lib::AnimUvController*		   m_pThrowUv;
 
 };

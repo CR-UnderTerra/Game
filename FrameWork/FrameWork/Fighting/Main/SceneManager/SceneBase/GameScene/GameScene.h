@@ -51,6 +51,8 @@ private:
 	Lib::AnimUvController* m_pUvController;
 	Lib::Vertex2D*		   m_pVertex;
 	int					   m_TextureIndex;
+	int					   m_CountdownSoundIndex;
+	int					   m_BgmSoundIndex;
 };
 
 

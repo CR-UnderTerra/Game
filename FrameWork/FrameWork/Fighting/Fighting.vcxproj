@@ -121,6 +121,7 @@
     <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\JudgeCountWindow.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\TimeWindow\TimeWindow.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\ScoreWindow\ResultScoreWindow.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleIcon\TitleIcon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\ContinueText\ContinueText.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\JudgeCountWindow.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\TimeWindow\TimeWindow.h" />
     <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\ScoreWindow\ResultScoreWindow.h" />
+    <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\TitleIcon\TitleIcon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

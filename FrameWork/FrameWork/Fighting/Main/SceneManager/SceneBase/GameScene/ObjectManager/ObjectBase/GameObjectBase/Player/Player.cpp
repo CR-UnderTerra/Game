@@ -11,6 +11,7 @@
 #include "../KnifeManager/KnifeManager.h"
 #include "../../../../CollisionManager/CollisionManager.h"
 #include "XInput/XInput.h"
+#include "Sound/DSoundManager.h"
 
 const D3DXVECTOR2 Player::m_RectCollision = D3DXVECTOR2(100, 230);
 
@@ -27,10 +28,12 @@ Player::Player(int _textureIndex)
 	m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos), &m_RectCollision, CollisionData::PLAYER_TYPE);
 	m_pCollisionData->SetEnable(false);
 	SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pCollisionData);
+	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/houchouSE_nagekaeshi.wav", &m_KnifeThrowSoundIndex);
 }
 
 Player::~Player()
 {
+	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_KnifeThrowSoundIndex);
 	for (int i = m_pHandBase.size() - 1; i >= 0; i--)
 	{
 		delete m_pHandBase[i];
@@ -104,6 +107,7 @@ void Player::KnifeCatchControl()
 	{
 		if (ThrowControl(GameDataManager::LEFT_ENEMY_TARGET))
 		{
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_KnifeThrowSoundIndex, Lib::DSoundManager::SOUND_PLAY);
 			m_pHandBase[0]->InitPos();
 			m_pHandBase[1]->InitPos();
 		}
@@ -114,6 +118,7 @@ void Player::KnifeCatchControl()
 	{
 		if (ThrowControl(GameDataManager::FRONT_ENEMY_TARGET))
 		{
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_KnifeThrowSoundIndex, Lib::DSoundManager::SOUND_PLAY);
 			m_pHandBase[0]->InitPos();
 			m_pHandBase[1]->InitPos();
 		}
@@ -123,10 +128,10 @@ void Player::KnifeCatchControl()
 	{
 		if (ThrowControl(GameDataManager::RIGHT_ENEMY_TARGET))
 		{
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_KnifeThrowSoundIndex, Lib::DSoundManager::SOUND_PLAY);
 			m_pHandBase[0]->InitPos();
 			m_pHandBase[1]->InitPos();
 		}
-		//(GameDataManager::RIGHT_ENEMY_TARGET);
 	}
 }
 

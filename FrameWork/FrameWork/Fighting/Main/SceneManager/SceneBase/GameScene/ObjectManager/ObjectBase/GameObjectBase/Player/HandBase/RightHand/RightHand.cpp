@@ -10,22 +10,25 @@
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "Window/Window.h"
 #include "XInput/XInput.h"
+#include "Sound/DSoundManager.h"
 
 RightHand::RightHand(int _textureIndex) :
 HandBase(&D3DXVECTOR2(0, 0), "h_right", _textureIndex)
 {
 	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
-
+	
 	m_Pos.x = static_cast<float>(ClientRect.right / 2 + 50 + m_Rect.x / 2);
 	m_Pos.y = static_cast<float>(ClientRect.bottom / 2 + 300);
 	m_StartPos = m_Pos;
 	m_EndPos.x = static_cast<float>(ClientRect.right / 2 + m_Rect.x / 2);
 	m_EndPos.y = m_StartPos.y;
 	m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos), &D3DXVECTOR2(m_Rect.x, m_Rect.y), CollisionData::HAND_TYPE);
+	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/shirahadariSE.wav",&m_SoundIndex);
 }
 
 RightHand::~RightHand()
 {
+	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_SoundIndex);
 }
 
 
@@ -50,9 +53,14 @@ void RightHand::Update()
 				m_Pos.x -= m_MoveSpeed;
 				m_MoveSpeed += m_Acceleration;
 			}
+			else
+			{
+				SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_SoundIndex,Lib::DSoundManager::SOUND_PLAY);
+			}
 
 			if (m_Pos.x <= m_EndPos.x)
 			{
+				SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_SoundIndex, Lib::DSoundManager::SOUND_PLAY);
 				m_pCollisionData->SetEnable(false);
 				m_Pos.x = m_EndPos.x;
 			}
@@ -74,6 +82,7 @@ void RightHand::Update()
 	}
 	else
 	{
+		SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_SoundIndex, Lib::DSoundManager::SOUND_STOP_RESET);
 		m_MoveSpeed = 1;
 		m_pCollisionData->SetEnable(false);
 		if (m_Pos.x < m_StartPos.x)

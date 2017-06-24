@@ -5,6 +5,7 @@
  */
 #include "Knife/Knife.h"
 #include "KnifeManager.h"
+#include "Helper/Helper.h"
 
 const int KnifeManager::m_KnifeMax = 3;
 
@@ -13,20 +14,17 @@ KnifeManager::~KnifeManager()
 {
 	for (int i = Knife::ANIM_MAX - 1; i >= 0; i--)
 	{
-		delete m_pEnemyKnifeUv[i];
-		m_pEnemyKnifeUv[i] = NULL;
+		Lib::SafeDelete<Lib::AnimUvController>(m_pEnemyKnifeUv[i]);
 	}
 
 	for (int i = Knife::ANIM_MAX - 1; i >= 0; i--)
 	{
-		delete m_pPlayerKnifeUv[i];
-		m_pPlayerKnifeUv[i] = NULL;
+		Lib::SafeDelete<Lib::AnimUvController>(m_pPlayerKnifeUv[i]);
 	}
 
 	for (int i = m_pKnife.size() - 1; i >= 0; i--)
 	{
-		delete m_pKnife[i];
-		m_pKnife[i] = NULL;
+		Lib::SafeDelete<Knife>(m_pKnife[i]);
 	}
 }
 

@@ -9,8 +9,10 @@
 #include "Dx11/DX11Manager.h"
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "../ResultScene.h"
+#include "../../GameDataManager/GameDataManager.h"
 
-const D3DXVECTOR2 ClearText::m_Rect = D3DXVECTOR2(1920 * 0.7, 315);
+
+const D3DXVECTOR2 ClearText::m_Rect = D3DXVECTOR2(1920.f * 0.7, 450.f * 0.7f);
 const float ClearText::m_DisplayTime = 3.f;
 
 
@@ -19,9 +21,18 @@ m_TextureIndex(_textureIndex)
 {
 	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 	m_Pos = D3DXVECTOR2(static_cast<float>(ClientRect.right / 2), static_cast<float>(ClientRect.bottom / 2));
-	m_Pos.y = 120.f;
 	m_pUvController = new Lib::AnimUvController();
-	m_pUvController->LoadAnimation("Resource/Text.anim", "l_clear");
+
+	if (SINGLETON_INSTANCE(GameDataManager).GetResultState() == GameDataManager::CLEAR)
+	{
+		m_Pos.y = 120.f;
+		m_pUvController->LoadAnimation("Resource/Text.anim", "l_clear");
+	}
+	else
+	{
+		m_Pos.y = 300.f;
+		m_pUvController->LoadAnimation("Resource/Text.anim", "l_over");
+	}
 
 	m_pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),

@@ -149,6 +149,12 @@
     <Filter Include="Main\SceneManager\SceneBase\ResultScene\JudgeCountWindow\CountDisplayBase\AmazingCountDisplay">
       <UniqueIdentifier>{1d7f323d-de94-46f7-986c-2ba80f23cbdd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\TitleScene\Icon">
+      <UniqueIdentifier>{38f6f40d-2220-4ed0-acae-ddc44887ebbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\SceneManager\SceneBase\ResultScene\Icon">
+      <UniqueIdentifier>{7d13fabc-08b8-46db-ad22-e3012bb9621a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\GameScene.cpp">
@@ -285,6 +291,9 @@
     </ClCompile>
     <ClCompile Include="Main\Main.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleIcon\TitleIcon.cpp">
+      <Filter>Main\SceneManager\SceneBase\TitleScene\Icon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -428,6 +437,9 @@
     </ClInclude>
     <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\ScoreWindow\ResultScoreWindow.h">
       <Filter>Main\SceneManager\SceneBase\ResultScene\ScoreWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\SceneManager\SceneBase\TitleScene\TitleIcon\TitleIcon.h">
+      <Filter>Main\SceneManager\SceneBase\TitleScene\Icon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

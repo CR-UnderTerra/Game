@@ -5,8 +5,19 @@
  */
 #ifndef APPLICATIONBASE_H
 #define APPLICATIONBASE_H
-//#define ENTRY_POINT int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmdShow)
 #include <Windows.h>
+
+#ifdef _MSC_VER
+#pragma comment(lib,"winmm.lib")
+#pragma comment(lib,"d3d11.lib")
+#pragma comment(lib,"d3dx11.lib")
+#pragma comment(lib,"d3dx10.lib")
+#pragma comment(lib,"dxguid.lib")
+#pragma comment(lib,"dinput8.lib")
+#pragma comment(lib,"dsound.lib")
+#pragma comment(lib,"strmiids.lib")
+#pragma comment(lib,"xinput.lib")
+#endif
 
 namespace Lib
 {
@@ -17,7 +28,9 @@ namespace Lib
 	class ApplicationBase
 	{
 	public:
-		ApplicationBase();
+		
+		ApplicationBase(LPCTSTR _appName,int _windowWidth, int _windowHeight);
+
 		virtual ~ApplicationBase();
 
 		static inline ApplicationBase* GetInstance()
@@ -25,15 +38,6 @@ namespace Lib
 			return m_pInstance;
 		}
 
-		/**
-		 * ライブラリの初期化
-		 */
-		void InitLib(HWND _hWnd);
-
-		/**
-		 * ライブラリの解放
-		 */
-		void ReleaseLib();
 
 		/**
 		 * 初期化処理
@@ -58,7 +62,20 @@ namespace Lib
 		int Boot();
 
 	private:
+		/**
+		 * ライブラリの初期化
+		 */
+		void InitLib();
+
+		/**
+		 * ライブラリの解放
+		 */
+		void ReleaseLib();
+
 		static ApplicationBase* m_pInstance;
+		int m_WindowWidth;
+		int m_WindowHeight;
+		LPCTSTR m_AppName;
 
 	};
 

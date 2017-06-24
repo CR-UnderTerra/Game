@@ -14,15 +14,20 @@
 #include "TitleBackGround/TitleBackGround.h"
 #include "StartButton/StartButton.h"
 #include "TitleText/TitleText.h"
+#include "Sound/DSoundManager.h"
+
+int TitleScene::m_ButtonSoundIndex = 0;
 
 
 TitleScene::TitleScene() :
-SceneBase(SCENE_TITLE)
+SceneBase(SCENE_TITLE),
+m_IsNextSceneControl(false)
 {
+	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/bgm/gametitleBGM.wav", &m_SoundIndex);
+	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/bottonSE.wav", &m_ButtonSoundIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/BlackOut.png", &m_BlackOutTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/Text.png", &m_TextTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/TitleBackGround.png", &m_BackGroundTextureIndex);
-
 	m_pTitleBackGround = new TitleBackGround(m_BackGroundTextureIndex);
 	m_pTitleText = new TitleText(m_TextTextureIndex);
 	m_pStartButton = new StartButton(m_TextTextureIndex);
@@ -37,6 +42,9 @@ TitleScene::~TitleScene()
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_BlackOutTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Release();
+	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_ButtonSoundIndex);
+	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_SoundIndex);
+	SINGLETON_INSTANCE(Lib::DSoundManager).ClearBuffer();
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -50,9 +58,9 @@ SceneBase::SceneID TitleScene::Update()
 	// alpha値が1になると次の絵を描画するので
 	// alpha値が1になるとtrueになって次の処理をするようにする
 	if (!m_pTitleBackGround->Update()) return m_SceneID;
+	SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_SoundIndex, Lib::DSoundManager::SOUND_LOOP);
 	if (!m_pTitleText->Update()) return m_SceneID;
 	if (!m_pStartButton->Update()) return m_SceneID;
-
 	if (KeyCheck())
 	{
 		m_SceneID = SCENE_GAME;
@@ -93,66 +101,6 @@ bool TitleScene::KeyCheck()
 //----------------------------------------------------------------------------------------------------
 // Private Functions
 //----------------------------------------------------------------------------------------------------
-
-void TitleScene::InitLibrary()
-{
-	{
-		const HWND hWnd = SINGLETON_INSTANCE(Lib::Window).GetWindowHandle();
-
-		// Lib::DSoundManager Init
-		SINGLETON_CREATE(Lib::DSoundManager);
-		SINGLETON_INSTANCE(Lib::DSoundManager).Init(hWnd);
-		// Lib::DSoundManager Init end
-
-		// InputDevice関係
-		SINGLETON_CREATE(Lib::DXInputDevice);
-		SINGLETON_INSTANCE(Lib::DXInputDevice).Init(hWnd);
-
-		SINGLETON_CREATE(Lib::MouseDevice);
-		SINGLETON_INSTANCE(Lib::MouseDevice).Init(
-			SINGLETON_INSTANCE(Lib::DXInputDevice).GetInputDevice(), hWnd);
-
-		SINGLETON_CREATE(Lib::KeyDevice);
-		SINGLETON_INSTANCE(Lib::KeyDevice).Init(
-			SINGLETON_INSTANCE(Lib::DXInputDevice).GetInputDevice(), hWnd);
-
-		SINGLETON_CREATE(Lib::XInput);
-	}
-
-	{
-		ID3D11Device* const pDevice = SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice();
-
-		// Lib::TextureManager Init
-		SINGLETON_CREATE(Lib::TextureManager);
-		SINGLETON_INSTANCE(Lib::TextureManager).Init(pDevice);
-		// Lib::TextureManager Init end
-	}
-}
-
-void TitleScene::ReleaseLibrary()
-{
-	// Lib::TextureManager Delete
-	SINGLETON_INSTANCE(Lib::TextureManager).Release();
-	SINGLETON_DELETE(Lib::TextureManager);
-	// Lib::TextureManager Delete end
-
-	SINGLETON_DELETE(Lib::XInput);
-
-	// Lib::InputDevice関係
-	SINGLETON_INSTANCE(Lib::KeyDevice).Release();
-	SINGLETON_DELETE(Lib::KeyDevice);
-
-	SINGLETON_INSTANCE(Lib::MouseDevice).Release();
-	SINGLETON_DELETE(Lib::MouseDevice);
-
-	SINGLETON_INSTANCE(Lib::DXInputDevice).Release();
-	SINGLETON_DELETE(Lib::DXInputDevice);
-
-	// Lib::DSoundManager Delete
-	SINGLETON_INSTANCE(Lib::DSoundManager).Release();
-	SINGLETON_DELETE(Lib::DSoundManager);
-	// Lib::DSoundManager Delete end
-}
 
 void TitleScene::KeyUpdate()
 {

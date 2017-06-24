@@ -15,10 +15,12 @@
 #include "CollisionManager/CollisionManager.h"
 #include "../GameDataManager/GameDataManager.h"
 #include "XInput/XInput.h"
+#include "Sound\DSoundManager.h"
+#include "Helper/Helper.h"
 
 namespace
 {
-	int FrameCount = 240;
+	int FrameCount = 300;
 }
 
 GameScene::GameScene() :
@@ -28,7 +30,7 @@ SceneBase(SCENE_GAME)
 	m_Pos.x = static_cast<float>(windowRect.right) / 2;
 	m_Pos.y = static_cast<float>(windowRect.bottom) / 2;
 	m_Rect = D3DXVECTOR2(45 * 2, 96 * 2);
-	FrameCount = 240;
+	FrameCount = 300;
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png",&m_TextureIndex);
 	m_pUvController = new Lib::AnimUvController();
 	m_pUvController->LoadAnimation("Resource/test_001.anim", "Number");
@@ -44,20 +46,28 @@ SceneBase(SCENE_GAME)
 	SINGLETON_CREATE(CollisionManager);
 	m_pObjectManager = new ObjectManager();
 	SINGLETON_INSTANCE(GameDataManager).Init();
+
+	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/bgm/gameBGM.wav", &m_BgmSoundIndex);
+	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/countdown/CountdownVoice.wav", &m_CountdownSoundIndex);
 }
 
 GameScene::~GameScene()
 {
-	delete m_pObjectManager;
-	m_pObjectManager = NULL;
+	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_CountdownSoundIndex);
+	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_BgmSoundIndex);
+
+	Lib::SafeDelete<ObjectManager>(m_pObjectManager);
 
 	m_pVertex->Release();
-	delete m_pVertex;
+	Lib::SafeDelete<Lib::Vertex2D>(m_pVertex);
+
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextureIndex);
-	delete m_pUvController;
+
+	Lib::SafeDelete<Lib::AnimUvController>(m_pUvController);
 
 	SINGLETON_DELETE(CollisionManager);
 	SINGLETON_INSTANCE(Lib::TextureManager).Release();
+	SINGLETON_INSTANCE(Lib::DSoundManager).ClearBuffer();
 }
 
 
@@ -68,12 +78,18 @@ GameScene::~GameScene()
 SceneBase::SceneID GameScene::Update()
 {
 	FrameCount--;
-	if (FrameCount > 60)
+	if (FrameCount > 60 && FrameCount < 240)
+	{
+		SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_CountdownSoundIndex, Lib::DSoundManager::SOUND_PLAY);
+	}
+
+	if (FrameCount > 0)
 	{
 		m_pUvController->SetAnimCount(FrameCount / 60);
 	}
 	else
 	{
+		SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_BgmSoundIndex, Lib::DSoundManager::SOUND_LOOP);
 		SINGLETON_INSTANCE(GameDataManager).Update();
 		m_pObjectManager->Update();
 		SINGLETON_INSTANCE(CollisionManager).Update();
@@ -93,7 +109,7 @@ void GameScene::Draw()
 	SINGLETON_INSTANCE(Lib::DX11Manager).SetDepthStencilTest(false);
 	SINGLETON_INSTANCE(Lib::DX11Manager).BeginScene();
 	m_pObjectManager->Draw();
-	if (FrameCount > 60)
+	if (FrameCount > 60 && FrameCount < 240)
 	{
 		m_pVertex->Draw(&m_Pos,m_pUvController->GetUV());
 	}

@@ -7,6 +7,7 @@
 #include "Texture/TextureManager.h"
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
+#include "Helper/Helper.h"
 
 const D3DXVECTOR2 BackGround::m_Rect = D3DXVECTOR2(1350, 1080);
 
@@ -34,12 +35,10 @@ BackGround::~BackGround()
 	if (m_pVertex != NULL)
 	{
 		m_pVertex->Release();
-		delete m_pVertex;
-		m_pVertex = NULL;
+		Lib::SafeDelete<Lib::Vertex2D>(m_pVertex);
 	}
 	
-	delete m_pAnimUvController;
-	m_pAnimUvController = NULL;
+	Lib::SafeDelete<Lib::AnimUvController>(m_pAnimUvController);
 }
 
 

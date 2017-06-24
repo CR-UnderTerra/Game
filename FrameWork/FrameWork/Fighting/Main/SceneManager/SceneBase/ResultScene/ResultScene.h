@@ -53,16 +53,6 @@ public:
 
 private:
 	/**
-	 * ライブラリの初期化
-	 */
-	void InitLibrary();
-
-	/**
-	 * ライブラリの解放
-	 */
-	void ReleaseLibrary();
-
-	/**
 	 * キーボードの状態更新
 	 */
 	void KeyUpdate();
@@ -71,6 +61,7 @@ private:
 	int				     m_BackGroundTextureIndex;
 	int				     m_TextTextureIndex;
 	int					 m_TextureIndex;
+	int					 m_BgmSoundIndex;
 	Result::BackGround*  m_pBackGround;
 	Result::ScoreWindow* m_pScoreWindow;
 	ClearText*		     m_pClearText;

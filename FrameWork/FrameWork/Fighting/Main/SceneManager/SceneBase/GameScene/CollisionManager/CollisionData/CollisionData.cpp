@@ -98,7 +98,7 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 				return true;
 			}
 		}
-		else if (v2.CollisionType == FANTASTIC_HIT)
+		else if (v2.CollisionType == FANTASTIC_PLAYER_KNIFE_TYPE)
 		{
 			if (Lib::Math::GetDistance(v1.Pos, v2.Pos) < 20.f)
 			{

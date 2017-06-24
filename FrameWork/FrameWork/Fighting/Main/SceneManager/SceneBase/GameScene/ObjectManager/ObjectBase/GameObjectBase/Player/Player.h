@@ -57,6 +57,7 @@ private:
 	std::vector<HandBase*>   m_pHandBase;
 	CollisionData*		     m_pCollisionData;
 	D3DXVECTOR2			     m_Pos;
+	int						 m_KnifeThrowSoundIndex;
 
 };
 

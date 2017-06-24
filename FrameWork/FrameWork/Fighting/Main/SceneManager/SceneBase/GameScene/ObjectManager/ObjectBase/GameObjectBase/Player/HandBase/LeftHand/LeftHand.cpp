@@ -47,6 +47,11 @@ void LeftHand::Update()
 				m_Pos.x += m_MoveSpeed;
 				m_MoveSpeed += m_Acceleration;
 			}
+			else
+			{
+
+			}
+
 			if (m_Pos.x >= m_EndPos.x)
 			{
 				m_pCollisionData->SetEnable(false);

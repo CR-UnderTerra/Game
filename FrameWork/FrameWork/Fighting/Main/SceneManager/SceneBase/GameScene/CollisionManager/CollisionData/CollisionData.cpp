@@ -65,7 +65,7 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 
 	if (v1.CollisionType == GOOD_PLAYER_KNIFE_TYPE ||
 		v1.CollisionType == AMAZING_PLAYER_KNIFE_TYPE ||
-		v1.CollisionType == FANTASTIC_HIT &&
+		v1.CollisionType == FANTASTIC_PLAYER_KNIFE_TYPE &&
 		v2.CollisionType == ENEMY_TYPE)
 	{
 		if (Lib::Math::GetDistance(v1.Pos, v2.Pos) < 20.f)

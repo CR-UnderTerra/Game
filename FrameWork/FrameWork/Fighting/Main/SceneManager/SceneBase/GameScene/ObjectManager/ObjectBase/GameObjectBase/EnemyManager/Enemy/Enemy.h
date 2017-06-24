@@ -15,11 +15,12 @@
 class Enemy : public GameObjectBase
 {
 public:
-	enum ENEMY_ACTION
+	enum EXPLOSION_TYPE
 	{
-		ACT_WAIT,
-		ACT_THROW,
-		ACTION_MAX
+		GOOD_EXPLOSION,
+		AMAZING_EXPLOSION,
+		FANTASTIC_EXPLOSION,
+		EXPLOSION_MAX
 	};
 
 	enum ATTACK_ENEMY
@@ -78,7 +79,7 @@ public:
 
 	void EnemyPosInit(CollisionData* _pcollisiondata, D3DXVECTOR2 _pos, Lib::Vertex2D* _vertex, CollisionData::HIT_STATE _hitstate);
 
-	void EnemyExplosionDraw(D3DXVECTOR2 _pos, float _alpha);
+	void EnemyExplosionDraw(D3DXVECTOR2 _pos, float _alpha, EXPLOSION_TYPE explosiontype_);
 
 	void Attack();
 
@@ -114,20 +115,23 @@ private:
 	Lib::Vertex2D*				   m_pLeftEnemyVertex;
 	Lib::Vertex2D*				   m_pCenterEnemyVertex;
 	Lib::Vertex2D*				   m_pRightEnemyVertex;
-	Lib::Vertex2D*				   m_pEnemyExplosionVertex;
+	Lib::Vertex2D*				   m_pEnemyGoodExplosionVertex;
+	Lib::Vertex2D*				   m_pEnemyAmazingExplosionVertex;
+	Lib::Vertex2D*				   m_pEnemyFantasticExplosionVertex;
 	Lib::AnimUvController*		   m_pWaitUvController;
 	Lib::AnimUvController*		   m_pAttackUvController;
-	Lib::AnimUvController*		   m_pEnemyExplosionUvController;
+	Lib::AnimUvController*		   m_pEnemyGoodExplosionUvController;
+	Lib::AnimUvController*		   m_pEnemyAmazingExplosionUvController;
+	Lib::AnimUvController*		   m_pEnemyFantasticExplosionUvController;
 	D3DXVECTOR2					   m_PosLeft;
 	D3DXVECTOR2					   m_PosCenter;
 	D3DXVECTOR2					   m_PosRight;
 	int							   m_EnemyLoad[ENEMYCOLUMN][ENEMYROW];
 
-	ENEMY_ACTION				   m_Action;
 	ATTACK_ENEMY				   m_AttackEnemy;
-	bool						   m_FirstAttack;
-	bool						   m_SecondAttack;
-	bool						   m_ThirdAttack;
+	bool						   m_LeftEnemyAttack;
+	bool						   m_CenterEnemyAttack;
+	bool						   m_RightEnemyAttack;
 	float						   m_AttackInterval;
 	float						   m_AttackTime;
 
@@ -140,6 +144,14 @@ private:
 	float						   m_RightEnemyCrowdAlfa;
 
 	float						   m_ThrowSpeed;
+	float						   m_ExplosionTime;
+	bool						   m_IsLeftEnemyExplosion;
+	bool						   m_IsCenterEnemyExplosion;
+	bool						   m_IsRightEnemyExplosion;
+
+	bool						   m_GoodHit;
+	bool						   m_AmazingHit;
+	bool						   m_FantasticHit;
 };
 
 #endif // !ENEMY_H

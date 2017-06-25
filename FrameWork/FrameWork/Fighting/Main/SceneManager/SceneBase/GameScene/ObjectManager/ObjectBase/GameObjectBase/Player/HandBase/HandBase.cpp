@@ -7,6 +7,7 @@
 #include "Texture/TextureManager.h"
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
+#include "Helper/Helper.h"
 
 const D3DXVECTOR2 HandBase::m_Rect = D3DXVECTOR2(192, 384);
 const float HandBase::m_Acceleration = 1.f;
@@ -37,18 +38,15 @@ m_TextureIndex(_textureIndex)
 
 HandBase::~HandBase()
 {
-	delete m_pCollisionData;
-	m_pCollisionData = NULL;
+	Lib::SafeDelete(m_pCollisionData);
 
 	if (m_pVertex != NULL)
 	{
 		m_pVertex->Release();
-		delete m_pVertex;
-		m_pVertex = NULL;
+		Lib::SafeDelete(m_pVertex);
 	}
 
-	delete m_pAnimUvController;
-	m_pAnimUvController = NULL;
+	Lib::SafeDelete(m_pAnimUvController);
 }
 
 

@@ -9,6 +9,7 @@
 #include "Dx11/DX11Manager.h"
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "../TitleScene.h"
+#include "Helper/Helper.h"
 
 const D3DXVECTOR2 StartButton::m_Rect = D3DXVECTOR2(768, 192);
 const float StartButton::m_DisplayTime = 2.f;
@@ -43,12 +44,10 @@ StartButton::~StartButton()
 	if (m_pVertex != NULL)
 	{
 		m_pVertex->Release();
-		delete m_pVertex;
-		m_pVertex = NULL;
+		Lib::SafeDelete(m_pVertex);
 	}
 
-	delete m_pUvController;
-	m_pUvController = NULL;
+	Lib::SafeDelete(m_pUvController);
 }
 
 

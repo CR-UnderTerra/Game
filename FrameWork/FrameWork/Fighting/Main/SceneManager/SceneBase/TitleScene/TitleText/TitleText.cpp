@@ -9,6 +9,7 @@
 #include "Dx11/DX11Manager.h"
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "../TitleScene.h"
+#include "Helper/Helper.h"
 
 const D3DXVECTOR2 TitleText::m_Rect = D3DXVECTOR2(1920 * 0.7, 450 * 0.7);
 const float TitleText::m_DisplayTime = 3.f;
@@ -40,12 +41,10 @@ TitleText::~TitleText()
 	if (m_pVertex != NULL)
 	{
 		m_pVertex->Release();
-		delete m_pVertex;
-		m_pVertex = NULL;
+		Lib::SafeDelete(m_pVertex);
 	}
 
-	delete m_pUvController;
-	m_pUvController = NULL;
+	Lib::SafeDelete(m_pUvController);
 }
 
 

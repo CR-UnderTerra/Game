@@ -13,6 +13,7 @@
 #include "ObjectBase/UIBase/TimerUI/TimerUI.h"
 #include "ObjectBase/GameObjectBase/EnemyManager/EnemyManager.h"
 #include "ObjectBase/UIBase/ScoreWindow/ScoreWindow.h"
+#include "Helper/Helper.h"
 
 
 ObjectManager::ObjectManager()
@@ -37,16 +38,13 @@ ObjectManager::~ObjectManager()
 {
 	for (int i = m_pUIBase.size() - 1; i >= 0; i--)
 	{
-		delete m_pUIBase[i];
-		m_pUIBase[i] = NULL;
+		Lib::SafeDelete(m_pUIBase[i]);
 	}
 
 	SINGLETON_DELETE(EnemyManager);
-	delete m_pPlayer;
-	m_pPlayer = NULL;
-
-	delete m_pBackGround;
-	m_pBackGround = NULL;
+	
+	Lib::SafeDelete(m_pPlayer);
+	Lib::SafeDelete(m_pBackGround);
 
 	SINGLETON_DELETE(KnifeManager);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextureIndex3);

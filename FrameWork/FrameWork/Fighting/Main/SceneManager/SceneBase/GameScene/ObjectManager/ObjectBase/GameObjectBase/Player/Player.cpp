@@ -12,6 +12,7 @@
 #include "../../../../CollisionManager/CollisionManager.h"
 #include "XInput/XInput.h"
 #include "Sound/DSoundManager.h"
+#include "Helper/Helper.h"
 
 const D3DXVECTOR2 Player::m_RectCollision = D3DXVECTOR2(100, 230);
 
@@ -36,12 +37,10 @@ Player::~Player()
 	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_KnifeThrowSoundIndex);
 	for (int i = m_pHandBase.size() - 1; i >= 0; i--)
 	{
-		delete m_pHandBase[i];
-		m_pHandBase[i] = NULL;
+		Lib::SafeDelete(m_pHandBase[i]);
 	}
 
-	delete m_pCollisionData;
-	m_pCollisionData = NULL;
+	Lib::SafeDelete(m_pCollisionData);
 }
 
 

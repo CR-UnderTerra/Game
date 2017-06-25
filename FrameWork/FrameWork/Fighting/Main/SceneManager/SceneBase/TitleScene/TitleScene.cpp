@@ -15,6 +15,7 @@
 #include "StartButton/StartButton.h"
 #include "TitleText/TitleText.h"
 #include "Sound/DSoundManager.h"
+#include "Helper/Helper.h"
 
 int TitleScene::m_ButtonSoundIndex = 0;
 
@@ -35,9 +36,9 @@ m_IsNextSceneControl(false)
 
 TitleScene::~TitleScene()
 {
-	delete m_pStartButton;
-	delete m_pTitleText;
-	delete m_pTitleBackGround;
+	Lib::SafeDelete(m_pStartButton);
+	Lib::SafeDelete(m_pTitleText);
+	Lib::SafeDelete(m_pTitleBackGround);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_BackGroundTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_BlackOutTextureIndex);

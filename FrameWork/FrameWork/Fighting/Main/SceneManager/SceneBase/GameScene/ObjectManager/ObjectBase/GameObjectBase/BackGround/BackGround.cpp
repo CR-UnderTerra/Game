@@ -35,10 +35,10 @@ BackGround::~BackGround()
 	if (m_pVertex != NULL)
 	{
 		m_pVertex->Release();
-		Lib::SafeDelete<Lib::Vertex2D>(m_pVertex);
+		Lib::SafeDelete(m_pVertex);
 	}
 	
-	Lib::SafeDelete<Lib::AnimUvController>(m_pAnimUvController);
+	Lib::SafeDelete(m_pAnimUvController);
 }
 
 

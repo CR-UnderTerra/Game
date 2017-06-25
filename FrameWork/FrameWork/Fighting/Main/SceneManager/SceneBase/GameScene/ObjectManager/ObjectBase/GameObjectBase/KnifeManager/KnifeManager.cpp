@@ -14,17 +14,17 @@ KnifeManager::~KnifeManager()
 {
 	for (int i = Knife::ANIM_MAX - 1; i >= 0; i--)
 	{
-		Lib::SafeDelete<Lib::AnimUvController>(m_pEnemyKnifeUv[i]);
+		Lib::SafeDelete(m_pEnemyKnifeUv[i]);
 	}
 
 	for (int i = Knife::ANIM_MAX - 1; i >= 0; i--)
 	{
-		Lib::SafeDelete<Lib::AnimUvController>(m_pPlayerKnifeUv[i]);
+		Lib::SafeDelete(m_pPlayerKnifeUv[i]);
 	}
 
 	for (int i = m_pKnife.size() - 1; i >= 0; i--)
 	{
-		Lib::SafeDelete<Knife>(m_pKnife[i]);
+		Lib::SafeDelete(m_pKnife[i]);
 	}
 }
 

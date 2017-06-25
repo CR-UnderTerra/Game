@@ -8,7 +8,7 @@
 #include "CountDisplayBase/AmazingCountDisplay/AmazingCountDisplay.h"
 #include "CountDisplayBase/FantasticCountDisplay/FantasticCountDisplay.h"
 #include "../ResultScene.h"
-
+#include "Helper/Helper.h"
 
 const float JudgeCountWindow::m_DisplayTime = 2.f;
 
@@ -27,8 +27,7 @@ JudgeCountWindow::~JudgeCountWindow()
 {
 	for (int i = m_pCountDisplayBase.size() - 1; i >= 0; i--)
 	{
-		delete m_pCountDisplayBase[i];
-		m_pCountDisplayBase[i] = NULL;
+		Lib::SafeDelete(m_pCountDisplayBase[i]);
 	}
 }
 

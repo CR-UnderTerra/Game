@@ -9,6 +9,7 @@
 #include "Dx11/DX11Manager.h"
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "../ResultScene.h"
+#include "Helper/Helper.h"
 
 const D3DXVECTOR2 ReturnTitleText::m_Rect = D3DXVECTOR2(768 * 0.7, 192 * 0.7);
 const float ReturnTitleText::m_DisplayTime = 2.f;
@@ -40,12 +41,10 @@ ReturnTitleText::~ReturnTitleText()
 	if (m_pVertex != NULL)
 	{
 		m_pVertex->Release();
-		delete m_pVertex;
-		m_pVertex = NULL;
+		Lib::SafeDelete(m_pVertex);
 	}
 
-	delete m_pUvController;
-	m_pUvController = NULL;
+	Lib::SafeDelete(m_pUvController);
 }
 
 

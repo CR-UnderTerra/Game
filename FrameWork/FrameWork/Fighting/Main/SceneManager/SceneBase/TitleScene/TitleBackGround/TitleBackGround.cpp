@@ -9,6 +9,7 @@
 #include "Dx11/DX11Manager.h"
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "../TitleScene.h"
+#include "Helper/Helper.h"
 
 const D3DXVECTOR2 TitleBackGround::m_Rect = D3DXVECTOR2(1920, 1080);
 const float TitleBackGround::m_DisplayTime = 2.f;
@@ -40,12 +41,10 @@ TitleBackGround::~TitleBackGround()
 	if (m_pVertex != NULL)
 	{
 		m_pVertex->Release();
-		delete m_pVertex;
-		m_pVertex = NULL;
+		Lib::SafeDelete(m_pVertex);
 	}
 
-	delete m_pUvController;
-	m_pUvController = NULL;
+	Lib::SafeDelete(m_pUvController);
 }
 
 

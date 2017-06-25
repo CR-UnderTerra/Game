@@ -16,7 +16,7 @@ RightHand::RightHand(int _textureIndex) :
 HandBase(&D3DXVECTOR2(0, 0), "h_right", _textureIndex)
 {
 	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
-	
+	m_Angle = 10;
 	m_Pos.x = static_cast<float>(ClientRect.right / 2 + 50 + m_Rect.x / 2);
 	m_Pos.y = static_cast<float>(ClientRect.bottom / 2 + 300);
 	m_StartPos = m_Pos;
@@ -45,7 +45,6 @@ void RightHand::Update()
 		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_Y, Lib::GAMEPAD1) == Lib::PAD_ON ||
 		SINGLETON_INSTANCE(Lib::XInput).GetButtonState(Lib::GAMEPAD_B, Lib::GAMEPAD1) == Lib::PAD_ON )
 	{
-
 		if (m_Pos.x > m_EndPos.x)
 		{
 			if (m_pCollisionData->GetCollisionState().HitState != CollisionData::CATCH_HIT)
@@ -55,11 +54,13 @@ void RightHand::Update()
 			}
 			else
 			{
+				m_Angle = 0;
 				SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_SoundIndex,Lib::DSoundManager::SOUND_PLAY);
 			}
 
 			if (m_Pos.x <= m_EndPos.x)
 			{
+				m_Angle = 0;
 				SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_SoundIndex, Lib::DSoundManager::SOUND_PLAY);
 				m_pCollisionData->SetEnable(false);
 				m_Pos.x = m_EndPos.x;
@@ -82,6 +83,7 @@ void RightHand::Update()
 	}
 	else
 	{
+		m_Angle = 10;
 		SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_SoundIndex, Lib::DSoundManager::SOUND_STOP_RESET);
 		m_MoveSpeed = 1;
 		m_pCollisionData->SetEnable(false);
@@ -99,5 +101,6 @@ void RightHand::Update()
 
 void RightHand::Draw()
 {
-	m_pVertex->Draw(&m_Pos, m_pAnimUvController->GetUV());
+	m_pVertex->Draw(&m_Pos, m_pAnimUvController->GetUV(),1.f,
+		&D3DXVECTOR2(1.f,1.f),m_Angle);
 }

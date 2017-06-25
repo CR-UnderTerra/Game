@@ -61,19 +61,13 @@ SceneBase(SCENE_RESULT)
 
 ResultScene::~ResultScene()
 {
-	Lib::SafeDelete<Result::ScoreWindow>(m_pScoreWindow);
-
-	Lib::SafeDelete<TimeWindow>(m_pTimeWindow);
-
-	Lib::SafeDelete<JudgeCountWindow>(m_pJudgeCountWindow);
-
-	Lib::SafeDelete<ContinueText>(m_pContinueText);
-
-	Lib::SafeDelete<ReturnTitleText>(m_pReturnTitleText);
-
-	Lib::SafeDelete<ClearText>(m_pClearText);
-
-	Lib::SafeDelete<Result::BackGround>(m_pBackGround);
+	Lib::SafeDelete(m_pScoreWindow);
+	Lib::SafeDelete(m_pTimeWindow);
+	Lib::SafeDelete(m_pJudgeCountWindow);
+	Lib::SafeDelete(m_pContinueText);
+	Lib::SafeDelete(m_pReturnTitleText);
+	Lib::SafeDelete(m_pClearText);
+	Lib::SafeDelete(m_pBackGround);
 
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_BackGroundTextureIndex);

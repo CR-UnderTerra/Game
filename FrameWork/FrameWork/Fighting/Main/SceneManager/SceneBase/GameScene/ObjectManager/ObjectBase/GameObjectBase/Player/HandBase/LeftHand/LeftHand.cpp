@@ -13,7 +13,7 @@ LeftHand::LeftHand(int _textureIndex) :
 HandBase(&D3DXVECTOR2(0, 0), "h_left", _textureIndex)
 {
 	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
-
+	m_Angle = -10;
 	m_Pos.x = static_cast<float>(ClientRect.right / 2 - 50 - m_Rect.x / 2);
 	m_Pos.y = static_cast<float>(ClientRect.bottom / 2 + 300);
 	m_StartPos = m_Pos;
@@ -49,11 +49,12 @@ void LeftHand::Update()
 			}
 			else
 			{
-
+				m_Angle = 0;
 			}
 
 			if (m_Pos.x >= m_EndPos.x)
 			{
+				m_Angle = 0;
 				m_pCollisionData->SetEnable(false);
 				m_Pos.x = m_EndPos.x;
 			}
@@ -75,6 +76,7 @@ void LeftHand::Update()
 	}
 	else
 	{
+		m_Angle = -10;
 		m_MoveSpeed = 1;
 		m_pCollisionData->SetEnable(false);
 		if (m_Pos.x > m_StartPos.x)
@@ -91,5 +93,6 @@ void LeftHand::Update()
 
 void LeftHand::Draw()
 {
-	m_pVertex->Draw(&m_Pos,m_pAnimUvController->GetUV());
+	m_pVertex->Draw(&m_Pos,m_pAnimUvController->GetUV(),1.f,
+		&D3DXVECTOR2(1.f,1.f),m_Angle);
 }

@@ -11,6 +11,7 @@
 #include "../../../../../CollisionManager/CollisionManager.h"
 #include "../../../../../CollisionManager/CollisionData/CollisionData.h"
 #include "../../../../../../GameDataManager/GameDataManager.h"
+#include "Math/Math.h"
 
 class HandBase : public GameObjectBase
 {
@@ -63,6 +64,7 @@ protected:
 	D3DXVECTOR2				 m_Pos;
 	D3DXVECTOR2				 m_StartPos;
 	D3DXVECTOR2				 m_EndPos;
+	float					 m_Angle;
 	float					 m_MoveSpeed;
 	CollisionData*		     m_pCollisionData;
 

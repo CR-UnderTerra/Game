@@ -56,8 +56,8 @@ Knife::~Knife()
 {
 	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_DamageSoundIndex);
 	m_pVertex->Release();
-	Lib::SafeDelete<Lib::Vertex2D>(m_pVertex);
-	Lib::SafeDelete<CollisionData>(m_pCollisionData);
+	Lib::SafeDelete(m_pVertex);
+	Lib::SafeDelete(m_pCollisionData);
 	m_IndexMax = 0;
 }
 

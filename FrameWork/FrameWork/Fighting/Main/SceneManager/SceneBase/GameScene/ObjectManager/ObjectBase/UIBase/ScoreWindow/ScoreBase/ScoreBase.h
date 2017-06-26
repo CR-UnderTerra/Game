@@ -2,11 +2,12 @@
 #define SCOREBASE_H
 #include "Vertex2D/Vertex2D.h"
 #include "Animation/AnimUvController.h"
+#include "../../UIBase.h"
 
 /**
  * Score表示の基底クラス
  */
-class ScoreBase
+class ScoreBase : public UIBase
 {
 public:
 	ScoreBase(D3DXVECTOR2* _pos,LPCTSTR _animName,int _textureIndex);

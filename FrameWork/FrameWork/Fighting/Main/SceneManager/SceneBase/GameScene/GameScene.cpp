@@ -17,6 +17,8 @@
 #include "XInput/XInput.h"
 #include "Sound\DSoundManager.h"
 #include "Helper/Helper.h"
+#include "Event/EventManager.h"
+
 
 namespace
 {
@@ -26,6 +28,7 @@ namespace
 GameScene::GameScene() :
 SceneBase(SCENE_GAME)
 {
+	SINGLETON_CREATE(Lib::EventManager);
 	RECT windowRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 	m_Pos.x = static_cast<float>(windowRect.right) / 2;
 	m_Pos.y = static_cast<float>(windowRect.bottom) / 2;
@@ -68,6 +71,7 @@ GameScene::~GameScene()
 	SINGLETON_DELETE(CollisionManager);
 	SINGLETON_INSTANCE(Lib::TextureManager).Release();
 	SINGLETON_INSTANCE(Lib::DSoundManager).ClearBuffer();
+	SINGLETON_DELETE(Lib::EventManager);
 }
 
 

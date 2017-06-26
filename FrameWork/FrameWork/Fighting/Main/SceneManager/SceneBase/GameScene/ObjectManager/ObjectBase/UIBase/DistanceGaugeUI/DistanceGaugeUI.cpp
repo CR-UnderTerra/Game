@@ -12,7 +12,7 @@
 #include "KnifeBar/KnifeBar.h"
 #include "JudgeGaugeUI/JudgeGaugeUI.h"
 
-const D3DXVECTOR2 DistanceGaugeUI::m_Rect = D3DXVECTOR2(64,750);
+const D3DXVECTOR2 DistanceGaugeUI::m_Rect = D3DXVECTOR2(64,800);
 
 
 DistanceGaugeUI::DistanceGaugeUI(int _textureIndex) :
@@ -79,7 +79,8 @@ void DistanceGaugeUI::Update()
 
 void DistanceGaugeUI::Draw()
 {
-	m_pVertex->Draw(&m_Pos,m_pUvController->GetUV());
+	Vibration();
+	m_pVertex->Draw(&D3DXVECTOR2(m_Pos.x, m_Pos.y + m_VibValue), m_pUvController->GetUV());
 	for (int i = 0; i < KnifeManager::m_KnifeMax; i++)
 	{
 		m_pKnifeBar[i]->Draw();

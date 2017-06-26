@@ -9,6 +9,7 @@
 #include "Dx11/DX11Manager.h"
 #include "HpIcon/HpIcon.h"
 #include "../../../../../GameDataManager/GameDataManager.h"
+#include "Event/EventManager.h"
 
 const D3DXVECTOR2 HpGaugeUI::m_Rect = D3DXVECTOR2(225,96);
 
@@ -31,6 +32,7 @@ m_TextureIndex(_textureIndex)
 	{
 		m_pHpIcon[i] = new HpIcon(m_TextureIndex, &D3DXVECTOR2(static_cast<FLOAT>((m_Pos.x - 75) + 75 * i), m_Pos.y));
 	}
+
 }
 
 
@@ -67,7 +69,8 @@ void HpGaugeUI::Update()
 
 void HpGaugeUI::Draw()
 {
-	m_pVertex->Draw(&m_Pos, m_pUvController->GetUV());
+	Vibration();
+	m_pVertex->Draw(&D3DXVECTOR2(m_Pos.x, m_Pos.y + m_VibValue), m_pUvController->GetUV());
 	if (SINGLETON_INSTANCE(GameDataManager).GetPlayerHp() < 0) return;
 	for (int i = 0; i < SINGLETON_INSTANCE(GameDataManager).GetPlayerHp(); i++)
 	{

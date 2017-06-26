@@ -68,12 +68,13 @@ void TimerUI::Update()
 
 void TimerUI::Draw()
 {
-	m_FrameVertex.pVertex->Draw(&m_FrameVertex.Pos, m_FrameVertex.pUvController->GetUV());
-	m_ColonVertex.pVertex->Draw(&m_ColonVertex.Pos, m_ColonVertex.pUvController->GetUV());
+	Vibration();
+	m_FrameVertex.pVertex->Draw(&D3DXVECTOR2(m_FrameVertex.Pos.x, m_FrameVertex.Pos.y + m_VibValue), m_FrameVertex.pUvController->GetUV());
+	m_ColonVertex.pVertex->Draw(&D3DXVECTOR2(m_ColonVertex.Pos.x, m_ColonVertex.Pos.y + m_VibValue), m_ColonVertex.pUvController->GetUV());
 
 	for (int i = 0; i < 4; i++)
 	{
-		m_NumVertex[i].pVertex->Draw(&m_NumVertex[i].Pos, m_NumVertex[i].pUvController->GetUV());
+		m_NumVertex[i].pVertex->Draw(&D3DXVECTOR2(m_NumVertex[i].Pos.x, m_NumVertex[i].Pos.y + m_VibValue), m_NumVertex[i].pUvController->GetUV());
 	}
 }
 

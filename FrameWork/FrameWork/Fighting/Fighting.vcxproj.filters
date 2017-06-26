@@ -295,6 +295,9 @@
     <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleIcon\TitleIcon.cpp">
       <Filter>Main\SceneManager\SceneBase\TitleScene\Icon</Filter>
     </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\UIBase.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\GameScene.h">

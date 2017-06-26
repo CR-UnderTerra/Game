@@ -49,5 +49,6 @@ void HpIcon::Update()
 
 void HpIcon::Draw()
 {
-	m_pVertex->Draw(&m_Pos, m_pUvController->GetUV());
+	Vibration();
+	m_pVertex->Draw(&D3DXVECTOR2(m_Pos.x, m_Pos.y + m_VibValue), m_pUvController->GetUV());
 }

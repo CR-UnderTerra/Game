@@ -122,6 +122,7 @@
     <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\TimeWindow\TimeWindow.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\ScoreWindow\ResultScoreWindow.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\TitleScene\TitleIcon\TitleIcon.cpp" />
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\UIBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\SceneManager\SceneBase\ResultScene\ContinueText\ContinueText.h" />

@@ -13,9 +13,11 @@
 #include "Math/Math.h"
 #include "Helper/Helper.h"
 #include "Sound/DSoundManager.h"
+#include "Event/EventManager.h"
 
 const D3DXVECTOR2 Knife::m_Rect = D3DXVECTOR2(192, 384);
 int	Knife::m_IndexMax = 0;
+
 
 namespace
 {
@@ -141,6 +143,7 @@ void Knife::CollisionUpdate()
 		if (m_TargetDistance <= 0)
 		{
 			int playerHp = SINGLETON_INSTANCE(GameDataManager).GetPlayerHp();
+			SINGLETON_INSTANCE(Lib::EventManager).CallEvent("PlayerDamage");
 			SINGLETON_INSTANCE(GameDataManager).SetPlayerHp(--playerHp);
 			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_DamageSoundIndex,Lib::DSoundManager::SOUND_PLAY);
 			SINGLETON_INSTANCE(GameDataManager).SetKnifeBarIsEnable(m_Index, false);

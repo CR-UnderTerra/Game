@@ -13,7 +13,8 @@ public:
 	/**
 	 * コンストラクタ
 	 */
-	UIBase() = default;
+	UIBase();
+		
 
 	/**
 	 * デストラクタ
@@ -29,6 +30,15 @@ public:
 	 * 描画関数
 	 */
 	virtual void Draw() override = 0;
+
+protected:
+	void Vibration();
+	float m_VibValue;
+
+private:
+	float m_VibRadius;
+	float m_VibAngle;
+	float m_Time;
 
 };
 

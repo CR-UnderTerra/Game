@@ -18,7 +18,7 @@
 
 ObjectManager::ObjectManager()
 {
-	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png",&m_TextureIndex1);
+	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png", &m_TextureIndex1);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_003.png", &m_TextureIndex3);
 	SINGLETON_CREATE(KnifeManager);
 	SINGLETON_INSTANCE(KnifeManager).Init(m_TextureIndex1);

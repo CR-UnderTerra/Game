@@ -11,7 +11,7 @@
 #include "../ResultScene.h"
 #include "Helper/Helper.h"
 
-const D3DXVECTOR2 ReturnTitleText::m_Rect = D3DXVECTOR2(768 * 0.7, 192 * 0.7);
+const D3DXVECTOR2 ReturnTitleText::m_Rect = D3DXVECTOR2(768 * 0.7f, 192 * 0.7f);
 const float ReturnTitleText::m_DisplayTime = 2.f;
 
 

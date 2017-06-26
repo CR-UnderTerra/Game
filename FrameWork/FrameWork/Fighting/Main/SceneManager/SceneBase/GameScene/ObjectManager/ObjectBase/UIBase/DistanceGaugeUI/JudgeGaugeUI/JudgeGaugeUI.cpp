@@ -21,11 +21,11 @@ m_DistanceGaugeButtomPos(*_distanceGaugeButtomPos)
 
 	rect = D3DXVECTOR2(45, 42);
 	InitJudgeVertex(&m_AmazingJudgeVertex, &D3DXVECTOR2(pos.x - 75.f,
-		m_FantasticJudgeVertex.Pos.y - m_FantasticJudgeVertex.Rect.y / 2 - rect.y / 2), &rect, "d_line2");
+		m_FantasticJudgeVertex.Pos.y - (m_FantasticJudgeVertex.Rect.y / 2 + rect.y / 2)), &rect, "d_line2");
 
 	rect = D3DXVECTOR2(45, 60);
 	InitJudgeVertex(&m_GoodJudgeVertex, &D3DXVECTOR2(pos.x - 75.f,
-		m_AmazingJudgeVertex.Pos.y - m_AmazingJudgeVertex.Rect.y / 2 - rect.y / 2), &rect, "d_line1");
+		m_AmazingJudgeVertex.Pos.y - (m_AmazingJudgeVertex.Rect.y / 2 + rect.y / 2)), &rect, "d_line1");
 }
 
 JudgeGaugeUI::~JudgeGaugeUI()
@@ -47,9 +47,10 @@ void JudgeGaugeUI::Update()
 
 void JudgeGaugeUI::Draw()
 {
-	m_GoodJudgeVertex.pVertex->Draw(&m_GoodJudgeVertex.Pos, m_GoodJudgeVertex.pUvController->GetUV());
-	m_AmazingJudgeVertex.pVertex->Draw(&m_AmazingJudgeVertex.Pos, m_AmazingJudgeVertex.pUvController->GetUV());
-	m_FantasticJudgeVertex.pVertex->Draw(&m_FantasticJudgeVertex.Pos, m_FantasticJudgeVertex.pUvController->GetUV());
+	Vibration();
+	m_GoodJudgeVertex.pVertex->Draw(&D3DXVECTOR2(m_GoodJudgeVertex.Pos.x, m_GoodJudgeVertex.Pos.y + m_VibValue), m_GoodJudgeVertex.pUvController->GetUV());
+	m_AmazingJudgeVertex.pVertex->Draw(&D3DXVECTOR2(m_AmazingJudgeVertex.Pos.x, m_AmazingJudgeVertex.Pos.y + m_VibValue), m_AmazingJudgeVertex.pUvController->GetUV());
+	m_FantasticJudgeVertex.pVertex->Draw(&D3DXVECTOR2(m_FantasticJudgeVertex.Pos.x, m_FantasticJudgeVertex.Pos.y + m_VibValue), m_FantasticJudgeVertex.pUvController->GetUV());
 }
 
 JudgeGaugeUI::JUDGE JudgeGaugeUI::Judge(D3DXVECTOR2 _KnifeBarPos)

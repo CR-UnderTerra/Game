@@ -180,6 +180,15 @@ public:
 		return m_RightEnemyCrowdAlfa;
 	}
 
+	void SetCurrentEnemyLine(int enemyline_)
+	{
+		m_EnemyLine = enemyline_;
+	}
+	int GetCurrentEnemyLine()
+	{
+		return m_EnemyLine;
+	}
+
 private:
 	GameDataManager();
 	~GameDataManager() = default;
@@ -194,6 +203,7 @@ private:
 	float			 m_LeftEnemyCrowdAlfa;
 	float			 m_CenterEnemyCrowdAlfa;
 	float			 m_RightEnemyCrowdAlfa;
+	int				 m_EnemyLine;
 
 };
 

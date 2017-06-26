@@ -7,6 +7,7 @@
 #include "../../../../../CollisionManager/CollisionManager.h"
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "../../KnifeManager/KnifeManager.h"
+#include "Sound/DSoundManager.h"
 
 const D3DXVECTOR2 Enemy::m_Rect = D3DXVECTOR2(128, 256);
 
@@ -37,11 +38,19 @@ m_AttackEnemy(NOT_ENEMY_ATTACK),
 m_LeftEnemyCrowdAlfa(0.f),
 m_CenterEnemyCrowdAlfa(0.f),
 m_RightEnemyCrowdAlfa(0.f),
-m_PosLeft{ (760), (576) },	
+m_WaitEnemyAlfa(0.f),
+m_AttackEnemyAlfa(0.f),
+m_PosLeft{ (760), (576) },
 m_PosCenter{ (960), (576) },
-m_PosRight{ (1160), (576) }	
+m_PosRight{ (1160), (576) }
 {
 	EnemyLoad("Resource/EnemyPos1.csv");
+	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/explosionSE_GOOD.wav", &m_GoodExplosionSound);
+	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/explosionSE_GOOD.wav", &m_AmazingAndFantasticExplosionSound);
+	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/damageVoice_001.wav", &m_DamageVoiceType01);
+	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/damageVoice_002.wav", &m_DamageVoiceType02);
+	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/damageVoice_003.wav", &m_DamageVoiceType03);
+	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/houchouSE_nage.wav", &m_ThrowSound);
 
 	SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
 	SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
@@ -90,20 +99,20 @@ m_PosRight{ (1160), (576) }
 	int Random = rand() % 3;
 
 	switch (Random)
-		{
-		case 0:
-			m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack01");
-			m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait01");
-			break;
-		case 1:
-			m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack02");
-			m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait02");
-			break;
-		case 2:
-			m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack03");
-			m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait03");
-			break;
-		}
+	{
+	case 0:
+		m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack01");
+		m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait01");
+		break;
+	case 1:
+		m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack02");
+		m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait02");
+		break;
+	case 2:
+		m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack03");
+		m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait03");
+		break;
+	}
 	//“G•`‰æˆ— End
 
 	if (m_EnemyLoad[m_LeftEnemyCount][0] >= 0)
@@ -123,10 +132,10 @@ m_PosRight{ (1160), (576) }
 
 		m_LeftEnemyHitState = m_pLeftEnemyCollisionData->GetCollisionState().HitState;
 
-		m_LeftEnemyCrowdAlfa = 1.0f;
-		SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
+		//m_LeftEnemyCrowdAlfa = 1.0f;
+		//SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
 	}
-	
+
 	if (m_EnemyLoad[m_CenterEnemyCount][1] >= 0)
 	{
 		m_pCenterEnemyCollisionData = new CollisionData();
@@ -143,11 +152,11 @@ m_PosRight{ (1160), (576) }
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 
 		m_CenterEnemyHitState = m_pCenterEnemyCollisionData->GetCollisionState().HitState;
-		
-		m_CenterEnemyCrowdAlfa = 1.0f;
-		SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
+
+		//m_CenterEnemyCrowdAlfa = 1.0f;
+		//SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
 	}
-	
+
 	if (m_EnemyLoad[m_RightEnemyCount][2] >= 0)
 	{
 		m_pRightEnemyCollisionData = new CollisionData();
@@ -164,11 +173,11 @@ m_PosRight{ (1160), (576) }
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 
 		m_RightEnemyHitState = m_pRightEnemyCollisionData->GetCollisionState().HitState;
-	
-		m_RightEnemyCrowdAlfa = 1.0f;
-		SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
+
+		//m_RightEnemyCrowdAlfa = 1.0f;
+		//SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
 	}
-	
+
 }
 
 Enemy::~Enemy()
@@ -193,10 +202,10 @@ Enemy::~Enemy()
 
 	delete m_pAttackUvController;
 	m_pAttackUvController = NULL;
-	
+
 	delete m_pWaitUvController;
 	m_pWaitUvController = NULL;
-	
+
 	if (m_pLeftEnemyVertex != NULL)
 	{
 		m_pLeftEnemyVertex->Release();
@@ -238,6 +247,14 @@ Enemy::~Enemy()
 		delete m_pEnemyFantasticExplosionVertex;
 		m_pEnemyFantasticExplosionVertex = NULL;
 	}
+
+	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_GoodExplosionSound);
+	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_AmazingAndFantasticExplosionSound);
+	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_DamageVoiceType01);
+	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_DamageVoiceType02);
+	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_DamageVoiceType03);
+	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_ThrowSound);
+
 }
 
 void Enemy::Update()
@@ -246,9 +263,9 @@ void Enemy::Update()
 
 	Hit();
 
-	if ((m_EnemyLoad[m_LeftEnemyCount][0] == 0) && 
-		(m_EnemyLoad[m_CenterEnemyCount][1] == 0) && 
-		(m_EnemyLoad[m_RightEnemyCount][2] == 0) )
+	if ((m_EnemyLoad[m_LeftEnemyCount][0] == 0) &&
+		(m_EnemyLoad[m_CenterEnemyCount][1] == 0) &&
+		(m_EnemyLoad[m_RightEnemyCount][2] == 0))
 	{
 		if (m_LeftEnemyCount > 0)
 		{
@@ -263,38 +280,55 @@ void Enemy::Update()
 			m_RightEnemyCount -= 1;
 		}
 
-		if (m_EnemyLoad[m_LeftEnemyCount][0] > 0)
-		{
-			m_pLeftEnemyCollisionData->SetEnable(true);
-
-			m_LeftEnemyCrowdAlfa = 1.f;
-			SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
-		}
-
-		if (m_EnemyLoad[m_CenterEnemyCount][1] > 0)
-		{
-			m_pCenterEnemyCollisionData->SetEnable(true);
-
-			m_CenterEnemyCrowdAlfa = 1.f;
-			SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
-		}
-
-		if (m_EnemyLoad[m_RightEnemyCount][2] > 0)
-		{
-			m_pRightEnemyCollisionData->SetEnable(true);
-
-			m_RightEnemyCrowdAlfa = 1.f;
-			SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
-		}
-
 		m_AttackTime = 0.f;
-
+		m_WaitEnemyAlfa = 0.f;
 		m_GoodHit = m_AmazingHit = m_FantasticHit = false;
 	}
 
+	if (m_EnemyLoad[m_LeftEnemyCount][0] > 0)
+	{
+		m_pLeftEnemyCollisionData->SetEnable(true);
+
+		m_LeftEnemyCrowdAlfa += 0.01f;
+		m_WaitEnemyAlfa += 0.01f;
+		m_AttackEnemyAlfa += 0.01f;
+		SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
+	}
+
+	if (m_EnemyLoad[m_CenterEnemyCount][1] > 0)
+	{
+		m_pCenterEnemyCollisionData->SetEnable(true);
+
+		m_CenterEnemyCrowdAlfa += 0.01f;
+		m_WaitEnemyAlfa += 0.01f;
+		m_AttackEnemyAlfa += 0.01f;
+		SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
+	}
+
+	if (m_EnemyLoad[m_RightEnemyCount][2] > 0)
+	{
+		m_pRightEnemyCollisionData->SetEnable(true);
+
+		m_RightEnemyCrowdAlfa += 0.01f;
+		m_WaitEnemyAlfa += 0.01f;
+		m_AttackEnemyAlfa += 0.01f;
+		SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
+	}
+
+	/*if (m_LeftEnemyAttack == true || m_CenterEnemyAttack == true || m_RightEnemyAttack == true)
+	{
+	m_AttackEnemyAlfa = 1.f;
+	m_WaitEnemyAlfa = 0.f;
+	}*/
+
+	/*if (m_LeftEnemyAttack == false || m_CenterEnemyAttack == false || m_RightEnemyAttack == false)
+	{
+	m_AttackEnemyAlfa -= 0.01f;
+	}*/
+
 	Attack();
 
-	if ( m_CenterEnemyHits == true || m_LeftEnemyHits == true || m_RightEnemyHits == true)
+	if (m_CenterEnemyHits == true || m_LeftEnemyHits == true || m_RightEnemyHits == true)
 	{
 		m_HitInterval += 1.0f;
 	}
@@ -303,6 +337,8 @@ void Enemy::Update()
 	{
 		SINGLETON_INSTANCE(GameDataManager).SetIsGameOver(true);
 	}
+
+	SINGLETON_INSTANCE(GameDataManager).SetCurrentEnemyLine(m_CenterEnemyCount);
 }
 
 void Enemy::Draw()
@@ -313,15 +349,19 @@ void Enemy::Draw()
 		{
 			if (m_LeftEnemyAttack == false)
 			{
-				m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pWaitUvController->GetUV());
+				m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
 			}
-			else if (m_LeftEnemyAttack == true)
+			if (m_LeftEnemyAttack == true)
 			{
-				m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pAttackUvController->GetUV());
+				m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
 			}
 
 			SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
 			EnemyExplosionDraw(m_PosLeft, 0.f, EXPLOSION_MAX);
+		}
+		else if (m_LeftEnemyHits == true)
+		{
+			m_ExplosionTime += 0.1f;
 		}
 		if (m_LeftEnemyHits == true && m_GoodHit == true)
 		{
@@ -329,11 +369,29 @@ void Enemy::Draw()
 		}
 		else if (m_LeftEnemyHits == true && m_AmazingHit == true)
 		{
+			/*if (m_ExplosionTime < 1.f)
+			{
+			EnemyExplosionDraw(m_PosLeft, 1.f, GOOD_EXPLOSION);
+			}
+			if (m_ExplosionTime > 1.f)
+			{*/
 			EnemyExplosionDraw(m_PosLeft, 1.f, AMAZING_EXPLOSION);
+			//}
 		}
 		else if (m_LeftEnemyHits == true && m_FantasticHit == true)
 		{
+			/*if (m_ExplosionTime < 1.f)
+			{
+			EnemyExplosionDraw(m_PosLeft, 1.f, GOOD_EXPLOSION);
+			}
+			if (m_ExplosionTime < 1.f)
+			{
+			EnemyExplosionDraw(m_PosLeft, 1.f, AMAZING_EXPLOSION);
+			}
+			if (m_ExplosionTime > 2.f)
+			{*/
 			EnemyExplosionDraw(m_PosLeft, 1.f, FANTASTIC_EXPLOSION);
+			//}
 		}
 	}
 	else if (m_EnemyLoad[m_LeftEnemyCount][0] == 0)
@@ -341,34 +399,56 @@ void Enemy::Draw()
 		m_LeftEnemyCrowdAlfa = 0.f;
 		SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
 	}
-	
+
 	if (m_EnemyLoad[m_CenterEnemyCount][1] > 0)
-	{	
+	{
 		if (m_CenterEnemyHits == false)
 		{
 			if (m_CenterEnemyAttack == false)
 			{
-				m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pWaitUvController->GetUV());
+				m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
 			}
-			else if (m_CenterEnemyAttack == true)
+			if (m_CenterEnemyAttack == true)
 			{
-				m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pAttackUvController->GetUV());
+				m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
 			}
-			
+
 			SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
 			EnemyExplosionDraw(m_PosCenter, 0.f, EXPLOSION_MAX);
 		}
+		else if (m_CenterEnemyHits)
+		{
+			m_ExplosionTime += 0.1f;
+		}
 		if (m_CenterEnemyHits == true && m_GoodHit == true)
 		{
-				EnemyExplosionDraw(m_PosCenter, 1.f, GOOD_EXPLOSION);
+			EnemyExplosionDraw(m_PosCenter, 1.f, GOOD_EXPLOSION);
 		}
 		else if (m_CenterEnemyHits == true && m_AmazingHit == true)
 		{
-				EnemyExplosionDraw(m_PosCenter, 1.f, AMAZING_EXPLOSION);
+			/*if (m_ExplosionTime < 1.f)
+			{
+			EnemyExplosionDraw(m_PosCenter, 1.f, GOOD_EXPLOSION);
+			}
+			if (m_ExplosionTime > 1.f)
+			{*/
+			EnemyExplosionDraw(m_PosCenter, 1.f, AMAZING_EXPLOSION);
+			//}
 		}
 		else if (m_CenterEnemyHits == true && m_FantasticHit == true)
 		{
-				EnemyExplosionDraw(m_PosCenter, 1.f, FANTASTIC_EXPLOSION);
+			/*if (m_ExplosionTime < 1.f)
+			{
+			EnemyExplosionDraw(m_PosCenter, 1.f, GOOD_EXPLOSION);
+			}
+			if (m_ExplosionTime < 2.f)
+			{
+			EnemyExplosionDraw(m_PosCenter, 1.f, AMAZING_EXPLOSION);
+			}
+			if (m_ExplosionTime > 2.f)
+			{*/
+			EnemyExplosionDraw(m_PosCenter, 1.f, FANTASTIC_EXPLOSION);
+			//}
 		}
 	}
 	else if (m_EnemyLoad[m_CenterEnemyCount][1] == 0)
@@ -379,20 +459,23 @@ void Enemy::Draw()
 
 	if (m_EnemyLoad[m_RightEnemyCount][2] > 0)
 	{
-	
 		if (m_RightEnemyHits == false)
 		{
 			if (m_RightEnemyAttack == false)
 			{
-				m_pRightEnemyVertex->Draw(&m_PosRight, m_pWaitUvController->GetUV());
+				m_pRightEnemyVertex->Draw(&m_PosRight, m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
 			}
-			else if (m_RightEnemyAttack == true)
+			if (m_RightEnemyAttack == true)
 			{
-				m_pRightEnemyVertex->Draw(&m_PosRight, m_pAttackUvController->GetUV());
+				m_pRightEnemyVertex->Draw(&m_PosRight, m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
 			}
-			
+
 			SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
 			EnemyExplosionDraw(m_PosRight, 0.f, EXPLOSION_MAX);
+		}
+		else if (m_RightEnemyHits == true)
+		{
+			m_ExplosionTime += 0.1f;
 		}
 		if (m_RightEnemyHits == true && m_GoodHit == true)
 		{
@@ -400,11 +483,29 @@ void Enemy::Draw()
 		}
 		else if (m_RightEnemyHits == true && m_AmazingHit == true)
 		{
+			/*if (m_ExplosionTime < 1.f)
+			{
+			EnemyExplosionDraw(m_PosRight, 1.f, GOOD_EXPLOSION);
+			}
+			if (m_ExplosionTime > 1.f)
+			{*/
 			EnemyExplosionDraw(m_PosRight, 1.f, AMAZING_EXPLOSION);
+			//}
 		}
 		else if (m_RightEnemyHits == true && m_FantasticHit == true)
 		{
+			/*if (m_ExplosionTime < 1.f)
+			{
+			EnemyExplosionDraw(m_PosRight, 1.f, GOOD_EXPLOSION);
+			}
+			if (m_ExplosionTime < 2.f)
+			{
+			EnemyExplosionDraw(m_PosRight, 1.f, AMAZING_EXPLOSION);
+			}
+			if (m_ExplosionTime > 2.f)
+			{*/
 			EnemyExplosionDraw(m_PosRight, 1.f, FANTASTIC_EXPLOSION);
+			//}
 		}
 	}
 	else if (m_EnemyLoad[m_RightEnemyCount][0] == 0)
@@ -412,7 +513,6 @@ void Enemy::Draw()
 		m_RightEnemyCrowdAlfa = 0.f;
 		SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
 	}
-
 }
 
 void Enemy::EnemyLoad(const char* _enemycsv)
@@ -424,7 +524,7 @@ void Enemy::EnemyLoad(const char* _enemycsv)
 	{
 		for (int j = 0; j < ENEMYROW; j++)
 		{
-			fscanf_s(fp, "%d,", &m_EnemyLoad[i][j], _countof(m_EnemyLoad));						
+			fscanf_s(fp, "%d,", &m_EnemyLoad[i][j], _countof(m_EnemyLoad));
 		}
 	}
 }
@@ -443,7 +543,7 @@ void Enemy::Hit()
 	{
 		m_CenterEnemyHits = true;
 	}
-	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_3] == Lib::KEY_ON )
+	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_3] == Lib::KEY_ON)
 	{
 		m_RightEnemyHits = true;
 	}
@@ -454,6 +554,7 @@ void Enemy::Hit()
 		m_LeftEnemyHits = false;
 		m_EnemyLoad[m_LeftEnemyCount][0] = 0;
 		EnemyExplosionDraw(m_PosLeft, 0.f, EXPLOSION_MAX);
+		m_ExplosionTime = 0.f;
 
 		m_LeftEnemyCrowdAlfa = 0.f;
 		SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
@@ -464,6 +565,7 @@ void Enemy::Hit()
 		m_CenterEnemyHits = false;
 		m_EnemyLoad[m_CenterEnemyCount][1] = 0;
 		EnemyExplosionDraw(m_PosCenter, 0.f, EXPLOSION_MAX);
+		m_ExplosionTime = 0.f;
 
 		m_CenterEnemyCrowdAlfa = 0.f;
 		SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
@@ -474,6 +576,7 @@ void Enemy::Hit()
 		m_RightEnemyHits = false;
 		m_EnemyLoad[m_RightEnemyCount][2] = 0;
 		EnemyExplosionDraw(m_PosRight, 0.f, EXPLOSION_MAX);
+		m_ExplosionTime = 0.f;
 
 		m_RightEnemyCrowdAlfa = 0.f;
 		SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
@@ -492,19 +595,27 @@ void Enemy::CollisionControl()
 		if (m_LeftEnemyHitState == CollisionData::GOOD_HIT)
 		{
 			m_GoodHit = true;
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_GoodExplosionSound, Lib::DSoundManager::SOUND_PLAY);
 		}
 		if (m_LeftEnemyHitState == CollisionData::AMAZING_HIT)
 		{
 			m_AmazingHit = true;
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_AmazingAndFantasticExplosionSound, Lib::DSoundManager::SOUND_PLAY);
 		}
 		if (m_LeftEnemyHitState == CollisionData::FANTASTIC_HIT)
 		{
 			m_FantasticHit = true;
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_AmazingAndFantasticExplosionSound, Lib::DSoundManager::SOUND_PLAY);
 		}
-		if (m_LeftEnemyHitState == CollisionData::GOOD_HIT || m_LeftEnemyHitState == CollisionData::FANTASTIC_HIT || m_LeftEnemyHitState == CollisionData::AMAZING_HIT)
+		if (m_LeftEnemyHitState == CollisionData::GOOD_HIT ||
+			m_LeftEnemyHitState == CollisionData::FANTASTIC_HIT ||
+			m_LeftEnemyHitState == CollisionData::AMAZING_HIT)
 		{
+			//m_ExplosionTime += 0.5f;
 			m_pLeftEnemyCollisionData->SetEnable(false);
 			m_LeftEnemyHits = true;
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_DamageVoiceType01, Lib::DSoundManager::SOUND_PLAY);
+
 		}
 	}
 	if (m_EnemyLoad[m_CenterEnemyCount][1] > 0)
@@ -515,19 +626,26 @@ void Enemy::CollisionControl()
 		if (m_CenterEnemyHitState == CollisionData::GOOD_HIT)
 		{
 			m_GoodHit = true;
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_GoodExplosionSound, Lib::DSoundManager::SOUND_PLAY);
 		}
 		if (m_CenterEnemyHitState == CollisionData::AMAZING_HIT)
 		{
 			m_AmazingHit = true;
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_AmazingAndFantasticExplosionSound, Lib::DSoundManager::SOUND_PLAY);
 		}
 		if (m_CenterEnemyHitState == CollisionData::FANTASTIC_HIT)
 		{
 			m_FantasticHit = true;
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_AmazingAndFantasticExplosionSound, Lib::DSoundManager::SOUND_PLAY);
 		}
-		if (m_CenterEnemyHitState == CollisionData::GOOD_HIT || m_CenterEnemyHitState == CollisionData::FANTASTIC_HIT || m_CenterEnemyHitState == CollisionData::AMAZING_HIT)
+		if (m_CenterEnemyHitState == CollisionData::GOOD_HIT ||
+			m_CenterEnemyHitState == CollisionData::FANTASTIC_HIT ||
+			m_CenterEnemyHitState == CollisionData::AMAZING_HIT)
 		{
+			//m_ExplosionTime += 0.5f;
 			m_pCenterEnemyCollisionData->SetEnable(false);
-			m_CenterEnemyHits = true;			
+			m_CenterEnemyHits = true;
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_DamageVoiceType01, Lib::DSoundManager::SOUND_PLAY);
 		}
 	}
 	if (m_EnemyLoad[m_RightEnemyCount][2] > 0)
@@ -538,22 +656,28 @@ void Enemy::CollisionControl()
 		if (m_RightEnemyHitState == CollisionData::GOOD_HIT)
 		{
 			m_GoodHit = true;
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_GoodExplosionSound, Lib::DSoundManager::SOUND_PLAY);
 		}
 		if (m_RightEnemyHitState == CollisionData::AMAZING_HIT)
 		{
 			m_AmazingHit = true;
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_AmazingAndFantasticExplosionSound, Lib::DSoundManager::SOUND_PLAY);
 		}
 		if (m_RightEnemyHitState == CollisionData::FANTASTIC_HIT)
 		{
 			m_FantasticHit = true;
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_AmazingAndFantasticExplosionSound, Lib::DSoundManager::SOUND_PLAY);
 		}
-		if (m_RightEnemyHitState == CollisionData::GOOD_HIT || m_RightEnemyHitState == CollisionData::FANTASTIC_HIT || m_RightEnemyHitState == CollisionData::AMAZING_HIT)
+		if (m_RightEnemyHitState == CollisionData::GOOD_HIT ||
+			m_RightEnemyHitState == CollisionData::FANTASTIC_HIT ||
+			m_RightEnemyHitState == CollisionData::AMAZING_HIT)
 		{
+			//m_ExplosionTime += 0.5f;
 			m_pRightEnemyCollisionData->SetEnable(false);
 			m_RightEnemyHits = true;
-			
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_DamageVoiceType01, Lib::DSoundManager::SOUND_PLAY);
 		}
-	}	
+	}
 }
 
 void Enemy::EnemyExplosionDraw(D3DXVECTOR2 pos_, float alpha_, EXPLOSION_TYPE explosiontype_)
@@ -561,13 +685,16 @@ void Enemy::EnemyExplosionDraw(D3DXVECTOR2 pos_, float alpha_, EXPLOSION_TYPE ex
 	switch (explosiontype_)
 	{
 	case GOOD_EXPLOSION:
-		m_pEnemyGoodExplosionVertex->Draw(&pos_, m_pEnemyGoodExplosionUvController->GetUV(), alpha_, &D3DXVECTOR2(0.5f, 0.5f));
+		m_pEnemyGoodExplosionVertex->Draw(&D3DXVECTOR2(pos_.x, pos_.y - (m_Rect.y * m_ExplosionTime / 2 - 256) / 2), m_pEnemyGoodExplosionUvController->GetUV(), alpha_,
+			&D3DXVECTOR2(m_ExplosionTime / 2, m_ExplosionTime / 2));
 		break;
 	case AMAZING_EXPLOSION:
-		m_pEnemyAmazingExplosionVertex->Draw(&pos_, m_pEnemyAmazingExplosionUvController->GetUV(), alpha_, &D3DXVECTOR2(1.5f, 1.f));
+		m_pEnemyAmazingExplosionVertex->Draw(&D3DXVECTOR2(pos_.x, pos_.y - (m_Rect.y * m_ExplosionTime - 256) / 2), m_pEnemyAmazingExplosionUvController->GetUV(), alpha_,
+			/*&D3DXVECTOR2(1.5f, 1.f)*/&D3DXVECTOR2(m_ExplosionTime, m_ExplosionTime));
 		break;
 	case FANTASTIC_EXPLOSION:
-		m_pEnemyFantasticExplosionVertex->Draw(&pos_, m_pEnemyFantasticExplosionUvController->GetUV(), alpha_, &D3DXVECTOR2(1.5f, 1.5f));
+		m_pEnemyFantasticExplosionVertex->Draw(&D3DXVECTOR2(pos_.x, pos_.y - (m_Rect.y * m_ExplosionTime - 256) / 2), m_pEnemyFantasticExplosionUvController->GetUV(), alpha_,
+			/*&D3DXVECTOR2(1.5f, 1.5f)*/&D3DXVECTOR2(m_ExplosionTime, m_ExplosionTime));
 		break;
 	}
 }
@@ -582,19 +709,16 @@ void Enemy::Attack()
 
 	if (m_EnemyLoad[m_LeftEnemyCount][0] > 0 && m_LeftEnemyHits == false)
 	{
-		if (AttackTurn(m_LeftEnemyCount, 0) == FIRST_ATTACK && m_AttackTime == 30)
+		if (AttackTurn(m_LeftEnemyCount, 0) == FIRST_ATTACK && m_AttackTime == 60)
 		{
-			//m_AttackEnemy = LEFT_ENEMY_ATTACK;
 			m_LeftEnemyAttack = true;
 		}
 		else if (AttackTurn(m_LeftEnemyCount, 0) == SECOND_ATTACK && m_AttackTime == 140)
 		{
-			//m_AttackEnemy = LEFT_ENEMY_ATTACK;
 			m_LeftEnemyAttack = true;
 		}
 		else if (AttackTurn(m_LeftEnemyCount, 0) == THIRD_ATTACK && m_AttackTime == 260)
 		{
-			//m_AttackEnemy = LEFT_ENEMY_ATTACK;
 			m_LeftEnemyAttack = true;
 		}
 		if (m_LeftEnemyAttack == true)
@@ -608,6 +732,7 @@ void Enemy::Attack()
 		}
 		if (m_AttackEnemy == LEFT_ENEMY_ATTACK)
 		{
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_ThrowSound, Lib::DSoundManager::SOUND_PLAY);
 			SINGLETON_INSTANCE(KnifeManager).
 				ThrowKnife(&D3DXVECTOR2(*m_PosLeft, 576), GameDataManager::LEFT_ENEMY_TARGET, GameDataManager::PLAYER_TARGET, ThrowSpeed(m_LeftEnemyCount, 0));
 			m_AttackEnemy = NOT_ENEMY_ATTACK;
@@ -619,21 +744,19 @@ void Enemy::Attack()
 		m_AttackEnemy = NOT_ENEMY_ATTACK;
 		m_AttackTime += 120;
 	}
-	
+
 	if (m_EnemyLoad[m_CenterEnemyCount][1] > 0 && m_CenterEnemyHits == false)
 	{
-		if (AttackTurn(m_CenterEnemyCount, 1) == FIRST_ATTACK && m_AttackTime == 30)
+		if (AttackTurn(m_CenterEnemyCount, 1) == FIRST_ATTACK && m_AttackTime == 60)
 		{
-			m_CenterEnemyAttack = true;			
+			m_CenterEnemyAttack = true;
 		}
 		else if (AttackTurn(m_CenterEnemyCount, 1) == SECOND_ATTACK && m_AttackTime == 140)
 		{
-			//m_AttackEnemy = CENTER_ENEMY_ATTACK;
 			m_CenterEnemyAttack = true;
 		}
 		else if (AttackTurn(m_CenterEnemyCount, 1) == THIRD_ATTACK && m_AttackTime == 260)
 		{
-			//m_AttackEnemy = CENTER_ENEMY_ATTACK;
 			m_CenterEnemyAttack = true;
 		}
 		if (m_CenterEnemyAttack == true)
@@ -647,6 +770,7 @@ void Enemy::Attack()
 		}
 		if (m_AttackEnemy == CENTER_ENEMY_ATTACK)
 		{
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_ThrowSound, Lib::DSoundManager::SOUND_PLAY);
 			SINGLETON_INSTANCE(KnifeManager).
 				ThrowKnife(&D3DXVECTOR2(*m_PosCenter, 576), GameDataManager::FRONT_ENEMY_TARGET, GameDataManager::PLAYER_TARGET, ThrowSpeed(m_CenterEnemyCount, 1));
 			m_AttackEnemy = NOT_ENEMY_ATTACK;
@@ -658,22 +782,19 @@ void Enemy::Attack()
 		m_AttackEnemy = NOT_ENEMY_ATTACK;
 		m_AttackTime += 120.f;
 	}
-	
+
 	if (m_EnemyLoad[m_RightEnemyCount][2] > 0 && m_RightEnemyHits == false)
 	{
-		if (AttackTurn(m_RightEnemyCount, 2) == FIRST_ATTACK && m_AttackTime == 30)
+		if (AttackTurn(m_RightEnemyCount, 2) == FIRST_ATTACK && m_AttackTime == 60)
 		{
-			//m_AttackEnemy = RIGHT_ENEMY_ATTACK;
 			m_RightEnemyAttack = true;
 		}
 		else if (AttackTurn(m_RightEnemyCount, 2) == SECOND_ATTACK && m_AttackTime == 140)
 		{
-			//m_AttackEnemy = RIGHT_ENEMY_ATTACK;
 			m_RightEnemyAttack = true;
 		}
 		else if (AttackTurn(m_RightEnemyCount, 2) == THIRD_ATTACK && m_AttackTime == 260)
 		{
-			//m_AttackEnemy = RIGHT_ENEMY_ATTACK;
 			m_RightEnemyAttack = true;
 		}
 		if (m_RightEnemyAttack == true)
@@ -687,6 +808,7 @@ void Enemy::Attack()
 		}
 		if (m_AttackEnemy == RIGHT_ENEMY_ATTACK)
 		{
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_ThrowSound, Lib::DSoundManager::SOUND_PLAY);
 			SINGLETON_INSTANCE(KnifeManager).
 				ThrowKnife(&D3DXVECTOR2(*m_PosRight, 576), GameDataManager::RIGHT_ENEMY_TARGET, GameDataManager::PLAYER_TARGET, ThrowSpeed(m_RightEnemyCount, 2));
 			m_AttackEnemy = NOT_ENEMY_ATTACK;
@@ -698,7 +820,7 @@ void Enemy::Attack()
 		m_AttackEnemy = NOT_ENEMY_ATTACK;
 		m_AttackTime += 120.f;
 	}
-	
+
 	if (m_AttackTime > 300)
 	{
 		m_AttackTime = 0;
@@ -734,13 +856,13 @@ float Enemy::ThrowSpeed(int _column, int _row)
 		return 1.f;
 		break;
 	case 2:
-		return 0.5f;
+		return 0.7f;
 		break;
 	case 3:
-		return 1.65f;
+		return 1.80f;
 		break;
 	case 4:
-		return 1.45f;
+		return 1.60f;
 		break;
 	}
 }

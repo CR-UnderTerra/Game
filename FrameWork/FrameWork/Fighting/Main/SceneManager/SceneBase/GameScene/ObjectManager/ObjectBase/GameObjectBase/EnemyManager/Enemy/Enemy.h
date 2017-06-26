@@ -42,14 +42,14 @@ public:
 
 	/*struct ENEMYSTATE
 	{
-		D3DXVECTOR2				 Position;
-		CollisionData*			 CollisionData;
-		Lib::Vertex2D*			 Vertex;
-		Lib::AnimUvController*   UvController;
-		bool					 Hits;
-		ENEMY_ACTION			 EnemyAction;
-		ATTACK_ENEMY			 AttackEnemy;
-		CollisionData::HIT_STATE HitState;
+	D3DXVECTOR2				 Position;
+	CollisionData*			 CollisionData;
+	Lib::Vertex2D*			 Vertex;
+	Lib::AnimUvController*   UvController;
+	bool					 Hits;
+	ENEMY_ACTION			 EnemyAction;
+	ATTACK_ENEMY			 AttackEnemy;
+	CollisionData::HIT_STATE HitState;
 	};*/
 
 	/**
@@ -142,6 +142,8 @@ private:
 	float						   m_LeftEnemyCrowdAlfa;
 	float						   m_CenterEnemyCrowdAlfa;
 	float						   m_RightEnemyCrowdAlfa;
+	float						   m_WaitEnemyAlfa;
+	float						   m_AttackEnemyAlfa;
 
 	float						   m_ThrowSpeed;
 	float						   m_ExplosionTime;
@@ -152,6 +154,13 @@ private:
 	bool						   m_GoodHit;
 	bool						   m_AmazingHit;
 	bool						   m_FantasticHit;
+
+	int							    m_GoodExplosionSound;
+	int							    m_AmazingAndFantasticExplosionSound;
+	int							    m_DamageVoiceType01;
+	int							    m_DamageVoiceType02;
+	int							    m_DamageVoiceType03;
+	int								m_ThrowSound;
 };
 
 #endif // !ENEMY_H

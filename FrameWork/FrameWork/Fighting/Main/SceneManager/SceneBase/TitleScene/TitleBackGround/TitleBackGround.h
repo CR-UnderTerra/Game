@@ -14,7 +14,7 @@ public:
 	/**
 	 * コンストラクタ
 	 */
-	TitleBackGround(int _textureIndex);
+	TitleBackGround();
 
 	/**
 	 * デストラクタ
@@ -32,13 +32,17 @@ public:
 	 */
 	void Draw();
 
+	bool TransitionControl();
+
 private:
 	static const D3DXVECTOR2 m_Rect;
 	static const float		 m_DisplayTime; //!< 何秒で表示するか
 	float					 m_Alpha;
+	bool					 m_IsTransitionControl;
 	float					 m_AddAlphaValue;
 	D3DXVECTOR2				 m_Pos;
 	int						 m_TextureIndex;
+	int						 m_TextureIndex2;
 	Lib::AnimUvController*	 m_pUvController;
 	Lib::Vertex2D*		     m_pVertex;
 

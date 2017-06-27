@@ -81,7 +81,7 @@ namespace Result
 		{
 			m_Scale = 1.f;
 		}
-		if (m_Scale > 1.f)
+		if (m_Scale >= 1.f)
 		{
 			m_Scale = 1.f;
 			return true;

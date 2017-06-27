@@ -61,6 +61,7 @@ private:
 	static int		 m_ButtonSoundIndex;
 	int				 m_BlackOutTextureIndex;
 	int				 m_BackGroundTextureIndex;
+	int				 m_BackGroundTextureIndex2;
 	int				 m_TextTextureIndex;
 	bool			 m_IsNextSceneControl;
 

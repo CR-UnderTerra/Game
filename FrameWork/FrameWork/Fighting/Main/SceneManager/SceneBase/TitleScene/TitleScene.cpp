@@ -28,8 +28,7 @@ m_IsNextSceneControl(false)
 	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/bottonSE.wav", &m_ButtonSoundIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/BlackOut.png", &m_BlackOutTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/Text.png", &m_TextTextureIndex);
-	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/TitleBackGround.png", &m_BackGroundTextureIndex);
-	m_pTitleBackGround = new TitleBackGround(m_BackGroundTextureIndex);
+	m_pTitleBackGround = new TitleBackGround();
 	m_pTitleText = new TitleText(m_TextTextureIndex);
 	m_pStartButton = new StartButton(m_TextTextureIndex);
 }
@@ -39,7 +38,6 @@ TitleScene::~TitleScene()
 	Lib::SafeDelete(m_pStartButton);
 	Lib::SafeDelete(m_pTitleText);
 	Lib::SafeDelete(m_pTitleBackGround);
-	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_BackGroundTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_BlackOutTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Release();
@@ -64,7 +62,16 @@ SceneBase::SceneID TitleScene::Update()
 	if (!m_pStartButton->Update()) return m_SceneID;
 	if (KeyCheck())
 	{
-		m_SceneID = SCENE_GAME;
+		SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_ButtonSoundIndex, Lib::DSoundManager::SOUND_PLAY);
+		m_IsNextSceneControl = true;
+	}
+
+	if (m_IsNextSceneControl)
+	{
+		if (m_pTitleBackGround->TransitionControl())
+		{
+			m_SceneID = SCENE_GAME;
+		}
 	}
 	return m_SceneID;
 }

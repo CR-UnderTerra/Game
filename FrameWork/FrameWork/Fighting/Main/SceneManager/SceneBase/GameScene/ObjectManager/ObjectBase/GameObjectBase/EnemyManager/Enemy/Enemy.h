@@ -8,7 +8,7 @@
 
 #define ENEMYROW		3		//敵出現パターン横列
 #define ENEMYCOLUMN		14		//敵出現パターン縦列
-#define HITINTERVAL		50.f
+#define HITINTERVAL		30.f
 #define ATTACKINTERVAL	100.f
 #define ATTACKTIME		30.f
 
@@ -118,8 +118,12 @@ private:
 	Lib::Vertex2D*				   m_pEnemyGoodExplosionVertex;
 	Lib::Vertex2D*				   m_pEnemyAmazingExplosionVertex;
 	Lib::Vertex2D*				   m_pEnemyFantasticExplosionVertex;
-	Lib::AnimUvController*		   m_pWaitUvController;
-	Lib::AnimUvController*		   m_pAttackUvController;
+	Lib::AnimUvController*		   m_pEnemy01WaitUvController;
+	Lib::AnimUvController*		   m_pEnemy01AttackUvController;
+	Lib::AnimUvController*		   m_pEnemy02WaitUvController;
+	Lib::AnimUvController*		   m_pEnemy02AttackUvController;
+	Lib::AnimUvController*		   m_pEnemy03WaitUvController;
+	Lib::AnimUvController*		   m_pEnemy03AttackUvController;
 	Lib::AnimUvController*		   m_pEnemyGoodExplosionUvController;
 	Lib::AnimUvController*		   m_pEnemyAmazingExplosionUvController;
 	Lib::AnimUvController*		   m_pEnemyFantasticExplosionUvController;
@@ -161,6 +165,10 @@ private:
 	int							    m_DamageVoiceType02;
 	int							    m_DamageVoiceType03;
 	int								m_ThrowSound;
+	
+	int								m_Random1;
+	int								m_Random2;
+	int								m_Random3;
 };
 
 #endif // !ENEMY_H

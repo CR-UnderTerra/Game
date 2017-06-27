@@ -12,8 +12,12 @@
 const D3DXVECTOR2 Enemy::m_Rect = D3DXVECTOR2(128, 256);
 
 Enemy::Enemy(int _textureIndex, Lib::AnimUvController* _pUvController) :
-m_pWaitUvController(_pUvController),
-m_pAttackUvController(_pUvController),
+m_pEnemy01WaitUvController(_pUvController),
+m_pEnemy01AttackUvController(_pUvController),
+m_pEnemy02WaitUvController(_pUvController),
+m_pEnemy02AttackUvController(_pUvController),
+m_pEnemy03WaitUvController(_pUvController),
+m_pEnemy03AttackUvController(_pUvController),
 m_TextureIndex(_textureIndex),
 m_LeftEnemyCount(13),
 m_CenterEnemyCount(13),
@@ -44,7 +48,22 @@ m_PosLeft{ (760), (576) },
 m_PosCenter{ (960), (576) },
 m_PosRight{ (1160), (576) }
 {
-	EnemyLoad("Resource/EnemyPos1.csv");
+	srand((unsigned int)time(NULL));
+
+	int RandomSelect = rand() % 3;
+	switch (RandomSelect)
+	{
+	case 0:
+		EnemyLoad("Resource/EnemyPos1.csv");
+		break;
+	case 1:
+		EnemyLoad("Resource/EnemyPos2.csv");
+		break;
+	case 2:
+		EnemyLoad("Resource/EnemyPos3.csv");
+		break;
+	}
+	//EnemyLoad("Resource/EnemyPos1.csv");
 	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/explosionSE_GOOD.wav", &m_GoodExplosionSound);
 	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/explosionSE_GOOD.wav", &m_AmazingAndFantasticExplosionSound);
 	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/damageVoice_001.wav", &m_DamageVoiceType01);
@@ -90,15 +109,25 @@ m_PosRight{ (1160), (576) }
 	//”š”­•`‰æŠÖ˜A End
 
 	//“G•`‰æˆ— Start
-	m_pAttackUvController = new Lib::AnimUvController();
-	m_pWaitUvController = new Lib::AnimUvController();
+	m_pEnemy01AttackUvController = new Lib::AnimUvController();
+	m_pEnemy01WaitUvController = new Lib::AnimUvController();
+	m_pEnemy01AttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack01");
+	m_pEnemy01WaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait01");
+	m_pEnemy02AttackUvController = new Lib::AnimUvController();
+	m_pEnemy02WaitUvController = new Lib::AnimUvController();
+	m_pEnemy02AttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack02");
+	m_pEnemy02WaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait02");
+	m_pEnemy03AttackUvController = new Lib::AnimUvController();
+	m_pEnemy03WaitUvController = new Lib::AnimUvController();
+	m_pEnemy03AttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack03");
+	m_pEnemy03WaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait03");
+	//m_pAttackUvController = new Lib::AnimUvController();
+	//m_pWaitUvController = new Lib::AnimUvController();
 	//m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack01");
 	//m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait01");
-	srand((unsigned int)time(NULL));
 
 	int Random = rand() % 3;
-
-	switch (Random)
+	/*switch (Random)
 	{
 	case 0:
 		m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack01");
@@ -112,7 +141,7 @@ m_PosRight{ (1160), (576) }
 		m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack03");
 		m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait03");
 		break;
-	}
+	}*/
 	//“G•`‰æˆ— End
 
 	if (m_EnemyLoad[m_LeftEnemyCount][0] >= 0)
@@ -126,7 +155,19 @@ m_PosRight{ (1160), (576) }
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
 			SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
-		m_pLeftEnemyVertex->Init(&m_Rect, m_pWaitUvController->GetUV());
+		//m_pLeftEnemyVertex->Init(&m_Rect, m_pWaitUvController->GetUV());
+		switch (Random)
+		{
+		case 0:
+			m_pLeftEnemyVertex->Init(&m_Rect, m_pEnemy01WaitUvController->GetUV());
+			break;
+		case 1:
+			m_pLeftEnemyVertex->Init(&m_Rect, m_pEnemy02WaitUvController->GetUV());
+			break;
+		case 2:
+			m_pLeftEnemyVertex->Init(&m_Rect, m_pEnemy03WaitUvController->GetUV());
+			break;
+		}
 		m_pLeftEnemyVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 
@@ -147,7 +188,19 @@ m_PosRight{ (1160), (576) }
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
 			SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
-		m_pCenterEnemyVertex->Init(&m_Rect, m_pWaitUvController->GetUV());
+		//m_pCenterEnemyVertex->Init(&m_Rect, m_pWaitUvController->GetUV());
+		switch (Random)
+		{
+		case 0:
+			m_pCenterEnemyVertex->Init(&m_Rect, m_pEnemy01WaitUvController->GetUV());
+			break;
+		case 1:
+			m_pCenterEnemyVertex->Init(&m_Rect, m_pEnemy02WaitUvController->GetUV());
+			break;
+		case 2:
+			m_pCenterEnemyVertex->Init(&m_Rect, m_pEnemy03WaitUvController->GetUV());
+			break;
+		}
 		m_pCenterEnemyVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 
@@ -168,7 +221,19 @@ m_PosRight{ (1160), (576) }
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 			SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
 			SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
-		m_pRightEnemyVertex->Init(&m_Rect, m_pWaitUvController->GetUV());
+		//m_pRightEnemyVertex->Init(&m_Rect, m_pWaitUvController->GetUV());
+		switch (Random)
+		{
+		case 0:
+			m_pRightEnemyVertex->Init(&m_Rect, m_pEnemy01WaitUvController->GetUV());
+			break;
+		case 1:
+			m_pRightEnemyVertex->Init(&m_Rect, m_pEnemy02WaitUvController->GetUV());
+			break;
+		case 2:
+			m_pRightEnemyVertex->Init(&m_Rect, m_pEnemy03WaitUvController->GetUV());
+			break;
+		}
 		m_pRightEnemyVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 
@@ -200,11 +265,18 @@ Enemy::~Enemy()
 	delete m_pEnemyFantasticExplosionUvController;
 	m_pEnemyFantasticExplosionUvController = NULL;
 
-	delete m_pAttackUvController;
-	m_pAttackUvController = NULL;
-
-	delete m_pWaitUvController;
-	m_pWaitUvController = NULL;
+	delete m_pEnemy01AttackUvController;
+	m_pEnemy01AttackUvController = NULL;
+	delete m_pEnemy01WaitUvController;
+	m_pEnemy01WaitUvController = NULL;
+	delete m_pEnemy02AttackUvController;
+	m_pEnemy02AttackUvController = NULL;
+	delete m_pEnemy02WaitUvController;
+	m_pEnemy02WaitUvController = NULL;
+	delete m_pEnemy03AttackUvController;
+	m_pEnemy03AttackUvController = NULL;
+	delete m_pEnemy03WaitUvController;
+	m_pEnemy03WaitUvController = NULL;
 
 	if (m_pLeftEnemyVertex != NULL)
 	{
@@ -259,14 +331,22 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
+	srand((unsigned int)time(NULL));
+
 	CollisionControl();
 
 	Hit();
+
+	Attack();
 
 	if ((m_EnemyLoad[m_LeftEnemyCount][0] == 0) &&
 		(m_EnemyLoad[m_CenterEnemyCount][1] == 0) &&
 		(m_EnemyLoad[m_RightEnemyCount][2] == 0))
 	{
+		m_Random1 = rand() % 3;
+		m_Random2 = rand() % 3;
+		m_Random3 = rand() % 3;
+
 		if (m_LeftEnemyCount > 0)
 		{
 			m_LeftEnemyCount -= 1;
@@ -314,23 +394,25 @@ void Enemy::Update()
 		m_AttackEnemyAlfa += 0.01f;
 		SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
 	}
-
-	/*if (m_LeftEnemyAttack == true || m_CenterEnemyAttack == true || m_RightEnemyAttack == true)
-	{
-	m_AttackEnemyAlfa = 1.f;
-	m_WaitEnemyAlfa = 0.f;
-	}*/
-
-	/*if (m_LeftEnemyAttack == false || m_CenterEnemyAttack == false || m_RightEnemyAttack == false)
-	{
-	m_AttackEnemyAlfa -= 0.01f;
-	}*/
-
-	Attack();
-
+	
 	if (m_CenterEnemyHits == true || m_LeftEnemyHits == true || m_RightEnemyHits == true)
 	{
 		m_HitInterval += 1.0f;
+
+		int Random = rand() % 3;
+
+		switch (Random)
+		{
+		case 0:
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_DamageVoiceType01, Lib::DSoundManager::SOUND_PLAY);
+			break;
+		case 1:
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_DamageVoiceType02, Lib::DSoundManager::SOUND_PLAY);
+			break;
+		case 2:
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_DamageVoiceType03, Lib::DSoundManager::SOUND_PLAY);
+			break;
+		}
 	}
 
 	if (m_LeftEnemyCount == 0 && m_CenterEnemyCount == 0 && m_RightEnemyCount == 0)
@@ -343,17 +425,44 @@ void Enemy::Update()
 
 void Enemy::Draw()
 {
+	//int Random = rand() % 3;
+
 	if (m_EnemyLoad[m_LeftEnemyCount][0] > 0)
 	{
 		if (m_LeftEnemyHits == false)
 		{
 			if (m_LeftEnemyAttack == false)
 			{
-				m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
+				switch (m_Random1)
+				{
+				case 0:
+					m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pEnemy01WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					break;
+				case 1:
+					m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pEnemy02WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					break;
+				case 2:
+					m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pEnemy03WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					break;
+				}
+
+				//m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
 			}
 			if (m_LeftEnemyAttack == true)
 			{
-				m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
+				switch (m_Random1)
+				{
+				case 0:
+					m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pEnemy01AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					break;
+				case 1:
+					m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pEnemy02AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					break;
+				case 2:
+					m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pEnemy03AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					break;
+				}
+				//m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
 			}
 
 			SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
@@ -369,29 +478,11 @@ void Enemy::Draw()
 		}
 		else if (m_LeftEnemyHits == true && m_AmazingHit == true)
 		{
-			/*if (m_ExplosionTime < 1.f)
-			{
-			EnemyExplosionDraw(m_PosLeft, 1.f, GOOD_EXPLOSION);
-			}
-			if (m_ExplosionTime > 1.f)
-			{*/
 			EnemyExplosionDraw(m_PosLeft, 1.f, AMAZING_EXPLOSION);
-			//}
 		}
 		else if (m_LeftEnemyHits == true && m_FantasticHit == true)
 		{
-			/*if (m_ExplosionTime < 1.f)
-			{
-			EnemyExplosionDraw(m_PosLeft, 1.f, GOOD_EXPLOSION);
-			}
-			if (m_ExplosionTime < 1.f)
-			{
-			EnemyExplosionDraw(m_PosLeft, 1.f, AMAZING_EXPLOSION);
-			}
-			if (m_ExplosionTime > 2.f)
-			{*/
 			EnemyExplosionDraw(m_PosLeft, 1.f, FANTASTIC_EXPLOSION);
-			//}
 		}
 	}
 	else if (m_EnemyLoad[m_LeftEnemyCount][0] == 0)
@@ -406,11 +497,35 @@ void Enemy::Draw()
 		{
 			if (m_CenterEnemyAttack == false)
 			{
-				m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
+				switch (m_Random2)
+				{
+				case 0:
+					m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pEnemy01WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					break;
+				case 1:
+					m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pEnemy02WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					break;
+				case 2:
+					m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pEnemy03WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					break;
+				}
+				//m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
 			}
 			if (m_CenterEnemyAttack == true)
 			{
-				m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
+				switch (m_Random2)
+				{
+				case 0:
+					m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pEnemy01AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					break;
+				case 1:
+					m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pEnemy02AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					break;
+				case 2:
+					m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pEnemy03AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					break;
+				}
+				//m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
 			}
 
 			SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
@@ -426,29 +541,11 @@ void Enemy::Draw()
 		}
 		else if (m_CenterEnemyHits == true && m_AmazingHit == true)
 		{
-			/*if (m_ExplosionTime < 1.f)
-			{
-			EnemyExplosionDraw(m_PosCenter, 1.f, GOOD_EXPLOSION);
-			}
-			if (m_ExplosionTime > 1.f)
-			{*/
 			EnemyExplosionDraw(m_PosCenter, 1.f, AMAZING_EXPLOSION);
-			//}
 		}
 		else if (m_CenterEnemyHits == true && m_FantasticHit == true)
 		{
-			/*if (m_ExplosionTime < 1.f)
-			{
-			EnemyExplosionDraw(m_PosCenter, 1.f, GOOD_EXPLOSION);
-			}
-			if (m_ExplosionTime < 2.f)
-			{
-			EnemyExplosionDraw(m_PosCenter, 1.f, AMAZING_EXPLOSION);
-			}
-			if (m_ExplosionTime > 2.f)
-			{*/
 			EnemyExplosionDraw(m_PosCenter, 1.f, FANTASTIC_EXPLOSION);
-			//}
 		}
 	}
 	else if (m_EnemyLoad[m_CenterEnemyCount][1] == 0)
@@ -463,11 +560,35 @@ void Enemy::Draw()
 		{
 			if (m_RightEnemyAttack == false)
 			{
-				m_pRightEnemyVertex->Draw(&m_PosRight, m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
+				switch (m_Random3)
+				{
+				case 0:
+					m_pRightEnemyVertex->Draw(&m_PosRight, m_pEnemy01WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					break;
+				case 1:
+					m_pRightEnemyVertex->Draw(&m_PosRight, m_pEnemy02WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					break;
+				case 2:
+					m_pRightEnemyVertex->Draw(&m_PosRight, m_pEnemy03WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					break;
+				}
+				//m_pRightEnemyVertex->Draw(&m_PosRight, m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
 			}
 			if (m_RightEnemyAttack == true)
 			{
-				m_pRightEnemyVertex->Draw(&m_PosRight, m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
+				switch (m_Random3)
+				{
+				case 0:
+					m_pRightEnemyVertex->Draw(&m_PosRight, m_pEnemy01AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					break;
+				case 1:
+					m_pRightEnemyVertex->Draw(&m_PosRight, m_pEnemy02AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					break;
+				case 2:
+					m_pRightEnemyVertex->Draw(&m_PosRight, m_pEnemy03AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					break;
+				}
+				//m_pRightEnemyVertex->Draw(&m_PosRight, m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
 			}
 
 			SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
@@ -483,29 +604,11 @@ void Enemy::Draw()
 		}
 		else if (m_RightEnemyHits == true && m_AmazingHit == true)
 		{
-			/*if (m_ExplosionTime < 1.f)
-			{
-			EnemyExplosionDraw(m_PosRight, 1.f, GOOD_EXPLOSION);
-			}
-			if (m_ExplosionTime > 1.f)
-			{*/
 			EnemyExplosionDraw(m_PosRight, 1.f, AMAZING_EXPLOSION);
-			//}
 		}
 		else if (m_RightEnemyHits == true && m_FantasticHit == true)
 		{
-			/*if (m_ExplosionTime < 1.f)
-			{
-			EnemyExplosionDraw(m_PosRight, 1.f, GOOD_EXPLOSION);
-			}
-			if (m_ExplosionTime < 2.f)
-			{
-			EnemyExplosionDraw(m_PosRight, 1.f, AMAZING_EXPLOSION);
-			}
-			if (m_ExplosionTime > 2.f)
-			{*/
 			EnemyExplosionDraw(m_PosRight, 1.f, FANTASTIC_EXPLOSION);
-			//}
 		}
 	}
 	else if (m_EnemyLoad[m_RightEnemyCount][0] == 0)
@@ -531,23 +634,27 @@ void Enemy::EnemyLoad(const char* _enemycsv)
 
 void Enemy::Hit()
 {
+#ifdef _DEBUG
 	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_1);
 	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_2);
 	SINGLETON_INSTANCE(Lib::KeyDevice).KeyCheck(DIK_3);
 
 	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_1] == Lib::KEY_ON)
 	{
+		m_AmazingHit = true;
 		m_LeftEnemyHits = true;
 	}
 	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_2] == Lib::KEY_ON)
 	{
+		m_AmazingHit = true;
 		m_CenterEnemyHits = true;
 	}
 	if (SINGLETON_INSTANCE(Lib::KeyDevice).GetKeyState()[DIK_3] == Lib::KEY_ON)
 	{
+		m_AmazingHit = true;
 		m_RightEnemyHits = true;
 	}
-
+#endif
 	if (m_LeftEnemyHits == true && m_HitInterval == HITINTERVAL)
 	{
 		m_HitInterval = 0;
@@ -614,8 +721,7 @@ void Enemy::CollisionControl()
 			//m_ExplosionTime += 0.5f;
 			m_pLeftEnemyCollisionData->SetEnable(false);
 			m_LeftEnemyHits = true;
-			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_DamageVoiceType01, Lib::DSoundManager::SOUND_PLAY);
-
+			//SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_DamageVoiceType01, Lib::DSoundManager::SOUND_PLAY);
 		}
 	}
 	if (m_EnemyLoad[m_CenterEnemyCount][1] > 0)
@@ -645,7 +751,7 @@ void Enemy::CollisionControl()
 			//m_ExplosionTime += 0.5f;
 			m_pCenterEnemyCollisionData->SetEnable(false);
 			m_CenterEnemyHits = true;
-			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_DamageVoiceType01, Lib::DSoundManager::SOUND_PLAY);
+			//SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_DamageVoiceType01, Lib::DSoundManager::SOUND_PLAY);
 		}
 	}
 	if (m_EnemyLoad[m_RightEnemyCount][2] > 0)
@@ -675,7 +781,7 @@ void Enemy::CollisionControl()
 			//m_ExplosionTime += 0.5f;
 			m_pRightEnemyCollisionData->SetEnable(false);
 			m_RightEnemyHits = true;
-			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_DamageVoiceType01, Lib::DSoundManager::SOUND_PLAY);
+			//SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_DamageVoiceType01, Lib::DSoundManager::SOUND_PLAY);
 		}
 	}
 }
@@ -713,11 +819,11 @@ void Enemy::Attack()
 		{
 			m_LeftEnemyAttack = true;
 		}
-		else if (AttackTurn(m_LeftEnemyCount, 0) == SECOND_ATTACK && m_AttackTime == 140)
+		else if (AttackTurn(m_LeftEnemyCount, 0) == SECOND_ATTACK && m_AttackTime == 170)
 		{
 			m_LeftEnemyAttack = true;
 		}
-		else if (AttackTurn(m_LeftEnemyCount, 0) == THIRD_ATTACK && m_AttackTime == 260)
+		else if (AttackTurn(m_LeftEnemyCount, 0) == THIRD_ATTACK && m_AttackTime == 270)
 		{
 			m_LeftEnemyAttack = true;
 		}
@@ -751,11 +857,11 @@ void Enemy::Attack()
 		{
 			m_CenterEnemyAttack = true;
 		}
-		else if (AttackTurn(m_CenterEnemyCount, 1) == SECOND_ATTACK && m_AttackTime == 140)
+		else if (AttackTurn(m_CenterEnemyCount, 1) == SECOND_ATTACK && m_AttackTime == 170)
 		{
 			m_CenterEnemyAttack = true;
 		}
-		else if (AttackTurn(m_CenterEnemyCount, 1) == THIRD_ATTACK && m_AttackTime == 260)
+		else if (AttackTurn(m_CenterEnemyCount, 1) == THIRD_ATTACK && m_AttackTime == 270)
 		{
 			m_CenterEnemyAttack = true;
 		}
@@ -789,11 +895,11 @@ void Enemy::Attack()
 		{
 			m_RightEnemyAttack = true;
 		}
-		else if (AttackTurn(m_RightEnemyCount, 2) == SECOND_ATTACK && m_AttackTime == 140)
+		else if (AttackTurn(m_RightEnemyCount, 2) == SECOND_ATTACK && m_AttackTime == 170)
 		{
 			m_RightEnemyAttack = true;
 		}
-		else if (AttackTurn(m_RightEnemyCount, 2) == THIRD_ATTACK && m_AttackTime == 260)
+		else if (AttackTurn(m_RightEnemyCount, 2) == THIRD_ATTACK && m_AttackTime == 270)
 		{
 			m_RightEnemyAttack = true;
 		}

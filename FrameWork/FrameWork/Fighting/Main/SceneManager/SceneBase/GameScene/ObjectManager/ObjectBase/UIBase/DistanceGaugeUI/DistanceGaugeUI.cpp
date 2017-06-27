@@ -33,7 +33,7 @@ m_TextureIndex(_textureIndex)
 
 	for (int i = 0; i < KnifeManager::m_KnifeMax; i++)
 	{
-		m_pKnifeBar.push_back(new KnifeBar(m_TextureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y - m_Rect.y / 2)));
+		m_pKnifeBar.push_back(new KnifeBar(m_DistanceGaugeTextureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y - m_Rect.y / 2)));
 	}
 	m_pJudgeGaugeUI = new JudgeGaugeUI(m_TextureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y + m_Rect.y / 2));
 	SINGLETON_INSTANCE(GameDataManager).SetDistanceGaugeUI(this);
@@ -80,7 +80,7 @@ void DistanceGaugeUI::Update()
 void DistanceGaugeUI::Draw()
 {
 	Vibration();
-	m_pVertex->Draw(&D3DXVECTOR2(m_Pos.x, m_Pos.y + m_VibValue), m_pUvController->GetUV());
+	m_pVertex->Draw(&D3DXVECTOR2(m_Pos.x, m_Pos.y + m_HeightVibValue), m_pUvController->GetUV());
 	for (int i = 0; i < KnifeManager::m_KnifeMax; i++)
 	{
 		m_pKnifeBar[i]->Draw();

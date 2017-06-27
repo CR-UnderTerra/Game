@@ -48,9 +48,9 @@ void JudgeGaugeUI::Update()
 void JudgeGaugeUI::Draw()
 {
 	Vibration();
-	m_GoodJudgeVertex.pVertex->Draw(&D3DXVECTOR2(m_GoodJudgeVertex.Pos.x, m_GoodJudgeVertex.Pos.y + m_VibValue), m_GoodJudgeVertex.pUvController->GetUV());
-	m_AmazingJudgeVertex.pVertex->Draw(&D3DXVECTOR2(m_AmazingJudgeVertex.Pos.x, m_AmazingJudgeVertex.Pos.y + m_VibValue), m_AmazingJudgeVertex.pUvController->GetUV());
-	m_FantasticJudgeVertex.pVertex->Draw(&D3DXVECTOR2(m_FantasticJudgeVertex.Pos.x, m_FantasticJudgeVertex.Pos.y + m_VibValue), m_FantasticJudgeVertex.pUvController->GetUV());
+	m_GoodJudgeVertex.pVertex->Draw(&D3DXVECTOR2(m_GoodJudgeVertex.Pos.x, m_GoodJudgeVertex.Pos.y + m_HeightVibValue), m_GoodJudgeVertex.pUvController->GetUV());
+	m_AmazingJudgeVertex.pVertex->Draw(&D3DXVECTOR2(m_AmazingJudgeVertex.Pos.x, m_AmazingJudgeVertex.Pos.y + m_HeightVibValue), m_AmazingJudgeVertex.pUvController->GetUV());
+	m_FantasticJudgeVertex.pVertex->Draw(&D3DXVECTOR2(m_FantasticJudgeVertex.Pos.x, m_FantasticJudgeVertex.Pos.y + m_HeightVibValue), m_FantasticJudgeVertex.pUvController->GetUV());
 }
 
 JudgeGaugeUI::JUDGE JudgeGaugeUI::Judge(D3DXVECTOR2 _KnifeBarPos)

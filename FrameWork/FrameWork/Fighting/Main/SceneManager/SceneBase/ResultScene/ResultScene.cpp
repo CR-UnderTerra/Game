@@ -22,9 +22,22 @@
 #include <stdlib.h>
 #include <time.h>
 
+namespace
+{
+	D3DXVECTOR2 g_uv[4] = 
+	{
+		D3DXVECTOR2(0,0),		
+		D3DXVECTOR2(1,0),
+		D3DXVECTOR2(0,1),
+		D3DXVECTOR2(1,1)
+	};
+}
 
 ResultScene::ResultScene() :
-SceneBase(SCENE_RESULT)
+SceneBase(SCENE_RESULT),
+m_ReturnTime(1800),
+m_FrameCount(0),
+m_BlackOutAlpha(0)
 {
 	srand(unsigned int(time(NULL)));
 	if (SINGLETON_INSTANCE(GameDataManager).GetResultState())
@@ -50,6 +63,16 @@ SceneBase(SCENE_RESULT)
 	}
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/Text.png", &m_TextTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png", &m_TextureIndex);
+	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/BlackOut.jpg",&m_BlackOutTextureIndex);
+
+	m_pBlackOutVertex = new Lib::Vertex2D(
+		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
+		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
+		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
+	m_pBlackOutVertex->Init(&D3DXVECTOR2(1920, 1080), g_uv);
+	m_pBlackOutVertex->SetTexture(
+		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_BlackOutTextureIndex));
+
 	m_pBackGround = new Result::BackGround(m_BackGroundTextureIndex);
 	m_pClearText = new ClearText(m_TextTextureIndex);
 	m_pReturnTitleText = new ReturnTitleText(m_TextTextureIndex);
@@ -68,7 +91,8 @@ ResultScene::~ResultScene()
 	Lib::SafeDelete(m_pReturnTitleText);
 	Lib::SafeDelete(m_pClearText);
 	Lib::SafeDelete(m_pBackGround);
-
+	Lib::SafeDelete(m_pBlackOutVertex);
+	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_BlackOutTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_BackGroundTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextTextureIndex);
@@ -85,6 +109,16 @@ ResultScene::~ResultScene()
 SceneBase::SceneID ResultScene::Update()
 {
 	KeyUpdate();
+	m_FrameCount++;
+	if (m_FrameCount >= m_ReturnTime)
+	{
+		m_BlackOutAlpha += 1.f / (2 * 60);;
+		if (m_BlackOutAlpha >= 1.f)
+		{
+			return SCENE_TITLE;
+		}
+	}
+
 	if (SINGLETON_INSTANCE(GameDataManager).GetResultState() == GameDataManager::CLEAR)
 	{
 		if (!m_pBackGround->Update()) return m_SceneID;
@@ -156,6 +190,7 @@ void ResultScene::Draw()
 		m_pContinueText->Draw();
 		m_pReturnTitleText->Draw();
 	}
+	m_pBlackOutVertex->Draw(&D3DXVECTOR2(960.f, 540.f),g_uv,m_BlackOutAlpha);
 	SINGLETON_INSTANCE(Lib::DX11Manager).EndScene();
 }
 

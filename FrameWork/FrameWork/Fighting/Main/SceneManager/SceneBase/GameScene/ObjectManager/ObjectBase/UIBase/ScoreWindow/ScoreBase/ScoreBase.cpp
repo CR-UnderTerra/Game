@@ -27,7 +27,7 @@ void ScoreBase::Draw()
 
 	auto VertexDraw = [this](Vertex _vertex)
 	{
-		_vertex.pVertex->Draw(&D3DXVECTOR2(_vertex.Pos.x, _vertex.Pos.y + m_VibValue), _vertex.pUvController->GetUV());
+		_vertex.pVertex->Draw(&D3DXVECTOR2(_vertex.Pos.x + m_WidthVibValue, _vertex.Pos.y + m_HeightVibValue), _vertex.pUvController->GetUV());
 	};
 
 	VertexDraw(m_Vertex);

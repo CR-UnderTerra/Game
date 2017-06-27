@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\GameObjectBase.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\ContinueText\ContinueText.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\ResultScene\ClearText\ClearText.cpp" />
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\ScoreWindow\ScoreBase\FantasticText\FantasticText.cpp" />

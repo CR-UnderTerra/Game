@@ -298,6 +298,9 @@
     <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase\UIBase.cpp">
       <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\UIBase</Filter>
     </ClCompile>
+    <ClCompile Include="Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase\GameObjectBase.cpp">
+      <Filter>Main\SceneManager\SceneBase\GameScene\ObjectManager\ObjectBase\GameObjectBase</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\SceneManager\SceneBase\GameScene\GameScene.h">

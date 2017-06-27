@@ -8,6 +8,7 @@
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
 #include "Helper/Helper.h"
+#include "Event/EventManager.h"
 
 const D3DXVECTOR2 BackGround::m_Rect = D3DXVECTOR2(1350, 1080);
 
@@ -32,6 +33,11 @@ m_TextureIndex(_textureIndex)
 	m_pVertex->Init(&m_Rect, m_pAnimUvController->GetUV());
 	m_pVertex->SetTexture(
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
+	
+	SINGLETON_INSTANCE(Lib::EventManager).AddEvent("EnemyDamage", [this]()
+	{
+		m_WidthTime = 60;
+	});
 
 }
 
@@ -57,5 +63,6 @@ void BackGround::Update()
 
 void BackGround::Draw()
 {
-	m_pVertex->Draw(&m_Pos, m_pAnimUvController->GetUV());
+	Vibration();
+	m_pVertex->Draw(&D3DXVECTOR2(m_Pos.x + m_WidthVibValue, m_Pos.y), m_pAnimUvController->GetUV());
 }

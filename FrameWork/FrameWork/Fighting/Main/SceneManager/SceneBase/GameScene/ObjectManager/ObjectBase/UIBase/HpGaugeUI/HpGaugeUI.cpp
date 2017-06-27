@@ -70,7 +70,7 @@ void HpGaugeUI::Update()
 void HpGaugeUI::Draw()
 {
 	Vibration();
-	m_pVertex->Draw(&D3DXVECTOR2(m_Pos.x, m_Pos.y + m_VibValue), m_pUvController->GetUV());
+	m_pVertex->Draw(&D3DXVECTOR2(m_Pos.x + m_WidthVibValue, m_Pos.y + m_HeightVibValue), m_pUvController->GetUV());
 	if (SINGLETON_INSTANCE(GameDataManager).GetPlayerHp() < 0) return;
 	for (int i = 0; i < SINGLETON_INSTANCE(GameDataManager).GetPlayerHp(); i++)
 	{

@@ -57,11 +57,15 @@ private:
 	 */
 	void KeyUpdate();
 
-
+	int					 m_ReturnTime;
+	int					 m_FrameCount;
+	int					 m_BlackOutTextureIndex;
+	float				 m_BlackOutAlpha;
 	int				     m_BackGroundTextureIndex;
 	int				     m_TextTextureIndex;
 	int					 m_TextureIndex;
 	int					 m_BgmSoundIndex;
+
 	Result::BackGround*  m_pBackGround;
 	Result::ScoreWindow* m_pScoreWindow;
 	ClearText*		     m_pClearText;
@@ -70,7 +74,7 @@ private:
 	JudgeCountWindow*	 m_pJudgeCountWindow;
 	TimeWindow*			 m_pTimeWindow;
 
-
+	Lib::Vertex2D*		 m_pBlackOutVertex;
 };
 
 

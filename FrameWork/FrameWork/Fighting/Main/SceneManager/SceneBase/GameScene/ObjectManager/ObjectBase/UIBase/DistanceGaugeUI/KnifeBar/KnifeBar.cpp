@@ -12,7 +12,7 @@ m_OffsetPos(0, 0),
 m_IsEnable(false)
 {
 	m_pAnimUvController = new Lib::AnimUvController();
-	m_pAnimUvController->LoadAnimation("Resource/test_001.anim", "d_mark");
+	m_pAnimUvController->LoadAnimation("Resource/test_006.anim", "L_mail03");
 
 	m_pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),

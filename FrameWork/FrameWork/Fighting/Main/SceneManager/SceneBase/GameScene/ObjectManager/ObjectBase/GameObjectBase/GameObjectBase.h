@@ -13,7 +13,7 @@ public:
 	/**
 	 * コンストラクタ
 	 */
-	GameObjectBase() = default;
+	GameObjectBase();
 
 	/**
 	 * デストラクタ
@@ -29,6 +29,20 @@ public:
 	 * 描画関数
 	 */
 	virtual void Draw() override = 0;
+
+protected:
+	void Vibration();
+
+	float m_HeightVibValue;
+	float m_WidthVibValue;
+	float m_HeightTime;
+	float m_WidthTime;
+
+private:
+	float m_VibRadius;
+	float m_HeightVibAngle;
+	float m_WidthVibAngle;
+
 };
 
 

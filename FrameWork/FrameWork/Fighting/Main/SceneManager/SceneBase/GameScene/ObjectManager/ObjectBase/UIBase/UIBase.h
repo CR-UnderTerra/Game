@@ -33,12 +33,16 @@ public:
 
 protected:
 	void Vibration();
-	float m_VibValue;
+
+	float m_HeightVibValue;
+	float m_WidthVibValue;
 
 private:
 	float m_VibRadius;
-	float m_VibAngle;
-	float m_Time;
+	float m_HeightVibAngle;
+	float m_WidthVibAngle;
+	float m_HeightTime;
+	float m_WidthTime;
 
 };
 

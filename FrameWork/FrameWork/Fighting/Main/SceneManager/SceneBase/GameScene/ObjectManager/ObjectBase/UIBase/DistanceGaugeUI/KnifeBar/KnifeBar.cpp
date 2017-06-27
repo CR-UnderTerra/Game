@@ -3,7 +3,7 @@
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
 
-const D3DXVECTOR2 KnifeBar::m_Rect(96, 60);
+const D3DXVECTOR2 KnifeBar::m_Rect(96*0.7f, 60*0.7f);
 
 KnifeBar::KnifeBar(int m_TextureIndex,D3DXVECTOR2* _GaugeTopPos) :
 m_TextureIndex(m_TextureIndex),
@@ -12,7 +12,7 @@ m_OffsetPos(0, 0),
 m_IsEnable(false)
 {
 	m_pAnimUvController = new Lib::AnimUvController();
-	m_pAnimUvController->LoadAnimation("Resource/test_006.anim", "L_mail03");
+	m_pAnimUvController->LoadAnimation("Resource/test_006.anim", "d_mark");
 
 	m_pVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),

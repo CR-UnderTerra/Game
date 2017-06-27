@@ -1,4 +1,4 @@
-#ifndef ENEMYMANAGER_H
+ï»¿#ifndef ENEMYMANAGER_H
 #define ENEMYMANAGER_H
 #include <vector>
 #include "../GameObjectBase.h"
@@ -7,41 +7,41 @@
 #include "Singleton.h"
 #include "../../../../../GameDataManager/GameDataManager.h"
 
-class EnemyManager : public ObjectBase
+class EnemyManager : public GameObjectBase
 {
 	friend Lib::Singleton<EnemyManager>;
 public:
 	/**
-	* ‰Šú‰»ˆ—
-	* @param[in] _textureIndex g—p‚·‚éƒeƒNƒXƒ`ƒƒ‚ÌƒCƒ“ƒfƒbƒNƒX
+	* åˆæœŸåŒ–å‡¦ç†
+	* @param[in] _textureIndex ä½¿ç”¨ã™ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 	*/
 	void Init(int _textureIndex);
 
 	/**
-	* “G‚Ì”z’u—pcsv‚ğ“Ç‚İ‚ŞŠÖ”
+	* æ•µã®é…ç½®ç”¨csvã‚’èª­ã¿è¾¼ã‚€é–¢æ•°
 	*/
 	void EnemyLoad(const char*);
 
 	/**
-	* §ŒäŠÖ”
+	* åˆ¶å¾¡é–¢æ•°
 	*/
 	void Update() override;
 
 	/**
-	* •`‰æŠÖ”
+	* æç”»é–¢æ•°
 	*/
 	void Draw() override;
 
-	static const int		m_EnemyMax; //!< “G‚ÌÅ‘åoŒ»”.
+	static const int		m_EnemyMax; //!< æ•µã®æœ€å¤§å‡ºç¾æ•°.
 
 private:
 	/**
-	* ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	* ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	*/
 	EnemyManager() = default;
 
 	/**
-	* ƒfƒXƒgƒ‰ƒNƒ^
+	* ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	*/
 	~EnemyManager();
 

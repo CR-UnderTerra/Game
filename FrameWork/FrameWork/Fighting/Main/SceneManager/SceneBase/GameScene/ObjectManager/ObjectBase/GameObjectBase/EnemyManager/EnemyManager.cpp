@@ -1,9 +1,9 @@
-#include "EnemyManager.h"
+﻿#include "EnemyManager.h"
 #include "Texture/TextureManager.h"
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
 #include "Enemy/Enemy.h"
-
+#include "Event/EventManager.h"
 const int EnemyManager::m_EnemyMax = 1/*18*/;
 const D3DXVECTOR2 EnemyManager::m_Rect = D3DXVECTOR2(256, 256);
 
@@ -35,6 +35,11 @@ void EnemyManager::Init(int _textureIndex)
 	m_PosLeft = { (760), (576) };
 	m_PosCenter = { (960), (576) };
 	m_PosRight = { (1160), (576) };
+
+	SINGLETON_INSTANCE(Lib::EventManager).AddEvent("EnemyDamage", [this]()
+	{
+		m_WidthTime = 30;
+	});
 
 	m_LeftEnemyCrowdAlfa = SINGLETON_INSTANCE(GameDataManager).GetLeftEnemyCrowdAlfa();
 	m_CenterEnemyCrowdAlfa = SINGLETON_INSTANCE(GameDataManager).GetCenterEnemyCrowdAlfa();
@@ -68,9 +73,10 @@ void EnemyManager::Update()
 
 void EnemyManager::Draw()
 {
-	m_pVertex->Draw(&m_PosLeft, m_pUvController->GetUV(), m_LeftEnemyCrowdAlfa, &D3DXVECTOR2(0.9, 0.9));
-	m_pVertex->Draw(&m_PosCenter, m_pUvController->GetUV(), m_CenterEnemyCrowdAlfa, &D3DXVECTOR2(0.9, 0.9));
-	m_pVertex->Draw(&m_PosRight, m_pUvController->GetUV(), m_RightEnemyCrowdAlfa, &D3DXVECTOR2(0.9, 0.9));
+	Vibration();
+	m_pVertex->Draw(&D3DXVECTOR2(m_PosLeft.x + m_WidthVibValue, m_PosLeft.y), m_pUvController->GetUV(), m_LeftEnemyCrowdAlfa, &D3DXVECTOR2(0.9, 0.9));
+	m_pVertex->Draw(&D3DXVECTOR2(m_PosCenter.x + m_WidthVibValue, m_PosCenter.y), m_pUvController->GetUV(), m_CenterEnemyCrowdAlfa, &D3DXVECTOR2(0.9, 0.9));
+	m_pVertex->Draw(&D3DXVECTOR2(m_PosRight.x + m_WidthVibValue, m_PosRight.y), m_pUvController->GetUV(), m_RightEnemyCrowdAlfa, &D3DXVECTOR2(0.9, 0.9));
 	m_LeftEnemyCrowdAlfa = SINGLETON_INSTANCE(GameDataManager).GetLeftEnemyCrowdAlfa();
 	m_CenterEnemyCrowdAlfa = SINGLETON_INSTANCE(GameDataManager).GetCenterEnemyCrowdAlfa();
 	m_RightEnemyCrowdAlfa = SINGLETON_INSTANCE(GameDataManager).GetRightEnemyCrowdAlfa();

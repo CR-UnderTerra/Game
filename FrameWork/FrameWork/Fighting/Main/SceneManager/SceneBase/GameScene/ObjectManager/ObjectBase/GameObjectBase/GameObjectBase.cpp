@@ -3,7 +3,7 @@
 #include "Math/Math.h"
 
 GameObjectBase::GameObjectBase() :
-m_VibRadius(10),
+m_VibRadius(5),
 m_HeightVibAngle(0),
 m_WidthVibAngle(0),
 m_HeightTime(0),

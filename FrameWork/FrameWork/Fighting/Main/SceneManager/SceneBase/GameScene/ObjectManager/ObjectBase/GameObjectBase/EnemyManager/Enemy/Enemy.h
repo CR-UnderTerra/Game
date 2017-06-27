@@ -1,4 +1,4 @@
-#ifndef ENEMY_H
+ï»¿#ifndef ENEMY_H
 #define ENEMY_H
 #include "../../GameObjectBase.h"
 #include "Animation/AnimUvController.h"
@@ -6,8 +6,8 @@
 #include "../../../../../CollisionManager/CollisionData/CollisionData.h"
 #include "../../../../../../GameDataManager/GameDataManager.h"
 
-#define ENEMYROW		3		//“GoŒ»ƒpƒ^[ƒ“‰¡—ñ
-#define ENEMYCOLUMN		21		//“GoŒ»ƒpƒ^[ƒ“c—ñ
+#define ENEMYROW		3		//æ•µå‡ºç¾ãƒ‘ã‚¿ãƒ¼ãƒ³æ¨ªåˆ—
+#define ENEMYCOLUMN		21		//æ•µå‡ºç¾ãƒ‘ã‚¿ãƒ¼ãƒ³ç¸¦åˆ—
 #define HITINTERVAL		30.f
 #define ATTACKINTERVAL	100.f
 #define ATTACKTIME		30.f
@@ -53,26 +53,26 @@ public:
 	};*/
 
 	/**
-	* ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	* ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	*/
 	Enemy(int _textureIndex, Lib::AnimUvController* _pUvController);
 
 	/**
-	* ƒfƒXƒgƒ‰ƒNƒ^
+	* ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	*/
 	~Enemy();
 
 	/**
-	* §ŒäŠÖ”
+	* åˆ¶å¾¡é–¢æ•°
 	*/
 	void Update() override;
 
 	/**
-	* •`‰æŠÖ”
+	* æç”»é–¢æ•°
 	*/
 	void Draw() override;
 
-	//Enemy‚Ì”z’u—pCSV‚Ì“Ç‚İ‚İŠÖ”
+	//Enemyã®é…ç½®ç”¨CSVã®èª­ã¿è¾¼ã¿é–¢æ•°
 	void EnemyLoad(const char*);
 
 	void Hit();
@@ -89,13 +89,13 @@ public:
 
 private:
 	/**
-	* “–‚½‚è”»’èˆ—
+	* å½“ãŸã‚Šåˆ¤å®šå‡¦ç†
 	*/
 	void CollisionControl();
 
 	static const D3DXVECTOR2	   m_Rect;
 	static int					   m_IndexMax;
-	int							   m_TextureIndex;		 //!< ƒeƒNƒXƒ`ƒƒ‚ÌƒCƒ“ƒfƒbƒNƒX
+	int							   m_TextureIndex;		 //!< ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 	int							   m_LeftEnemyCount;
 	int							   m_CenterEnemyCount;
 	int							   m_RightEnemyCount;

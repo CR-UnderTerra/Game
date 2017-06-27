@@ -19,7 +19,7 @@ m_HeightVibValue(0)
 
 	SINGLETON_INSTANCE(Lib::EventManager).AddEvent("EnemyDamage", [this]()
 	{
-		m_WidthTime = 60;
+		m_WidthTime = 30;
 	});
 }
 

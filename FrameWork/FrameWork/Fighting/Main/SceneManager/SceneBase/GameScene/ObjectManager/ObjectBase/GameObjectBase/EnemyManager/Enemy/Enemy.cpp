@@ -1,4 +1,4 @@
-#include "Enemy.h"
+ï»¿#include "Enemy.h"
 #include<time.h>
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
@@ -8,6 +8,7 @@
 #include "DxInput/KeyBoard/KeyDevice.h"
 #include "../../KnifeManager/KnifeManager.h"
 #include "Sound/DSoundManager.h"
+#include "Event/EventManager.h"
 
 const D3DXVECTOR2 Enemy::m_Rect = D3DXVECTOR2(128, 256);
 
@@ -75,7 +76,7 @@ m_PosRight{ (1160), (576) }
 	SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
 	SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
 
-	//”š”­•`‰æŠÖ˜A Start
+	//çˆ†ç™ºæç”»é–¢é€£ Start
 	m_pEnemyGoodExplosionUvController = new Lib::AnimUvController();
 	m_pEnemyGoodExplosionUvController->LoadAnimation("Resource/test_001.anim", "e_bom_g");
 	m_pEnemyGoodExplosionVertex = new Lib::Vertex2D(
@@ -106,9 +107,9 @@ m_PosRight{ (1160), (576) }
 	m_pEnemyFantasticExplosionVertex->SetTexture(
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 
-	//”š”­•`‰æŠÖ˜A End
+	//çˆ†ç™ºæç”»é–¢é€£ End
 
-	//“G•`‰æˆ— Start
+	//æ•µæç”»å‡¦ç† Start
 	m_pEnemy01AttackUvController = new Lib::AnimUvController();
 	m_pEnemy01WaitUvController = new Lib::AnimUvController();
 	m_pEnemy01AttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack01");
@@ -142,7 +143,7 @@ m_PosRight{ (1160), (576) }
 		m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait03");
 		break;
 	}*/
-	//“G•`‰æˆ— End
+	//æ•µæç”»å‡¦ç† End
 
 	if (m_EnemyLoad[m_LeftEnemyCount][0] >= 0)
 	{
@@ -243,6 +244,10 @@ m_PosRight{ (1160), (576) }
 		//SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
 	}
 
+	SINGLETON_INSTANCE(Lib::EventManager).AddEvent("EnemyDamage", [this]()
+	{
+		m_WidthTime = 30;
+	});
 }
 
 Enemy::~Enemy()
@@ -426,6 +431,7 @@ void Enemy::Update()
 void Enemy::Draw()
 {
 	//int Random = rand() % 3;
+	Vibration();
 
 	if (m_EnemyLoad[m_LeftEnemyCount][0] > 0)
 	{
@@ -436,13 +442,13 @@ void Enemy::Draw()
 				switch (m_Random1)
 				{
 				case 0:
-					m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pEnemy01WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					m_pLeftEnemyVertex->Draw(&D3DXVECTOR2(m_PosLeft.x + m_WidthVibValue, m_PosLeft.y), m_pEnemy01WaitUvController->GetUV(), m_WaitEnemyAlfa);
 					break;
 				case 1:
-					m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pEnemy02WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					m_pLeftEnemyVertex->Draw(&D3DXVECTOR2(m_PosLeft.x + m_WidthVibValue, m_PosLeft.y), m_pEnemy02WaitUvController->GetUV(), m_WaitEnemyAlfa);
 					break;
 				case 2:
-					m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pEnemy03WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					m_pLeftEnemyVertex->Draw(&D3DXVECTOR2(m_PosLeft.x + m_WidthVibValue, m_PosLeft.y), m_pEnemy03WaitUvController->GetUV(), m_WaitEnemyAlfa);
 					break;
 				}
 
@@ -453,13 +459,13 @@ void Enemy::Draw()
 				switch (m_Random1)
 				{
 				case 0:
-					m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pEnemy01AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					m_pLeftEnemyVertex->Draw(&D3DXVECTOR2(m_PosLeft.x + m_WidthVibValue, m_PosLeft.y), m_pEnemy01AttackUvController->GetUV(), m_AttackEnemyAlfa);
 					break;
 				case 1:
-					m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pEnemy02AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					m_pLeftEnemyVertex->Draw(&D3DXVECTOR2(m_PosLeft.x + m_WidthVibValue, m_PosLeft.y), m_pEnemy02AttackUvController->GetUV(), m_AttackEnemyAlfa);
 					break;
 				case 2:
-					m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pEnemy03AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					m_pLeftEnemyVertex->Draw(&D3DXVECTOR2(m_PosLeft.x + m_WidthVibValue, m_PosLeft.y), m_pEnemy03AttackUvController->GetUV(), m_AttackEnemyAlfa);
 					break;
 				}
 				//m_pLeftEnemyVertex->Draw(&m_PosLeft, m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
@@ -500,13 +506,13 @@ void Enemy::Draw()
 				switch (m_Random2)
 				{
 				case 0:
-					m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pEnemy01WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					m_pCenterEnemyVertex->Draw(&D3DXVECTOR2(m_PosCenter.x + m_WidthVibValue, m_PosCenter.y), m_pEnemy01WaitUvController->GetUV(), m_WaitEnemyAlfa);
 					break;
 				case 1:
-					m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pEnemy02WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					m_pCenterEnemyVertex->Draw(&D3DXVECTOR2(m_PosCenter.x + m_WidthVibValue, m_PosCenter.y), m_pEnemy02WaitUvController->GetUV(), m_WaitEnemyAlfa);
 					break;
 				case 2:
-					m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pEnemy03WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					m_pCenterEnemyVertex->Draw(&D3DXVECTOR2(m_PosCenter.x + m_WidthVibValue, m_PosCenter.y), m_pEnemy03WaitUvController->GetUV(), m_WaitEnemyAlfa);
 					break;
 				}
 				//m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
@@ -516,13 +522,13 @@ void Enemy::Draw()
 				switch (m_Random2)
 				{
 				case 0:
-					m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pEnemy01AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					m_pCenterEnemyVertex->Draw(&D3DXVECTOR2(m_PosCenter.x + m_WidthVibValue, m_PosCenter.y), m_pEnemy01AttackUvController->GetUV(), m_AttackEnemyAlfa);
 					break;
 				case 1:
-					m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pEnemy02AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					m_pCenterEnemyVertex->Draw(&D3DXVECTOR2(m_PosCenter.x + m_WidthVibValue, m_PosCenter.y), m_pEnemy02AttackUvController->GetUV(), m_AttackEnemyAlfa);
 					break;
 				case 2:
-					m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pEnemy03AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					m_pCenterEnemyVertex->Draw(&D3DXVECTOR2(m_PosCenter.x + m_WidthVibValue, m_PosCenter.y), m_pEnemy03AttackUvController->GetUV(), m_AttackEnemyAlfa);
 					break;
 				}
 				//m_pCenterEnemyVertex->Draw(&m_PosCenter, m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
@@ -563,13 +569,13 @@ void Enemy::Draw()
 				switch (m_Random3)
 				{
 				case 0:
-					m_pRightEnemyVertex->Draw(&m_PosRight, m_pEnemy01WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					m_pRightEnemyVertex->Draw(&D3DXVECTOR2(m_PosRight.x + m_WidthVibValue, m_PosRight.y), m_pEnemy01WaitUvController->GetUV(), m_WaitEnemyAlfa);
 					break;
 				case 1:
-					m_pRightEnemyVertex->Draw(&m_PosRight, m_pEnemy02WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					m_pRightEnemyVertex->Draw(&D3DXVECTOR2(m_PosRight.x + m_WidthVibValue, m_PosRight.y), m_pEnemy02WaitUvController->GetUV(), m_WaitEnemyAlfa);
 					break;
 				case 2:
-					m_pRightEnemyVertex->Draw(&m_PosRight, m_pEnemy03WaitUvController->GetUV(), m_WaitEnemyAlfa);
+					m_pRightEnemyVertex->Draw(&D3DXVECTOR2(m_PosRight.x + m_WidthVibValue, m_PosRight.y), m_pEnemy03WaitUvController->GetUV(), m_WaitEnemyAlfa);
 					break;
 				}
 				//m_pRightEnemyVertex->Draw(&m_PosRight, m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
@@ -579,13 +585,13 @@ void Enemy::Draw()
 				switch (m_Random3)
 				{
 				case 0:
-					m_pRightEnemyVertex->Draw(&m_PosRight, m_pEnemy01AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					m_pRightEnemyVertex->Draw(&D3DXVECTOR2(m_PosRight.x + m_WidthVibValue, m_PosRight.y), m_pEnemy01AttackUvController->GetUV(), m_AttackEnemyAlfa);
 					break;
 				case 1:
-					m_pRightEnemyVertex->Draw(&m_PosRight, m_pEnemy02AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					m_pRightEnemyVertex->Draw(&D3DXVECTOR2(m_PosRight.x + m_WidthVibValue, m_PosRight.y), m_pEnemy02AttackUvController->GetUV(), m_AttackEnemyAlfa);
 					break;
 				case 2:
-					m_pRightEnemyVertex->Draw(&m_PosRight, m_pEnemy03AttackUvController->GetUV(), m_AttackEnemyAlfa);
+					m_pRightEnemyVertex->Draw(&D3DXVECTOR2(m_PosRight.x + m_WidthVibValue, m_PosRight.y), m_pEnemy03AttackUvController->GetUV(), m_AttackEnemyAlfa);
 					break;
 				}
 				//m_pRightEnemyVertex->Draw(&m_PosRight, m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
@@ -691,7 +697,7 @@ void Enemy::Hit()
 
 }
 
-//“G‚ÆŽèŽ†‚ÌÕ“Ë”»’èˆ—
+//æ•µã¨æ‰‹ç´™ã®è¡çªåˆ¤å®šå‡¦ç†
 void Enemy::CollisionControl()
 {
 	if (m_EnemyLoad[m_LeftEnemyCount][0] > 0)

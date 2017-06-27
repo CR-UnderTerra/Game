@@ -213,7 +213,6 @@ void Knife::CollisionControl()
 				break;
 			}
 		}
-		SINGLETON_INSTANCE(Lib::EventManager).CallEvent("EnemyDamage");
 		SINGLETON_INSTANCE(GameDataManager).SetKnifeBarIsEnable(m_Index, false);
 		m_pCollisionData->SetEnable(false);
 		m_IsThrow = false;

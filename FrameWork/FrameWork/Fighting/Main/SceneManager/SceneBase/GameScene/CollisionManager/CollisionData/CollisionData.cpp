@@ -5,6 +5,7 @@
 */
 #include "CollisionData.h"
 #include "Math/Math.h"
+#include "Event/EventManager.h"
 
 int CollisionData::m_IndexMax = 0;
 
@@ -92,6 +93,7 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 	{
 		if (Lib::Math::GetDistance(v1.Pos, v2.Pos) < 20.f)
 		{
+			SINGLETON_INSTANCE(Lib::EventManager).CallEvent("EnemyDamage");
 			m_CollisionState.HitState = KNIFE_HIT;
 			return true;
 		}

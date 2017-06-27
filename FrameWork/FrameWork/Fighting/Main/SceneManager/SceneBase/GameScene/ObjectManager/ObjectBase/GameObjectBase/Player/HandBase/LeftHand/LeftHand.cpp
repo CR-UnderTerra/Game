@@ -93,6 +93,7 @@ void LeftHand::Update()
 
 void LeftHand::Draw()
 {
-	m_pVertex->Draw(&m_Pos,m_pAnimUvController->GetUV(),1.f,
-		&D3DXVECTOR2(1.f,1.f),m_Angle);
+	Vibration();
+	m_pVertex->Draw(&D3DXVECTOR2(m_Pos.x, m_Pos.y + m_HeightVibValue), m_pAnimUvController->GetUV(), 1.f,
+		&D3DXVECTOR2(1.f, 1.f), m_Angle);
 }

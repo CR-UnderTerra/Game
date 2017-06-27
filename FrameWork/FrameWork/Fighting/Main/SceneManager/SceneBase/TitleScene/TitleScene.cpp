@@ -62,13 +62,16 @@ SceneBase::SceneID TitleScene::Update()
 	if (!m_pStartButton->Update()) return m_SceneID;
 	if (KeyCheck())
 	{
-		SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_ButtonSoundIndex, Lib::DSoundManager::SOUND_PLAY);
+		if (!m_IsNextSceneControl)
+		{
+			SINGLETON_INSTANCE(Lib::DSoundManager).SoundOperation(m_ButtonSoundIndex, Lib::DSoundManager::SOUND_PLAY);
+		}
 		m_IsNextSceneControl = true;
 	}
 
 	if (m_IsNextSceneControl)
 	{
-		if (m_pTitleBackGround->TransitionControl())
+		if (m_pTitleBackGround->NextSceneControl())
 		{
 			m_SceneID = SCENE_GAME;
 		}
@@ -81,7 +84,10 @@ void TitleScene::Draw()
 	SINGLETON_INSTANCE(Lib::DX11Manager).SetDepthStencilTest(false);
 	SINGLETON_INSTANCE(Lib::DX11Manager).BeginScene();
 	m_pTitleBackGround->Draw();
-	m_pStartButton->Draw();
+	if (!m_IsNextSceneControl)
+	{
+		m_pStartButton->Draw();
+	}
 	m_pTitleText->Draw();
 	SINGLETON_INSTANCE(Lib::DX11Manager).EndScene();
 }

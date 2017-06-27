@@ -87,7 +87,7 @@ void TitleBackGround::Draw()
 	}
 }
 
-bool TitleBackGround::TransitionControl()
+bool TitleBackGround::NextSceneControl()
 {
 	m_IsTransitionControl = true;
 	m_Alpha -= m_AddAlphaValue;

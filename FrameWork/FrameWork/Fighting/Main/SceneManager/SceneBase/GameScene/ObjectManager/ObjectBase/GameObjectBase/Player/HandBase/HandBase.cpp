@@ -7,6 +7,7 @@
 #include "Texture/TextureManager.h"
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
+#include "Event/EventManager.h"
 #include "Helper/Helper.h"
 
 const D3DXVECTOR2 HandBase::m_Rect = D3DXVECTOR2(192, 384);
@@ -32,6 +33,11 @@ m_TextureIndex(_textureIndex)
 	m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos), &D3DXVECTOR2(m_Rect.x, m_Rect.y), CollisionData::PLAYER_TYPE);
 	m_pCollisionData->SetEnable(true);
 	SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pCollisionData);
+
+	SINGLETON_INSTANCE(Lib::EventManager).AddEvent("PlayerDamage", [this]()
+	{
+		m_HeightTime = 60;
+	});
 
 }
 

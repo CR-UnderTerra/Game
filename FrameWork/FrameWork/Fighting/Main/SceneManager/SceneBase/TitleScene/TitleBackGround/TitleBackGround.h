@@ -32,7 +32,7 @@ public:
 	 */
 	void Draw();
 
-	bool TransitionControl();
+	bool NextSceneControl();
 
 private:
 	static const D3DXVECTOR2 m_Rect;

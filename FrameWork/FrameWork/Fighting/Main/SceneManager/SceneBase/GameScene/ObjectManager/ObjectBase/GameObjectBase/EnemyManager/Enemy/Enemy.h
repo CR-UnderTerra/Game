@@ -7,7 +7,7 @@
 #include "../../../../../../GameDataManager/GameDataManager.h"
 
 #define ENEMYROW		3		//敵出現パターン横列
-#define ENEMYCOLUMN		14		//敵出現パターン縦列
+#define ENEMYCOLUMN		21		//敵出現パターン縦列
 #define HITINTERVAL		30.f
 #define ATTACKINTERVAL	100.f
 #define ATTACKTIME		30.f

@@ -15,6 +15,11 @@ const D3DXVECTOR2 BackGround::m_Rect = D3DXVECTOR2(1350, 1080);
 BackGround::BackGround(int _textureIndex) :
 m_TextureIndex(_textureIndex)
 {
+	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_009.png", &m_TextureIndex);
+	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_010.png", &m_TextureIndex);
+	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_011.png", &m_TextureIndex);
+	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_003.png", &m_TextureIndex);
+
 	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 	m_Pos = D3DXVECTOR2(static_cast<float>(ClientRect.right / 2), static_cast<float>(ClientRect.bottom / 2));
 	m_pAnimUvController = new Lib::AnimUvController();

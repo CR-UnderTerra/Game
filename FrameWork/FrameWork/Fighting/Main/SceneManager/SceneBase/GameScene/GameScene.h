@@ -53,6 +53,14 @@ private:
 	int					   m_TextureIndex;
 	int					   m_CountdownSoundIndex;
 	int					   m_BgmSoundIndex;
+
+	/* カウントダウン時のみボタンの案内を出す */
+	int					   m_ButtonTextureIndex;
+	Lib::AnimUvController* m_pXButtonUvController;
+	Lib::AnimUvController* m_pYButtonUvController;
+	Lib::AnimUvController* m_pBButtonUvController;
+	Lib::Vertex2D*		   m_pButtonVertex;
+
 };
 
 

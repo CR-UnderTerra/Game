@@ -13,6 +13,7 @@
 #include "XInput/XInput.h"
 #include "Sound/DSoundManager.h"
 #include "Helper/Helper.h"
+#include "Event/EventManager.h"
 
 const D3DXVECTOR2 Player::m_RectCollision = D3DXVECTOR2(100, 230);
 
@@ -22,14 +23,24 @@ Player::Player(int _textureIndex)
 	m_pCollisionData = new CollisionData();
 	m_pHandBase.push_back(new RightHand(_textureIndex));
 	m_pHandBase.push_back(new LeftHand(_textureIndex));
-
+	m_ImmortalTime = 0;
 	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 	m_Pos.x = static_cast<float>(ClientRect.right / 2);
 	m_Pos.y = static_cast<float>(ClientRect.bottom);
 	m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos), &m_RectCollision, CollisionData::PLAYER_TYPE);
-	m_pCollisionData->SetEnable(false);
+	m_pCollisionData->SetEnable(true);
 	SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pCollisionData);
 	SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/se/houchouSE_nagekaeshi.wav", &m_KnifeThrowSoundIndex);
+	
+	SINGLETON_INSTANCE(Lib::EventManager).AddEvent("PlayerDamage", [this]()
+	{
+		if (m_ImmortalTime == 0)
+		{
+			m_ImmortalTime = 120;
+			int playerHp = SINGLETON_INSTANCE(GameDataManager).GetPlayerHp();
+			SINGLETON_INSTANCE(GameDataManager).SetPlayerHp(--playerHp);
+		}
+	});
 }
 
 Player::~Player()
@@ -52,11 +63,14 @@ void Player::Update()
 {
 	KeyCheck();
 	GamePadCheck();
+	if (m_ImmortalTime > 0)
+	{
+		m_ImmortalTime--;
+	}
 
 	m_pCollisionData->SetCollision(&D3DXVECTOR3(m_Pos), &m_RectCollision, CollisionData::PLAYER_TYPE);
 
 	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
-
 	for (unsigned int i = 0; i < m_pHandBase.size(); i++)
 	{
 		m_pHandBase[i]->Update();

@@ -77,14 +77,14 @@ namespace Result
 	bool ScoreWindow::Update()
 	{
 		m_Scale += m_AddScaleValue;
+		if (ResultScene::KeyCheck())
+		{
+			m_Scale = 1.f;
+		}
 		if (m_Scale > 1.f)
 		{
 			m_Scale = 1.f;
 			return true;
-		}
-		if (ResultScene::KeyCheck())
-		{
-			m_Scale = 1.f;
 		}
 		return false;
 	}

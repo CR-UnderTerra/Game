@@ -48,7 +48,6 @@ BackGround::~BackGround()
 
 void BackGround::Update()
 {
-
 }
 
 void BackGround::Draw()

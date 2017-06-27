@@ -16,7 +16,7 @@ const float JudgeCountWindow::m_DisplayTime = 2.f;
 JudgeCountWindow::JudgeCountWindow(int _textureIndex) :
 	m_Alpha(0)
 {
-	m_Pos = D3DXVECTOR2(1150, 600);
+	m_Pos = D3DXVECTOR2(1000, 600);
 	m_pCountDisplayBase[0] = new GoodCountDisplay(_textureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y + 70.f));
 	m_pCountDisplayBase[1] = new AmazingCountDisplay(_textureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y));
 	m_pCountDisplayBase[2] = new FantasticCountDisplay(_textureIndex, &D3DXVECTOR2(m_Pos.x, m_Pos.y - 70.f));
@@ -42,16 +42,16 @@ bool JudgeCountWindow::Update()
 		m_pCountDisplayBase[i]->Update();
 	}
 	m_Alpha += m_AddAlphaValue;
-	if (m_Alpha > 1.f)
+	if (ResultScene::KeyCheck())
+	{
+		m_Alpha = 1.f;
+	}
+	if (m_Alpha >= 1.f)
 	{
 		m_Alpha = 1.f;
 		return true;
 	}
 
-	if (ResultScene::KeyCheck())
-	{
-		m_Alpha = 1.f;
-	}
 	return false;
 }
 

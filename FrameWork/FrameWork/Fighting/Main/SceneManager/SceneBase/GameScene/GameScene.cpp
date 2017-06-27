@@ -35,6 +35,8 @@ SceneBase(SCENE_GAME)
 	m_Rect = D3DXVECTOR2(45 * 2, 96 * 2);
 	FrameCount = 300;
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png",&m_TextureIndex);
+	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_006.png", &m_ButtonTextureIndex);
+	
 	m_pUvController = new Lib::AnimUvController();
 	m_pUvController->LoadAnimation("Resource/test_001.anim", "Number");
 	m_pVertex = new Lib::Vertex2D(
@@ -45,6 +47,20 @@ SceneBase(SCENE_GAME)
 	m_pVertex->SetTexture(
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
 
+	m_pXButtonUvController = new Lib::AnimUvController();
+	m_pXButtonUvController->LoadAnimation("Resource/test_006.anim", "b_x");
+	m_pYButtonUvController = new Lib::AnimUvController();
+	m_pYButtonUvController->LoadAnimation("Resource/test_006.anim", "b_y");
+	m_pBButtonUvController = new Lib::AnimUvController();
+	m_pBButtonUvController->LoadAnimation("Resource/test_006.anim", "b_b");
+
+	m_pButtonVertex = new Lib::Vertex2D(
+		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
+		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
+		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
+	m_pButtonVertex->Init(&D3DXVECTOR2(100,100), m_pUvController->GetUV());
+	m_pButtonVertex->SetTexture(
+		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_ButtonTextureIndex));
 
 	SINGLETON_CREATE(CollisionManager);
 	m_pObjectManager = new ObjectManager();
@@ -61,9 +77,16 @@ GameScene::~GameScene()
 
 	Lib::SafeDelete<ObjectManager>(m_pObjectManager);
 
+	m_pButtonVertex->Release();
+	Lib::SafeDelete(m_pButtonVertex);
+
+	Lib::SafeDelete(m_pBButtonUvController);
+	Lib::SafeDelete(m_pYButtonUvController);
+	Lib::SafeDelete(m_pXButtonUvController);
+
 	m_pVertex->Release();
 	Lib::SafeDelete<Lib::Vertex2D>(m_pVertex);
-
+	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_ButtonTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).ReleaseTexture(m_TextureIndex);
 
 	Lib::SafeDelete<Lib::AnimUvController>(m_pUvController);
@@ -116,6 +139,15 @@ void GameScene::Draw()
 	if (FrameCount > 60 && FrameCount < 240)
 	{
 		m_pVertex->Draw(&m_Pos,m_pUvController->GetUV());
+		D3DXVECTOR2 pos = SINGLETON_INSTANCE(GameDataManager).GetPos(GameDataManager::LEFT_ENEMY_TARGET);
+		pos.y -= 180.f;
+		m_pButtonVertex->Draw(&pos, m_pXButtonUvController->GetUV());
+		pos = SINGLETON_INSTANCE(GameDataManager).GetPos(GameDataManager::FRONT_ENEMY_TARGET);
+		pos.y -= 180.f;
+		m_pButtonVertex->Draw(&pos, m_pYButtonUvController->GetUV());
+		pos = SINGLETON_INSTANCE(GameDataManager).GetPos(GameDataManager::RIGHT_ENEMY_TARGET);
+		pos.y -= 180.f;
+		m_pButtonVertex->Draw(&pos, m_pBButtonUvController->GetUV());
 	}
 	SINGLETON_INSTANCE(Lib::DX11Manager).EndScene();
 }

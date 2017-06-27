@@ -49,14 +49,14 @@ namespace Result
 	bool BackGround::Update()
 	{
 		m_Alpha += m_AddAlphaValue;
-		if (m_Alpha > 1.f)
-		{
-			m_Alpha = 1.f;
-			return true;
-		}
 		if (ResultScene::KeyCheck())
 		{
 			m_Alpha = 1.f;
+		}
+		if (m_Alpha >= 1.f)
+		{
+			m_Alpha = 1.f;
+			return true;
 		}
 		return false;
 	}

@@ -36,7 +36,7 @@ public:
 	{
 		m_Distance = _distance;
 		m_Velocity = _velocity;
-		m_AddValue = (750.f / (m_Distance / m_Velocity));
+		m_AddValue = (800.f / (m_Distance / m_Velocity));
 	}
 
 	/**

@@ -19,7 +19,7 @@ m_Alpha(0)
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png", &m_TextureIndex);
 	RECT ClientRect = SINGLETON_INSTANCE(Lib::Window).GetWindowSize();
 
-	m_Pos = D3DXVECTOR2(550, 600);
+	m_Pos = D3DXVECTOR2(750, 600);
 	InitVertex(&m_Pos, &D3DXVECTOR2(24, 64), "t_colon", &m_ColonVertex);
 
 	InitVertex(&D3DXVECTOR2(m_Pos.x - (90.f - m_ColonVertex.Rect.x / 2), m_Pos.y), &D3DXVECTOR2(45, 96), "Number", &m_NumVertex[0]);
@@ -57,14 +57,14 @@ TimeWindow::~TimeWindow()
 bool TimeWindow::Update()
 {
 	m_Alpha += m_AddAlphaValue;
+	if (ResultScene::KeyCheck())
+	{
+		m_Alpha = 1.f;
+	}
 	if (m_Alpha > 1.f)
 	{
 		m_Alpha = 1.f;
 		return true;
-	}
-	if (ResultScene::KeyCheck())
-	{
-		m_Alpha = 1.f;
 	}
 	return false;
 }

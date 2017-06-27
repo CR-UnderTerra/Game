@@ -1,4 +1,4 @@
-#include "Event/EventManager.h"
+﻿#include "Event/EventManager.h"
 #include "UIBase.h"
 #include "Math/Math.h"
 
@@ -8,6 +8,7 @@ m_VibAngle(0),
 m_Time(0),
 m_VibValue(0)
 {
+	/* プレイヤーがダメージを受けたときのEventの登録 */
 	SINGLETON_INSTANCE(Lib::EventManager).AddEvent("PlayerDamage", [this]()
 	{
 		m_Time = 60;

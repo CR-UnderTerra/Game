@@ -55,6 +55,11 @@ ReturnTitleText::~ReturnTitleText()
 bool ReturnTitleText::Update()
 {
 	m_Alpha += m_AddAlphaValue;
+	if (ResultScene::KeyCheck())
+	{
+		m_Alpha = 1.f;
+	}
+
 	if (m_IsButtonEnable)
 	{
 		if (m_IsSelect)
@@ -73,10 +78,6 @@ bool ReturnTitleText::Update()
 		m_IsButtonEnable = true;
 	}
 
-	if (ResultScene::KeyCheck())
-	{
-		m_Alpha = 1.f;
-	}
 	return m_IsButtonEnable;
 }
 

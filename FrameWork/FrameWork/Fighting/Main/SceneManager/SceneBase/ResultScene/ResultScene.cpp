@@ -46,7 +46,7 @@ SceneBase(SCENE_RESULT)
 	else
 	{
 		SINGLETON_INSTANCE(Lib::DSoundManager).LoadSound("Resource/Sound/bgm/gameclearBGM.wav", &m_BgmSoundIndex);
-		SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/TitleBackGround.png", &m_BackGroundTextureIndex);
+		SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/Clear.png", &m_BackGroundTextureIndex);
 	}
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/Text.png", &m_TextTextureIndex);
 	SINGLETON_INSTANCE(Lib::TextureManager).Load("Resource/test_001.png", &m_TextureIndex);

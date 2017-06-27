@@ -49,12 +49,34 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 	}
 
 	
-	if (CollisionCheck(AMAZING_PLAYER_KNIFE_TYPE, ENEMY_KNIFE_TYPE))
+	if (CollisionCheck(AMAZING_PLAYER_KNIFE_TYPE,ENEMY_KNIFE_TYPE) ||
+		CollisionCheck(GOOD_PLAYER_KNIFE_TYPE,ENEMY_KNIFE_TYPE) ||
+		CollisionCheck(FANTASTIC_PLAYER_KNIFE_TYPE,ENEMY_KNIFE_TYPE))
 	{
-		if (Lib::Math::GetDistance(v1.Pos, v2.Pos) < 20.f)
+		if (Lib::Math::GetDistance(v1.Pos, v2.Pos) <= 20.f)
 		{
 			m_CollisionState.HitState = KNIFE_HIT;
 			return true;	
+		}
+		else
+		{
+			m_CollisionState.HitState = NON_HIT;
+			return false;
+		}
+	}
+
+	if (CollisionCheck(ENEMY_KNIFE_TYPE, AMAZING_PLAYER_KNIFE_TYPE) ||
+		CollisionCheck(ENEMY_KNIFE_TYPE, GOOD_PLAYER_KNIFE_TYPE) ||
+		CollisionCheck(ENEMY_KNIFE_TYPE, FANTASTIC_PLAYER_KNIFE_TYPE))
+	{
+		if (m_CollisionState.CollisionType == ENEMY_KNIFE_TYPE)
+		{
+			int var = 0;
+		}
+		if (Lib::Math::GetDistance(v1.Pos, v2.Pos) <= 20.f)
+		{
+			m_CollisionState.HitState = KNIFE_HIT;
+			return true;
 		}
 		else
 		{
@@ -137,14 +159,6 @@ bool CollisionData::HitCheck(const CollisionState* _collisionState)
 				m_CollisionState.HitState = CATCH_HIT;
 				return true;
 			}
-		}
-		else if (v1.CollisionType == ENEMY_KNIFE_TYPE &&
-			v2.CollisionType == PLAYER_TYPE ||
-			v1.CollisionType == PLAYER_TYPE &&
-			v2.CollisionType == ENEMY_KNIFE_TYPE)
-		{
-			m_CollisionState.HitState = KNIFE_HIT;
-			return true;
 		}
 	}
 	m_CollisionState.HitState = NON_HIT;

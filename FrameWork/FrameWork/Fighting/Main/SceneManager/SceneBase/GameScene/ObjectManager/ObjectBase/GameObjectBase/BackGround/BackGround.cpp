@@ -82,11 +82,40 @@ void BackGround::Update()
 {
 	m_EnemyLine = SINGLETON_INSTANCE(GameDataManager).GetCurrentEnemyLine();
 
-	//m_Alfa = m_AfterAlfa - m_BeforeAlfa;
 	if (m_EnemyLine > 14)
 	{
-		m_Alfa2 -= 0.001f;
-		m_Alfa3 += 0.001f;
+		if (m_EnemyLine == 20)
+		{
+			m_Alfa2 = 1.f;
+			m_Alfa3 = 0.f;
+		}
+		if (m_EnemyLine == 19)
+		{
+			m_Alfa2 = 0.9f;
+			m_Alfa3 = 0.1f;
+		}
+		if (m_EnemyLine == 18)
+		{
+			m_Alfa2 = 0.8f;
+			m_Alfa3 = 0.2f;
+		}
+		if (m_EnemyLine == 17)
+		{
+			m_Alfa2 = 0.6f;
+			m_Alfa3 = 0.4f;
+		}
+		if (m_EnemyLine == 16)
+		{
+			m_Alfa2 = 0.4f;
+			m_Alfa3 = 0.6f;
+		}
+		if (m_EnemyLine == 15)
+		{
+			m_Alfa2 = 0.2f;
+			m_Alfa3 = 0.8f;
+		}
+		//m_Alfa2 -= 0.001f;
+		//m_Alfa3 += 0.001f;
 	}
 	if (m_EnemyLine == 14)
 	{
@@ -95,8 +124,33 @@ void BackGround::Update()
 	}
 	if (m_EnemyLine < 14 && m_EnemyLine > 8)
 	{
-		m_Alfa3 -= 0.001f;
-		m_Alfa4 += 0.001f;
+		if (m_EnemyLine == 13)
+		{
+			m_Alfa3 = 0.8f;
+			m_Alfa4 = 0.2f;
+		}
+		if (m_EnemyLine == 12)
+		{
+			m_Alfa3 = 0.6f;
+			m_Alfa4 = 0.4f;
+		}
+		if (m_EnemyLine == 11)
+		{
+			m_Alfa3 = 0.4f;
+			m_Alfa4 = 0.6f;
+		}
+		if (m_EnemyLine == 10)
+		{
+			m_Alfa3 = 0.2f;
+			m_Alfa4 = 0.8f;
+		}
+		if (m_EnemyLine == 9)
+		{
+			m_Alfa3 = 0.1f;
+			m_Alfa4 = 0.9f;
+		}
+		//m_Alfa3 -= 0.001f;
+		//m_Alfa4 += 0.001f;
 	}
 	if (m_EnemyLine == 8)
 	{
@@ -105,8 +159,33 @@ void BackGround::Update()
 	}
 	if (m_EnemyLine < 8 && m_EnemyLine > 2)
 	{
-		m_Alfa4 -= 0.001f;
-		m_Alfa5 += 0.001f;
+		if (m_EnemyLine == 7)
+		{
+			m_Alfa4 = 0.8f;
+			m_Alfa5 = 0.2f;
+		}
+		if (m_EnemyLine == 6)
+		{
+			m_Alfa4 = 0.6f;
+			m_Alfa5 = 0.4f;
+		}
+		if (m_EnemyLine == 5)
+		{
+			m_Alfa4 = 0.4f;
+			m_Alfa5 = 0.6f;
+		}
+		if (m_EnemyLine == 4)
+		{
+			m_Alfa4 = 0.2f;
+			m_Alfa5 = 0.8f;
+		}
+		if (m_EnemyLine == 3)
+		{
+			m_Alfa4 = 0.1f;
+			m_Alfa5 = 0.9f;
+		}
+		//m_Alfa4 -= 0.001f;
+		//m_Alfa5 += 0.001f;
 	}
 	if (m_EnemyLine == 2)
 	{
@@ -117,8 +196,13 @@ void BackGround::Update()
 
 void BackGround::Draw()
 {
-	Vibration();
-	m_pVertex->Draw(&D3DXVECTOR2(m_Pos.x + m_WidthVibValue, m_Pos.y), m_pAnimUvController->GetUV());
+	m_pVertex->Draw(&m_Pos, m_pAnimUvController->GetUV());
+	if (m_EnemyLine >= 14)
+	{
+		m_pVertex->Draw(&m_Pos, m_pAnimUvController->GetUV(), m_Alfa2);
+		Vibration();
+		m_pVertex->Draw(&D3DXVECTOR2(m_Pos.x + m_WidthVibValue, m_Pos.y), m_pAnimUvController->GetUV());
+	}
 	if (m_EnemyLine >= 14)
 	{
 		m_pVertex->Draw(&D3DXVECTOR2(m_Pos.x + m_WidthVibValue, m_Pos.y), m_pAnimUvController->GetUV(), m_Alfa2);
@@ -127,18 +211,21 @@ void BackGround::Draw()
 	}
 	if (m_EnemyLine >= 8)
 	{
+		m_pVertex2->Draw(&m_Pos, m_pAnimUvController->GetUV(), m_Alfa3);
 		m_pVertex2->Draw(&D3DXVECTOR2(m_Pos.x + m_WidthVibValue, m_Pos.y), m_pAnimUvController->GetUV(), m_Alfa3);
 		m_pVertex2->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_RedSky));
 	}
 	if (m_EnemyLine <= 14 && m_EnemyLine >= 8)
 	{
+		m_pVertex->Draw(&m_Pos, m_pAnimUvController->GetUV(), m_Alfa4);
 		m_pVertex->Draw(&D3DXVECTOR2(m_Pos.x + m_WidthVibValue, m_Pos.y), m_pAnimUvController->GetUV(), m_Alfa4);
 		m_pVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_OrangeSky));
 	}
 	if (m_EnemyLine <= 8 && m_EnemyLine >= 0)
 	{
+		m_pVertex2->Draw(&m_Pos, m_pAnimUvController->GetUV(), m_Alfa5);
 		m_pVertex2->Draw(&D3DXVECTOR2(m_Pos.x + m_WidthVibValue, m_Pos.y), m_pAnimUvController->GetUV(), m_Alfa5);
 		m_pVertex2->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_BlueSky));

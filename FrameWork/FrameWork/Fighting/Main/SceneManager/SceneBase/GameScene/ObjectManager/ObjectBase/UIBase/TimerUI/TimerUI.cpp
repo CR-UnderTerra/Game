@@ -51,7 +51,7 @@ void TimerUI::Update()
 	{
 		m_Count = 0;
 		m_Second++;
-		if (m_Second > 60)
+		if (m_Second > 59)
 		{
 			m_Second = 0;
 			m_Minute++;

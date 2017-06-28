@@ -8,7 +8,7 @@
 #include "Window/Window.h"
 #include "Dx11/DX11Manager.h"
 
-const D3DXVECTOR2 HpIcon::m_Rect = D3DXVECTOR2(75, 75);
+const D3DXVECTOR2 HpIcon::m_Rect = D3DXVECTOR2(75 * 0.5, 75 * 0.5);
 
 
 HpIcon::HpIcon(int _textureIndex, D3DXVECTOR2* _pos) :

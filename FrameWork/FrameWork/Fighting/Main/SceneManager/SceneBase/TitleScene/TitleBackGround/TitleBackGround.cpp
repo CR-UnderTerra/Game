@@ -12,7 +12,7 @@
 #include "Helper/Helper.h"
 
 const D3DXVECTOR2 TitleBackGround::m_Rect = D3DXVECTOR2(1920, 1080);
-const float TitleBackGround::m_DisplayTime = 2.f;
+const float TitleBackGround::m_DisplayTime = 1.8f;
 
 
 TitleBackGround::TitleBackGround() :

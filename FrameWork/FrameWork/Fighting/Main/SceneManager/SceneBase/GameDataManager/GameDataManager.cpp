@@ -40,7 +40,7 @@ m_IsGameOver(false)
 
 void GameDataManager::Init()
 {
-	m_PlayerHp = 3;
+	m_PlayerHp = 6;
 	m_Result.AmazingCount = 0;
 	m_Result.FantasticCount = 0;
 	m_Result.GoodCount = 0;

@@ -38,7 +38,7 @@ public:
 
 private:
 	static const D3DXVECTOR2 m_Rect;
-	std::array<HpIcon*, 4>	 m_pHpIcon;
+	std::array<HpIcon*, 6>	 m_pHpIcon;
 	D3DXVECTOR2				 m_Pos;
 	int						 m_TextureIndex;
 	Lib::AnimUvController*   m_pUvController;

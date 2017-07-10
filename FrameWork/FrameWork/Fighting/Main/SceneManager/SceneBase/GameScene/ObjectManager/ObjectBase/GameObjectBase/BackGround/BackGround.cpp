@@ -86,6 +86,7 @@ void BackGround::Update()
 	{
 		if (m_EnemyLine == 20)
 		{
+			m_Alfa = 0.f;
 			m_Alfa2 = 1.f;
 			m_Alfa3 = 0.f;
 		}
@@ -205,6 +206,7 @@ void BackGround::Draw()
 	}
 	if (m_EnemyLine >= 14)
 	{
+		Vibration();
 		m_pVertex->Draw(&D3DXVECTOR2(m_Pos.x + m_WidthVibValue, m_Pos.y), m_pAnimUvController->GetUV(), m_Alfa2);
 		m_pVertex->SetTexture(
 			SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_PurpleSky));

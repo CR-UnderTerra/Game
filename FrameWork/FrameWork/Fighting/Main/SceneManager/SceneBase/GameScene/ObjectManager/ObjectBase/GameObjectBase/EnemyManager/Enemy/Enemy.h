@@ -75,11 +75,17 @@ public:
 	//Enemyの配置用CSVの読み込み関数
 	void EnemyLoad(const char*);
 
-	void Hit();
-
+	//Enemyの初期化関数
 	void EnemyPosInit(CollisionData* _pcollisiondata, D3DXVECTOR2 _pos, Lib::Vertex2D* _vertex, CollisionData::HIT_STATE _hitstate);
 
+	void EnemyWaitUvInit(int random_);
+
+	void EnemyAttackUvInit(int random_);
+
+	//爆風の描画用関数
 	void EnemyExplosionDraw(D3DXVECTOR2 _pos, float _alpha, EXPLOSION_TYPE explosiontype_);
+
+	void Hit();
 
 	void Attack();
 
@@ -118,12 +124,14 @@ private:
 	Lib::Vertex2D*				   m_pEnemyGoodExplosionVertex;
 	Lib::Vertex2D*				   m_pEnemyAmazingExplosionVertex;
 	Lib::Vertex2D*				   m_pEnemyFantasticExplosionVertex;
-	Lib::AnimUvController*		   m_pEnemy01WaitUvController;
-	Lib::AnimUvController*		   m_pEnemy01AttackUvController;
-	Lib::AnimUvController*		   m_pEnemy02WaitUvController;
-	Lib::AnimUvController*		   m_pEnemy02AttackUvController;
-	Lib::AnimUvController*		   m_pEnemy03WaitUvController;
-	Lib::AnimUvController*		   m_pEnemy03AttackUvController;
+	Lib::AnimUvController*		   m_pWaitUvController;
+	Lib::AnimUvController*		   m_pAttackUvController;
+	//Lib::AnimUvController*		   m_pEnemy01WaitUvController;
+	//Lib::AnimUvController*		   m_pEnemy01AttackUvController;
+	//Lib::AnimUvController*		   m_pEnemy02WaitUvController;
+	//Lib::AnimUvController*		   m_pEnemy02AttackUvController;
+	//Lib::AnimUvController*		   m_pEnemy03WaitUvController;
+	//Lib::AnimUvController*		   m_pEnemy03AttackUvController;
 	Lib::AnimUvController*		   m_pEnemyGoodExplosionUvController;
 	Lib::AnimUvController*		   m_pEnemyAmazingExplosionUvController;
 	Lib::AnimUvController*		   m_pEnemyFantasticExplosionUvController;

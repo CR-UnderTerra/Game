@@ -73,36 +73,14 @@ m_PosRight{ (1160), (576) }
 	SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
 
 	//爆発描画関連 Start
-	m_pEnemyGoodExplosionUvController = new Lib::AnimUvController();
-	m_pEnemyGoodExplosionUvController->LoadAnimation("Resource/test_001.anim", "e_bom_g");
-	m_pEnemyGoodExplosionVertex = new Lib::Vertex2D(
+	m_pEnemyExplosionUvController = new Lib::AnimUvController();
+	m_pEnemyExplosionVertex = new Lib::Vertex2D(
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
 		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
 		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
-	m_pEnemyGoodExplosionVertex->Init(&m_Rect, m_pEnemyGoodExplosionUvController->GetUV());
-	m_pEnemyGoodExplosionVertex->SetTexture(
+	m_pEnemyExplosionVertex->Init(&m_Rect, m_pEnemyExplosionUvController->GetUV());
+	m_pEnemyExplosionVertex->SetTexture(
 		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
-
-	m_pEnemyAmazingExplosionUvController = new Lib::AnimUvController();
-	m_pEnemyAmazingExplosionUvController->LoadAnimation("Resource/test_001.anim", "e_bom_a");
-	m_pEnemyAmazingExplosionVertex = new Lib::Vertex2D(
-		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
-		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
-	m_pEnemyAmazingExplosionVertex->Init(&m_Rect, m_pEnemyAmazingExplosionUvController->GetUV());
-	m_pEnemyAmazingExplosionVertex->SetTexture(
-		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
-
-	m_pEnemyFantasticExplosionUvController = new Lib::AnimUvController();
-	m_pEnemyFantasticExplosionUvController->LoadAnimation("Resource/test_001.anim", "e_bom_f");
-	m_pEnemyFantasticExplosionVertex = new Lib::Vertex2D(
-		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
-		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
-	m_pEnemyFantasticExplosionVertex->Init(&m_Rect, m_pEnemyFantasticExplosionUvController->GetUV());
-	m_pEnemyFantasticExplosionVertex->SetTexture(
-		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
-
 	//爆発描画関連 End
 
 	//敵描画処理 Start
@@ -118,129 +96,23 @@ m_PosRight{ (1160), (576) }
 
 	if (m_EnemyLoad[m_LeftEnemyCount][0] >= 0)
 	{
-		EnemyPosInit(m_pLeftEnemyCollisionData, m_PosLeft, m_pLeftEnemyVertex, m_LeftEnemyHitState);
-		//m_pLeftEnemyCollisionData = new CollisionData();
-		//m_pLeftEnemyCollisionData->SetEnable(false);
-		//m_pLeftEnemyCollisionData->SetCollision(&D3DXVECTOR3(m_PosLeft), &m_Rect, CollisionData::ENEMY_TYPE);
-		//SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pLeftEnemyCollisionData);
-		//
-		//m_pLeftEnemyVertex = new Lib::Vertex2D(
-		//	SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
-		//	SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-		//	SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
-		//m_pLeftEnemyVertex->Init(&m_Rect, m_pWaitUvController->GetUV());
-		//
-		//m_pLeftEnemyVertex->SetTexture(
-		//	SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
-		//
-		//m_LeftEnemyHitState = m_pLeftEnemyCollisionData->GetCollisionState().HitState;
-		//
-		//m_LeftEnemyCrowdAlfa = 1.0f;
-		//SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
+		EnemyPosInit(&m_pLeftEnemyCollisionData, m_PosLeft, &m_pLeftEnemyVertex, m_LeftEnemyHitState);
 	}
 
 	if (m_EnemyLoad[m_CenterEnemyCount][1] >= 0)
 	{
-		EnemyPosInit(m_pCenterEnemyCollisionData, m_PosCenter, m_pCenterEnemyVertex, m_CenterEnemyHitState);
-		//m_pCenterEnemyCollisionData = new CollisionData();
-		//m_pCenterEnemyCollisionData->SetEnable(false);
-		//m_pCenterEnemyCollisionData->SetCollision(&D3DXVECTOR3(m_PosCenter), &m_Rect, CollisionData::ENEMY_TYPE);
-		//SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pCenterEnemyCollisionData);
-		//
-		//m_pCenterEnemyVertex = new Lib::Vertex2D(
-		//	SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
-		//	SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-		//	SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
-		//m_pCenterEnemyVertex->Init(&m_Rect, m_pWaitUvController->GetUV());
-		//
-		//m_pCenterEnemyVertex->SetTexture(
-		//	SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
-		//
-		//m_CenterEnemyHitState = m_pCenterEnemyCollisionData->GetCollisionState().HitState;
-		//
-		//m_CenterEnemyCrowdAlfa = 1.0f;
-		//SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
+		EnemyPosInit(&m_pCenterEnemyCollisionData, m_PosCenter, &m_pCenterEnemyVertex, m_CenterEnemyHitState);
 	}
 
 	if (m_EnemyLoad[m_RightEnemyCount][2] >= 0)
 	{
-		EnemyPosInit(m_pRightEnemyCollisionData, m_PosRight, m_pRightEnemyVertex, m_RightEnemyHitState);
-		//m_pRightEnemyCollisionData = new CollisionData();
-		//m_pRightEnemyCollisionData->SetEnable(false);
-		//m_pRightEnemyCollisionData->SetCollision(&D3DXVECTOR3(m_PosRight), &m_Rect, CollisionData::ENEMY_TYPE);
-		//SINGLETON_INSTANCE(CollisionManager).AddCollision(m_pRightEnemyCollisionData);
-		//
-		//m_pRightEnemyVertex = new Lib::Vertex2D(
-		//	SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
-		//	SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-		//	SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
-		//m_pRightEnemyVertex->Init(&m_Rect, m_pWaitUvController->GetUV());
-		//
-		//m_pRightEnemyVertex->SetTexture(
-		//	SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
-		//
-		//m_RightEnemyHitState = m_pRightEnemyCollisionData->GetCollisionState().HitState;
-		//
-		//m_RightEnemyCrowdAlfa = 1.0f;
-		//SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
+		EnemyPosInit(&m_pRightEnemyCollisionData, m_PosRight, &m_pRightEnemyVertex, m_RightEnemyHitState);
 	}
 
 	SINGLETON_INSTANCE(Lib::EventManager).AddEvent("EnemyDamage", [this]()
 	{
 		m_WidthTime = 30;
 	});
-}
-
-void Enemy::EnemyPosInit(CollisionData* _pcollisiondata, D3DXVECTOR2 _pos, Lib::Vertex2D* _vertex, CollisionData::HIT_STATE _hitstate)
-{
-	_pcollisiondata = new CollisionData();
-	_pcollisiondata->SetEnable(false);
-	_pcollisiondata->SetCollision(&D3DXVECTOR3(_pos), &m_Rect, CollisionData::ENEMY_TYPE);
-	SINGLETON_INSTANCE(CollisionManager).AddCollision(_pcollisiondata);
-
-	_vertex = new Lib::Vertex2D(
-		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
-		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
-		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
-
-	_vertex->Init(&m_Rect, m_pWaitUvController->GetUV());
-
-	_vertex->SetTexture(
-		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
-
-	_hitstate = _pcollisiondata->GetCollisionState().HitState;
-}
-
-void Enemy::EnemyWaitUvInit(int random_)
-{
-	switch (random_)
-	{
-	case 0:
-		m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait01");
-		break;
-	case 1:
-		m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait02");
-		break;
-	case 2:
-		m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait03");
-		break;
-	}
-}
-
-void Enemy::EnemyAttackUvInit(int random_)
-{
-	switch (random_)
-	{
-	case 0:
-		m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack01");
-		break;
-	case 1:
-		m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack02");
-		break;
-	case 2:
-		m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack03");
-		break;
-	}
 }
 
 Enemy::~Enemy()
@@ -254,14 +126,8 @@ Enemy::~Enemy()
 	delete m_pRightEnemyCollisionData;
 	m_pRightEnemyCollisionData = NULL;
 
-	delete m_pEnemyGoodExplosionUvController;
-	m_pEnemyGoodExplosionUvController = NULL;
-
-	delete m_pEnemyAmazingExplosionUvController;
-	m_pEnemyAmazingExplosionUvController = NULL;
-
-	delete m_pEnemyFantasticExplosionUvController;
-	m_pEnemyFantasticExplosionUvController = NULL;
+	delete m_pEnemyExplosionUvController;
+	m_pEnemyExplosionUvController = NULL;
 
 	delete m_pWaitUvController;
 	m_pWaitUvController = NULL;
@@ -289,25 +155,11 @@ Enemy::~Enemy()
 		m_pRightEnemyVertex = NULL;
 	}
 
-	if (m_pEnemyGoodExplosionVertex != NULL)
+	if (m_pEnemyExplosionVertex != NULL)
 	{
-		m_pEnemyGoodExplosionVertex->Release();
-		delete m_pEnemyGoodExplosionVertex;
-		m_pEnemyGoodExplosionVertex = NULL;
-	}
-
-	if (m_pEnemyAmazingExplosionVertex != NULL)
-	{
-		m_pEnemyAmazingExplosionVertex->Release();
-		delete m_pEnemyAmazingExplosionVertex;
-		m_pEnemyAmazingExplosionVertex = NULL;
-	}
-
-	if (m_pEnemyFantasticExplosionVertex != NULL)
-	{
-		m_pEnemyFantasticExplosionVertex->Release();
-		delete m_pEnemyFantasticExplosionVertex;
-		m_pEnemyFantasticExplosionVertex = NULL;
+		m_pEnemyExplosionVertex->Release();
+		delete m_pEnemyExplosionVertex;
+		m_pEnemyExplosionVertex = NULL;
 	}
 
 	SINGLETON_INSTANCE(Lib::DSoundManager).ReleaseSound(m_GoodExplosionSound);
@@ -342,21 +194,18 @@ void Enemy::Update()
 			m_LeftEnemyCount -= 1;
 			EnemyWaitUvInit(m_Random1);
 			EnemyAttackUvInit(m_Random1);
-			//EnemyPosInit(m_pLeftEnemyCollisionData, m_PosLeft, m_pLeftEnemyVertex, m_LeftEnemyHitState);
 		}
 		if (m_CenterEnemyCount > 0)
 		{
 			m_CenterEnemyCount -= 1;
 			EnemyWaitUvInit(m_Random2);
 			EnemyAttackUvInit(m_Random2);
-			//EnemyPosInit(m_pCenterEnemyCollisionData, m_PosCenter, m_pCenterEnemyVertex, m_CenterEnemyHitState);
 		}
 		if (m_RightEnemyCount > 0)
 		{
 			m_RightEnemyCount -= 1;
 			EnemyWaitUvInit(m_Random3);
 			EnemyAttackUvInit(m_Random3);
-			//EnemyPosInit(m_pRightEnemyCollisionData, m_PosRight, m_pRightEnemyVertex, m_RightEnemyHitState);
 		}
 
 		m_AttackTime = 0.f;
@@ -369,8 +218,8 @@ void Enemy::Update()
 		m_pLeftEnemyCollisionData->SetEnable(true);
 
 		m_LeftEnemyCrowdAlfa += 0.01f;
-		m_WaitEnemyAlfa += 0.01f;
-		m_AttackEnemyAlfa += 0.01f;
+		m_WaitEnemyAlfa		 += 0.01f;
+		m_AttackEnemyAlfa	 += 0.01f;
 		SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
 	}
 
@@ -379,8 +228,8 @@ void Enemy::Update()
 		m_pCenterEnemyCollisionData->SetEnable(true);
 
 		m_CenterEnemyCrowdAlfa += 0.01f;
-		m_WaitEnemyAlfa += 0.01f;
-		m_AttackEnemyAlfa += 0.01f;
+		m_WaitEnemyAlfa		   += 0.01f;
+		m_AttackEnemyAlfa	   += 0.01f;
 		SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
 	}
 
@@ -389,8 +238,8 @@ void Enemy::Update()
 		m_pRightEnemyCollisionData->SetEnable(true);
 
 		m_RightEnemyCrowdAlfa += 0.01f;
-		m_WaitEnemyAlfa += 0.01f;
-		m_AttackEnemyAlfa += 0.01f;
+		m_WaitEnemyAlfa		  += 0.01f;
+		m_AttackEnemyAlfa	  += 0.01f;
 		SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
 	}
 	
@@ -428,40 +277,9 @@ void Enemy::Draw()
 
 	if (m_EnemyLoad[m_LeftEnemyCount][0] > 0)
 	{
-		if (m_LeftEnemyHits == false)
-		{
-			if (m_LeftEnemyAttack == false)
-			{
-				EnemyWaitUvInit(m_Random1);
-				m_pLeftEnemyVertex->Draw(&D3DXVECTOR2(m_PosLeft.x + m_WidthVibValue, m_PosLeft.y), m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
-			}
-			if (m_LeftEnemyAttack == true)
-			{
-				EnemyAttackUvInit(m_Random1);
-				m_pLeftEnemyVertex->Draw(&D3DXVECTOR2(m_PosLeft.x + m_WidthVibValue, m_PosLeft.y), m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
-			}
-
-			SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
-			EnemyExplosionDraw(m_PosLeft, 0.f, EXPLOSION_MAX);
-		}
-		else if (m_LeftEnemyHits == true)
-		{
-			m_ExplosionTime += 0.1f;
-		}
-		if (m_LeftEnemyHits == true && m_GoodHit == true)
-		{
-			EnemyExplosionDraw(m_PosLeft, 1.f, GOOD_EXPLOSION);
-		}
-		else if (m_LeftEnemyHits == true && m_AmazingHit == true)
-		{
-			EnemyExplosionDraw(m_PosLeft, 1.f, AMAZING_EXPLOSION);
-		}
-		else if (m_LeftEnemyHits == true && m_FantasticHit == true)
-		{
-			EnemyExplosionDraw(m_PosLeft, 1.f, FANTASTIC_EXPLOSION);
-		}
+		EnemyDrawInit(m_LeftEnemyHits, m_LeftEnemyAttack, m_Random1, &m_pLeftEnemyVertex, m_PosLeft);	
 	}
-	else if (m_EnemyLoad[m_LeftEnemyCount][0] == 0)
+	if (m_EnemyLoad[m_LeftEnemyCount][0] == 0)
 	{
 		m_LeftEnemyCrowdAlfa = 0.f;
 		SINGLETON_INSTANCE(GameDataManager).SetLeftEnemyCrowdAlfa(m_LeftEnemyCrowdAlfa);
@@ -469,40 +287,9 @@ void Enemy::Draw()
 
 	if (m_EnemyLoad[m_CenterEnemyCount][1] > 0)
 	{
-		if (m_CenterEnemyHits == false)
-		{
-			if (m_CenterEnemyAttack == false)
-			{
-				EnemyWaitUvInit(m_Random2);
-				m_pCenterEnemyVertex->Draw(&D3DXVECTOR2(m_PosCenter.x + m_WidthVibValue, m_PosCenter.y), m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
-			}
-			if (m_CenterEnemyAttack == true)
-			{
-				EnemyAttackUvInit(m_Random2);
-				m_pCenterEnemyVertex->Draw(&D3DXVECTOR2(m_PosCenter.x + m_WidthVibValue, m_PosCenter.y), m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
-			}
-
-			SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
-			EnemyExplosionDraw(m_PosCenter, 0.f, EXPLOSION_MAX);
-		}
-		else if (m_CenterEnemyHits)
-		{
-			m_ExplosionTime += 0.1f;
-		}
-		if (m_CenterEnemyHits == true && m_GoodHit == true)
-		{
-			EnemyExplosionDraw(m_PosCenter, 1.f, GOOD_EXPLOSION);
-		}
-		else if (m_CenterEnemyHits == true && m_AmazingHit == true)
-		{
-			EnemyExplosionDraw(m_PosCenter, 1.f, AMAZING_EXPLOSION);
-		}
-		else if (m_CenterEnemyHits == true && m_FantasticHit == true)
-		{
-			EnemyExplosionDraw(m_PosCenter, 1.f, FANTASTIC_EXPLOSION);
-		}
+		EnemyDrawInit(m_CenterEnemyHits, m_CenterEnemyAttack, m_Random2, &m_pCenterEnemyVertex, m_PosCenter);
 	}
-	else if (m_EnemyLoad[m_CenterEnemyCount][1] == 0)
+	if (m_EnemyLoad[m_CenterEnemyCount][1] == 0)
 	{
 		m_CenterEnemyCrowdAlfa = 0.f;
 		SINGLETON_INSTANCE(GameDataManager).SetCenterEnemyCrowdAlfa(m_CenterEnemyCrowdAlfa);
@@ -510,43 +297,94 @@ void Enemy::Draw()
 
 	if (m_EnemyLoad[m_RightEnemyCount][2] > 0)
 	{
-		if (m_RightEnemyHits == false)
-		{
-			if (m_RightEnemyAttack == false)
-			{
-				EnemyWaitUvInit(m_Random3);
-				m_pRightEnemyVertex->Draw(&D3DXVECTOR2(m_PosRight.x + m_WidthVibValue, m_PosRight.y), m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
-			}
-			if (m_RightEnemyAttack == true)
-			{
-				EnemyAttackUvInit(m_Random3);
-				m_pRightEnemyVertex->Draw(&D3DXVECTOR2(m_PosRight.x + m_WidthVibValue, m_PosRight.y), m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
-			}
-
-			SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
-			EnemyExplosionDraw(m_PosRight, 0.f, EXPLOSION_MAX);
-		}
-		else if (m_RightEnemyHits == true)
-		{
-			m_ExplosionTime += 0.1f;
-		}
-		if (m_RightEnemyHits == true && m_GoodHit == true)
-		{
-			EnemyExplosionDraw(m_PosRight, 1.f, GOOD_EXPLOSION);
-		}
-		else if (m_RightEnemyHits == true && m_AmazingHit == true)
-		{
-			EnemyExplosionDraw(m_PosRight, 1.f, AMAZING_EXPLOSION);
-		}
-		else if (m_RightEnemyHits == true && m_FantasticHit == true)
-		{
-			EnemyExplosionDraw(m_PosRight, 1.f, FANTASTIC_EXPLOSION);
-		}
+		EnemyDrawInit(m_RightEnemyHits, m_RightEnemyAttack, m_Random3, &m_pRightEnemyVertex, m_PosRight);
 	}
-	else if (m_EnemyLoad[m_RightEnemyCount][0] == 0)
+	if (m_EnemyLoad[m_RightEnemyCount][0] == 0)
 	{
 		m_RightEnemyCrowdAlfa = 0.f;
 		SINGLETON_INSTANCE(GameDataManager).SetRightEnemyCrowdAlfa(m_RightEnemyCrowdAlfa);
+	}
+}
+
+void Enemy::EnemyDrawInit(bool enemyhit_, bool enemyattack_, int random_, Lib::Vertex2D** vertex_, D3DXVECTOR2 pos_)
+{
+	if (enemyhit_ == false && enemyattack_ == false)
+	{
+		EnemyWaitUvInit(random_);
+		(*vertex_)->Draw(&D3DXVECTOR2(pos_.x + m_WidthVibValue, pos_.y), m_pWaitUvController->GetUV(), m_WaitEnemyAlfa);
+	}
+	else if (enemyhit_ == false && enemyattack_ == true)
+	{
+		EnemyAttackUvInit(random_);
+		(*vertex_)->Draw(&D3DXVECTOR2(pos_.x + m_WidthVibValue, pos_.y), m_pAttackUvController->GetUV(), m_AttackEnemyAlfa);
+	}
+	else if (enemyhit_ == true)
+	{
+		m_ExplosionTime += 0.1f;
+	}
+	if (enemyhit_ == true && m_GoodHit == true)
+	{
+		EnemyExplosionDraw(pos_, 1.f, GOOD_EXPLOSION);
+	}
+	else if (enemyhit_ == true && m_AmazingHit == true)
+	{
+		EnemyExplosionDraw(pos_, 1.f, AMAZING_EXPLOSION);
+	}
+	else if (enemyhit_ == true && m_FantasticHit == true)
+	{
+		EnemyExplosionDraw(pos_, 1.f, FANTASTIC_EXPLOSION);
+	}
+}
+
+void Enemy::EnemyPosInit(CollisionData** _pcollisiondata, D3DXVECTOR2 _pos, Lib::Vertex2D** _vertex, CollisionData::HIT_STATE _hitstate)
+{
+	*_pcollisiondata = new CollisionData();
+	(*_pcollisiondata)->SetEnable(false);
+	(*_pcollisiondata)->SetCollision(&D3DXVECTOR3(_pos), &m_Rect, CollisionData::ENEMY_TYPE);
+	SINGLETON_INSTANCE(CollisionManager).AddCollision(*_pcollisiondata);
+
+	*_vertex = new Lib::Vertex2D(
+		SINGLETON_INSTANCE(Lib::DX11Manager).GetDevice(),
+		SINGLETON_INSTANCE(Lib::DX11Manager).GetDeviceContext(),
+		SINGLETON_INSTANCE(Lib::Window).GetWindowSize());
+
+	(*_vertex)->Init(&m_Rect, m_pWaitUvController->GetUV());
+
+	(*_vertex)->SetTexture(
+		SINGLETON_INSTANCE(Lib::TextureManager).GetTexture(m_TextureIndex));
+
+	_hitstate = (*_pcollisiondata)->GetCollisionState().HitState;
+}
+
+void Enemy::EnemyWaitUvInit(int random_)
+{
+	switch (random_)
+	{
+	case 0:
+		m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait01");
+		break;
+	case 1:
+		m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait02");
+		break;
+	case 2:
+		m_pWaitUvController->LoadAnimation("Resource/test_001.anim", "e_wait03");
+		break;
+	}
+}
+
+void Enemy::EnemyAttackUvInit(int random_)
+{
+	switch (random_)
+	{
+	case 0:
+		m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack01");
+		break;
+	case 1:
+		m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack02");
+		break;
+	case 2:
+		m_pAttackUvController->LoadAnimation("Resource/test_001.anim", "e_attack03");
+		break;
 	}
 }
 
@@ -723,16 +561,19 @@ void Enemy::EnemyExplosionDraw(D3DXVECTOR2 pos_, float alpha_, EXPLOSION_TYPE ex
 	switch (explosiontype_)
 	{
 	case GOOD_EXPLOSION:
-		m_pEnemyGoodExplosionVertex->Draw(&D3DXVECTOR2(pos_.x, pos_.y - (m_Rect.y * m_ExplosionTime / 2 - 256) / 2), 
-			m_pEnemyGoodExplosionUvController->GetUV(), alpha_,&D3DXVECTOR2(m_ExplosionTime / 2, m_ExplosionTime / 2));
+		m_pEnemyExplosionUvController->LoadAnimation("Resource/test_001.anim", "e_bom_g");
+		m_pEnemyExplosionVertex->Draw(&D3DXVECTOR2(pos_.x, pos_.y - (m_Rect.y * m_ExplosionTime / 2 - 256) / 2),
+			m_pEnemyExplosionUvController->GetUV(), alpha_,&D3DXVECTOR2(m_ExplosionTime / 2, m_ExplosionTime / 2));
 		break;
 	case AMAZING_EXPLOSION:
-		m_pEnemyAmazingExplosionVertex->Draw(&D3DXVECTOR2(pos_.x, pos_.y - (m_Rect.y * m_ExplosionTime - 256) / 2), 
-			m_pEnemyAmazingExplosionUvController->GetUV(), alpha_, &D3DXVECTOR2(m_ExplosionTime, m_ExplosionTime));
+		m_pEnemyExplosionUvController->LoadAnimation("Resource/test_001.anim", "e_bom_a");
+		m_pEnemyExplosionVertex->Draw(&D3DXVECTOR2(pos_.x, pos_.y - (m_Rect.y * m_ExplosionTime - 256) / 2),
+			m_pEnemyExplosionUvController->GetUV(), alpha_, &D3DXVECTOR2(m_ExplosionTime, m_ExplosionTime));
 		break;
 	case FANTASTIC_EXPLOSION:
-		m_pEnemyFantasticExplosionVertex->Draw(&D3DXVECTOR2(pos_.x, pos_.y - (m_Rect.y * m_ExplosionTime - 256) / 2), 
-			m_pEnemyFantasticExplosionUvController->GetUV(), alpha_,&D3DXVECTOR2(m_ExplosionTime, m_ExplosionTime));
+		m_pEnemyExplosionUvController->LoadAnimation("Resource/test_001.anim", "e_bom_f");
+		m_pEnemyExplosionVertex->Draw(&D3DXVECTOR2(pos_.x, pos_.y - (m_Rect.y * m_ExplosionTime - 256) / 2),
+			m_pEnemyExplosionUvController->GetUV(), alpha_,&D3DXVECTOR2(m_ExplosionTime, m_ExplosionTime));
 		break;
 	}
 }
@@ -747,15 +588,15 @@ void Enemy::Attack()
 
 	if (m_EnemyLoad[m_LeftEnemyCount][0] > 0 && m_LeftEnemyHits == false)
 	{
-		if (AttackTurn(m_LeftEnemyCount, 0) == FIRST_ATTACK && m_AttackTime == 60)
+		if (AttackTurn(m_LeftEnemyCount, 0) == FIRST_ATTACK && m_AttackTime == FIRSTATTACKTIME)
 		{
 			m_LeftEnemyAttack = true;
 		}
-		else if (AttackTurn(m_LeftEnemyCount, 0) == SECOND_ATTACK && m_AttackTime == 170)
+		else if (AttackTurn(m_LeftEnemyCount, 0) == SECOND_ATTACK && m_AttackTime == SECONDATTACKTIME)
 		{
 			m_LeftEnemyAttack = true;
 		}
-		else if (AttackTurn(m_LeftEnemyCount, 0) == THIRD_ATTACK && m_AttackTime == 270)
+		else if (AttackTurn(m_LeftEnemyCount, 0) == THIRD_ATTACK && m_AttackTime == THIRDATTACKTIME)
 		{
 			m_LeftEnemyAttack = true;
 		}
@@ -785,15 +626,15 @@ void Enemy::Attack()
 
 	if (m_EnemyLoad[m_CenterEnemyCount][1] > 0 && m_CenterEnemyHits == false)
 	{
-		if (AttackTurn(m_CenterEnemyCount, 1) == FIRST_ATTACK && m_AttackTime == 60)
+		if (AttackTurn(m_CenterEnemyCount, 1) == FIRST_ATTACK && m_AttackTime == FIRSTATTACKTIME)
 		{
 			m_CenterEnemyAttack = true;
 		}
-		else if (AttackTurn(m_CenterEnemyCount, 1) == SECOND_ATTACK && m_AttackTime == 170)
+		else if (AttackTurn(m_CenterEnemyCount, 1) == SECOND_ATTACK && m_AttackTime == SECONDATTACKTIME)
 		{
 			m_CenterEnemyAttack = true;
 		}
-		else if (AttackTurn(m_CenterEnemyCount, 1) == THIRD_ATTACK && m_AttackTime == 270)
+		else if (AttackTurn(m_CenterEnemyCount, 1) == THIRD_ATTACK && m_AttackTime == THIRDATTACKTIME)
 		{
 			m_CenterEnemyAttack = true;
 		}
@@ -823,15 +664,15 @@ void Enemy::Attack()
 
 	if (m_EnemyLoad[m_RightEnemyCount][2] > 0 && m_RightEnemyHits == false)
 	{
-		if (AttackTurn(m_RightEnemyCount, 2) == FIRST_ATTACK && m_AttackTime == 60)
+		if (AttackTurn(m_RightEnemyCount, 2) == FIRST_ATTACK && m_AttackTime == FIRSTATTACKTIME)
 		{
 			m_RightEnemyAttack = true;
 		}
-		else if (AttackTurn(m_RightEnemyCount, 2) == SECOND_ATTACK && m_AttackTime == 170)
+		else if (AttackTurn(m_RightEnemyCount, 2) == SECOND_ATTACK && m_AttackTime == SECONDATTACKTIME)
 		{
 			m_RightEnemyAttack = true;
 		}
-		else if (AttackTurn(m_RightEnemyCount, 2) == THIRD_ATTACK && m_AttackTime == 270)
+		else if (AttackTurn(m_RightEnemyCount, 2) == THIRD_ATTACK && m_AttackTime == THIRDATTACKTIME)
 		{
 			m_RightEnemyAttack = true;
 		}
@@ -859,7 +700,7 @@ void Enemy::Attack()
 		m_AttackTime += 120.f;
 	}
 
-	if (m_AttackTime > 300)
+	if (m_AttackTime > 200)
 	{
 		m_AttackTime = 0;
 		m_CenterEnemyAttack = false;
